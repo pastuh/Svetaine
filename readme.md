@@ -7,7 +7,7 @@
 _Papildomai išmokti_:
 - PHP programavimo kalbą
 - Laravel framework
-- GitHub komandas ir naudojimą
+- Github komandas ir naudojimą
 - Linux komandas
 - Dedikuoto serverio paleidimą
 
@@ -19,3 +19,4 @@ _Papildomai išmokti_:
 
 - Svetainė bus pasiekiama adresu: http://www.thehunter.lt
 - Pagalbos neteikiu jeigu naudojate projekto failus kitiem tikslam.
+- Jeigu randate klaidų ar turite kokių pasiūlymų, tuomet kurkite Issue
