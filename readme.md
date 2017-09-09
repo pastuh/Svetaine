@@ -6,6 +6,7 @@
 
 _Papildomai išmokti_:
 - PHP programavimo kalbą
+- JQuery skriptinimą
 - Laravel framework
 - Github komandas ir naudojimą
 - Linux komandas
