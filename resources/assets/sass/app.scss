@@ -1,10 +1,22 @@
-
+/* Viskas sukompiliuojama ir idedama i APP.CSS */
 // Fonts
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
-@import "node_modules/font-awesome/scss/font-awesome";
+@import "~font-awesome/scss/font-awesome.scss";
 
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Overhang stilius
+@import "~overhang/dist/overhang.min.css";
+
+// Koreguoti SASS stiliai
+@import "overrides";
+// Papildomi mini koregavimai
+@import "helpers";
+// Pagrindinis stilius
+@import "styles";
+// NextMenu thumb stilius
+@import "nextmenu";

@@ -1,47 +1,60 @@
-@extends('layouts.app')
+@extends('layouts.main')
+@section('title', '| Slaptažodžio priminimas')
+
+@section('body_class', 'pm_dark_type single-post pm_overflow_visible background-info2')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+    <div class="pm_wrapper pm_container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pm_content_standard">
+                    <div class="row">
+                        <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                            <div class="panel-body">
+                                <form id="main-form" class="form-horizontal" role="form" method="POST"
+                                      action="{{ route('password.email') }}">
+                                    {{ csrf_field() }}
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                                    <div class="{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon" id="basic-addon1"><span
+                                                        class="fa fa-envelope" style="width: 30px;"></span></span>
+                                            <input id="email" type="email" class="form-control" name="email" placeholder="E-paštas"
+                                                   value="{{ old('email') }}" required autofocus>
+                                        </div>
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                {{ $errors->first('email') }}
+                                                </span>
+                                        @endif
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                    </div><!-- row -->
+                </div><!-- standard -->
+            </div><!-- col12 -->
+        </div><!-- row -->
+    </div><!-- wrapper -->
+@endsection
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+@section('bottom-footer-left-menu')
+    <ul class="nav navbar-nav short-menu">
+        <li>
+            <a href="javascript:void(0)" id="submit-button" aria-label="Siūsti slaptažodį">
+                <i class="fa fa-check-circle fa-lg"></i>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url('login') }}" aria-label="Prisijungti">
+                <i class="fa fa-sign-in fa-lg"></i>
+            </a>
+        </li>
+    </ul>
+@endsection
+
+@section('bottom-footer-info')
+    <div class="pm_slide_title_wrapper pm_simple_title">
+        Slaptažodžio priminimas
     </div>
-</div>
 @endsection

@@ -1,41 +1,46 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
 
-        <title>Laravel</title>
-        <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+@section('body_class', 'pm_dark_type album_fullscreen_page pm_overflow_hidden')
 
-            <div id="app" class="content">
-                <div class="title m-b-md">
-                    theHunter.LT svetainė
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+@section('simple-menu')
+        <div class="pm_navigation_container">
+            <div class="pm_prev_slide_button">
+                <div class="pm_prev_thumb_cont"></div>
+                <div class="pm_prev_button_fader"></div>
+            </div>
+            <div class="pm_pause_button"></div>
+            <div class="pm_next_slide_button">
+                <div class="pm_next_thumb_cont"></div>
+                <div class="pm_next_button_fader"></div>
             </div>
         </div>
+@endsection
 
-        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
-    </body>
-</html>
+@section('content')
+    <!-- Content -->
+    <div class="pm_album_fullscreen">
+        <div class="pm_gallery_container galleery_fullscreen effect_fade">
+            <ul class="pm_gallery effect_fade">
+
+                @foreach ($posts as $key => $post)
+                    <li style="background: url( {{ url('../img/posts/' . $post->image) }} );" data-number="{{ $key+1 }}" data-link="blog/{{$post->slug}}"
+                        data-title="{{ $post->title }}" {{--data-thumbnail="{{ asset('img/posts/' . $post->image) }}"--}}>
+                    </li>
+                @endforeach
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+@endsection
+
+@section('bottom-footer-info')
+        {{--<div class="pm_fullscreen_toggler"></div>--}}
+        <div class="pm_slides_title_and_likes_container welcome_title">
+            <div class="pm_slide_title_wrapper"></div>
+        </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="{{  url('js\main.js') }}"></script> {{--Template main script, bet ne Single info--}}
+@endsection

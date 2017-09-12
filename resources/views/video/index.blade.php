@@ -1,0 +1,2 @@
+<?php
+/* DAR NEAISKU KAIP BUS SU VIDEO */

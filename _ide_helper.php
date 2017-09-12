@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.3 on 2017-09-10.
+ * Generated for Laravel 5.5.3 on 2017-09-12.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12071,6 +12071,140 @@ namespace Illuminate\Support\Facades {
  
 }
 
+namespace Jenssegers\Date { 
+
+    class Date {
+         
+    }
+ 
+}
+
+namespace Intervention\Image\Facades { 
+
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @static 
+         */ 
+        public static function configure($config = array())
+        {
+            return \Intervention\Image\ImageManager::configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+            return \Intervention\Image\ImageManager::make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param integer $width
+         * @param integer $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+            return \Intervention\Image\ImageManager::canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param integer $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+            return \Intervention\Image\ImageManager::cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
+namespace Laratrust { 
+
+    class Laratrust {
+         
+    }
+ 
+}
+
+namespace Anhskohbo\NoCaptcha\Facades { 
+
+    class NoCaptcha {
+        
+        /**
+         * Render HTML captcha.
+         *
+         * @param array $attributes
+         * @param string $lang
+         * @return string 
+         * @static 
+         */ 
+        public static function display($attributes = array(), $lang = null)
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::display($attributes, $lang);
+        }
+        
+        /**
+         * Verify no-captcha response.
+         *
+         * @param string $response
+         * @param string $clientIp
+         * @return bool 
+         * @static 
+         */ 
+        public static function verifyResponse($response, $clientIp = null)
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::verifyResponse($response, $clientIp);
+        }
+        
+        /**
+         * Verify no-captcha response by Symfony Request.
+         *
+         * @param \Request $request
+         * @return bool 
+         * @static 
+         */ 
+        public static function verifyRequest($request)
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::verifyRequest($request);
+        }
+        
+        /**
+         * Get recaptcha js link.
+         *
+         * @param string $lang
+         * @return string 
+         * @static 
+         */ 
+        public static function getJsLink($lang = null)
+        {
+            return \Anhskohbo\NoCaptcha\NoCaptcha::getJsLink($lang);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -14183,6 +14317,14 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class Date extends \Jenssegers\Date\Date {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
+
+    class Laratrust extends \Laratrust\Laratrust {}
+
+    class NoCaptcha extends \Anhskohbo\NoCaptcha\Facades\NoCaptcha {}
  
 }
 
