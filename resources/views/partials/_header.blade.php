@@ -5,10 +5,11 @@
             <a class="navbar-brand" href="/"><img src="{{ url('img/logo.png') }}" alt="theHunter Lietuva logo"></a>
             @yield('simple-menu')
 
-            {{-- Prireiks tikrinti info --}}
+            {{-- Prireiks tikrinti info
             @if(Auth::check() )
                 {{ Auth::user()->name }}
             @endif
+            --}}
             {{--
             @if(Auth::check() )
                 {{ Auth::user()->roles->first()->description }}
