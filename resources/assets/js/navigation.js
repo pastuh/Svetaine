@@ -1,5 +1,5 @@
 /*Loading screen'o veikimas*/
-/*
+
     var site_width = jQuery(window).width(),
         site_height = jQuery(window).height(),
         header_height = jQuery('.pm_header').height();
@@ -9,11 +9,10 @@
 
     // Hide Preloader
     setTimeout("jQuery('.preloader_active').fadeOut();", 500);
-</script>
-*/
+
 
 /*Scrollbar rodymas po loado, skirta veikimui su Loading screen*/
-//setTimeout("jQuery('html').addClass('show-scrollbar');", 1000);
+setTimeout("jQuery('html').addClass('show-scrollbar');", 1000);
 
 /*Navigacijos ir mygtuku valdymas*/
 $(document).ready(function () {
