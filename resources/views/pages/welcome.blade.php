@@ -24,7 +24,7 @@
 
                 @foreach ($posts as $key => $post)
                     <li style="background: url( {{ url('../img/posts/' . $post->image) }} );" data-number="{{ $key+1 }}" data-link="blog/{{$post->slug}}"
-                        data-title="{{ $post->title }}" {{--data-thumbnail="{{ asset('img/posts/' . $post->image) }}"--}}>
+                        data-title="{{ $post->title }}" data-thumbnail="{{ asset('img/posts/' . $post->image_thumb) }}">
                     </li>
                 @endforeach
             </ul>
