@@ -59,7 +59,7 @@
                                             <span>Į laiškus neatsakoma, bet Jūsų pasiūlymai ir rastos klaidos bus peržiūrėtos</span>
                                         </div>
                                     {{--<div class="g-recaptcha" data-sitekey="6Lc26ywUAAAAAKqZDK2SrFVoJZTk9rG_GAq1rLpJ" data-theme="dark" ></div>--}}
-                                    <div class="g-recaptcha" data-theme="light" data-sitekey="6Lc26ywUAAAAAKqZDK2SrFVoJZTk9rG_GAq1rLpJ" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
+                                    <div class="g-recaptcha" data-theme="light" data-sitekey="{{-- {{env('NOCAPTCHA_SITEKEY')}}--}}" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;"></div>
                                     {!! app('captcha')->display() !!}
                                 </form>
                             </div>

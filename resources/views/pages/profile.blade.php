@@ -33,7 +33,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('contact.index') }}">
+            <a href="{{ route('contact.index') }}" style="color:#4f4f4f;">
                 <i class="fa fa-envelope fa-lg"></i>
             </a>
         </li>

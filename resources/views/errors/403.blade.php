@@ -26,7 +26,7 @@
     @if(Auth::check())
         <ul class="nav navbar-nav short-menu">
             <li>
-                <a href="{{ route('contact.index') }}" aria-label="Kontaktai">
+                <a href="{{ route('contact.index') }}" aria-label="Kontaktai" style="color:#4f4f4f;">
                     <i class="fa fa-envelope fa-lg"></i>
                 </a>
             </li>
