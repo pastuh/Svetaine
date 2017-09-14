@@ -2,6 +2,9 @@
 
 return [
 
+    /* Nustatau KEY del recaptcha */
+    'secret_key' => env('NOCAPTCHA_SITEKEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

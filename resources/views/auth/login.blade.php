@@ -57,7 +57,7 @@
                                             </a></span>
                                         </div>
                                     </div>
-                                    <div class="g-recaptcha" data-theme="light" data-sitekey="{{env('NOCAPTCHA_SITEKEY')}}" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;float: left;"></div>
+                                    <div class="g-recaptcha" data-theme="light" data-sitekey="{{ config('app.secret_key') }}" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;float: left;"></div>
                                     {!! app('captcha')->display() !!}
                                 </form>
                             </div>
