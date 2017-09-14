@@ -63,6 +63,6 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\parsley.min.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\parsley-lt.js') }}"></script>
+    {{--Tikrina ar suvestas tekstas teisingas--}}
+    <script type="text/javascript" src="{{  url('js\parsley.js') }}"></script>
 @endsection

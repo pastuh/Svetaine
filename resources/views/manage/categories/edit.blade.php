@@ -83,8 +83,8 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\speakingurl.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\slugify.min.js') }}"></script>
+    {{--Teksta pavercia i slug--}}
+    <script type="text/javascript" src="{{  url('js\slug.js') }}"></script>
     <script>
         $('#slug').slugify('#category');
         $('#slug').keydown(function () {

@@ -229,14 +229,10 @@
 
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\fullscreen\scrolloverflow.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\fullscreen\jquery.fullPage.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\fullscreen\jquery.fullpage.extensions.min.js') }}"></script>
-
+    {{--Fullscreen scroolas--}}
+    <script type="text/javascript" src="{{  url('js\fullscreen.js') }}"></script>
     <script type="text/javascript">
-        /* Fullscreen scroolas */
         $(document).ready(function () {
-
             $('#fullpage').fullpage({
                 verticalCentered: true,
                 navigation: true,
@@ -249,8 +245,8 @@
         });
     </script>
 
+    {{--Linku ant arrow blokavimas--}}
     <script>
-        /* Linku ant arrow blokavimas */
         [].slice.call( document.querySelectorAll('nav > a span') ).forEach( function(el) {
             el.addEventListener( 'click', function(ev) { ev.preventDefault(); } );
         } );

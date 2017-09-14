@@ -111,24 +111,23 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\speakingurl.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\slugify.min.js') }}"></script>
-    <script src="{{  url('js/vue.min.js') }}" type="text/javascript"></script> {{-- VUE --}}
+    {{--Teksta pavercia i slug--}}
+    <script type="text/javascript" src="{{  url('js\slug.js') }}"></script>
+    <script>
+        $('#slug').slugify('#name');
+        $('#slug').keydown(function () {
+            $('#slug').attr('readonly', 'readonly');
+            return false;
+        });
+    </script>
 
+    <script src="{{  url('js/vue.min.js') }}" type="text/javascript"></script> {{-- VUE --}}
     <script>
         var app = new Vue({
             el: '#app',
             data: {
                 permissionsSelected: []
             }
-        });
-    </script>
-
-    <script>
-        $('#slug').slugify('#name');
-        $('#slug').keydown(function () {
-            $('#slug').attr('readonly', 'readonly');
-            return false;
         });
     </script>
 @endsection

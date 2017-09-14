@@ -64,25 +64,32 @@ Route::get('/profile', function () {
 /******************************************************************************************************/
 /*****************************************REIKIA TVARKYTI**********************************************/
 
-
+/*
 Route::resource('video', 'VideoController');
+*/
 
-Route::get('trophies', function () {
+/*
+ * Route::get('trophies', function () {
     return view('pages.trophies');
 });
-
-Route::get('locations', function () {
-    return view('pages.locations');
-});
+*/
 
 Route::get('trophies/single', function () {
     return view('trophies.single');
 })->name('trophies.single');
 
+/*
+Route::get('locations', function () {
+    return view('pages.locations');
+});
+*/
+
 /* Gal suristi Steam naujienas su blog */
-Route::get('news', function () {
+/*
+ * Route::get('news', function () {
     return view('pages.news');
 });
+*/
 
 Route::get('info', function () {
     return view('pages.info');

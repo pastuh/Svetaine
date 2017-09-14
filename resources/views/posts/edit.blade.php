@@ -209,18 +209,23 @@ background-size: cover;')
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\selectbox\js\select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\speakingurl.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\slugify.min.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\filestyle\bootstrap-filestyle.min.js') }}"></script>
-
+    {{--Teksta pavercia i slug--}}
+    <script type="text/javascript" src="{{  url('js\slug.js') }}"></script>
     <script>
         $('#slug').slugify('#title');
         $('#slug').keydown(function () {
             $('#slug').attr('readonly', 'readonly');
             return false;
         });
+    </script>
+
+    {{--Geresnis selectbox--}}
+    <script type="text/javascript" src="{{  url('js\selectbox\js\select2.min.js') }}"></script>
+    <script>
         $('.select2-single').select2();
         $('.select2-multi').select2();
     </script>
+
+    {{--Grazesnis failo parinkimas ir uploud--}}
+    <script type="text/javascript" src="{{  url('js\filestyle\bootstrap-filestyle.min.js') }}"></script>
 @endsection

@@ -140,7 +140,6 @@
 
 @section('script')
     <script src="{{  url('js/vue.min.js') }}" type="text/javascript"></script> {{-- VUE --}}
-
     <script>
         var app = new Vue({
             el: '#app',

@@ -56,6 +56,14 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="js\isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="js\locations.js"></script>
+    {{-- Reikia perziureti ir sutvarkyti--}}
+
+    {{--Kad pridetu history list--}}
+    @include('components._blog-list')
+
+    {{--Kad veiktu MAIN list--}}
+    <script type="text/javascript" src="{{  url('js\template.js') }}"></script>
+
+    {{--Laiko konvertavimas--}}
+    @include('components._time')
 @endsection

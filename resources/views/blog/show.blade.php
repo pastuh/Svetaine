@@ -225,17 +225,13 @@ width: 100%;')
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\parsley.min.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\parsley-lt.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\jquery.accordion.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\post-view.js') }}"></script>
+    {{--Tikrina ar suvestas tekstas teisingas--}}
+    <script type="text/javascript" src="{{  url('js\parsley.js') }}"></script>
+
+    {{--Postams priedai--}}
+    <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
+
     @include('components._time')
     @include('components._comsystem')
 
-    <script>
-        $(document).on('click', '#pagination-wrapper a', function(e){
-            e.preventDefault();
-            $('#results-wrapper').load($(this).attr('href') + ' #results-wrapper');
-        });
-    </script>
 @endsection

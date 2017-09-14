@@ -108,10 +108,8 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\speakingurl.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\slugify.min.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\table\bootstrap-table.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\table\bootstrap-table-en-US.js') }}"></script>
+    {{--Teksta pavercia i slug--}}
+    <script type="text/javascript" src="{{  url('js\slug.js') }}"></script>
     <script>
         $('#slug').slugify('#tag');
         $('#slug').keydown(function () {
@@ -119,4 +117,8 @@
             return false;
         });
     </script>
+
+    {{--Bootstrap table sortinimas--}}
+    <script type="text/javascript" src="{{  url('js\bootstrap-table.js') }}"></script>
+
 @endsection

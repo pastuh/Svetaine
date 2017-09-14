@@ -266,17 +266,9 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\post-view.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\jquery.accordion.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\parsley.min.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\parsley-lt.js') }}"></script>
+    {{--Postams priedai--}}
+    <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
 
-    <script>
-        $('.accordion').accordion({
-            "transitionSpeed": 100
-        });
-        $("#submit-button").click(function () {
-            $("#forma").submit();
-        });
-    </script>
+    {{--Tikrina ar suvestas tekstas teisingas--}}
+    <script type="text/javascript" src="{{  url('js\parsley.js') }}"></script>
 @endsection

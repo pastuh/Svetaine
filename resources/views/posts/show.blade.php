@@ -144,22 +144,8 @@ width: 100%;")
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\jquery.accordion.js') }}"></script>
-    <script>
-        $('.accordion').accordion({
-            "transitionSpeed": 100
-        });
-    </script>
-
-    <script>
-        /* Linku ant arrow blokavimas */
-        [].slice.call(document.querySelectorAll('nav > a span')).forEach(function (el) {
-            el.addEventListener('click', function (ev) {
-                ev.preventDefault();
-            });
-        });
-    </script>
-    <script type="text/javascript" src="{{  url('js\post-view.js') }}"></script>
+    {{--Postams priedai--}}
+    <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
 
     <script type="text/javascript">
         //Confirm post trynima

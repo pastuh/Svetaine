@@ -22,30 +22,34 @@
             }
 
             if ((loaded_images + now_load) == img_count) jQuery(this).fadeOut();
-
             if (loaded_images < 1) {
                 var i_start = 1;
             } else {
                 i_start = loaded_images + 1;
             }
-
             if (now_load > 0) {
                 // load more elements
                 for (var i = i_start - 1; i < i_start + now_load - 1; i++) {
 
+                    /* Zymiu ar postas published */
+                    if (addon_options.items[i].published) {
+                        var post_published = "post_published"
+                    } else {
+                        var post_published = "post_invisible"
+                    }
                     /* Įrašo pavadinimo sutrumpinimas */
                     var post_title = addon_options.items[i].title;
-                    var title_count = 60;
+                    var title_count = 42;
                     var post_title = post_title.slice(0, title_count) + (post_title.length > title_count ? "..." : "");
                     var post_time = moment(addon_options.items[i].created_at).format('YYYY-MM-DD HH:mm');
 
                     loaded_object = loaded_object +
                         '<div class="pm_blog_item added">' +
                         '<div class="pm_blog_item_wrapper">' +
-                        '<div class="pm_blog_featured_image_wrapper">' +
+                        '<div class="pm_blog_featured_image_wrapper ' + post_published + '">' +
                         '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" />' +
                         '<div class="pm_post_likes_wrapper">' +
-                        '<a class="pm_potrfolio_read_more" href="blog/' + addon_options.items[i].slug + '"></a>' +
+                        '<a class="pm_potrfolio_read_more" href="posts/' + addon_options.items[i].id + '"></a>' +
                         '<div class="clear"></div>' +
                         '</div>' +
 
@@ -77,4 +81,12 @@
             }
         });
     };
+
+    jQuery('.news_page').each(function () {
+        var items_set = {!! json_encode($old_posts->toArray()) !!};
+        jQuery('#list').blog_listing_addon_title({
+            load_count: 4,
+            items: items_set
+        });
+    });
 </script>

@@ -42,5 +42,5 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\main.js') }}"></script> {{--Template main script, bet ne Single info--}}
+    <script type="text/javascript" src="{{  url('js\template.js') }}"></script> {{--Template main script, bet ne Single info--}}
 @endsection

@@ -67,6 +67,6 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{  url('js\table\bootstrap-table.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\table\bootstrap-table-en-US.js') }}"></script>
+    {{--Bootstrap table sortinimas--}}
+    <script type="text/javascript" src="{{  url('js\bootstrap-table.js') }}"></script>
 @endsection
