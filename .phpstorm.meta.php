@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-09-12.
+    * Generated on 2017-09-15.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -51,6 +51,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -191,6 +192,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -331,6 +333,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -471,6 +474,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -611,6 +615,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -751,6 +756,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
@@ -891,6 +897,7 @@ namespace PHPSTORM_META {
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,

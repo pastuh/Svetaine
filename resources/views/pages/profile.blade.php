@@ -42,6 +42,6 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Profilis
+        Profilis ( {{ Auth::user()->name }} )
     </div>
 @endsection

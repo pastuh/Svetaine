@@ -642,15 +642,12 @@ li.comment:nth-child(odd) {
 .pm_post_comments_standard ul.pm_comments_list li.comment {
   position: relative;
   letter-spacing: 0;
-}
-
-.pm_post_comments_standard ul.pm_comments_list li.comment {
   border: 0;
   margin-bottom: 5px;
   padding-top: 5px;
   padding-bottom: 2px;
   background: rgba(0, 0, 0, 0.75);
-  border-radius: 5em;
+  border-radius: 10px;
 }
 
 .pm_post_comments_standard ul.pm_comments_list li.comment:last-child {
@@ -669,7 +666,7 @@ li.comment:nth-child(odd) {
 }
 
 .pm_post_comments_standard ul.pm_comments_list li.comment .pm_comment_container .pm_comment_avatar img {
-  border-radius: 50%;
+  border-radius: 10%;
 }
 
 .pm_post_comments_standard ul.pm_comments_list li.comment .pm_comment_container .pm_comment_info {
@@ -1054,6 +1051,15 @@ li.comment:nth-child(odd) {
 .pagination > li > a:focus {
   background: rgba(0, 0, 0, 0.75);
   color: #e7e0dd;
+}
+
+/* TOP profile info */
+.profile-avatar {
+  float: right;
+}
+.profile-avatar img {
+  height: 40px;
+  margin-top: 10px;
 }
 
 /* Specialus @Media */

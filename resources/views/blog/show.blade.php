@@ -77,7 +77,14 @@ width: 100%;')
                                                     <div class="pm_comment_wrapper">
                                                         <div class="pm_comment_avatar">
                                                             <img class="avatar"
-                                                                 src="{{ "https://www.gravatar.com/avatar/" . md5(strtolower(trim("vpastuh@gmail.com"))) }}"
+                                                                 src=
+                                                                 "
+                                                                 @if($comment->user->avatar)
+                                                                    {{ $comment->user->avatar }}
+                                                                 @else
+                                                                    {{ asset('img/default-avatar.png') }}
+                                                                 @endif
+                                                                 "
                                                                  alt="">
                                                         </div>
 

@@ -7,6 +7,9 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('error', 'PagesController@getError')->name('error.403');
 
 /* Svarbiausia autentikacija */
+Route::get('steamlogin', 'AuthController@redirectToSteam')->name('auth.steam');
+Route::get('steamloged', 'AuthController@handle')->name('auth.steam.handle');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 
 /* DEFAULT kad galetu uzeiti i Dashboard */

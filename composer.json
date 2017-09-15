@@ -15,7 +15,8 @@
         "laravel/tinker": "~1.0",
         "mews/purifier": "^2.0",
         "nesbot/carbon": "^1.22",
-        "santigarcor/laratrust": "4.0.*"
+        "santigarcor/laratrust": "4.0.*",
+        "invisnik/laravel-steam-auth": "3.*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.4",

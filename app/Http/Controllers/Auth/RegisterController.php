@@ -67,6 +67,8 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            /*Jeigu paprasta registracija, tai generuoti fake steamid*/
+            'steamid' => 'F-'.$data['name'].microtime(),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ])->syncRoles(8);
