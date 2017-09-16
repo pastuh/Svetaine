@@ -72,6 +72,8 @@ width: 100%;')
                                     <div class="clearfix"></div>
                                     <ul class="pm_comments_list">
                                         @foreach($comments as $comment)
+                                            {{-- Tikrinu ar useris egzistuoja --}}
+                                            @if($comment->user !== NULL and $comment->user->status == 1 )
                                             <li class="comment">
                                                 <div class="pm_comment_container">
                                                     <div class="pm_comment_wrapper">
@@ -139,6 +141,7 @@ width: 100%;')
                                                     <div class="clear"></div>
                                                 </div>
                                             </li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                     <div id="pagination-wrapper">
@@ -206,7 +209,7 @@ width: 100%;')
         <li>
             <a href="javascript:void(0)" class="comment-post">
                 <i class="fa fa-comments fa-lg">
-                    <span class="menu-simple-text">{{ $post->comments()->count() }}</span>
+                    <span class="menu-simple-text">{{ $comments->count() }}</span>
                 </i>
             </a>
         </li>

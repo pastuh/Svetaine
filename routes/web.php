@@ -7,8 +7,8 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('error', 'PagesController@getError')->name('error.403');
 
 /* Svarbiausia autentikacija */
-Route::get('steamlogin', 'AuthController@redirectToSteam')->name('auth.steam');
-Route::get('steamloged', 'AuthController@handle')->name('auth.steam.handle');
+Route::get('steamlink', 'AuthController@redirectToSteam')->name('link.steam');
+Route::get('steamloged', 'AuthController@handle')->name('steam.handle');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Auth::routes();
 

@@ -1,28 +1,97 @@
 @extends('layouts.main')
 @section('title', '| Profilis')
 
+@section('stylesheet')
+    <link href="{{  url('css\info.css') }}" rel="stylesheet" type="text/css" media="all">
+@endsection
+
 @section('body_class', 'pm_dark_type single-post background-info2')
 
 @section('content')
     <div class="pm_wrapper pm_container">
+
+        <div class="container">
+            <div class="row">
+                <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="block__header">
+                        <h2 class="heading heading--medium" style="font-size: 50px;">
+                            {{ Auth::user()->name }}<img
+                                    src="{{ asset('img/default-avatar.png') }}" border="0"
+                                    alt="Medžiotojo avataras" style="margin-bottom: 18px;padding-left: 10px;height: 70px;" class="img-fluid"></h2>
+                    </div>
+                    <div class="block__location">
+                        <p class="block__location-text">
+                            @foreach(Auth::user()->roles as $role)
+                                <tr>
+                                    <td class="role-visible">Tavo rolė: {{ $role->display_name }}</td>
+                                </tr>
+                            @endforeach</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="pm_content_standard">
                     <div class="row">
-                        <div class="col-lg-2 col-lg-offset-5 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-                            <br>
-                            <a href="{{ route('manage.dashboard') }}"
-                                    class="pm_send_comment_button pm_load_more stilius_mygtukas">
-                                <i class="pm_likes_icon fa fa-tachometer fa-lg"></i>
-                                <span class="pm_likes_counter">Medžiotojo profilis</span>
-                            </a>
+
+                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+
+                            <div class="panel-body">
+
+                                <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-3">
+                                    <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip" title="Komentarų skaičius"><span
+                                                            class="fa fa-comments"
+                                                            style="width: 30px;"></span></span>
+                                        <input type="text" class="form-control info-perziura"
+                                               value="{{ Auth::user()->comments->count() }}"
+                                               readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-lg-push-2 col-md-3 col-md-offset-0">
+                                    <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip" title="Įrašų skaičius"><span
+                                                            class="fa fa-file-text"
+                                                            style="width: 30px;"></span></span>
+                                        <input type="text" class="form-control info-perziura"
+                                               value="{{ Auth::user()->posts->count() }}"
+                                               readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3">
+                                    <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip" title="Steam ID <br> <i>(Ateityje bus naudojama)</i>"><span
+                                                            class="fa fa-steam-square fa-lg"
+                                                            style="width: 30px;"></span></span>
+                                        <input id="status" type="text" class="form-control info-perziura" name="steam"
+                                               value=
+                                               @if(substr(Auth::user()->steamid, 0, 1) !== '_')
+                                                       "{{ Auth::user()->steamid }}"
+                                        @else
+                                            "-"
+                                        @endif
+                                        readonly>
+                                        @if(substr(Auth::user()->steamid, 0, 1) == '_')
+                                            <a href="{{ route('link.steam') }}" class="steam-link-image"><img
+                                                        src="{{ asset('img/navigation/steam_large.png') }}" border="0"
+                                                        alt="Link Steam"></a>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
                     </div><!-- row -->
                 </div><!-- standard -->
             </div><!-- col12 -->
         </div><!-- row -->
     </div><!-- wrapper -->
-
 @endsection
 
 @section('bottom-footer-left-menu')
@@ -42,6 +111,40 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Profilis ( {{ Auth::user()->name }} )
+        Profilis
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        (function($) {
+
+            'use strict';
+
+            $(document).on('show.bs.tab', '.nav-tabs-responsive [data-toggle="tab"]', function(e) {
+                var $target = $(e.target);
+                var $tabs = $target.closest('.nav-tabs-responsive');
+                var $current = $target.closest('li');
+                var $parent = $current.closest('li.dropdown');
+                $current = $parent.length > 0 ? $parent : $current;
+                var $next = $current.next();
+                var $prev = $current.prev();
+                var updateDropdownMenu = function($el, position){
+                    $el
+                        .find('.dropdown-menu')
+                        .removeClass('pull-xs-left pull-xs-center pull-xs-right')
+                        .addClass( 'pull-xs-' + position );
+                };
+
+                $tabs.find('>li').removeClass('next prev');
+                $prev.addClass('prev');
+                $next.addClass('next');
+
+                updateDropdownMenu( $prev, 'left' );
+                updateDropdownMenu( $current, 'center' );
+                updateDropdownMenu( $next, 'right' );
+            });
+
+        })(jQuery);
+    </script>
 @endsection

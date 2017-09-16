@@ -6,6 +6,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -112,8 +113,10 @@ class UserController extends Controller
 
         if ($request->status_check == '1') {
             $user->status = 1;
+            $user->comments()->update(['approved' => '1']);
         } else {
             $user->status = 0;
+            $user->comments()->update(['approved' => '0']);
         }
 
         if ($user->save()) {

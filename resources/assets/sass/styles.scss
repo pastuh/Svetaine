@@ -97,7 +97,7 @@ textarea.pm_comment_respond_field {
   border-color: transparent;
   z-index: 99999;
   margin-top: 4px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
 }
 
 .navbar-default .navbar-toggle:focus,
@@ -238,7 +238,7 @@ textarea.pm_comment_respond_field {
   font-weight: bold;
   font-size: 14px;
   padding: 10px 0 10px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   color: #fff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -282,7 +282,7 @@ textarea.pm_comment_respond_field {
   display: inline-block;
   float: left;
   margin-left: 10px;
-  background: rgba(0, 0, 0, 0.75) url(/img/navigation/next_button_back.png) no-repeat center;
+  background: rgba(23, 23, 23, 0.75) url(/img/navigation/next_button_back.png) no-repeat center;
   transition: all .3s;
   -webkit-transition: all .3s;
 }
@@ -349,7 +349,7 @@ textarea.pm_comment_respond_field {
 
 .btn-default {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(23, 23, 23, 0.75);
   border: none;
 }
 
@@ -369,7 +369,7 @@ input[type=file] {
 
 .input-group-addon {
   color: #ffc500;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(23, 23, 23, 0.75);
   border: 0;
   border-radius: 0;
 }
@@ -377,7 +377,7 @@ input[type=file] {
 .control-margin {
   margin-bottom: 20px;
   border-top: 10px solid #ffc500;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   padding: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -418,7 +418,7 @@ input[type=file] {
   text-align: center;
   padding: 4px;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
 }
 
 .pm_add_icon {
@@ -443,7 +443,7 @@ input[type=file] {
 
 .post-body {
   padding: 10px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   border-top: 10px solid #ffc500;
   color: #c0bab8;
   border-bottom-left-radius: 10px;
@@ -463,10 +463,31 @@ a .info-tiny:hover {
 }
 
 .stilius_mygtukas {
-  border: 0;
+  border: 1px solid;
   cursor: pointer;
   border-radius: 4px;
   letter-spacing: 0.04em;
+  border-top: 10px solid #ffc500;
+  background: rgba(0,0,0,.75);
+  padding: 10px;
+}
+
+.steam-link-image {
+  margin-left: -110px;
+  margin-top: -3px;
+  width: 50%;
+  position: absolute;
+  z-index: 3;
+}
+/* TOP profile info */
+
+.profile-box{
+  background: rgba(0,0,0,.75);
+  min-height: 120px;
+}
+
+.profile-avatar img {
+  height: 120px;
 }
 
 .pm_load_more:hover {
@@ -567,8 +588,8 @@ nav.nav-slit {
 }
 
 .info-perziura {
-  background: #ffc500 !important;
-  color: #000 !important;
+  background: rgba(23, 23, 23, 0.75) !important;
+  color: #fff!important;
 }
 
 .text-left {
@@ -646,7 +667,7 @@ li.comment:nth-child(odd) {
   margin-bottom: 5px;
   padding-top: 5px;
   padding-bottom: 2px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   border-radius: 10px;
 }
 
@@ -866,7 +887,7 @@ li.comment:nth-child(odd) {
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: rgba(0, 0, 0, 0.75) !important;
+  background-color: rgba(23, 23, 23, 0.75) !important;
   border: 0 !important;
   color: #e7e0dd !important;
   margin-top: 8px !important;
@@ -893,12 +914,12 @@ li.comment:nth-child(odd) {
   left: 0;
   height: 20px;
   width: 20px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   border: 1px solid #fff;
 }
 
 .control input:checked ~ .control_indicator {
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
 }
 
 .control input:disabled ~ .control_indicator {
@@ -962,7 +983,7 @@ li.comment:nth-child(odd) {
   text-align: center;
   padding: 4px;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
 }
 
 .dropdown-menu {
@@ -1001,7 +1022,7 @@ li.comment:nth-child(odd) {
 }
 
 .simple-table.table > tbody > tr:nth-of-type(even) {
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
 }
 
 .fake-table div:nth-child(even) {
@@ -1039,7 +1060,7 @@ li.comment:nth-child(odd) {
 .pagination > .active > a,
 .pagination > .active > a:focus,
 .pagination > .active > a:hover {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(23, 23, 23, 0.75);
   color: #c0bab8;
 }
 
@@ -1049,17 +1070,8 @@ li.comment:nth-child(odd) {
 }
 
 .pagination > li > a:focus {
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(23, 23, 23, 0.75);
   color: #e7e0dd;
-}
-
-/* TOP profile info */
-.profile-avatar {
-  float: right;
-}
-.profile-avatar img {
-  height: 40px;
-  margin-top: 10px;
 }
 
 /* Specialus @Media */
@@ -1106,6 +1118,10 @@ only screen and (min-resolution: 144dpi) {
   .pm_prev_slide_button:hover .pm_prev_button_fader,
   .pm_next_slide_button:hover .pm_next_button_fader {
     opacity: 1;
+  }
+  .heading--medium {
+    color: #fff;
+    font-size: 50px;
   }
 }
 
@@ -1158,7 +1174,7 @@ only screen and (min-resolution: 144dpi) {
     top: 13px;
   }
   ul.nav.navbar-nav.short-menu.nav > li {
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(23, 23, 23, 0.75);
     margin-right: 5px;
     border-radius: 4px;
   }

@@ -20,7 +20,7 @@
                                             <span class="input-group-addon" id="basic-addon1"><span
                                                         class="fa fa-address-card" style="width: 30px;"></span></span>
                                             <input id="name" type="text" class="form-control" name="name"
-                                                   placeholder="Nick'as"
+                                                   placeholder="Vardas"
                                                    value="{{ old('name') }}" required autofocus maxlength="255">
                                         </div>
                                         @if ($errors->has('name'))

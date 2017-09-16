@@ -66,7 +66,7 @@ class BlogController extends Controller
         $next_post = Post::find($next);
 
         /* Surandu komentarus kurie priklauso siam postui ir paverciu i puslapiavima */
-        $comments = Comment::where('post_id', '=', $post->id)->orderBy('id', 'desc')->paginate(5);
+        $comments = Comment::where('post_id', '=', $post->id)->where('approved', '1')->orderBy('id', 'desc')->paginate(5);
         $links = $comments->links();
 
         // Jeigu useris yra parases komentara, tai neleisti rasyti kito 60 sekundziu.

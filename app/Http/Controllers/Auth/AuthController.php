@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use Invisnik\LaravelSteamAuth\SteamAuth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
@@ -21,7 +22,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectURL = '/';
+    protected $redirectURL = '/profile';
 
     /**
      * AuthController constructor.
@@ -44,7 +45,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get user info and log in
+     * Get user info and link
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -54,38 +55,37 @@ class AuthController extends Controller
             $info = $this->steam->getUserInfo();
 
             if (!is_null($info)) {
-                $user = $this->findOrNewUser($info);
+                $steamID = User::where('steamid', '=', $info->steamID64)->first();
+                /* Jeigu identisko Steam ID nera bazeje*/
+                if ($steamID === null) {
+                    $user = Auth::user();
 
-                Auth::login($user, true);
+                    /* Jeigu USER nera linkines Steam, sulinkinam */
+                    if ($user->steam_status == 0) {
 
-                return redirect($this->redirectURL); // redirect to site
+                        $user->steam_status = 1;
+                        $user->nickname = $info->personaname;
+                        $user->avatar = $info->avatarfull;
+                        $user->steamid = $info->steamID64;
+                        $user->save();
+                        return redirect($this->redirectURL);
+                    } else {
+                        Session::flash('status', 'Negali naudoti STEAM Link antrą kartą.');
+                        return redirect($this->redirectURL);
+                    }
+
+                } else {
+                    if (Auth::user()->steamid == $info->steamID64) {
+                        Session::flash('success', 'Nurodytas STEAM ACC sulinkintas');
+                        return redirect($this->redirectURL);
+                    } else {
+                        Session::flash('status', 'Nurodyta STEAM ACC jau naudoja kitas medžiotojas');
+                        return redirect($this->redirectURL);
+                    }
+
+                }
             }
         }
         return $this->redirectToSteam();
-    }
-
-    /**
-     * Getting user by info or created if not exists
-     *
-     * @param $info
-     * @return User
-     */
-    protected function findOrNewUser($info)
-    {
-        $user = User::where('steamid', $info->steamID64)->first();
-
-        if (!is_null($user)) {
-            return $user;
-        }
-
-        return User::create([
-            'name'  => $info->personaname,
-            'nickname' => $info->personaname,
-            'avatar' => $info->avatarfull,
-            'steamid' => $info->steamID64,
-            /*Jeigu steam registracija, tai generuoti fake email*/
-            'email' => 'steam@'.$info->steamID64.'.lt',
-            'password' => Hash::make(str_random(8))
-        ])->syncRoles(8);
     }
 }

@@ -60,7 +60,6 @@
                                     <div class="g-recaptcha" data-theme="light" data-sitekey="{{ config('app.secret_key') }}" style="transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;float: left;"></div>
                                     {!! app('captcha')->display() !!}
                                 </form>
-                                <a href="{{ route('auth.steam') }}"><img src="{{ asset('img/navigation/steam_large.png') }}" border="0" alt="Login with Steam" style="float:right;"></a>
                             </div>
                         </div>
                     </div><!-- row -->

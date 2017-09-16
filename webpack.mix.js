@@ -27,7 +27,8 @@ mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap', 'public/bootstrap
 /* Generuojami visi Basic scriptai */
 mix.scripts(['resources/assets/js/jquery.min.js',
     'resources/assets/js/jquery-ui.min.js',
-    'node_modules/overhang/dist/overhang.min.js'
+    'node_modules/overhang/dist/overhang.min.js',
+    'resources/assets/js/tooltip.js'
 ], 'public/js/top.js');
 
 /* Isveda JS kuris atsakingas uz interaktyvu Listinima */

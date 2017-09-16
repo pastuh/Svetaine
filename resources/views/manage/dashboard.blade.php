@@ -12,18 +12,7 @@
                         <br>
                         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
                             <div class="col-xs-12 control-margin">
-                                <span>Sveikas {{ Auth::user()->name }}</span><br><br>
-
-                                @if(Auth::user()->avatar)
-                                    <a class="profile-avatar" href="{{ route('profile') }}"><img src="{{ Auth::user()->avatar }}"></a>
-                                @else
-                                    <a class="profile-avatar" href="{{ route('profile') }}"><img src="{{ asset('img/default-avatar.png') }}"></a>
-                                @endif
-
-                                <span>Svetainėje esi užfiksuotas kaip:</span><br>
-                                @foreach(Auth::user()->roles as $role)
-                                    <span>{{ $role->display_name }}</span><br>
-                                @endforeach
+                                <span>Šiame skyriuje gali peržiūrėti svarbiausią svetainės informaciją.</span><br>
                             </div>
                         </div>
 
