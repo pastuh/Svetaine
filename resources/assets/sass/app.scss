@@ -12,11 +12,11 @@
 // Overhang stilius
 @import "~overhang/dist/overhang.min.css";
 
-// Koreguoti SASS stiliai
-@import "overrides";
-// Papildomi mini koregavimai
-@import "helpers";
 // Pagrindinis stilius
 @import "styles";
+// Papildomi mini koregavimai
+@import "helpers";
+// Koreguoti SASS stiliai
+@import "overrides";
 // NextMenu thumb stilius
 @import "nextmenu";

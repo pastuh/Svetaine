@@ -359,7 +359,7 @@ jQuery.fn.blog_listing_addon = function (addon_options) {
                     '<i class="pm_likes_icon fa fa-heart-o"></i>' +
                     '<span class="pm_likes_counter">0</span>' +
                     '</div>' +
-                    '<a class="pm_potrfolio_read_more" href="' + addon_options.items[i].href + '"></a>' +
+                    '<a class="pm_portfolio_read_more" href="' + addon_options.items[i].href + '"></a>' +
                     '<div class="clear"></div>' +
                     '</div>' +
                     '</div>' +
@@ -426,7 +426,7 @@ jQuery.fn.portfolio_listing_addon = function (addon_options) {
                     '<i class="pm_likes_icon fa fa-heart-o"></i>' +
                     '<span class="pm_likes_counter">0</span>' +
                     '</div>' +
-                    '<a class="pm_potrfolio_read_more" href="' + addon_options.items[i].href + '"></a>' +
+                    '<a class="pm_portfolio_read_more" href="' + addon_options.items[i].href + '"></a>' +
                     '<div class="clear"></div>' +
                     '</div>' +
                     '</div>' +
@@ -492,7 +492,7 @@ jQuery.fn.portfolio_listing_addon_title = function (addon_options) {
                     '<i class="pm_likes_icon fa fa-heart-o"></i>' +
                     '<span class="pm_likes_counter">0</span>' +
                     '</div>' +
-                    '<a class="pm_potrfolio_read_more" href="' + addon_options.items[i].href + '"></a>' +
+                    '<a class="pm_portfolio_read_more" href="' + addon_options.items[i].href + '"></a>' +
                     '<div class="clear"></div>' +
                     '</div>' +
                     '</div>' +

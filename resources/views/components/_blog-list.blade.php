@@ -45,7 +45,7 @@
                         '<div class="pm_blog_featured_image_wrapper">' +
                         '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" />' +
                         '<div class="pm_post_likes_wrapper">' +
-                        '<a class="pm_potrfolio_read_more" href="blog/' + addon_options.items[i].slug + '"></a>' +
+                        '<a class="pm_portfolio_read_more" href="blog/' + addon_options.items[i].slug + '"></a>' +
                         '<div class="clear"></div>' +
                         '</div>' +
 

@@ -15,7 +15,7 @@
                         <div class="pm_blog_featured_image_wrapper">
                             <img src="{{ asset('img/posts/' . $post->image) }}" alt="">
                             <div class="pm_post_likes_wrapper">
-                                <a class="pm_potrfolio_read_more" href="blog/{{ $post->slug }}"></a>
+                                <a class="pm_portfolio_read_more" href="blog/{{ $post->slug }}"></a>
                                 <div class="clear"></div>
                             </div>
                             <div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">

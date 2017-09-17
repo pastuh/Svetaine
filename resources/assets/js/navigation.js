@@ -1,5 +1,4 @@
 /*Loading screen'o veikimas*/
-
     var site_width = jQuery(window).width(),
         site_height = jQuery(window).height(),
         header_height = jQuery('.pm_header').height();
@@ -15,16 +14,14 @@
 setTimeout("jQuery('html').addClass('show-scrollbar');", 1000);
 
 /*Navigacijos ir mygtuku valdymas*/
+
 $(document).ready(function () {
 
     /* Paspaudus Hamburget uzslepia virsutiniu mini meniu */
 
     $( ".navbar-toggle" ).click(function() {
-        console.log('paspaustas');
         $('.short-menu').toggle();
-        console.log('tooglinu short');
         $('.nav-slit').toggle();
-        console.log('tooglinu nav');
     });
     /* Submit forma */
     $("#submit-button").click(function () {

@@ -5,6 +5,9 @@ return [
     /* Nustatau KEY del recaptcha */
     'secret_key' => env('NOCAPTCHA_SITEKEY'),
 
+    /* Nustatau KEY del twitch */
+    'twitch_key' => env('TWITCH_CLIENTKEY'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

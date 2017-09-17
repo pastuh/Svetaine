@@ -111,6 +111,10 @@ a:hover {
   color: #e7e0dd;
 }
 
+a:focus {
+  color: #e7e0dd;
+}
+
 ul {
   padding: 0;
   list-style-position: inside;
@@ -368,8 +372,6 @@ button::-moz-focus-inner {
   }
 }
 
-
-
 /**
  * Demo Styles
  */
@@ -386,4 +388,57 @@ button::-moz-focus-inner {
   #narrow-browser-alert {
     display: none;
   }
+}
+
+/* Bootstrap modal */
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  background-color: #000;
+  border: 0;
+}
+
+.embed-responsive-16by9 {
+  padding-bottom: 30%;
+}
+
+.embed-responsive-item {
+  max-height: 600px;
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  top: 300px;
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transform: translate3d(0, -300px, 0);
+  transform: translate3d(0, -300px, 0);
+  opacity: 1;
+}
+button#close-module {
+  font-size: 14px;
+  font-weight: bold;
+}
+.btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
+  color: #ffc500;
 }

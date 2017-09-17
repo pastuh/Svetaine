@@ -58,6 +58,9 @@ textarea.pm_comment_respond_field {
   height: 50px;
   background: transparent;
 }
+.nav-up {
+  top: -50px;
+}
 
 .navbar-default .navbar-brand {
   color: #fff;
@@ -271,11 +274,11 @@ textarea.pm_comment_respond_field {
   opacity: 1;
 }
 
-.page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_read_more:hover {
+.page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_portfolio_read_more:hover {
   opacity: .9;
 }
 
-.page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_read_more {
+.page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_portfolio_read_more {
   width: 67px;
   height: 67px;
   border-radius: 4px;
@@ -283,6 +286,18 @@ textarea.pm_comment_respond_field {
   float: left;
   margin-left: 10px;
   background: rgba(23, 23, 23, 0.75) url(/img/navigation/next_button_back.png) no-repeat center;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+}
+
+.page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_watch {
+  width: 67px;
+  height: 67px;
+  border-radius: 4px;
+  display: inline-block;
+  float: left;
+  margin-left: 10px;
+  background: rgba(23, 23, 23, 0.75) url(/img/navigation/fullscreen_button_back.png) no-repeat center;
   transition: all .3s;
   -webkit-transition: all .3s;
 }
@@ -1083,8 +1098,12 @@ li.comment:nth-child(odd) {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (min-resolution: 144dpi) {
-  .page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_read_more {
+  .page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_portfolio_read_more {
     background: #191514 url(/img/navigation/retina/next_button_back.png) no-repeat center;
+    background-size: 22px 22px;
+  }
+  .page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_watch {
+    background: #191514 url(/img/navigation/retina/fullscreen_button_active_back.png) no-repeat center;
     background-size: 22px 22px;
   }
   .pm_prev_slide_button .pm_prev_button_fader {
@@ -1182,7 +1201,7 @@ only screen and (min-resolution: 144dpi) {
     height: 40px;
     margin-top: -20px;
   }
-  .page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_read_more {
+  .page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_portfolio_read_more {
     width: 40px;
     height: 40px;
     background-size: 15px 15px;

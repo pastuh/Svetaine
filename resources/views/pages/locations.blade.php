@@ -18,7 +18,7 @@
                                     <i class="pm_likes_icon fa fa-heart-o"></i>
                                     <span class="pm_likes_counter">0</span>
                                 </div>
-                                <a class="pm_potrfolio_read_more" href="blog-post-standard.htm"></a>
+                                <a class="pm_portfolio_read_more" href="blog-post-standard.htm"></a>
                                 <div class="clear"></div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                     <i class="pm_likes_icon fa fa-heart-o"></i>
                                     <span class="pm_likes_counter">0</span>
                                 </div>
-                                <a class="pm_potrfolio_read_more" href="blog-post-image-full.htm"></a>
+                                <a class="pm_portfolio_read_more" href="blog-post-image-full.htm"></a>
                                 <div class="clear"></div>
                             </div>
                         </div>

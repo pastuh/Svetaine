@@ -16,8 +16,20 @@ class VideoController extends Controller
     {
         $TwitchVideos = new TwitchVideo();
         $TwitchVideos = $TwitchVideos->getTwitchVideos();
+        $EmptyVideo = true;
 
-        return view('video.index', compact('TwitchVideos'));
+        if(!empty($TwitchVideos)) {
+            $VisibleVideos = array_slice($TwitchVideos['streams'],0, 8);
+            $HiddenVideos = array_slice($TwitchVideos['streams'],8);
+            $EmptyVideo = false;
+        }
+//        dd($HiddenVideos);
+        /* Perskiriu per puse */
+        //$halved = array_chunk($TwitchVideos['streams'], ceil(count($TwitchVideos['streams'])/2));
+        //$VisibleVideos = $halved[0];
+        //$HiddenVideos = $halved[1];
+
+        return view('video.index', compact('VisibleVideos', 'HiddenVideos', 'EmptyVideo'));
     }
 
     /**
