@@ -15,9 +15,17 @@
                 <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                     <div class="block__header">
                         <h2 class="heading heading--medium" style="font-size: 50px;">
-                            {{ Auth::user()->name }}<img
-                                    src="{{ asset('img/default-avatar.png') }}" border="0"
-                                    alt="Medžiotojo avataras" style="margin-bottom: 18px;padding-left: 10px;height: 70px;" class="img-fluid"></h2>
+                            {{ Auth::user()->name }}
+                            <img src="
+                            @if(Auth::user()->avatar !== NULL)
+                            {{ Auth::user()->avatar }}
+                            @else
+                            {{ asset('img/default-avatar.png') }}
+                            @endif
+                            "
+                                 border="0"
+                                 alt="Medžiotojo avataras" style="margin-bottom: 18px;padding-left: 10px;height: 70px;"
+                                 class="img-fluid"></h2>
                     </div>
                     <div class="block__location">
                         <p class="block__location-text">
@@ -42,7 +50,8 @@
 
                                 <div class="col-lg-3 col-lg-offset-2 col-md-3 col-md-offset-3">
                                     <div class="input-group input-group-lg">
-                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip" title="Komentarų skaičius"><span
+                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip"
+                                                      title="Komentarų skaičius"><span
                                                             class="fa fa-comments"
                                                             style="width: 30px;"></span></span>
                                         <input type="text" class="form-control info-perziura"
@@ -53,7 +62,8 @@
 
                                 <div class="col-lg-3 col-lg-push-2 col-md-3 col-md-offset-0">
                                     <div class="input-group input-group-lg">
-                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip" title="Įrašų skaičius"><span
+                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip"
+                                                      title="Įrašų skaičius"><span
                                                             class="fa fa-file-text"
                                                             style="width: 30px;"></span></span>
                                         <input type="text" class="form-control info-perziura"
@@ -64,7 +74,8 @@
 
                                 <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3">
                                     <div class="input-group input-group-lg">
-                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip" title="Steam ID <br> <i>(Ateityje bus naudojama)</i>"><span
+                                                <span class="input-group-addon" id="basic-addon1" rel="tooltip"
+                                                      title="Steam ID <br> <i>(Ateityje bus naudojama)</i>"><span
                                                             class="fa fa-steam-square fa-lg"
                                                             style="width: 30px;"></span></span>
                                         <input id="status" type="text" class="form-control info-perziura" name="steam"
@@ -117,11 +128,11 @@
 
 @section('scripts')
     <script type="text/javascript">
-        (function($) {
+        (function ($) {
 
             'use strict';
 
-            $(document).on('show.bs.tab', '.nav-tabs-responsive [data-toggle="tab"]', function(e) {
+            $(document).on('show.bs.tab', '.nav-tabs-responsive [data-toggle="tab"]', function (e) {
                 var $target = $(e.target);
                 var $tabs = $target.closest('.nav-tabs-responsive');
                 var $current = $target.closest('li');
@@ -129,20 +140,20 @@
                 $current = $parent.length > 0 ? $parent : $current;
                 var $next = $current.next();
                 var $prev = $current.prev();
-                var updateDropdownMenu = function($el, position){
+                var updateDropdownMenu = function ($el, position) {
                     $el
                         .find('.dropdown-menu')
                         .removeClass('pull-xs-left pull-xs-center pull-xs-right')
-                        .addClass( 'pull-xs-' + position );
+                        .addClass('pull-xs-' + position);
                 };
 
                 $tabs.find('>li').removeClass('next prev');
                 $prev.addClass('prev');
                 $next.addClass('next');
 
-                updateDropdownMenu( $prev, 'left' );
-                updateDropdownMenu( $current, 'center' );
-                updateDropdownMenu( $next, 'right' );
+                updateDropdownMenu($prev, 'left');
+                updateDropdownMenu($current, 'center');
+                updateDropdownMenu($next, 'right');
             });
 
         })(jQuery);
