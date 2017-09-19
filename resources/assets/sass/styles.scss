@@ -143,7 +143,7 @@ textarea.pm_comment_respond_field {
 .pm_post_meta_standard {
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: .8px;
+  letter-spacing: 0.04em;
   color: #838c91;
   margin-bottom: 43px;
 }
@@ -275,6 +275,10 @@ textarea.pm_comment_respond_field {
 }
 
 .page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_portfolio_read_more:hover {
+  opacity: .9;
+}
+
+.page-template-page-blog-ajax .pm_blog_item .pm_post_likes_wrapper .pm_potrfolio_watch:hover {
   opacity: .9;
 }
 
@@ -423,8 +427,6 @@ input[type=file] {
 .post-short-intro {
   color: #fff;
   padding: 5px;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .info-tiny {
@@ -433,7 +435,7 @@ input[type=file] {
   text-align: center;
   padding: 4px;
   border-radius: 10px;
-  background: rgba(23, 23, 23, 0.75);
+  //background: rgba(23, 23, 23, 0.75);
 }
 
 .pm_add_icon {
@@ -457,12 +459,26 @@ input[type=file] {
 }
 
 .post-body {
-  padding: 10px;
+  padding: 20px;
   background: rgba(23, 23, 23, 0.75);
-  border-top: 10px solid #ffc500;
   color: #c0bab8;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.post-body .post-short-intro {
+  border-bottom: 2px solid #ffc500;
+  padding: 20px;
+  padding-bottom: 10px;
+}
+/* Tekstas */
+.main-text {
+  margin-top: 14px;
+  padding: 20px;
+  padding-bottom: 40px;
+  padding-top: 10px;
 }
 
 .delete-confirm {
@@ -471,6 +487,10 @@ input[type=file] {
 
 a .info-tiny:hover {
   background: rgba(34, 32, 28, 0.75);
+}
+
+.info-tags {
+  color: #4f4f4f;
 }
 
 .pm_comment_input_wrapper {
@@ -759,7 +779,6 @@ li.comment:nth-child(odd) {
   margin-bottom: 0;
   color: #ffc500;
   padding-bottom: 0;
-  padding-top: 10px;
 }
 
 .pm_post_comments_standard {

@@ -421,9 +421,6 @@ button::-moz-focus-inner {
   transform: scale(0.1);
   top: 300px;
   opacity: 0;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
 }
 
 .modal.fade.in .modal-dialog {

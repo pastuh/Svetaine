@@ -1,1 +1,332 @@
-!function(t,n,e,i){function a(n,e){this.element=n,this.options=t.extend({},r,e),this._defaults=r,this._name=o,this.init()}var o="accordion",r={transitionSpeed:300,transitionEasing:"ease",controlElement:"[data-control]",contentElement:"[data-content]",groupElement:"[data-accordion-group]",singleOpen:!0};a.prototype.init=function(){function i(t,n,e){var i;return function(){function a(){e||t.apply(o,r),i=null}var o=this,r=arguments;i?clearTimeout(i):e&&t.apply(o,r),i=setTimeout(a,n||100)}}function a(t){return n.requestAnimationFrame||n.webkitRequestAnimationFrame||n.mozRequestAnimationFrame?requestAnimationFrame(t)||webkitRequestAnimationFrame(t)||mozRequestAnimationFrame(t):setTimeout(t,1e3/60)}function o(t,n){n?v.css({"-webkit-transition":"",transition:""}):v.css({"-webkit-transition":"max-height "+m.transitionSpeed+"ms "+m.transitionEasing,transition:"max-height "+m.transitionSpeed+"ms "+m.transitionEasing})}function r(n){var e=0;n.children().each(function(){e+=t(this).outerHeight(!0)}),n.data("oHeight",e)}function s(n,e,i,a){var o,r=n.filter(".open").find("> [data-content]"),s=r.find("[data-accordion].open > [data-content]");m.singleOpen||(s=s.not(e.siblings("[data-accordion].open").find("> [data-content]"))),o=r.add(s),n.hasClass("open")&&o.each(function(){var n=t(this).data("oHeight");switch(a){case"+":t(this).data("oHeight",n+i);break;case"-":t(this).data("oHeight",n-i);break;default:throw"updateParentHeight method needs an operation"}t(this).css("max-height",t(this).data("oHeight"))})}function c(t){if(t.hasClass("open")){var n=t.find("> [data-content]"),e=n.find("[data-accordion].open > [data-content]"),i=n.add(e);r(i),i.css("max-height",i.data("oHeight"))}}function d(t,n){if(t.trigger("accordion.close"),y){if(w){s(t.parents("[data-accordion]"),t,n.data("oHeight"),"-")}n.css(x),t.removeClass("open")}else n.css("max-height",n.data("oHeight")),n.animate(x,m.transitionSpeed),t.removeClass("open")}function h(t,n){if(t.trigger("accordion.open"),y){if(o(n),w){s(t.parents("[data-accordion]"),t,n.data("oHeight"),"+")}a(function(){n.css("max-height",n.data("oHeight"))}),t.addClass("open")}else n.animate({"max-height":n.data("oHeight")},m.transitionSpeed,function(){n.css({"max-height":"none"})}),t.addClass("open")}function l(n){var e=(n.closest(m.groupElement),n.siblings("[data-accordion]").filter(".open")),i=e.find("[data-accordion]").filter(".open"),a=e.add(i);a.each(function(){var n=t(this);d(n,n.find(m.contentElement))}),a.removeClass("open")}function u(){var t=!!m.singleOpen&&g.parents(m.groupElement).length>0;r(v),t&&l(g),g.hasClass("open")?d(g,v):h(g,v)}var f=this,m=f.options,g=t(f.element),p=g.find("> "+m.controlElement),v=g.find("> "+m.contentElement),b=g.parents("[data-accordion]").length,w=b>0,x={"max-height":0,overflow:"hidden"},y=function(){var t=e.body||e.documentElement,n=t.style,i="transition";if("string"==typeof n[i])return!0;var a=["Moz","webkit","Webkit","Khtml","O","ms"];i="Transition";for(var o=0;o<a.length;o++)if("string"==typeof n[a[o]+i])return!0;return!1}();!function(){v.each(function(){var n=t(this);0!=n.css("max-height")&&(n.closest("[data-accordion]").hasClass("open")?(o(n),r(n),n.css("max-height",n.data("oHeight"))):n.css({"max-height":0,overflow:"hidden"}))}),g.attr("data-accordion")||(g.attr("data-accordion",""),g.find(m.controlElement).attr("data-control",""),g.find(m.contentElement).attr("data-content",""))}(),function(){p.on("click",u),p.on("accordion.toggle",function(){if(m.singleOpen&&p.length>1)return!1;u()}),p.on("accordion.refresh",function(){c(g)}),t(n).on("resize",i(function(){c(g)}))}()},t.fn[o]=function(n){return this.each(function(){t.data(this,"plugin_"+o)||t.data(this,"plugin_"+o,new a(this,n))})}}(jQuery,window,document),[].slice.call(document.querySelectorAll("nav > a span")).forEach(function(t){t.addEventListener("click",function(t){t.preventDefault()})}),$(document).on("click","#pagination-wrapper a",function(t){t.preventDefault(),$("#results-wrapper").load($(this).attr("href")+" #results-wrapper")}),$(".accordion").accordion({transitionSpeed:100}),$(document).on("mouseenter",".youtube-play",function(){$(this).next("img").css("background","rgba(37, 34, 32, 0.4)")}).on("mouseleave",".youtube-play",function(){$(this).next("img").css("border","")}),$(".video-box").click(function(){var t=$(this).children("img").attr("data-video");video='<div class="youtube-box youtube-img col-md-10 col-lg-6"><iframe class="youtube-iframe" width="100%" height="355" src="'+t+'" frameborder="0" allowfullscreen></iframe></div>',$(this).replaceWith(video)});
+/*!
+ * jQuery Accordion 0.0.1
+ * (c) 2014 Victor Fernandez <victor@vctrfrnndz.com>
+ * MIT Licensed.
+ */
+
+;(function ( $, window, document, undefined ) {
+
+    var pluginName = 'accordion',
+        defaults = {
+            transitionSpeed: 300,
+            transitionEasing: 'ease',
+            controlElement: '[data-control]',
+            contentElement: '[data-content]',
+            groupElement: '[data-accordion-group]',
+            singleOpen: true
+        };
+
+    function Accordion(element, options) {
+        this.element = element;
+        this.options = $.extend({}, defaults, options);
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.init();
+    }
+
+    Accordion.prototype.init = function () {
+        var self = this,
+            opts = self.options;
+
+        var $accordion = $(self.element),
+            $controls = $accordion.find('> ' + opts.controlElement),
+            $content =  $accordion.find('> ' + opts.contentElement);
+
+        var accordionParentsQty = $accordion.parents('[data-accordion]').length,
+            accordionHasParent = accordionParentsQty > 0;
+
+        var closedCSS = { 'max-height': 0, 'overflow': 'hidden' };
+
+        var CSStransitions = supportsTransitions();
+
+        function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);
+                else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 100);
+            };
+        }
+
+        function supportsTransitions() {
+            var b = document.body || document.documentElement,
+                s = b.style,
+                p = 'transition';
+
+            if (typeof s[p] == 'string') {
+                return true;
+            }
+
+            var v = ['Moz', 'webkit', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            p = 'Transition';
+
+            for (var i=0; i<v.length; i++) {
+                if (typeof s[v[i] + p] == 'string') {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function requestAnimFrame(cb) {
+            if(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame) {
+                return  requestAnimationFrame(cb) ||
+                        webkitRequestAnimationFrame(cb) ||
+                        mozRequestAnimationFrame(cb);
+            } else {
+                return setTimeout(cb, 1000 / 60);
+            }
+        }
+
+        function toggleTransition($el, remove) {
+            if(!remove) {
+                $content.css({
+                    '-webkit-transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing,
+                    'transition': 'max-height ' + opts.transitionSpeed + 'ms ' + opts.transitionEasing
+                });
+            } else {
+                $content.css({
+                    '-webkit-transition': '',
+                    'transition': ''
+                });
+            }
+        }
+
+        function calculateHeight($el) {
+            var height = 0;
+
+            $el.children().each(function() {
+                height = height + $(this).outerHeight(true);
+            });
+
+            $el.data('oHeight', height);
+        }
+
+        function updateParentHeight($parentAccordion, $currentAccordion, qty, operation) {
+            var $content = $parentAccordion.filter('.open').find('> [data-content]'),
+                $childs = $content.find('[data-accordion].open > [data-content]'),
+                $matched;
+
+            if(!opts.singleOpen) {
+                $childs = $childs.not($currentAccordion.siblings('[data-accordion].open').find('> [data-content]'));
+            }
+
+            $matched = $content.add($childs);
+
+            if($parentAccordion.hasClass('open')) {
+                $matched.each(function() {
+                    var currentHeight = $(this).data('oHeight');
+
+                    switch (operation) {
+                        case '+':
+                            $(this).data('oHeight', currentHeight + qty);
+                            break;
+                        case '-':
+                            $(this).data('oHeight', currentHeight - qty);
+                            break;
+                        default:
+                            throw 'updateParentHeight method needs an operation';
+                    }
+
+                    $(this).css('max-height', $(this).data('oHeight'));
+                });
+            }
+        }
+
+        function refreshHeight($accordion) {
+            if($accordion.hasClass('open')) {
+                var $content = $accordion.find('> [data-content]'),
+                    $childs = $content.find('[data-accordion].open > [data-content]'),
+                    $matched = $content.add($childs);
+
+                calculateHeight($matched);
+
+                $matched.css('max-height', $matched.data('oHeight'));
+            }
+        }
+
+        function closeAccordion($accordion, $content) {
+            $accordion.trigger('accordion.close');
+            
+            if(CSStransitions) {
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '-');
+                }
+
+                $content.css(closedCSS);
+
+                $accordion.removeClass('open');
+            } else {
+                $content.css('max-height', $content.data('oHeight'));
+
+                $content.animate(closedCSS, opts.transitionSpeed);
+
+                $accordion.removeClass('open');
+            }
+        }
+
+        function openAccordion($accordion, $content) {
+            $accordion.trigger('accordion.open');
+            if(CSStransitions) {
+                toggleTransition($content);
+
+                if(accordionHasParent) {
+                    var $parentAccordions = $accordion.parents('[data-accordion]');
+
+                    updateParentHeight($parentAccordions, $accordion, $content.data('oHeight'), '+');
+                }
+
+                requestAnimFrame(function() {
+                    $content.css('max-height', $content.data('oHeight'));
+                });
+
+                $accordion.addClass('open');
+            } else {
+                $content.animate({
+                    'max-height': $content.data('oHeight')
+                }, opts.transitionSpeed, function() {
+                    $content.css({'max-height': 'none'});
+                });
+
+                $accordion.addClass('open');
+            }
+        }
+
+        function closeSiblingAccordions($accordion) {
+            var $accordionGroup = $accordion.closest(opts.groupElement);
+
+            var $siblings = $accordion.siblings('[data-accordion]').filter('.open'),
+                $siblingsChildren = $siblings.find('[data-accordion]').filter('.open');
+
+            var $otherAccordions = $siblings.add($siblingsChildren);
+
+            $otherAccordions.each(function() {
+                var $accordion = $(this),
+                    $content = $accordion.find(opts.contentElement);
+
+                closeAccordion($accordion, $content);
+            });
+
+            $otherAccordions.removeClass('open');
+        }
+
+        function toggleAccordion() {
+            var isAccordionGroup = (opts.singleOpen) ? $accordion.parents(opts.groupElement).length > 0 : false;
+
+            calculateHeight($content);
+
+            if(isAccordionGroup) {
+                closeSiblingAccordions($accordion);
+            }
+
+            if($accordion.hasClass('open')) {
+                closeAccordion($accordion, $content);
+            } else {
+                openAccordion($accordion, $content);
+            }
+        }
+
+        function addEventListeners() {
+            $controls.on('click', toggleAccordion);
+            
+            $controls.on('accordion.toggle', function() {
+                if(opts.singleOpen && $controls.length > 1) {
+                    return false;
+                }
+                
+                toggleAccordion();
+            });
+            
+            $controls.on('accordion.refresh', function() {
+                refreshHeight($accordion);
+            });
+
+            $(window).on('resize', debounce(function() {
+                refreshHeight($accordion);
+            }));
+        }
+
+        function setup() {
+            $content.each(function() {
+                var $curr = $(this);
+
+                if($curr.css('max-height') != 0) {
+                    if(!$curr.closest('[data-accordion]').hasClass('open')) {
+                        $curr.css({ 'max-height': 0, 'overflow': 'hidden' });
+                    } else {
+                        toggleTransition($curr);
+                        calculateHeight($curr);
+
+                        $curr.css('max-height', $curr.data('oHeight'));
+                    }
+                }
+            });
+
+
+            if(!$accordion.attr('data-accordion')) {
+                $accordion.attr('data-accordion', '');
+                $accordion.find(opts.controlElement).attr('data-control', '');
+                $accordion.find(opts.contentElement).attr('data-content', '');
+            }
+        }
+
+        setup();
+        addEventListeners();
+    };
+
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName,
+                new Accordion( this, options ));
+            }
+        });
+    }
+
+})( jQuery, window, document );
+
+// Linku ant thumb arrow blokavimas
+[].slice.call(document.querySelectorAll('nav > a span')).forEach(function (el) {
+    el.addEventListener('click', function (ev) {
+        ev.preventDefault();
+    });
+});
+
+//
+$(document).on('click', '#pagination-wrapper a', function(e){
+    e.preventDefault();
+    $('#results-wrapper').load($(this).attr('href') + ' #results-wrapper');
+});
+
+// Accordion
+$('.accordion').accordion({
+    "transitionSpeed": 100
+});
+
+// YOUTUBE BOX
+$(document).on('mouseenter', '.youtube-play', function() {
+	$(this).next('img').css('background', 'rgba(37, 34, 32, 0.4)');
+}).on('mouseleave', '.youtube-play', function() {
+	$(this).next('img').css('border', '');
+});
+
+$('.video-box').click(function () {
+	var linkas = $(this).children('img').attr('data-video');
+	video = '<div class="youtube-box youtube-img col-md-10 col-lg-6"><iframe class="youtube-iframe" width="100%" height="355" src="'+linkas+'" frameborder="0" allowfullscreen></iframe></div>';
+
+	$(this).replaceWith(video);
+});

@@ -35,26 +35,32 @@ width: 100%;')
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                         <div class="pm_content_standard">
-                            <div class="post-short-intro" style="float:left;">
-                                <a href="{{ route('categories.slug', $post->category->slug) }}">
-                                    @include('components._posticon')
-                                </a>
-                                <span class="info-tiny"><i
-                                            class="pm_load_more_back fa fa-clock-o fa-lg"></i> {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
-                                </span>
-                            </div>
-                            <div class="clearfix"></div>
-
                             <div class="post-body">
+
+                                <div class="post-short-intro" >
+                                    <div style="float: left;">
+                                    <a href="{{ route('categories.slug', $post->category->slug) }}">
+                                        @include('components._posticon')
+                                    </a>
+                                    <span class="info-tiny">
+                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                        {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
+                                    </span>
+                                    </div>
+                                    <div class="pm_post_meta_standard">
+                                        <span><i class="icon fa fa-tags fa-lg" style="margin-left: 30px;"></i></span>
+                                        @foreach($post->tags as $tag)
+                                            {{ $loop->first ? '' : '&nbsp;' }}
+                                            <a href="{{ route('tags.slug', $tag->slug) }}">
+                                                <span class="info-tiny">{{ $tag->name }}</span>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="main-text">
                                 {!! $post->body !!}
-                                <div class="pm_post_meta_standard">
-                                    <span><i class="icon fa fa-tags fa-lg"></i></span>
-                                    @foreach($post->tags as $tag)
-                                        {{ $loop->first ? '' : '&nbsp;' }}
-                                        <a href="{{ route('tags.slug', $tag->slug) }}">
-                                            <span class="info-tiny">{{ $tag->name }}</span>
-                                        </a>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -225,6 +231,16 @@ width: 100%;')
                 </a>
             </li>
         @endif
+        <li>
+            <a href="javascript:void(0)" class="show-info">
+                <i class="fa fa-info-circle fa-lg"></i>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" class="show-image">
+                <i class="fa fa-picture-o fa-lg"></i>
+            </a>
+        </li>
     </ul>
 @endsection
 

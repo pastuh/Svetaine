@@ -109,7 +109,9 @@
 
             video = '<iframe class="embed-responsive-item main-video" src="' + linkas + '" height="auto" width="100%" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>';
 
+            setTimeout( function(){
             $('.main-video').replaceWith(video);
+            }, 500);
         });
         $(document).on('click', '#close-module', function () {
             closeVideo = '<iframe class="embed-responsive-item main-video "></iframe>';
