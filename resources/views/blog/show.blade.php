@@ -3,6 +3,7 @@
 
 @section('stylesheet')
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{  url('css\fluidbox.min.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
 @section('body_class', 'pm_dark_type single-post pm_overflow_visible')
@@ -12,8 +13,6 @@
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-position: absolute;
-top: 10%;
 width: 100%;')
 
 @section('content')
@@ -48,17 +47,17 @@ width: 100%;')
                                     </span>
                                     </div>
                                     <div class="pm_post_meta_standard">
-                                        <span><i class="icon fa fa-tags fa-lg" style="margin-left: 30px;"></i></span>
+                                        <span style="float: right;"><i id="tag-zyma" class="icon fa fa-tags fa-lg" style="margin-left: 30px;"></i></span>
                                         @foreach($post->tags as $tag)
                                             {{ $loop->first ? '' : '&nbsp;' }}
-                                            <a href="{{ route('tags.slug', $tag->slug) }}">
+                                            <a href="{{ route('tags.slug', $tag->slug) }}" class="tags-list" style="visibility: hidden;">
                                                 <span class="info-tiny">{{ $tag->name }}</span>
                                             </a>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-
+                                {{--Body startas--}}
                                 <div class="main-text">
                                 {!! $post->body !!}
                                 </div>
@@ -232,12 +231,8 @@ width: 100%;')
             </li>
         @endif
         <li>
-            <a href="javascript:void(0)" class="show-info">
-                <i class="fa fa-info-circle fa-lg"></i>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" class="show-image">
+            <a class="fluidbox fluid-image-fix" href="{{ asset('/img/posts/' . $post->image) }}">
+                <img src="{{ asset('/img/posts/' . $post->image) }}" class="fluid-image-fix" height="0px" width="1px" style="margin-right: -6px;"/>
                 <i class="fa fa-picture-o fa-lg"></i>
             </a>
         </li>
@@ -257,7 +252,17 @@ width: 100%;')
     {{--Postams priedai--}}
     <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
 
+    {{--IMG preview--}}
+    <script type="text/javascript" src="{{  url('js\throttle-debounce.min.js') }}"></script>
+
     @include('components._time')
     @include('components._comsystem')
+
+    {{--Image preview--}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.fluidbox').fluidbox();
+        });
+    </script>
 
 @endsection

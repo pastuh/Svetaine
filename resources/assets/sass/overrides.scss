@@ -439,3 +439,18 @@ button#close-module {
 .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
   color: #ffc500;
 }
+
+.tags-list .info-tiny {
+  color: #4f4f4f;
+  background: rgba(34,32,28,.75);
+}
+.tags-list .info-tiny:hover {
+  background: #ffc500;
+}
+#tag-zyma {
+  color: #4f4f4f;
+}
+
+.fluidbox__overlay {
+  background-color:hsla(0,0%,0%,.85);
+}

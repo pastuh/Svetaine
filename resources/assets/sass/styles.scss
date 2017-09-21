@@ -191,7 +191,7 @@ textarea.pm_comment_respond_field {
 }
 
 .pm_slides_title_and_likes_container {
-  z-index: 20000;
+  z-index: 2;
   transition: all .3s;
   -webkit-transition: all .3s;
   position: relative;
@@ -245,7 +245,7 @@ textarea.pm_comment_respond_field {
   color: #fff;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
-  border-top: 10px solid rgb(255, 197, 0);
+  border-top: 2px solid rgb(255, 197, 0);
 }
 
 .page-template-page-blog-ajax .pm_blog_item .pm_blog_item_wrapper {
@@ -395,7 +395,7 @@ input[type=file] {
 
 .control-margin {
   margin-bottom: 20px;
-  border-top: 10px solid #ffc500;
+  border-top: 2px solid #ffc500;
   background: rgba(23, 23, 23, 0.75);
   padding: 10px;
   border-bottom-left-radius: 10px;
@@ -502,7 +502,7 @@ a .info-tiny:hover {
   cursor: pointer;
   border-radius: 4px;
   letter-spacing: 0.04em;
-  border-top: 10px solid #ffc500;
+  border-top: 2px solid #ffc500;
   background: rgba(0,0,0,.75);
   padding: 10px;
 }

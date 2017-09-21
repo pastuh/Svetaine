@@ -53,7 +53,8 @@ mix.scripts(['resources/assets/js/bootstrap-table.js',
 
 /* Priedai irasams, youtube, accordion ir t.t. */
 mix.scripts(['resources/assets/js/jquery.accordion.js',
-    'resources/assets/js/post-box.js'
+    'resources/assets/js/post-box.js',
+    'resources/assets/js/jquery.fluidbox.js'
 ], 'public/js/post-addon.js');
 
 /* Interaktyvus fullscreen. */

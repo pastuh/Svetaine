@@ -44,7 +44,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="text-left col-xs-12 control-margin">
+                                    <div class="text-left col-xs-12 control-margin" style="padding: 10px;">
                                         <div class="checkbox">
                                             <label class="control control-checkbox">
                                                 Prisiminti

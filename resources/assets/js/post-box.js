@@ -11,6 +11,10 @@ $(document).on('click', '#pagination-wrapper a', function(e){
     $('#results-wrapper').load($(this).attr('href') + ' #results-wrapper');
 });
 
+$("#tag-zyma").click(function () {
+    $(".tags-list").css('visibility', 'visible');
+});
+
 // Accordion
 $('.accordion').accordion({
     "transitionSpeed": 100
