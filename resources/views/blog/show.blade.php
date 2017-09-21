@@ -3,7 +3,6 @@
 
 @section('stylesheet')
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">
-    <link href="{{  url('css\fluidbox.min.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
 @section('body_class', 'pm_dark_type single-post pm_overflow_visible')
@@ -41,7 +40,7 @@ width: 100%;')
                                     <a href="{{ route('categories.slug', $post->category->slug) }}">
                                         @include('components._posticon')
                                     </a>
-                                    <span class="info-tiny">
+                                    <span class="info-time">
                                         <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
                                         {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                     </span>

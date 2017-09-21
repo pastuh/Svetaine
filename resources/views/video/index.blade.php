@@ -47,12 +47,12 @@
                                 </div>
                                 <div class="post-short-intro"
                                      style="float:left; margin-top: -40px; position: relative;">
-                                <span class="info-tiny">
+                                <span class="video-info info-tiny">
                                    <a href="{{ $TwitchVideo['channel']['url'] }}"
                                       target="_blank">{{ $TwitchVideo['channel']['display_name'] }}</a>
                                 </span>
 
-                                    <span class="info-tiny">
+                                    <span class="video-info info-tiny">
                                     <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
                                 </span>
                                 </div>

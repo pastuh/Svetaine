@@ -35,7 +35,7 @@ width: 100%;")
                                 <a href="{{ route('categories.slug', $post->category->slug) }}">
                                     @include('components._posticon')
                                 </a>
-                                <span class="info-tiny"><i
+                                <span class="info-time"><i
                                             class="fa fa-clock-o fa-lg"></i> {{ date('Y-m-d H:i', strtotime($post->created_at)) }}</span>
                             </div>
                             <div class="clearfix"></div>

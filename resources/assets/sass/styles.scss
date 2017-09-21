@@ -435,7 +435,15 @@ input[type=file] {
   text-align: center;
   padding: 4px;
   border-radius: 10px;
-  //background: rgba(23, 23, 23, 0.75);
+  background-color: rgba(34, 32, 28, 0.75);
+}
+
+.info-time {
+  color: #ffc500;
+  font-size: 13px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 10px;
 }
 
 .pm_add_icon {

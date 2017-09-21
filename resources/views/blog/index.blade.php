@@ -22,7 +22,7 @@
                                 <a href="{{ route('categories.slug', $post->category->slug) }}">
                                     @include('components._posticon')
                                 </a>
-                                <span class="info-tiny">
+                                <span class="video-info info-tiny">
                                     <i class="pm_load_more_back fa fa-clock-o fa-lg"></i> {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                 </span>
                             </div>

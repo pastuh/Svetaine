@@ -52,10 +52,10 @@
                         '</div>' +
 
                         '<div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">' +
-                        '<span class="info-tiny">' +
+                        '<span class="video-info info-tiny">' +
                         '<a href="' + addon_options.items[i].channel.url + '" target="_blank">' + video_author + '</a>' +
                         '</span>' +
-                        '<span class="info-tiny">' +
+                        '<span class="video-info info-tiny">' +
                         '<i class="pm_load_more_back fa fa-twitch fa-lg"></i>' + post_time +
                         '</span>' +
                         '</div>' +
