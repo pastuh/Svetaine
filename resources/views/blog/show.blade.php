@@ -27,7 +27,7 @@ width: 100%;')
         </svg>
     </div>
 
-    <div id="post-page{{ $post->id }}" class="pm_wrapper pm_container" style="margin: 0 auto -50px;">
+    <div id="post-page{{ $post->id }}" class="pm_wrapper pm_container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">

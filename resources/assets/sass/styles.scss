@@ -1193,6 +1193,9 @@ only screen and (min-resolution: 144dpi) {
   .page-template-page-blog-ajax .pm_blog_item {
     width: 50%;
   }
+  .nav {
+    margin-left: 10px !important;
+  }
 }
 
 @media only screen and (max-width: 737px) {
