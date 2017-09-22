@@ -263,6 +263,8 @@ overflow: auto;')
         $(document).ready(function() {
             $('.fluidbox').fluidbox();
         });
+
+        $(".navbar-fixed-top").autoHidingNavbar();
     </script>
 
 @endsection
