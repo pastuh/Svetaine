@@ -13,7 +13,8 @@
 -o-background-size: cover;
 background-size: cover;
 width: 100%;
-position: fixed;')
+-webkit-background-size: cover !important;
+background-size: cover !important; ')
 
 @section('content')
     <!--SVG navigacijai -->
