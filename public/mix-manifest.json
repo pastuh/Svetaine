@@ -1,3 +1,11 @@
 {
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/js/top.js": "/js/top.js",
+    "/js/template.js": "/js/template.js",
+    "/js/parsley.js": "/js/parsley.js",
+    "/js/slug.js": "/js/slug.js",
+    "/js/bootstrap-table.js": "/js/bootstrap-table.js",
+    "/js/post-addon.js": "/js/post-addon.js",
+    "/js/fullscreen.js": "/js/fullscreen.js",
+    "/js/all.js": "/js/all.js"
 }
