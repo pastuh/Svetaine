@@ -5,96 +5,84 @@
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_visible')
-
-@section('body_style', 'background: url("../img/posts/' . htmlspecialchars($post->image_blured) . '") no-repeat center center fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-width: 100%;')
+@section('body_class', 'pm_dark_type album_fullscreen_page pm_overflow_visible')
 
 @section('content')
-    <!--SVG navigacijai -->
-    <div class="svg-wrap" style="display: none;">
-        <svg width="64" height="64" viewBox="0 0 64 64">
-            <path id="arrow-left-1"
-                  d="M46.077 55.738c0.858 0.867 0.858 2.266 0 3.133s-2.243 0.867-3.101 0l-25.056-25.302c-0.858-0.867-0.858-2.269 0-3.133l25.056-25.306c0.858-0.867 2.243-0.867 3.101 0s0.858 2.266 0 3.133l-22.848 23.738 22.848 23.738z"/>
-        </svg>
-        <svg width="64" height="64" viewBox="0 0 64 64">
-            <path id="arrow-right-1"
-                  d="M17.919 55.738c-0.858 0.867-0.858 2.266 0 3.133s2.243 0.867 3.101 0l25.056-25.302c0.858-0.867 0.858-2.269 0-3.133l-25.056-25.306c-0.858-0.867-2.243-0.867-3.101 0s-0.858 2.266 0 3.133l22.848 23.738-22.848 23.738z"/>
-        </svg>
-    </div>
+    <!-- Content -->
+    <div class="pm_album_fullscreen">
+        <div class="pm_gallery_container galleery_fullscreen">
+            <ul class="pm_gallery effect_post">
+                <li style="background: url( {{ url('../img/posts/' . $post->image_blured) }} );" data-title="{{ $post->title }}">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                                    <div class="pm_content_standard">
+                                        <div class="post-body">
 
-    <div id="post-page{{ $post->id }}" class="pm_wrapper pm_container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <div class="pm_content_standard">
-                            <div class="post-body">
-
-                                <div class="post-short-intro" >
-                                    <div style="float: left;">
-                                    <a href="{{ route('categories.slug', $post->category->slug) }}">
-                                        @include('components._posticon')
-                                    </a>
-                                    <span class="info-time">
+                                            <div class="post-short-intro">
+                                                <div style="float: left;">
+                                                    <a href="{{ route('categories.slug', $post->category->slug) }}">
+                                                        @include('components._posticon')
+                                                    </a>
+                                                    <span class="info-time">
                                         <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
-                                        {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
+                                                        {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                     </span>
+                                                </div>
+                                                <div class="pm_post_meta_standard">
+                                                    <span style="float: right;"><i id="tag-zyma"
+                                                                                   class="icon fa fa-tags fa-lg"
+                                                                                   style="margin-left: 30px;"></i></span>
+                                                    @foreach($post->tags as $tag)
+                                                        {{ $loop->first ? '' : '&nbsp;' }}
+                                                        <a href="{{ route('tags.slug', $tag->slug) }}" class="tags-list"
+                                                           style="visibility: hidden;">
+                                                            <span class="info-tiny">{{ $tag->name }}</span>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            {{--Body startas--}}
+                                            <div class="main-text">
+                                                {!! $post->body !!}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="pm_post_meta_standard">
-                                        <span style="float: right;"><i id="tag-zyma" class="icon fa fa-tags fa-lg" style="margin-left: 30px;"></i></span>
-                                        @foreach($post->tags as $tag)
-                                            {{ $loop->first ? '' : '&nbsp;' }}
-                                            <a href="{{ route('tags.slug', $tag->slug) }}" class="tags-list" style="visibility: hidden;">
-                                                <span class="info-tiny">{{ $tag->name }}</span>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                {{--Body startas--}}
-                                <div class="main-text">
-                                {!! $post->body !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- col -->
-                </div><!-- info row -->
+                                </div> <!-- col -->
+                            </div><!-- info row -->
 
-                <div class="row">
-                    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <div class="pm_post_comments_standard pm_simple_layout hidden">
-                            <div class="pm_comments_wrapper">
-                                <div id="results-wrapper">
-                                    <div id="pagination-wrapper">
-                                        {{ $links }}
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <ul class="pm_comments_list">
-                                        @foreach($comments as $comment)
-                                            {{-- Tikrinu ar useris egzistuoja --}}
-                                            @if($comment->user !== NULL and $comment->user->status == 1 )
-                                            <li class="comment">
-                                                <div class="pm_comment_container">
-                                                    <div class="pm_comment_wrapper">
-                                                        <div class="pm_comment_avatar">
-                                                            <img class="avatar"
-                                                                 src=
-                                                                 "
+                            <div class="row">
+                                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                                    <div class="pm_post_comments_standard pm_simple_layout hidden">
+                                        <div class="pm_comments_wrapper">
+                                            <div id="results-wrapper">
+                                                <div id="pagination-wrapper">
+                                                    {{ $links }}
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <ul class="pm_comments_list">
+                                                    @foreach($comments as $comment)
+                                                        {{-- Tikrinu ar useris egzistuoja --}}
+                                                        @if($comment->user !== NULL and $comment->user->status == 1 )
+                                                            <li class="comment">
+                                                                <div class="pm_comment_container">
+                                                                    <div class="pm_comment_wrapper">
+                                                                        <div class="pm_comment_avatar">
+                                                                            <img class="avatar"
+                                                                                 src=
+                                                                                 "
                                                                  @if($comment->user->avatar)
-                                                                    {{ $comment->user->avatar }}
-                                                                 @else
-                                                                    {{ asset('img/default-avatar.png') }}
-                                                                 @endif
-                                                                 "
-                                                                 alt="">
-                                                        </div>
+                                                                                 {{ $comment->user->avatar }}
+                                                                                 @else
+                                                                                 {{ asset('img/default-avatar.png') }}
+                                                                                 @endif
+                                                                                         "
+                                                                                 alt="">
+                                                                        </div>
 
-                                                        <div class="pm_comment_info">
+                                                                        <div class="pm_comment_info">
                                                         <span class="pm_comment_author">
                                                                 @if($comment->user->hasRole('superadministrator'))
                                                                 <span style="color: #84a970;">{{ $comment->user->name }}</span>
@@ -102,25 +90,25 @@ width: 100%;')
                                                                 {{ $comment->user->name }}
                                                             @endif
                                                         </span>
-                                                            <span class="pm_comment_date">{{ date('Y-m-d H:i', strtotime($comment->updated_at)) }}</span>
+                                                                            <span class="pm_comment_date">{{ date('Y-m-d H:i', strtotime($comment->updated_at)) }}</span>
 
-                                                            {{-- LEISTI REDAGUOTI KOMENTARA, JEIGU: --}}
-                                                            {{--Useriui priklauso komentaras ir nepraejo 5 min--}}
-                                                            {{--Arba Useris su spec teisemis--}}
-                                                            @if(Auth::check() and Auth::user()->canAndOwns('update-comments', $comment) and (abs(time() - strtotime($comment->created_at)) < 300) or Auth::check() and Auth::user()->hasRole('editor|administrator|superadministrator'))
-                                                                <span class="admin_editor">
+                                                                            {{-- LEISTI REDAGUOTI KOMENTARA, JEIGU: --}}
+                                                                            {{--Useriui priklauso komentaras ir nepraejo 5 min--}}
+                                                                            {{--Arba Useris su spec teisemis--}}
+                                                                            @if(Auth::check() and Auth::user()->canAndOwns('update-comments', $comment) and (abs(time() - strtotime($comment->created_at)) < 300) or Auth::check() and Auth::user()->hasRole('editor|administrator|superadministrator'))
+                                                                                <span class="admin_editor">
                                                             <a href="{{ route('comments.edit', $comment->id) }}"
                                                                aria-label="Edit">
                                                                 <i class="fa fa-pencil-square" aria-hidden="true"></i>
                                                             </a>
                                                         </span>
-                                                            @endif
+                                                                            @endif
 
-                                                            {{-- LEISTI TRINTI KOMENTARA, JEIGU: --}}
-                                                            {{--Useriui priklauso komentaras ir nepraejo 5 min--}}
-                                                            {{--Arba Useris su spec teisemis--}}
-                                                            @if(Auth::check() and Auth::user()->canAndOwns('delete-comments', $comment) and (abs(time() - strtotime($comment->created_at)) < 300) or Auth::check() and Auth::user()->hasRole('editor|administrator|superadministrator'))
-                                                                <span class="admin_options">
+                                                                            {{-- LEISTI TRINTI KOMENTARA, JEIGU: --}}
+                                                                            {{--Useriui priklauso komentaras ir nepraejo 5 min--}}
+                                                                            {{--Arba Useris su spec teisemis--}}
+                                                                            @if(Auth::check() and Auth::user()->canAndOwns('delete-comments', $comment) and (abs(time() - strtotime($comment->created_at)) < 300) or Auth::check() and Auth::user()->hasRole('editor|administrator|superadministrator'))
+                                                                                <span class="admin_options">
                                                             <button class="btn-link btn-xs button-link delete-button"
                                                                     type="submit">
                                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -136,52 +124,51 @@ width: 100%;')
                                                                 {{ csrf_field() }}
                                                             </form>
                                                         </span>
-                                                            @endif
-                                                        </div>
-                                                        <div class="pm_comment_text">
-                                                            <p>{{ $comment->comment }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="pm_comment_text">
+                                                                            <p>{{ $comment->comment }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                                <div id="pagination-wrapper">
+                                                    {{ $links }}
                                                 </div>
-                                            </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                    <div id="pagination-wrapper">
-                                        {{ $links }}
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
 
-                            </div><!-- pm_comments_wrapper -->
+                                        </div><!-- pm_comments_wrapper -->
 
-                            @if(Auth::check() and Auth::user()->hasPermission('create-comments'))
-                                <div class="comment-respond">
-                                    <form id="main-form" data-parsley-validate
-                                          action="{{ route('comments.store', $post->id) }}" method="POST"
-                                          class="comment-form">
-                                        <div class="pm_comment_input_wrapper">
+                                        @if(Auth::check() and Auth::user()->hasPermission('create-comments'))
+                                            <div class="comment-respond">
+                                                <form id="main-form" data-parsley-validate
+                                                      action="{{ route('comments.store', $post->id) }}" method="POST"
+                                                      class="comment-form">
+                                                    <div class="pm_comment_input_wrapper">
                                         <textarea class="pm_comment_respond_field form-control" name="comment"
                                                   rows="1" cols="45" required
                                                   minlength="5" maxlength="2000">{{ old('comment') }}</textarea>
-                                        </div>
-                                        {{ csrf_field() }}
-                                    </form>
-                                </div>
-                            @endif
+                                                    </div>
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </div>
+                                        @endif
+                                    </div><!-- comments_standard -->
+                                    <div class="clearfix"></div>
+                                </div> <!-- comments col -->
+                            </div> <!-- comments row -->
+                        </div><!-- col_12 -->
+                    </div><!-- row -->
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                        </div><!-- comments_standard -->
-                        <div class="clearfix"></div>
-                    </div> <!-- comments col -->
-                </div> <!-- comments row -->
-
-
-
-
-            </div><!-- col_12 -->
-        </div><!-- row -->
-    </div><!-- wrapper -->
 @endsection
 
 @section('bottom-footer-left-menu')
@@ -245,14 +232,18 @@ width: 100%;')
 @endsection
 
 @section('script')
+    {{--Template main script--}}
+   {{-- <script type="text/javascript"
+            src="{{  url('js\template.js') }}"></script>--}}
+
     {{--Tikrina ar suvestas tekstas teisingas--}}
     <script type="text/javascript" src="{{  url('js\parsley.js') }}"></script>
 
-    {{--Postams priedai--}}
-    <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
-
     {{--IMG preview--}}
     <script type="text/javascript" src="{{  url('js\throttle-debounce.min.js') }}"></script>
+
+    {{--Postams priedai--}}
+    <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
 
     @include('components._time')
     @include('components._comsystem')

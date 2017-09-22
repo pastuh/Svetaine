@@ -22,6 +22,8 @@ $(document).ready(function () {
     $( ".navbar-toggle" ).click(function() {
         $('.short-menu').toggle();
         $('.nav-slit').toggle();
+        $('.navbar-fixed-bottom').toggleClass('transp-bg');
+        $('.navbar-collapse.collapse').toggleClass('dark-bg');
     });
     /* Submit forma */
     $("#submit-button").click(function () {

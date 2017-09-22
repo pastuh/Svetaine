@@ -384,6 +384,11 @@ button::-moz-focus-inner {
   margin-bottom: 15px;
 }
 
+@media (max-width: 768px) {
+  .navbar-default {
+    background: transparent;
+  }
+}
 @media (max-width: 479px) {
   #narrow-browser-alert {
     display: none;
@@ -455,4 +460,11 @@ button#close-module {
 
 .fluidbox__overlay {
   background-color:hsla(0,0%,0%,.85);
+}
+
+.transp-bg {
+ background: transparent;
+}
+.dark-bg {
+  background: hsla(0,0%,9%,.75);
 }
