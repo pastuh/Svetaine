@@ -12,8 +12,7 @@
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-width: 100%;
-overflow: auto;')
+width: 100%;')
 
 @section('content')
     <!--SVG navigacijai -->
