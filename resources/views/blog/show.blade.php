@@ -12,9 +12,7 @@
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-width: 100%;
--webkit-background-size: cover !important;
-background-size: cover !important; ')
+width: 100%;')
 
 @section('content')
     <!--SVG navigacijai -->
