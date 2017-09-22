@@ -1,5 +1,5 @@
 <!-- Apatinis puslapio meniu -->
-<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+<div class="navbar navbar-default" role="navigation">
     {{--Kaires mygtukai--}}
     @yield('bottom-footer-left-menu')
     <div class="container footer-width">
