@@ -5,7 +5,7 @@
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_visible')
+@section('body_class', 'pm_dark_type single-post')
 
 @section('body_style', 'background: url("../img/posts/' . htmlspecialchars($post->image_blured) . '") no-repeat center center fixed;
 -webkit-background-size: cover;
