@@ -12,8 +12,7 @@
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-width: 100%;
-overflow: auto;')
+width: 100%;')
 
 @section('content')
     <!--SVG navigacijai -->
@@ -263,8 +262,6 @@ overflow: auto;')
         $(document).ready(function() {
             $('.fluidbox').fluidbox();
         });
-
-        $(".navbar-fixed-top").autoHidingNavbar();
     </script>
 
 @endsection

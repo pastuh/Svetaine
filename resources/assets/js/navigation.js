@@ -30,7 +30,7 @@ $(document).ready(function () {
         $("#main-form").submit();
     });
 
-    /* Show hide header
+    /* Show hide header */
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -68,5 +68,5 @@ $(document).ready(function () {
 
         lastScrollTop = st;
     }
-    */
+
 });

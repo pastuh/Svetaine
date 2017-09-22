@@ -66,6 +66,5 @@ mix.scripts(['resources/assets/js/fullscreen/scrolloverflow.js',
 /* Navigacija, bootstrap default JS */
 mix.scripts([
     'resources/assets/js/navigation.js',
-    'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
-    'resources/assets/js/jquery.bootstrap-autohidingnavbar.min.js'
+    'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js'
 ], 'public/js/all.js');
