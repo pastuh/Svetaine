@@ -53,12 +53,13 @@ textarea.pm_comment_respond_field {
 }
 
 .navbar-fixed-top {
+  overflow: hidden;
   height: 50px;
   //background: transparent;
   background: hsla(0,0%,9%,.75);
 }
 .nav-up {
-  margin-top: -50px;
+  top: -50px;
 }
 
 .navbar-default .navbar-brand {
