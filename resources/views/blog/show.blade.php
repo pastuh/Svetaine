@@ -13,7 +13,7 @@
 -o-background-size: cover;
 background-size: cover;
 width: 100%;
-overflow: auto;')
+overflow: hidden;')
 
 @section('content')
     <!--SVG navigacijai -->
