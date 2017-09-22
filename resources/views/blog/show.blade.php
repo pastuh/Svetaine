@@ -18,7 +18,9 @@ width: 100%;
 height: 100%;
 background-size: cover !important;
 background-repeat: no-repeat !important;
-background-position: center !important;')
+background-position: center !important;
+min-width: 100%;
+min-height: 100%;')
 
 @section('content')
     <!--SVG navigacijai -->
