@@ -12,7 +12,8 @@
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-width: 100%;')
+width: 100%;
+overflow: hidden;')
 
 @section('content')
     <!--SVG navigacijai -->
@@ -27,7 +28,7 @@ width: 100%;')
         </svg>
     </div>
 
-    <div id="post-page{{ $post->id }}" class="pm_wrapper pm_container">
+    <div id="post-page{{ $post->id }}" class="pm_wrapper pm_container" style="overflow: scroll;">
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
