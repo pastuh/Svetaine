@@ -1,4 +1,5258 @@
-!function(t,e,i){function n(i,n){this.wrapper="string"==typeof i?e.querySelector(i):i,this.scroller=this.wrapper.children[0],this.scrollerStyle=this.scroller.style,this.options={resizeScrollbars:!0,mouseWheelSpeed:20,snapThreshold:.334,disablePointer:!a.hasPointer,disableTouch:a.hasPointer||!a.hasTouch,disableMouse:a.hasPointer||a.hasTouch,startX:0,startY:0,scrollY:!0,directionLockThreshold:5,momentum:!0,bounce:!0,bounceTime:600,bounceEasing:"",preventDefault:!0,preventDefaultException:{tagName:/^(INPUT|TEXTAREA|BUTTON|SELECT|LABEL)$/},HWCompositing:!0,useTransition:!0,useTransform:!0,bindToWrapper:void 0===t.onmousedown};for(var o in n)this.options[o]=n[o];this.translateZ=this.options.HWCompositing&&a.hasPerspective?" translateZ(0)":"",this.options.useTransition=a.hasTransition&&this.options.useTransition,this.options.useTransform=a.hasTransform&&this.options.useTransform,this.options.eventPassthrough=!0===this.options.eventPassthrough?"vertical":this.options.eventPassthrough,this.options.preventDefault=!this.options.eventPassthrough&&this.options.preventDefault,this.options.scrollY="vertical"!=this.options.eventPassthrough&&this.options.scrollY,this.options.scrollX="horizontal"!=this.options.eventPassthrough&&this.options.scrollX,this.options.freeScroll=this.options.freeScroll&&!this.options.eventPassthrough,this.options.directionLockThreshold=this.options.eventPassthrough?0:this.options.directionLockThreshold,this.options.bounceEasing="string"==typeof this.options.bounceEasing?a.ease[this.options.bounceEasing]||a.ease.circular:this.options.bounceEasing,this.options.resizePolling=void 0===this.options.resizePolling?60:this.options.resizePolling,!0===this.options.tap&&(this.options.tap="tap"),this.options.useTransition||this.options.useTransform||/relative|absolute/i.test(this.scrollerStyle.position)||(this.scrollerStyle.position="relative"),"scale"==this.options.shrinkScrollbars&&(this.options.useTransition=!1),this.options.invertWheelDirection=this.options.invertWheelDirection?-1:1,this.x=0,this.y=0,this.directionX=0,this.directionY=0,this._events={},this._init(),this.refresh(),this.scrollTo(this.options.startX,this.options.startY),this.enable()}function o(t,i,n){var o=e.createElement("div"),s=e.createElement("div");return!0===n&&(o.style.cssText="position:absolute;z-index:9999",s.style.cssText="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px"),s.className="iScrollIndicator","h"==t?(!0===n&&(o.style.cssText+=";height:7px;left:2px;right:2px;bottom:0",s.style.height="100%"),o.className="iScrollHorizontalScrollbar"):(!0===n&&(o.style.cssText+=";width:7px;bottom:2px;top:2px;right:1px",s.style.width="100%"),o.className="iScrollVerticalScrollbar"),o.style.cssText+=";overflow:hidden",i||(o.style.pointerEvents="none"),o.appendChild(s),o}function s(i,n){this.wrapper="string"==typeof n.el?e.querySelector(n.el):n.el,this.wrapperStyle=this.wrapper.style,this.indicator=this.wrapper.children[0],this.indicatorStyle=this.indicator.style,this.scroller=i,this.options={listenX:!0,listenY:!0,interactive:!1,resize:!0,defaultScrollbars:!1,shrink:!1,fade:!1,speedRatioX:0,speedRatioY:0};for(var o in n)this.options[o]=n[o];if(this.sizeRatioX=1,this.sizeRatioY=1,this.maxPosX=0,this.maxPosY=0,this.options.interactive&&(this.options.disableTouch||(a.addEvent(this.indicator,"touchstart",this),a.addEvent(t,"touchend",this)),this.options.disablePointer||(a.addEvent(this.indicator,a.prefixPointerEvent("pointerdown"),this),a.addEvent(t,a.prefixPointerEvent("pointerup"),this)),this.options.disableMouse||(a.addEvent(this.indicator,"mousedown",this),a.addEvent(t,"mouseup",this))),this.options.fade){this.wrapperStyle[a.style.transform]=this.scroller.translateZ;var s=a.style.transitionDuration;if(!s)return;this.wrapperStyle[s]=a.isBadAndroid?"0.0001ms":"0ms";var l=this;a.isBadAndroid&&r(function(){"0.0001ms"===l.wrapperStyle[s]&&(l.wrapperStyle[s]="0s")}),this.wrapperStyle.opacity="0"}}var r=t.requestAnimationFrame||t.webkitRequestAnimationFrame||t.mozRequestAnimationFrame||t.oRequestAnimationFrame||t.msRequestAnimationFrame||function(e){t.setTimeout(e,1e3/60)},a=function(){function n(t){return!1!==r&&(""===r?t:r+t.charAt(0).toUpperCase()+t.substr(1))}var o={},s=e.createElement("div").style,r=function(){for(var t=["t","webkitT","MozT","msT","OT"],e=0,i=t.length;e<i;e++)if(t[e]+"ransform"in s)return t[e].substr(0,t[e].length-1);return!1}();o.getTime=Date.now||function(){return(new Date).getTime()},o.extend=function(t,e){for(var i in e)t[i]=e[i]},o.addEvent=function(t,e,i,n){t.addEventListener(e,i,!!n)},o.removeEvent=function(t,e,i,n){t.removeEventListener(e,i,!!n)},o.prefixPointerEvent=function(e){return t.MSPointerEvent?"MSPointer"+e.charAt(7).toUpperCase()+e.substr(8):e},o.momentum=function(t,e,n,o,s,r){var a,l,c=t-e,h=i.abs(c)/n;return r=void 0===r?6e-4:r,a=t+h*h/(2*r)*(c<0?-1:1),l=h/r,a<o?(a=s?o-s/2.5*(h/8):o,c=i.abs(a-t),l=c/h):a>0&&(a=s?s/2.5*(h/8):0,c=i.abs(t)+a,l=c/h),{destination:i.round(a),duration:l}};var a=n("transform");return o.extend(o,{hasTransform:!1!==a,hasPerspective:n("perspective")in s,hasTouch:"ontouchstart"in t,hasPointer:!(!t.PointerEvent&&!t.MSPointerEvent),hasTransition:n("transition")in s}),o.isBadAndroid=function(){var e=t.navigator.appVersion;if(/Android/.test(e)&&!/Chrome\/\d/.test(e)){var i=e.match(/Safari\/(\d+.\d)/);return!(i&&"object"==typeof i&&i.length>=2)||parseFloat(i[1])<535.19}return!1}(),o.extend(o.style={},{transform:a,transitionTimingFunction:n("transitionTimingFunction"),transitionDuration:n("transitionDuration"),transitionDelay:n("transitionDelay"),transformOrigin:n("transformOrigin")}),o.hasClass=function(t,e){return new RegExp("(^|\\s)"+e+"(\\s|$)").test(t.className)},o.addClass=function(t,e){if(!o.hasClass(t,e)){var i=t.className.split(" ");i.push(e),t.className=i.join(" ")}},o.removeClass=function(t,e){if(o.hasClass(t,e)){var i=new RegExp("(^|\\s)"+e+"(\\s|$)","g");t.className=t.className.replace(i," ")}},o.offset=function(t){for(var e=-t.offsetLeft,i=-t.offsetTop;t=t.offsetParent;)e-=t.offsetLeft,i-=t.offsetTop;return{left:e,top:i}},o.preventDefaultException=function(t,e){for(var i in e)if(e[i].test(t[i]))return!0;return!1},o.extend(o.eventType={},{touchstart:1,touchmove:1,touchend:1,mousedown:2,mousemove:2,mouseup:2,pointerdown:3,pointermove:3,pointerup:3,MSPointerDown:3,MSPointerMove:3,MSPointerUp:3}),o.extend(o.ease={},{quadratic:{style:"cubic-bezier(0.25, 0.46, 0.45, 0.94)",fn:function(t){return t*(2-t)}},circular:{style:"cubic-bezier(0.1, 0.57, 0.1, 1)",fn:function(t){return i.sqrt(1- --t*t)}},back:{style:"cubic-bezier(0.175, 0.885, 0.32, 1.275)",fn:function(t){return(t-=1)*t*(5*t+4)+1}},bounce:{style:"",fn:function(t){return(t/=1)<1/2.75?7.5625*t*t:t<2/2.75?7.5625*(t-=1.5/2.75)*t+.75:t<2.5/2.75?7.5625*(t-=2.25/2.75)*t+.9375:7.5625*(t-=2.625/2.75)*t+.984375}},elastic:{style:"",fn:function(t){return 0===t?0:1==t?1:.4*i.pow(2,-10*t)*i.sin((t-.055)*(2*i.PI)/.22)+1}}}),o.tap=function(t,i){var n=e.createEvent("Event");n.initEvent(i,!0,!0),n.pageX=t.pageX,n.pageY=t.pageY,t.target.dispatchEvent(n)},o.click=function(i){var n,o=i.target;/(SELECT|INPUT|TEXTAREA)/i.test(o.tagName)||(n=e.createEvent(t.MouseEvent?"MouseEvents":"Event"),n.initEvent("click",!0,!0),n.view=i.view||t,n.detail=1,n.screenX=o.screenX||0,n.screenY=o.screenY||0,n.clientX=o.clientX||0,n.clientY=o.clientY||0,n.ctrlKey=!!i.ctrlKey,n.altKey=!!i.altKey,n.shiftKey=!!i.shiftKey,n.metaKey=!!i.metaKey,n.button=0,n.relatedTarget=null,n._constructed=!0,o.dispatchEvent(n))},o}();n.prototype={version:"5.2.0",_init:function(){this._initEvents(),(this.options.scrollbars||this.options.indicators)&&this._initIndicators(),this.options.mouseWheel&&this._initWheel(),this.options.snap&&this._initSnap(),this.options.keyBindings&&this._initKeys()},destroy:function(){this._initEvents(!0),clearTimeout(this.resizeTimeout),this.resizeTimeout=null,this._execEvent("destroy")},_transitionEnd:function(t){t.target==this.scroller&&this.isInTransition&&(this._transitionTime(),this.resetPosition(this.options.bounceTime)||(this.isInTransition=!1,this._execEvent("scrollEnd")))},_start:function(t){if(1!=a.eventType[t.type]){if(0!==(t.which?t.button:t.button<2?0:4==t.button?1:2))return}if(this.enabled&&(!this.initiated||a.eventType[t.type]===this.initiated)){!this.options.preventDefault||a.isBadAndroid||a.preventDefaultException(t.target,this.options.preventDefaultException)||t.preventDefault();var e,n=t.touches?t.touches[0]:t;this.initiated=a.eventType[t.type],this.moved=!1,this.distX=0,this.distY=0,this.directionX=0,this.directionY=0,this.directionLocked=0,this.startTime=a.getTime(),this.options.useTransition&&this.isInTransition?(this._transitionTime(),this.isInTransition=!1,e=this.getComputedPosition(),this._translate(i.round(e.x),i.round(e.y)),this._execEvent("scrollEnd")):!this.options.useTransition&&this.isAnimating&&(this.isAnimating=!1,this._execEvent("scrollEnd")),this.startX=this.x,this.startY=this.y,this.absStartX=this.x,this.absStartY=this.y,this.pointX=n.pageX,this.pointY=n.pageY,this._execEvent("beforeScrollStart")}},_move:function(t){if(this.enabled&&a.eventType[t.type]===this.initiated){this.options.preventDefault&&t.preventDefault();var e,n,o,s,r=t.touches?t.touches[0]:t,l=r.pageX-this.pointX,c=r.pageY-this.pointY,h=a.getTime();if(this.pointX=r.pageX,this.pointY=r.pageY,this.distX+=l,this.distY+=c,o=i.abs(this.distX),s=i.abs(this.distY),!(h-this.endTime>300&&o<10&&s<10)){if(this.directionLocked||this.options.freeScroll||(o>s+this.options.directionLockThreshold?this.directionLocked="h":s>=o+this.options.directionLockThreshold?this.directionLocked="v":this.directionLocked="n"),"h"==this.directionLocked){if("vertical"==this.options.eventPassthrough)t.preventDefault();else if("horizontal"==this.options.eventPassthrough)return void(this.initiated=!1);c=0}else if("v"==this.directionLocked){if("horizontal"==this.options.eventPassthrough)t.preventDefault();else if("vertical"==this.options.eventPassthrough)return void(this.initiated=!1);l=0}l=this.hasHorizontalScroll?l:0,c=this.hasVerticalScroll?c:0,e=this.x+l,n=this.y+c,(e>0||e<this.maxScrollX)&&(e=this.options.bounce?this.x+l/3:e>0?0:this.maxScrollX),(n>0||n<this.maxScrollY)&&(n=this.options.bounce?this.y+c/3:n>0?0:this.maxScrollY),this.directionX=l>0?-1:l<0?1:0,this.directionY=c>0?-1:c<0?1:0,this.moved||this._execEvent("scrollStart"),this.moved=!0,this._translate(e,n),h-this.startTime>300&&(this.startTime=h,this.startX=this.x,this.startY=this.y)}}},_end:function(t){if(this.enabled&&a.eventType[t.type]===this.initiated){this.options.preventDefault&&!a.preventDefaultException(t.target,this.options.preventDefaultException)&&t.preventDefault();var e,n,o=(t.changedTouches&&t.changedTouches[0],a.getTime()-this.startTime),s=i.round(this.x),r=i.round(this.y),l=i.abs(s-this.startX),c=i.abs(r-this.startY),h=0,d="";if(this.isInTransition=0,this.initiated=0,this.endTime=a.getTime(),!this.resetPosition(this.options.bounceTime)){if(this.scrollTo(s,r),!this.moved)return this.options.tap&&a.tap(t,this.options.tap),this.options.click&&a.click(t),void this._execEvent("scrollCancel");if(this._events.flick&&o<200&&l<100&&c<100)return void this._execEvent("flick");if(this.options.momentum&&o<300&&(e=this.hasHorizontalScroll?a.momentum(this.x,this.startX,o,this.maxScrollX,this.options.bounce?this.wrapperWidth:0,this.options.deceleration):{destination:s,duration:0},n=this.hasVerticalScroll?a.momentum(this.y,this.startY,o,this.maxScrollY,this.options.bounce?this.wrapperHeight:0,this.options.deceleration):{destination:r,duration:0},s=e.destination,r=n.destination,h=i.max(e.duration,n.duration),this.isInTransition=1),this.options.snap){var u=this._nearestSnap(s,r);this.currentPage=u,h=this.options.snapSpeed||i.max(i.max(i.min(i.abs(s-u.x),1e3),i.min(i.abs(r-u.y),1e3)),300),s=u.x,r=u.y,this.directionX=0,this.directionY=0,d=this.options.bounceEasing}if(s!=this.x||r!=this.y)return(s>0||s<this.maxScrollX||r>0||r<this.maxScrollY)&&(d=a.ease.quadratic),void this.scrollTo(s,r,h,d);this._execEvent("scrollEnd")}}},_resize:function(){var t=this;clearTimeout(this.resizeTimeout),this.resizeTimeout=setTimeout(function(){t.refresh()},this.options.resizePolling)},resetPosition:function(t){var e=this.x,i=this.y;return t=t||0,!this.hasHorizontalScroll||this.x>0?e=0:this.x<this.maxScrollX&&(e=this.maxScrollX),!this.hasVerticalScroll||this.y>0?i=0:this.y<this.maxScrollY&&(i=this.maxScrollY),(e!=this.x||i!=this.y)&&(this.scrollTo(e,i,t,this.options.bounceEasing),!0)},disable:function(){this.enabled=!1},enable:function(){this.enabled=!0},refresh:function(){this.wrapper.offsetHeight;this.wrapperWidth=this.wrapper.clientWidth,this.wrapperHeight=this.wrapper.clientHeight,this.scrollerWidth=this.scroller.offsetWidth,this.scrollerHeight=this.scroller.offsetHeight,this.maxScrollX=this.wrapperWidth-this.scrollerWidth,this.maxScrollY=this.wrapperHeight-this.scrollerHeight,this.hasHorizontalScroll=this.options.scrollX&&this.maxScrollX<0,this.hasVerticalScroll=this.options.scrollY&&this.maxScrollY<0,this.hasHorizontalScroll||(this.maxScrollX=0,this.scrollerWidth=this.wrapperWidth),this.hasVerticalScroll||(this.maxScrollY=0,this.scrollerHeight=this.wrapperHeight),this.endTime=0,this.directionX=0,this.directionY=0,this.wrapperOffset=a.offset(this.wrapper),this._execEvent("refresh"),this.resetPosition()},on:function(t,e){this._events[t]||(this._events[t]=[]),this._events[t].push(e)},off:function(t,e){if(this._events[t]){var i=this._events[t].indexOf(e);i>-1&&this._events[t].splice(i,1)}},_execEvent:function(t){if(this._events[t]){var e=0,i=this._events[t].length;if(i)for(;e<i;e++)this._events[t][e].apply(this,[].slice.call(arguments,1))}},scrollBy:function(t,e,i,n){t=this.x+t,e=this.y+e,i=i||0,this.scrollTo(t,e,i,n)},scrollTo:function(t,e,i,n){n=n||a.ease.circular,this.isInTransition=this.options.useTransition&&i>0;var o=this.options.useTransition&&n.style;!i||o?(o&&(this._transitionTimingFunction(n.style),this._transitionTime(i)),this._translate(t,e)):this._animate(t,e,i,n.fn)},scrollToElement:function(t,e,n,o,s){if(t=t.nodeType?t:this.scroller.querySelector(t)){var r=a.offset(t);r.left-=this.wrapperOffset.left,r.top-=this.wrapperOffset.top,!0===n&&(n=i.round(t.offsetWidth/2-this.wrapper.offsetWidth/2)),!0===o&&(o=i.round(t.offsetHeight/2-this.wrapper.offsetHeight/2)),r.left-=n||0,r.top-=o||0,r.left=r.left>0?0:r.left<this.maxScrollX?this.maxScrollX:r.left,r.top=r.top>0?0:r.top<this.maxScrollY?this.maxScrollY:r.top,e=void 0===e||null===e||"auto"===e?i.max(i.abs(this.x-r.left),i.abs(this.y-r.top)):e,this.scrollTo(r.left,r.top,e,s)}},_transitionTime:function(t){if(this.options.useTransition){t=t||0;var e=a.style.transitionDuration;if(e){if(this.scrollerStyle[e]=t+"ms",!t&&a.isBadAndroid){this.scrollerStyle[e]="0.0001ms";var i=this;r(function(){"0.0001ms"===i.scrollerStyle[e]&&(i.scrollerStyle[e]="0s")})}if(this.indicators)for(var n=this.indicators.length;n--;)this.indicators[n].transitionTime(t)}}},_transitionTimingFunction:function(t){if(this.scrollerStyle[a.style.transitionTimingFunction]=t,this.indicators)for(var e=this.indicators.length;e--;)this.indicators[e].transitionTimingFunction(t)},_translate:function(t,e){if(this.options.useTransform?this.scrollerStyle[a.style.transform]="translate("+t+"px,"+e+"px)"+this.translateZ:(t=i.round(t),e=i.round(e),this.scrollerStyle.left=t+"px",this.scrollerStyle.top=e+"px"),this.x=t,this.y=e,this.indicators)for(var n=this.indicators.length;n--;)this.indicators[n].updatePosition()},_initEvents:function(e){var i=e?a.removeEvent:a.addEvent,n=this.options.bindToWrapper?this.wrapper:t;i(t,"orientationchange",this),i(t,"resize",this),this.options.click&&i(this.wrapper,"click",this,!0),this.options.disableMouse||(i(this.wrapper,"mousedown",this),i(n,"mousemove",this),i(n,"mousecancel",this),i(n,"mouseup",this)),a.hasPointer&&!this.options.disablePointer&&(i(this.wrapper,a.prefixPointerEvent("pointerdown"),this),i(n,a.prefixPointerEvent("pointermove"),this),i(n,a.prefixPointerEvent("pointercancel"),this),i(n,a.prefixPointerEvent("pointerup"),this)),a.hasTouch&&!this.options.disableTouch&&(i(this.wrapper,"touchstart",this),i(n,"touchmove",this),i(n,"touchcancel",this),i(n,"touchend",this)),i(this.scroller,"transitionend",this),i(this.scroller,"webkitTransitionEnd",this),i(this.scroller,"oTransitionEnd",this),i(this.scroller,"MSTransitionEnd",this)},getComputedPosition:function(){var e,i,n=t.getComputedStyle(this.scroller,null);return this.options.useTransform?(n=n[a.style.transform].split(")")[0].split(", "),e=+(n[12]||n[4]),i=+(n[13]||n[5])):(e=+n.left.replace(/[^-\d.]/g,""),i=+n.top.replace(/[^-\d.]/g,"")),{x:e,y:i}},_initIndicators:function(){function t(t){if(a.indicators)for(var e=a.indicators.length;e--;)t.call(a.indicators[e])}var e,i=this.options.interactiveScrollbars,n="string"!=typeof this.options.scrollbars,r=[],a=this;this.indicators=[],this.options.scrollbars&&(this.options.scrollY&&(e={el:o("v",i,this.options.scrollbars),interactive:i,defaultScrollbars:!0,customStyle:n,resize:this.options.resizeScrollbars,shrink:this.options.shrinkScrollbars,fade:this.options.fadeScrollbars,listenX:!1},this.wrapper.appendChild(e.el),r.push(e)),this.options.scrollX&&(e={el:o("h",i,this.options.scrollbars),interactive:i,defaultScrollbars:!0,customStyle:n,resize:this.options.resizeScrollbars,shrink:this.options.shrinkScrollbars,fade:this.options.fadeScrollbars,listenY:!1},this.wrapper.appendChild(e.el),r.push(e))),this.options.indicators&&(r=r.concat(this.options.indicators));for(var l=r.length;l--;)this.indicators.push(new s(this,r[l]));this.options.fadeScrollbars&&(this.on("scrollEnd",function(){t(function(){this.fade()})}),this.on("scrollCancel",function(){t(function(){this.fade()})}),this.on("scrollStart",function(){t(function(){this.fade(1)})}),this.on("beforeScrollStart",function(){t(function(){this.fade(1,!0)})})),this.on("refresh",function(){t(function(){this.refresh()})}),this.on("destroy",function(){t(function(){this.destroy()}),delete this.indicators})},_initWheel:function(){a.addEvent(this.wrapper,"wheel",this),a.addEvent(this.wrapper,"mousewheel",this),a.addEvent(this.wrapper,"DOMMouseScroll",this),this.on("destroy",function(){clearTimeout(this.wheelTimeout),this.wheelTimeout=null,a.removeEvent(this.wrapper,"wheel",this),a.removeEvent(this.wrapper,"mousewheel",this),a.removeEvent(this.wrapper,"DOMMouseScroll",this)})},_wheel:function(t){if(this.enabled){var e,n,o,s,r=this;if(void 0===this.wheelTimeout&&r._execEvent("scrollStart"),clearTimeout(this.wheelTimeout),this.wheelTimeout=setTimeout(function(){r.options.snap||r._execEvent("scrollEnd"),r.wheelTimeout=void 0},400),"deltaX"in t)1===t.deltaMode?(e=-t.deltaX*this.options.mouseWheelSpeed,n=-t.deltaY*this.options.mouseWheelSpeed):(e=-t.deltaX,n=-t.deltaY);else if("wheelDeltaX"in t)e=t.wheelDeltaX/120*this.options.mouseWheelSpeed,n=t.wheelDeltaY/120*this.options.mouseWheelSpeed;else if("wheelDelta"in t)e=n=t.wheelDelta/120*this.options.mouseWheelSpeed;else{if(!("detail"in t))return;e=n=-t.detail/3*this.options.mouseWheelSpeed}if(e*=this.options.invertWheelDirection,n*=this.options.invertWheelDirection,this.hasVerticalScroll||(e=n,n=0),this.options.snap)return o=this.currentPage.pageX,s=this.currentPage.pageY,e>0?o--:e<0&&o++,n>0?s--:n<0&&s++,void this.goToPage(o,s);o=this.x+i.round(this.hasHorizontalScroll?e:0),s=this.y+i.round(this.hasVerticalScroll?n:0),this.directionX=e>0?-1:e<0?1:0,this.directionY=n>0?-1:n<0?1:0,o>0?o=0:o<this.maxScrollX&&(o=this.maxScrollX),s>0?s=0:s<this.maxScrollY&&(s=this.maxScrollY),this.scrollTo(o,s,0)}},_initSnap:function(){this.currentPage={},"string"==typeof this.options.snap&&(this.options.snap=this.scroller.querySelectorAll(this.options.snap)),this.on("refresh",function(){var t,e,n,o,s,r,a=0,l=0,c=0,h=this.options.snapStepX||this.wrapperWidth,d=this.options.snapStepY||this.wrapperHeight;if(this.pages=[],this.wrapperWidth&&this.wrapperHeight&&this.scrollerWidth&&this.scrollerHeight){if(!0===this.options.snap)for(n=i.round(h/2),o=i.round(d/2);c>-this.scrollerWidth;){for(this.pages[a]=[],t=0,s=0;s>-this.scrollerHeight;)this.pages[a][t]={x:i.max(c,this.maxScrollX),y:i.max(s,this.maxScrollY),width:h,height:d,cx:c-n,cy:s-o},s-=d,t++;c-=h,a++}else for(r=this.options.snap,t=r.length,e=-1;a<t;a++)(0===a||r[a].offsetLeft<=r[a-1].offsetLeft)&&(l=0,e++),this.pages[l]||(this.pages[l]=[]),c=i.max(-r[a].offsetLeft,this.maxScrollX),s=i.max(-r[a].offsetTop,this.maxScrollY),n=c-i.round(r[a].offsetWidth/2),o=s-i.round(r[a].offsetHeight/2),this.pages[l][e]={x:c,y:s,width:r[a].offsetWidth,height:r[a].offsetHeight,cx:n,cy:o},c>this.maxScrollX&&l++;this.goToPage(this.currentPage.pageX||0,this.currentPage.pageY||0,0),this.options.snapThreshold%1==0?(this.snapThresholdX=this.options.snapThreshold,this.snapThresholdY=this.options.snapThreshold):(this.snapThresholdX=i.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width*this.options.snapThreshold),this.snapThresholdY=i.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height*this.options.snapThreshold))}}),this.on("flick",function(){var t=this.options.snapSpeed||i.max(i.max(i.min(i.abs(this.x-this.startX),1e3),i.min(i.abs(this.y-this.startY),1e3)),300);this.goToPage(this.currentPage.pageX+this.directionX,this.currentPage.pageY+this.directionY,t)})},_nearestSnap:function(t,e){if(!this.pages.length)return{x:0,y:0,pageX:0,pageY:0};var n=0,o=this.pages.length,s=0;if(i.abs(t-this.absStartX)<this.snapThresholdX&&i.abs(e-this.absStartY)<this.snapThresholdY)return this.currentPage;for(t>0?t=0:t<this.maxScrollX&&(t=this.maxScrollX),e>0?e=0:e<this.maxScrollY&&(e=this.maxScrollY);n<o;n++)if(t>=this.pages[n][0].cx){t=this.pages[n][0].x;break}for(o=this.pages[n].length;s<o;s++)if(e>=this.pages[0][s].cy){e=this.pages[0][s].y;break}return n==this.currentPage.pageX&&(n+=this.directionX,n<0?n=0:n>=this.pages.length&&(n=this.pages.length-1),t=this.pages[n][0].x),s==this.currentPage.pageY&&(s+=this.directionY,s<0?s=0:s>=this.pages[0].length&&(s=this.pages[0].length-1),e=this.pages[0][s].y),{x:t,y:e,pageX:n,pageY:s}},goToPage:function(t,e,n,o){o=o||this.options.bounceEasing,t>=this.pages.length?t=this.pages.length-1:t<0&&(t=0),e>=this.pages[t].length?e=this.pages[t].length-1:e<0&&(e=0);var s=this.pages[t][e].x,r=this.pages[t][e].y;n=void 0===n?this.options.snapSpeed||i.max(i.max(i.min(i.abs(s-this.x),1e3),i.min(i.abs(r-this.y),1e3)),300):n,this.currentPage={x:s,y:r,pageX:t,pageY:e},this.scrollTo(s,r,n,o)},next:function(t,e){var i=this.currentPage.pageX,n=this.currentPage.pageY;i++,i>=this.pages.length&&this.hasVerticalScroll&&(i=0,n++),this.goToPage(i,n,t,e)},prev:function(t,e){var i=this.currentPage.pageX,n=this.currentPage.pageY;i--,i<0&&this.hasVerticalScroll&&(i=0,n--),this.goToPage(i,n,t,e)},_initKeys:function(e){var i,n={pageUp:33,pageDown:34,end:35,home:36,left:37,up:38,right:39,down:40};if("object"==typeof this.options.keyBindings)for(i in this.options.keyBindings)"string"==typeof this.options.keyBindings[i]&&(this.options.keyBindings[i]=this.options.keyBindings[i].toUpperCase().charCodeAt(0));else this.options.keyBindings={};for(i in n)this.options.keyBindings[i]=this.options.keyBindings[i]||n[i];a.addEvent(t,"keydown",this),this.on("destroy",function(){a.removeEvent(t,"keydown",this)})},_key:function(t){if(this.enabled){var e,n=this.options.snap,o=n?this.currentPage.pageX:this.x,s=n?this.currentPage.pageY:this.y,r=a.getTime(),l=this.keyTime||0;switch(this.options.useTransition&&this.isInTransition&&(e=this.getComputedPosition(),this._translate(i.round(e.x),i.round(e.y)),this.isInTransition=!1),this.keyAcceleration=r-l<200?i.min(this.keyAcceleration+.25,50):0,t.keyCode){case this.options.keyBindings.pageUp:this.hasHorizontalScroll&&!this.hasVerticalScroll?o+=n?1:this.wrapperWidth:s+=n?1:this.wrapperHeight;break;case this.options.keyBindings.pageDown:this.hasHorizontalScroll&&!this.hasVerticalScroll?o-=n?1:this.wrapperWidth:s-=n?1:this.wrapperHeight;break;case this.options.keyBindings.end:o=n?this.pages.length-1:this.maxScrollX,s=n?this.pages[0].length-1:this.maxScrollY;break;case this.options.keyBindings.home:o=0,s=0;break;case this.options.keyBindings.left:o+=n?-1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.up:s+=n?1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.right:o-=n?-1:5+this.keyAcceleration>>0;break;case this.options.keyBindings.down:s-=n?1:5+this.keyAcceleration>>0;break;default:return}if(n)return void this.goToPage(o,s);o>0?(o=0,this.keyAcceleration=0):o<this.maxScrollX&&(o=this.maxScrollX,this.keyAcceleration=0),s>0?(s=0,this.keyAcceleration=0):s<this.maxScrollY&&(s=this.maxScrollY,this.keyAcceleration=0),this.scrollTo(o,s,0),this.keyTime=r}},_animate:function(t,e,i,n){function o(){var u,f,p,v=a.getTime();if(v>=d)return s.isAnimating=!1,s._translate(t,e),void(s.resetPosition(s.options.bounceTime)||s._execEvent("scrollEnd"));v=(v-h)/i,p=n(v),u=(t-l)*p+l,f=(e-c)*p+c,s._translate(u,f),s.isAnimating&&r(o)}var s=this,l=this.x,c=this.y,h=a.getTime(),d=h+i;this.isAnimating=!0,o()},handleEvent:function(t){switch(t.type){case"touchstart":case"pointerdown":case"MSPointerDown":case"mousedown":this._start(t);break;case"touchmove":case"pointermove":case"MSPointerMove":case"mousemove":this._move(t);break;case"touchend":case"pointerup":case"MSPointerUp":case"mouseup":case"touchcancel":case"pointercancel":case"MSPointerCancel":case"mousecancel":this._end(t);break;case"orientationchange":case"resize":this._resize();break;case"transitionend":case"webkitTransitionEnd":case"oTransitionEnd":case"MSTransitionEnd":this._transitionEnd(t);break;case"wheel":case"DOMMouseScroll":case"mousewheel":this._wheel(t);break;case"keydown":this._key(t);break;case"click":this.enabled&&!t._constructed&&(t.preventDefault(),t.stopPropagation())}}},s.prototype={handleEvent:function(t){switch(t.type){case"touchstart":case"pointerdown":case"MSPointerDown":case"mousedown":this._start(t);break;case"touchmove":case"pointermove":case"MSPointerMove":case"mousemove":this._move(t);break;case"touchend":case"pointerup":case"MSPointerUp":case"mouseup":case"touchcancel":case"pointercancel":case"MSPointerCancel":case"mousecancel":this._end(t)}},destroy:function(){this.options.fadeScrollbars&&(clearTimeout(this.fadeTimeout),this.fadeTimeout=null),this.options.interactive&&(a.removeEvent(this.indicator,"touchstart",this),a.removeEvent(this.indicator,a.prefixPointerEvent("pointerdown"),this),a.removeEvent(this.indicator,"mousedown",this),a.removeEvent(t,"touchmove",this),a.removeEvent(t,a.prefixPointerEvent("pointermove"),this),a.removeEvent(t,"mousemove",this),a.removeEvent(t,"touchend",this),a.removeEvent(t,a.prefixPointerEvent("pointerup"),this),a.removeEvent(t,"mouseup",this)),this.options.defaultScrollbars&&this.wrapper.parentNode.removeChild(this.wrapper)},_start:function(e){var i=e.touches?e.touches[0]:e;e.preventDefault(),e.stopPropagation(),this.transitionTime(),this.initiated=!0,this.moved=!1,this.lastPointX=i.pageX,this.lastPointY=i.pageY,this.startTime=a.getTime(),this.options.disableTouch||a.addEvent(t,"touchmove",this),this.options.disablePointer||a.addEvent(t,a.prefixPointerEvent("pointermove"),this),this.options.disableMouse||a.addEvent(t,"mousemove",this),this.scroller._execEvent("beforeScrollStart")},_move:function(t){var e,i,n,o,s=t.touches?t.touches[0]:t;a.getTime();this.moved||this.scroller._execEvent("scrollStart"),this.moved=!0,e=s.pageX-this.lastPointX,this.lastPointX=s.pageX,i=s.pageY-this.lastPointY,this.lastPointY=s.pageY,n=this.x+e,o=this.y+i,this._pos(n,o),t.preventDefault(),t.stopPropagation()},_end:function(e){if(this.initiated){if(this.initiated=!1,e.preventDefault(),e.stopPropagation(),a.removeEvent(t,"touchmove",this),a.removeEvent(t,a.prefixPointerEvent("pointermove"),this),a.removeEvent(t,"mousemove",this),this.scroller.options.snap){var n=this.scroller._nearestSnap(this.scroller.x,this.scroller.y),o=this.options.snapSpeed||i.max(i.max(i.min(i.abs(this.scroller.x-n.x),1e3),i.min(i.abs(this.scroller.y-n.y),1e3)),300);this.scroller.x==n.x&&this.scroller.y==n.y||(this.scroller.directionX=0,this.scroller.directionY=0,this.scroller.currentPage=n,this.scroller.scrollTo(n.x,n.y,o,this.scroller.options.bounceEasing))}this.moved&&this.scroller._execEvent("scrollEnd")}},transitionTime:function(t){t=t||0;var e=a.style.transitionDuration;if(e&&(this.indicatorStyle[e]=t+"ms",!t&&a.isBadAndroid)){this.indicatorStyle[e]="0.0001ms";var i=this;r(function(){"0.0001ms"===i.indicatorStyle[e]&&(i.indicatorStyle[e]="0s")})}},transitionTimingFunction:function(t){this.indicatorStyle[a.style.transitionTimingFunction]=t},refresh:function(){this.transitionTime(),this.options.listenX&&!this.options.listenY?this.indicatorStyle.display=this.scroller.hasHorizontalScroll?"block":"none":this.options.listenY&&!this.options.listenX?this.indicatorStyle.display=this.scroller.hasVerticalScroll?"block":"none":this.indicatorStyle.display=this.scroller.hasHorizontalScroll||this.scroller.hasVerticalScroll?"block":"none",this.scroller.hasHorizontalScroll&&this.scroller.hasVerticalScroll?(a.addClass(this.wrapper,"iScrollBothScrollbars"),a.removeClass(this.wrapper,"iScrollLoneScrollbar"),this.options.defaultScrollbars&&this.options.customStyle&&(this.options.listenX?this.wrapper.style.right="8px":this.wrapper.style.bottom="8px")):(a.removeClass(this.wrapper,"iScrollBothScrollbars"),a.addClass(this.wrapper,"iScrollLoneScrollbar"),this.options.defaultScrollbars&&this.options.customStyle&&(this.options.listenX?this.wrapper.style.right="2px":this.wrapper.style.bottom="2px"));this.wrapper.offsetHeight;this.options.listenX&&(this.wrapperWidth=this.wrapper.clientWidth,this.options.resize?(this.indicatorWidth=i.max(i.round(this.wrapperWidth*this.wrapperWidth/(this.scroller.scrollerWidth||this.wrapperWidth||1)),8),this.indicatorStyle.width=this.indicatorWidth+"px"):this.indicatorWidth=this.indicator.clientWidth,this.maxPosX=this.wrapperWidth-this.indicatorWidth,"clip"==this.options.shrink?(this.minBoundaryX=8-this.indicatorWidth,this.maxBoundaryX=this.wrapperWidth-8):(this.minBoundaryX=0,this.maxBoundaryX=this.maxPosX),this.sizeRatioX=this.options.speedRatioX||this.scroller.maxScrollX&&this.maxPosX/this.scroller.maxScrollX),this.options.listenY&&(this.wrapperHeight=this.wrapper.clientHeight,this.options.resize?(this.indicatorHeight=i.max(i.round(this.wrapperHeight*this.wrapperHeight/(this.scroller.scrollerHeight||this.wrapperHeight||1)),8),this.indicatorStyle.height=this.indicatorHeight+"px"):this.indicatorHeight=this.indicator.clientHeight,this.maxPosY=this.wrapperHeight-this.indicatorHeight,"clip"==this.options.shrink?(this.minBoundaryY=8-this.indicatorHeight,this.maxBoundaryY=this.wrapperHeight-8):(this.minBoundaryY=0,this.maxBoundaryY=this.maxPosY),this.maxPosY=this.wrapperHeight-this.indicatorHeight,this.sizeRatioY=this.options.speedRatioY||this.scroller.maxScrollY&&this.maxPosY/this.scroller.maxScrollY),this.updatePosition()},updatePosition:function(){var t=this.options.listenX&&i.round(this.sizeRatioX*this.scroller.x)||0,e=this.options.listenY&&i.round(this.sizeRatioY*this.scroller.y)||0;this.options.ignoreBoundaries||(t<this.minBoundaryX?("scale"==this.options.shrink&&(this.width=i.max(this.indicatorWidth+t,8),this.indicatorStyle.width=this.width+"px"),t=this.minBoundaryX):t>this.maxBoundaryX?"scale"==this.options.shrink?(this.width=i.max(this.indicatorWidth-(t-this.maxPosX),8),this.indicatorStyle.width=this.width+"px",t=this.maxPosX+this.indicatorWidth-this.width):t=this.maxBoundaryX:"scale"==this.options.shrink&&this.width!=this.indicatorWidth&&(this.width=this.indicatorWidth,this.indicatorStyle.width=this.width+"px"),e<this.minBoundaryY?("scale"==this.options.shrink&&(this.height=i.max(this.indicatorHeight+3*e,8),this.indicatorStyle.height=this.height+"px"),
-e=this.minBoundaryY):e>this.maxBoundaryY?"scale"==this.options.shrink?(this.height=i.max(this.indicatorHeight-3*(e-this.maxPosY),8),this.indicatorStyle.height=this.height+"px",e=this.maxPosY+this.indicatorHeight-this.height):e=this.maxBoundaryY:"scale"==this.options.shrink&&this.height!=this.indicatorHeight&&(this.height=this.indicatorHeight,this.indicatorStyle.height=this.height+"px")),this.x=t,this.y=e,this.scroller.options.useTransform?this.indicatorStyle[a.style.transform]="translate("+t+"px,"+e+"px)"+this.scroller.translateZ:(this.indicatorStyle.left=t+"px",this.indicatorStyle.top=e+"px")},_pos:function(t,e){t<0?t=0:t>this.maxPosX&&(t=this.maxPosX),e<0?e=0:e>this.maxPosY&&(e=this.maxPosY),t=this.options.listenX?i.round(t/this.sizeRatioX):this.scroller.x,e=this.options.listenY?i.round(e/this.sizeRatioY):this.scroller.y,this.scroller.scrollTo(t,e)},fade:function(t,e){if(!e||this.visible){clearTimeout(this.fadeTimeout),this.fadeTimeout=null;var i=t?250:500,n=t?0:300;t=t?"1":"0",this.wrapperStyle[a.style.transitionDuration]=i+"ms",this.fadeTimeout=setTimeout(function(t){this.wrapperStyle.opacity=t,this.visible=+t}.bind(this,t),n)}}},n.utils=a,"undefined"!=typeof module&&module.exports?module.exports=n:"function"==typeof define&&define.amd?define(function(){return n}):t.IScroll=n}(window,document,Math),function(t,e){"use strict";"function"==typeof define&&define.amd?define(["jquery"],function(i){return e(i,t,t.document,t.Math)}):"object"==typeof exports&&exports?module.exports=e(require("jquery"),t,t.document,t.Math):e(jQuery,t,t.document,t.Math)}("undefined"!=typeof window?window:this,function(t,e,i,n,o){"use strict";var s="fullpage-wrapper",r="."+s,a="fp-responsive",l="fp-notransition",c="fp-destroyed",h="fp-enabled",d="fp-viewing",u="active",f="."+u,p="fp-completely",v="."+p,g="fp-section",m="."+g,S=m+f,w=m+":first",x=m+":last",y="fp-tableCell",b="."+y,T="fp-nav",k="#"+T,E="fp-tooltip",C="."+E,P="fp-slide",A="."+P,I=A+f,L="fp-slides",Y="."+L,H="fp-slidesContainer",X="."+H,M="fp-table",z="fp-slidesNav",B="."+z,O=B+" a",R=".fp-controlArrow",D="fp-prev",W="."+D,_="fp-controlArrow "+D,F=R+W,V=R+".fp-next",q=t(e),N=t(i),U={scrollbars:!0,mouseWheel:!0,hideScrollbars:!1,fadeScrollbars:!1,disableMouse:!0,interactiveScrollbars:!0};t.fn.fullpage=function(W){function Z(e,i){e||Ne(0),Ge("autoScrolling",e,i);var n=t(S);W.autoScrolling&&!W.scrollBar?(Je.css({overflow:"hidden",height:"100%"}),K(ki.recordHistory,"internal"),ci.css({"-ms-touch-action":"none","touch-action":"none"}),n.length&&Ne(n.position().top)):(Je.css({overflow:"visible",height:"initial"}),K(!1,"internal"),ci.css({"-ms-touch-action":"","touch-action":""}),n.length&&Je.scrollTop(n.position().top))}function K(t,e){Ge("recordHistory",t,e)}function G(t,e){Ge("scrollingSpeed",t,e)}function Q(t,e){Ge("fitToSection",t,e)}function $(t){W.lockAnchors=t}function J(t){t?(Re(),De()):(Oe(),We())}function tt(e,i){void 0!==i?(i=i.replace(/ /g,"").split(","),t.each(i,function(t,i){je(e,i,"m")})):e?(J(!0),_e()):(J(!1),Fe())}function et(e,i){void 0!==i?(i=i.replace(/ /g,"").split(","),t.each(i,function(t,i){je(e,i,"k")})):W.keyboardScrolling=e}function it(){var e=t(S).prev(m);e.length||!W.loopTop&&!W.continuousVertical||(e=t(m).last()),e.length&&Dt(e,null,!0)}function nt(){var e=t(S).next(m);e.length||!W.loopBottom&&!W.continuousVertical||(e=t(m).first()),e.length&&Dt(e,null,!1)}function ot(t,e){G(0,"internal"),st(t,e),G(ki.scrollingSpeed,"internal")}function st(t,e){var i=Pe(t);void 0!==e?Ie(t,e):i.length>0&&Dt(i)}function rt(t){Bt("right",t)}function at(t){Bt("left",t)}function lt(e){if(!ci.hasClass(c)){di=!0,hi=q.height(),t(m).each(function(){var e=t(this).find(Y),i=t(this).find(A);W.verticalCentered&&t(this).find(b).css("height",Ee(t(this))+"px"),t(this).css("height",hi+"px"),W.scrollOverflow&&(i.length?i.each(function(){Te(t(this))}):Te(t(this))),i.length>1&&he(e,e.find(I))});var i=t(S),n=i.index(m);n&&ot(n+1),di=!1,t.isFunction(W.afterResize)&&e&&W.afterResize.call(ci),t.isFunction(W.afterReBuild)&&!e&&W.afterReBuild.call(ci)}}function ct(e){var i=ti.hasClass(a);e?i||(Z(!1,"internal"),Q(!1,"internal"),t(k).hide(),ti.addClass(a),t.isFunction(W.afterResponsive)&&W.afterResponsive.call(ci,e)):i&&(Z(ki.autoScrolling,"internal"),Q(ki.autoScrolling,"internal"),t(k).show(),ti.removeClass(a),t.isFunction(W.afterResponsive)&&W.afterResponsive.call(ci,e))}function ht(){var e=ci.find(W.sectionSelector);W.anchors.length||(W.anchors=e.filter("[data-anchor]").map(function(){return t(this).data("anchor").toString()}).get()),W.navigationTooltips.length||(W.navigationTooltips=e.filter("[data-tooltip]").map(function(){return t(this).data("tooltip").toString()}).get())}function dt(){ci.css({height:"100%",position:"relative"}),ci.addClass(s),t("html").addClass(h),hi=q.height(),ci.removeClass(c),vt(),t(m).each(function(e){var i=t(this),n=i.find(A),o=n.length;ft(i,e),pt(i,e),o>0?ut(i,n,o):W.verticalCentered&&ke(i)}),W.fixedElements&&W.css3&&t(W.fixedElements).appendTo(ti),W.navigation&&mt(),wt(),W.scrollOverflow?("complete"===i.readyState&&St(),q.on("load",St)):bt()}function ut(e,i,n){var o=100*n,s=100/n;i.wrapAll('<div class="'+H+'" />'),i.parent().wrap('<div class="'+L+'" />'),e.find(X).css("width",o+"%"),n>1&&(W.controlArrows&&gt(e),W.slidesNavigation&&Ye(e,n)),i.each(function(e){t(this).css("width",s+"%"),W.verticalCentered&&ke(t(this))});var r=e.find(I);r.length&&(0!==t(S).index(m)||0===t(S).index(m)&&0!==r.index())?qe(r,"internal"):i.eq(0).addClass(u)}function ft(e,i){i||0!==t(S).length||e.addClass(u),si=t(S),e.css("height",hi+"px"),W.paddingTop&&e.css("padding-top",W.paddingTop),W.paddingBottom&&e.css("padding-bottom",W.paddingBottom),void 0!==W.sectionsColor[i]&&e.css("background-color",W.sectionsColor[i]),void 0!==W.anchors[i]&&e.attr("data-anchor",W.anchors[i])}function pt(e,i){void 0!==W.anchors[i]&&e.hasClass(u)&&xe(W.anchors[i],i),W.menu&&W.css3&&t(W.menu).closest(r).length&&t(W.menu).appendTo(ti)}function vt(){ci.find(W.sectionSelector).addClass(g),ci.find(W.slideSelector).addClass(P)}function gt(t){t.find(Y).after('<div class="'+_+'"></div><div class="fp-controlArrow fp-next"></div>'),"#fff"!=W.controlArrowColor&&(t.find(V).css("border-color","transparent transparent transparent "+W.controlArrowColor),t.find(F).css("border-color","transparent "+W.controlArrowColor+" transparent transparent")),W.loopHorizontal||t.find(F).hide()}function mt(){ti.append('<div id="'+T+'"><ul></ul></div>');var e=t(k);e.addClass(function(){return W.showActiveTooltip?"fp-show-active "+W.navigationPosition:W.navigationPosition});for(var i=0;i<t(m).length;i++){var n="";W.anchors.length&&(n=W.anchors[i]);var o='<li><a href="#'+n+'"><span></span></a>',s=W.navigationTooltips[i];void 0!==s&&""!==s&&(o+='<div class="'+E+" "+W.navigationPosition+'">'+s+"</div>"),o+="</li>",e.find("ul").append(o)}t(k).css("margin-top","-"+t(k).height()/2+"px"),t(k).find("li").eq(t(S).index(m)).find("a").addClass(u)}function St(){t(m).each(function(){var e=t(this).find(A);e.length?e.each(function(){Te(t(this))}):Te(t(this))}),bt()}function wt(){ci.find('iframe[src*="youtube.com/embed/"]').each(function(){xt(t(this),"enablejsapi=1")})}function xt(t,e){var i=t.attr("src");t.attr("src",i+yt(i)+e)}function yt(t){return/\?/.test(t)?"&":"?"}function bt(){var e=t(S);e.addClass(p),W.scrollOverflowHandler.afterRender&&W.scrollOverflowHandler.afterRender(e),Ut(e),jt(e),W.scrollOverflowHandler.afterLoad(),Tt()&&t.isFunction(W.afterLoad)&&W.afterLoad.call(e,e.data("anchor"),e.index(m)+1),t.isFunction(W.afterRender)&&W.afterRender.call(ci)}function Tt(){var t=e.location.hash.replace("#","").split("/"),i=Pe(decodeURIComponent(t[0]));return!i.length||i.length&&i.index()===si.index()}function kt(){var e;if(!W.autoScrolling||W.scrollBar){var n=q.scrollTop(),o=Pt(n),s=0,r=n+q.height()/2,a=ti.height()-q.height()===n,l=i.querySelectorAll(m);if(a)s=l.length-1;else if(n)for(var c=0;c<l.length;++c){var h=l[c];h.offsetTop<=r&&(s=c)}else s=0;if(Ct(o)&&(t(S).hasClass(p)||t(S).addClass(p).siblings().removeClass(p)),e=t(l).eq(s),!e.hasClass(u)){Ei=!0;var d,f,v=t(S),g=v.index(m)+1,w=ye(e),x=e.data("anchor"),y=e.index(m)+1,b=e.find(I);b.length&&(f=b.data("anchor"),d=b.index()),fi&&(e.addClass(u).siblings().removeClass(u),t.isFunction(W.onLeave)&&W.onLeave.call(v,g,y,w),t.isFunction(W.afterLoad)&&W.afterLoad.call(e,x,y),Kt(v),Ut(e),jt(e),xe(x,y-1),W.anchors.length&&(ii=x),He(d,f,x,y)),clearTimeout(wi),wi=setTimeout(function(){Ei=!1},100)}W.fitToSection&&(clearTimeout(xi),xi=setTimeout(function(){W.fitToSection&&Et()},W.fitToSectionDelay))}}function Et(){fi&&(di=!0,Dt(t(S)),di=!1)}function Ct(e){var i=t(S).position().top,n=i+q.height();return"up"==e?n>=q.scrollTop()+q.height():i<=q.scrollTop()}function Pt(t){var e=t>Ci?"down":"up";return Ci=t,Hi=t,e}function At(t,e){if(vi.m[t]){var i="down"===t?"bottom":"top",n="down"===t?nt:it;if(e.length>0){if(!W.scrollOverflowHandler.isScrolled(i,e))return!0;n()}else n()}}function It(t){var e=t.originalEvent;!Yt(t.target)&&W.autoScrolling&&Ht(e)&&t.preventDefault()}function Lt(e){var i=e.originalEvent,o=t(i.target).closest(m);if(!Yt(e.target)&&Ht(i)){W.autoScrolling&&e.preventDefault();var s=W.scrollOverflowHandler.scrollable(o),r=Ve(i);Ii=r.y,Li=r.x,o.find(Y).length&&n.abs(Ai-Li)>n.abs(Pi-Ii)?!ri&&n.abs(Ai-Li)>q.outerWidth()/100*W.touchSensitivity&&(Ai>Li?vi.m.right&&rt(o):vi.m.left&&at(o)):W.autoScrolling&&fi&&n.abs(Pi-Ii)>q.height()/100*W.touchSensitivity&&(Pi>Ii?At("down",s):Ii>Pi&&At("up",s))}}function Yt(e,i){i=i||0;var n=t(e).parent();return!!(i<W.normalScrollElementTouchThreshold&&n.is(W.normalScrollElements))||i!=W.normalScrollElementTouchThreshold&&Yt(n,++i)}function Ht(t){return void 0===t.pointerType||"mouse"!=t.pointerType}function Xt(t){var e=t.originalEvent;if(W.fitToSection&&Je.stop(),Ht(e)){var i=Ve(e);Pi=i.y,Ai=i.x}}function Mt(t,e){for(var i=0,o=t.slice(n.max(t.length-e,1)),s=0;s<o.length;s++)i+=o[s];return n.ceil(i/e)}function zt(i){var o=(new Date).getTime(),s=t(v).hasClass("fp-normal-scroll");if(W.autoScrolling&&!oi&&!s){i=i||e.event;var r=i.wheelDelta||-i.deltaY||-i.detail,a=n.max(-1,n.min(1,r)),l=void 0!==i.wheelDeltaX||void 0!==i.deltaX,c=n.abs(i.wheelDeltaX)<n.abs(i.wheelDelta)||n.abs(i.deltaX)<n.abs(i.deltaY)||!l;pi.length>149&&pi.shift(),pi.push(n.abs(r)),W.scrollBar&&(i.preventDefault?i.preventDefault():i.returnValue=!1);var h=t(S),d=W.scrollOverflowHandler.scrollable(h),u=o-Yi;return Yi=o,u>200&&(pi=[]),fi&&Mt(pi,10)>=Mt(pi,70)&&c&&(a<0?At("down",d):At("up",d)),!1}W.fitToSection&&Je.stop()}function Bt(e,i){var n=void 0===i?t(S):i,o=n.find(Y),s=o.find(A).length;if(!(!o.length||ri||s<2)){var r=o.find(I),a=null;if(a="left"===e?r.prev(A):r.next(A),!a.length){if(!W.loopHorizontal)return;a="left"===e?r.siblings(":last"):r.siblings(":first")}ri=!0,he(o,a,e)}}function Ot(){t(I).each(function(){qe(t(this),"internal")})}function Rt(t){var e=t.position(),i=e.top,n=e.top>Hi,o=i-hi+t.outerHeight(),s=W.bigSectionsDestination;return t.outerHeight()>hi?(n||s)&&"bottom"!==s||(i=o):(n||di&&t.is(":last-child"))&&(i=o),Hi=i,i}function Dt(e,i,n){if(void 0!==e){var o,s,r=Rt(e),a={element:e,callback:i,isMovementUp:n,dtop:r,yMovement:ye(e),anchorLink:e.data("anchor"),sectionIndex:e.index(m),activeSlide:e.find(I),activeSection:t(S),leavingSection:t(S).index(m)+1,localIsResizing:di};a.activeSection.is(e)&&!di||W.scrollBar&&q.scrollTop()===a.dtop&&!e.hasClass("fp-auto-height")||(a.activeSlide.length&&(o=a.activeSlide.data("anchor"),s=a.activeSlide.index()),W.autoScrolling&&W.continuousVertical&&void 0!==a.isMovementUp&&(!a.isMovementUp&&"up"==a.yMovement||a.isMovementUp&&"down"==a.yMovement)&&(a=Ft(a)),t.isFunction(W.onLeave)&&!a.localIsResizing&&!1===W.onLeave.call(a.activeSection,a.leavingSection,a.sectionIndex+1,a.yMovement)||(a.localIsResizing||Kt(a.activeSection),W.scrollOverflowHandler.beforeLeave(),e.addClass(u).siblings().removeClass(u),Ut(e),W.scrollOverflowHandler.onLeave(),fi=!1,He(s,o,a.anchorLink,a.sectionIndex),Wt(a),ii=a.anchorLink,xe(a.anchorLink,a.sectionIndex)))}}function Wt(e){if(W.css3&&W.autoScrolling&&!W.scrollBar)Ce("translate3d(0px, -"+n.round(e.dtop)+"px, 0px)",!0),W.scrollingSpeed?(clearTimeout(mi),mi=setTimeout(function(){qt(e)},W.scrollingSpeed)):qt(e);else{var i=_t(e);t(i.element).animate(i.options,W.scrollingSpeed,W.easing).promise().done(function(){W.scrollBar?setTimeout(function(){qt(e)},30):qt(e)})}}function _t(t){var e={};return W.autoScrolling&&!W.scrollBar?(e.options={top:-t.dtop},e.element=r):(e.options={scrollTop:t.dtop},e.element="html, body"),e}function Ft(e){return e.isMovementUp?t(S).before(e.activeSection.nextAll(m)):t(S).after(e.activeSection.prevAll(m).get().reverse()),Ne(t(S).position().top),Ot(),e.wrapAroundElements=e.activeSection,e.dtop=e.element.position().top,e.yMovement=ye(e.element),e}function Vt(e){e.wrapAroundElements&&e.wrapAroundElements.length&&(e.isMovementUp?t(w).before(e.wrapAroundElements):t(x).after(e.wrapAroundElements),Ne(t(S).position().top),Ot())}function qt(e){Vt(e),t.isFunction(W.afterLoad)&&!e.localIsResizing&&W.afterLoad.call(e.element,e.anchorLink,e.sectionIndex+1),W.scrollOverflowHandler.afterLoad(),e.localIsResizing||jt(e.element),e.element.addClass(p).siblings().removeClass(p),fi=!0,t.isFunction(e.callback)&&e.callback.call(this)}function Nt(t,e){t.attr(e,t.data(e)).removeAttr("data-"+e)}function Ut(e){if(W.lazyLoading){var i;Gt(e).find("img[data-src], img[data-srcset], source[data-src], audio[data-src], iframe[data-src]").each(function(){i=t(this),t.each(["src","srcset"],function(t,e){var n=i.attr("data-"+e);void 0!==n&&n&&Nt(i,e)}),i.is("source")&&i.closest("video").get(0).load()})}}function jt(e){var i=Gt(e);i.find("video, audio").each(function(){var e=t(this).get(0);e.hasAttribute("data-autoplay")&&"function"==typeof e.play&&e.play()}),i.find('iframe[src*="youtube.com/embed/"]').each(function(){var e=t(this).get(0);e.hasAttribute("data-autoplay")&&Zt(e),e.onload=function(){e.hasAttribute("data-autoplay")&&Zt(e)}})}function Zt(t){t.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*")}function Kt(e){var i=Gt(e);i.find("video, audio").each(function(){var e=t(this).get(0);e.hasAttribute("data-keepplaying")||"function"!=typeof e.pause||e.pause()}),i.find('iframe[src*="youtube.com/embed/"]').each(function(){var e=t(this).get(0);/youtube\.com\/embed\//.test(t(this).attr("src"))&&!e.hasAttribute("data-keepplaying")&&t(this).get(0).contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*")})}function Gt(e){var i=e.find(I);return i.length&&(e=t(i)),e}function Qt(){var t=e.location.hash.replace("#","").split("/"),i=decodeURIComponent(t[0]),n=decodeURIComponent(t[1]);i&&(W.animateAnchor?Ie(i,n):ot(i,n))}function $t(){if(!Ei&&!W.lockAnchors){var t=e.location.hash.replace("#","").split("/"),i=decodeURIComponent(t[0]),n=decodeURIComponent(t[1]),o=void 0===ii,s=void 0===ii&&void 0===n&&!ri;i.length&&(i&&i!==ii&&!o||s||!ri&&ni!=n)&&Ie(i,n)}}function Jt(e){clearTimeout(yi);var i=t(":focus");if(!i.is("textarea")&&!i.is("input")&&!i.is("select")&&"true"!==i.attr("contentEditable")&&""!==i.attr("contentEditable")&&W.keyboardScrolling&&W.autoScrolling){var n=e.which,o=[40,38,32,33,34];t.inArray(n,o)>-1&&e.preventDefault(),oi=e.ctrlKey,yi=setTimeout(function(){le(e)},150)}}function te(){t(this).prev().trigger("click")}function ee(t){ui&&(oi=t.ctrlKey)}function ie(t){2==t.which&&(Xi=t.pageY,ci.on("mousemove",ce))}function ne(t){2==t.which&&ci.off("mousemove")}function oe(){var e=t(this).closest(m);t(this).hasClass(D)?vi.m.left&&at(e):vi.m.right&&rt(e)}function se(){ui=!1,oi=!1}function re(e){e.preventDefault();var i=t(this).parent().index();Dt(t(m).eq(i))}function ae(e){e.preventDefault();var i=t(this).closest(m).find(Y);he(i,i.find(A).eq(t(this).closest("li").index()))}function le(e){var i=e.shiftKey;if(fi||!([37,39].indexOf(e.which)<0))switch(e.which){case 38:case 33:vi.k.up&&it();break;case 32:if(i&&vi.k.up){it();break}case 40:case 34:vi.k.down&&nt();break;case 36:vi.k.up&&st(1);break;case 35:vi.k.down&&st(t(m).length);break;case 37:vi.k.left&&at();break;case 39:vi.k.right&&rt();break;default:return}}function ce(t){fi&&(t.pageY<Xi&&vi.m.up?it():t.pageY>Xi&&vi.m.down&&nt()),Xi=t.pageY}function he(e,i,n){var o=e.closest(m),s={slides:e,destiny:i,direction:n,destinyPos:i.position(),slideIndex:i.index(),section:o,sectionIndex:o.index(m),anchorLink:o.data("anchor"),slidesNav:o.find(B),slideAnchor:Me(i),prevSlide:o.find(I),prevSlideIndex:o.find(I).index(),localIsResizing:di};if(s.xMovement=be(s.prevSlideIndex,s.slideIndex),s.localIsResizing||(fi=!1),W.onSlideLeave&&!s.localIsResizing&&"none"!==s.xMovement&&t.isFunction(W.onSlideLeave)&&!1===W.onSlideLeave.call(s.prevSlide,s.anchorLink,s.sectionIndex+1,s.prevSlideIndex,s.xMovement,s.slideIndex))return void(ri=!1);i.addClass(u).siblings().removeClass(u),s.localIsResizing||(Kt(s.prevSlide),Ut(i)),!W.loopHorizontal&&W.controlArrows&&(o.find(F).toggle(0!==s.slideIndex),o.find(V).toggle(!i.is(":last-child"))),o.hasClass(u)&&!s.localIsResizing&&He(s.slideIndex,s.slideAnchor,s.anchorLink,s.sectionIndex),ue(e,s,!0)}function de(e){fe(e.slidesNav,e.slideIndex),e.localIsResizing||(t.isFunction(W.afterSlideLoad)&&W.afterSlideLoad.call(e.destiny,e.anchorLink,e.sectionIndex+1,e.slideAnchor,e.slideIndex),fi=!0,jt(e.destiny)),ri=!1}function ue(t,e,i){var o=e.destinyPos;if(W.css3){var s="translate3d(-"+n.round(o.left)+"px, 0px, 0px)";ge(t.find(X)).css(Ue(s)),Si=setTimeout(function(){i&&de(e)},W.scrollingSpeed,W.easing)}else t.animate({scrollLeft:n.round(o.left)},W.scrollingSpeed,W.easing,function(){i&&de(e)})}function fe(t,e){t.find(f).removeClass(u),t.find("li").eq(e).find("a").addClass(u)}function pe(){if(ve(),ai){var e=t(i.activeElement);if(!e.is("textarea")&&!e.is("input")&&!e.is("select")){var o=q.height();n.abs(o-Mi)>20*n.max(Mi,o)/100&&(lt(!0),Mi=o)}}else clearTimeout(gi),gi=setTimeout(function(){lt(!0)},350)}function ve(){var t=W.responsive||W.responsiveWidth,e=W.responsiveHeight,i=t&&q.outerWidth()<t,n=e&&q.height()<e;t&&e?ct(i||n):t?ct(i):e&&ct(n)}function ge(t){var e="all "+W.scrollingSpeed+"ms "+W.easingcss3;return t.removeClass(l),t.css({"-webkit-transition":e,transition:e})}function me(t){return t.addClass(l)}function Se(e,i){W.navigation&&(t(k).find(f).removeClass(u),e?t(k).find('a[href="#'+e+'"]').addClass(u):t(k).find("li").eq(i).find("a").addClass(u))}function we(e){W.menu&&(t(W.menu).find(f).removeClass(u),t(W.menu).find('[data-menuanchor="'+e+'"]').addClass(u))}function xe(t,e){we(t),Se(t,e)}function ye(e){var i=t(S).index(m),n=e.index(m);return i==n?"none":i>n?"up":"down"}function be(t,e){return t==e?"none":t>e?"left":"right"}function Te(t){if(!t.hasClass("fp-noscroll")){t.css("overflow","hidden");var e,i=W.scrollOverflowHandler,n=i.wrapContent(),o=t.closest(m),s=i.scrollable(t);s.length?e=i.scrollHeight(t):(e=t.get(0).scrollHeight,W.verticalCentered&&(e=t.find(b).get(0).scrollHeight));var r=hi-parseInt(o.css("padding-bottom"))-parseInt(o.css("padding-top"));e>r?s.length?i.update(t,r):(W.verticalCentered?t.find(b).wrapInner(n):t.wrapInner(n),i.create(t,r)):i.remove(t),t.css("overflow","")}}function ke(t){t.hasClass(M)||t.addClass(M).wrapInner('<div class="'+y+'" style="height:'+Ee(t)+'px;" />')}function Ee(t){var e=hi;if(W.paddingTop||W.paddingBottom){var i=t;i.hasClass(g)||(i=t.closest(m));var n=parseInt(i.css("padding-top"))+parseInt(i.css("padding-bottom"));e=hi-n}return e}function Ce(t,e){e?ge(ci):me(ci),ci.css(Ue(t)),setTimeout(function(){ci.removeClass(l)},10)}function Pe(e){if(!e)return[];var i=ci.find(m+'[data-anchor="'+e+'"]');return i.length||(i=t(m).eq(e-1)),i}function Ae(t,e){var i=e.find(Y),n=i.find(A+'[data-anchor="'+t+'"]');return n.length||(n=i.find(A).eq(t)),n}function Ie(t,e){var i=Pe(t);i.length&&(void 0===e&&(e=0),t===ii||i.hasClass(u)?Le(i,e):Dt(i,function(){Le(i,e)}))}function Le(t,e){if(void 0!==e){var i=t.find(Y),n=Ae(e,t);n.length&&he(i,n)}}function Ye(t,e){t.append('<div class="'+z+'"><ul></ul></div>');var i=t.find(B);i.addClass(W.slidesNavPosition);for(var n=0;n<e;n++)i.find("ul").append('<li><a href="#"><span></span></a></li>');i.css("margin-left","-"+i.width()/2+"px"),i.find("li").first().find("a").addClass(u)}function He(t,e,i,n){var o="";W.anchors.length&&!W.lockAnchors&&(t?(void 0!==i&&(o=i),void 0===e&&(e=t),ni=e,Xe(o+"/"+e)):void 0!==t?(ni=e,Xe(i)):Xe(i)),ze()}function Xe(t){if(W.recordHistory)location.hash=t;else if(ai||li)e.history.replaceState(o,o,"#"+t);else{var i=e.location.href.split("#")[0];e.location.replace(i+"#"+t)}}function Me(t){var e=t.data("anchor"),i=t.index();return void 0===e&&(e=i),e}function ze(){var e=t(S),i=e.find(I),n=Me(e),o=Me(i),s=String(n);i.length&&(s=s+"-"+o),s=s.replace("/","-").replace("#","");var r=new RegExp("\\b\\s?"+d+"-[^\\s]+\\b","g");ti[0].className=ti[0].className.replace(r,""),ti.addClass(d+"-"+s)}function Be(){var t,n=i.createElement("p"),s={webkitTransform:"-webkit-transform",OTransform:"-o-transform",msTransform:"-ms-transform",MozTransform:"-moz-transform",transform:"transform"};i.body.insertBefore(n,null);for(var r in s)n.style[r]!==o&&(n.style[r]="translate3d(1px,1px,1px)",t=e.getComputedStyle(n).getPropertyValue(s[r]));return i.body.removeChild(n),t!==o&&t.length>0&&"none"!==t}function Oe(){i.addEventListener?(i.removeEventListener("mousewheel",zt,!1),i.removeEventListener("wheel",zt,!1),i.removeEventListener("MozMousePixelScroll",zt,!1)):i.detachEvent("onmousewheel",zt)}function Re(){var t,n="";e.addEventListener?t="addEventListener":(t="attachEvent",n="on");var s="onwheel"in i.createElement("div")?"wheel":i.onmousewheel!==o?"mousewheel":"DOMMouseScroll";"DOMMouseScroll"==s?i[t](n+"MozMousePixelScroll",zt,!1):i[t](n+s,zt,!1)}function De(){ci.on("mousedown",ie).on("mouseup",ne)}function We(){ci.off("mousedown",ie).off("mouseup",ne)}function _e(){(ai||li)&&(W.autoScrolling&&ti.off(Ti.touchmove).on(Ti.touchmove,It),t(r).off(Ti.touchstart).on(Ti.touchstart,Xt).off(Ti.touchmove).on(Ti.touchmove,Lt))}function Fe(){(ai||li)&&t(r).off(Ti.touchstart).off(Ti.touchmove)}function Ve(t){var e=[];return e.y=void 0!==t.pageY&&(t.pageY||t.pageX)?t.pageY:t.touches[0].pageY,e.x=void 0!==t.pageX&&(t.pageY||t.pageX)?t.pageX:t.touches[0].pageX,li&&Ht(t)&&W.scrollBar&&(e.y=t.touches[0].pageY,e.x=t.touches[0].pageX),e}function qe(t,e){G(0,"internal"),void 0!==e&&(di=!0),he(t.closest(Y),t),void 0!==e&&(di=!1),G(ki.scrollingSpeed,"internal")}function Ne(t){var e=n.round(t);W.css3&&W.autoScrolling&&!W.scrollBar?Ce("translate3d(0px, -"+e+"px, 0px)",!1):W.autoScrolling&&!W.scrollBar?ci.css("top",-e):Je.scrollTop(e)}function Ue(t){return{"-webkit-transform":t,"-moz-transform":t,"-ms-transform":t,transform:t}}function je(t,e,i){switch(e){case"up":vi[i].up=t;break;case"down":vi[i].down=t;break;case"left":vi[i].left=t;break;case"right":vi[i].right=t;break;case"all":"m"==i?tt(t):et(t)}}function Ze(e){Z(!1,"internal"),tt(!1),et(!1),ci.addClass(c),clearTimeout(Si),clearTimeout(mi),clearTimeout(gi),clearTimeout(wi),clearTimeout(xi),q.off("scroll",kt).off("hashchange",$t).off("resize",pe),N.off("click touchstart",k+" a").off("mouseenter",k+" li").off("mouseleave",k+" li").off("click touchstart",O).off("mouseover",W.normalScrollElements).off("mouseout",W.normalScrollElements),t(m).off("click touchstart",R),clearTimeout(Si),clearTimeout(mi),e&&Ke()}function Ke(){Ne(0),ci.find("img[data-src], source[data-src], audio[data-src], iframe[data-src]").each(function(){Nt(t(this),"src")}),ci.find("img[data-srcset]").each(function(){Nt(t(this),"srcset")}),t(k+", "+B+", "+R).remove(),t(m).css({height:"","background-color":"",padding:""}),t(A).css({width:""}),ci.css({height:"",position:"","-ms-touch-action":"","touch-action":""}),Je.css({overflow:"",height:""}),t("html").removeClass(h),ti.removeClass(a),t.each(ti.get(0).className.split(/\s+/),function(t,e){0===e.indexOf(d)&&ti.removeClass(e)}),t(m+", "+A).each(function(){W.scrollOverflowHandler.remove(t(this)),t(this).removeClass(M+" "+u)}),me(ci),ci.find(b+", "+X+", "+Y).each(function(){t(this).replaceWith(this.childNodes)}),ci.css({"-webkit-transition":"none",transition:"none"}),Je.scrollTop(0);var e=[g,P,H];t.each(e,function(e,i){t("."+i).removeClass(i)})}function Ge(t,e,i){W[t]=e,"internal"!==i&&(ki[t]=e)}function Qe(){var e=["fadingEffect","continuousHorizontal","scrollHorizontally","interlockedSlides","resetSliders","responsiveSlides","offsetSections","dragAndMove","scrollOverflowReset","parallax"];if(t("html").hasClass(h))return void $e("error","Fullpage.js can only be initialized once and you are doing it multiple times!");W.continuousVertical&&(W.loopTop||W.loopBottom)&&(W.continuousVertical=!1,$e("warn","Option `loopTop/loopBottom` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),W.scrollBar&&W.scrollOverflow&&$e("warn","Option `scrollBar` is mutually exclusive with `scrollOverflow`. Sections with scrollOverflow might not work well in Firefox"),!W.continuousVertical||!W.scrollBar&&W.autoScrolling||(W.continuousVertical=!1,$e("warn","Scroll bars (`scrollBar:true` or `autoScrolling:false`) are mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),t.each(e,function(t,e){W[e]&&$e("warn","fullpage.js extensions require jquery.fullpage.extensions.min.js file instead of the usual jquery.fullpage.js. Requested: "+e)}),t.each(W.anchors,function(e,i){var n=N.find("[name]").filter(function(){return t(this).attr("name")&&t(this).attr("name").toLowerCase()==i.toLowerCase()}),o=N.find("[id]").filter(function(){return t(this).attr("id")&&t(this).attr("id").toLowerCase()==i.toLowerCase()});(o.length||n.length)&&($e("error","data-anchor tags can not have the same value as any `id` element on the site (or `name` element for IE)."),o.length&&$e("error",'"'+i+'" is is being used by another element `id` property'),n.length&&$e("error",'"'+i+'" is is being used by another element `name` property'))})}function $e(t,e){console&&console[t]}if(t("html").hasClass(h))return void Qe();var Je=t("html, body"),ti=t("body"),ei=t.fn.fullpage;W=t.extend({menu:!1,anchors:[],lockAnchors:!1,navigation:!1,navigationPosition:"right",navigationTooltips:[],showActiveTooltip:!1,slidesNavigation:!1,slidesNavPosition:"bottom",scrollBar:!1,hybrid:!1,css3:!0,scrollingSpeed:700,autoScrolling:!0,fitToSection:!0,fitToSectionDelay:1e3,easing:"easeInOutCubic",easingcss3:"ease",loopBottom:!1,loopTop:!1,loopHorizontal:!0,continuousVertical:!1,continuousHorizontal:!1,scrollHorizontally:!1,interlockedSlides:!1,dragAndMove:!1,offsetSections:!1,resetSliders:!1,fadingEffect:!1,normalScrollElements:null,scrollOverflow:!1,scrollOverflowReset:!1,scrollOverflowHandler:j,scrollOverflowOptions:null,touchSensitivity:5,normalScrollElementTouchThreshold:5,bigSectionsDestination:null,keyboardScrolling:!0,animateAnchor:!0,recordHistory:!0,controlArrows:!0,controlArrowColor:"#fff",verticalCentered:!0,sectionsColor:[],paddingTop:0,paddingBottom:0,fixedElements:null,responsive:0,responsiveWidth:0,responsiveHeight:0,responsiveSlides:!1,parallax:!1,parallaxOptions:{type:"reveal",percentage:62,property:"translate"},sectionSelector:".section",slideSelector:".slide",afterLoad:null,onLeave:null,afterRender:null,afterResize:null,afterReBuild:null,afterSlideLoad:null,onSlideLeave:null,afterResponsive:null,lazyLoading:!0},W);var ii,ni,oi,si,ri=!1,ai=navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/),li="ontouchstart"in e||navigator.msMaxTouchPoints>0||navigator.maxTouchPoints,ci=t(this),hi=q.height(),di=!1,ui=!0,fi=!0,pi=[],vi={};vi.m={up:!0,down:!0,left:!0,right:!0},vi.k=t.extend(!0,{},vi.m);var gi,mi,Si,wi,xi,yi,bi=function(){return e.PointerEvent?{down:"pointerdown",move:"pointermove"}:{down:"MSPointerDown",move:"MSPointerMove"}}(),Ti={touchmove:"ontouchmove"in e?"touchmove":bi.move,touchstart:"ontouchstart"in e?"touchstart":bi.down},ki=t.extend(!0,{},W);Qe(),U.click=li,U=t.extend(U,W.scrollOverflowOptions),t.extend(t.easing,{easeInOutCubic:function(t,e,i,n,o){return(e/=o/2)<1?n/2*e*e*e+i:n/2*((e-=2)*e*e+2)+i}}),t(this).length&&(ei.setAutoScrolling=Z,ei.setRecordHistory=K,ei.setScrollingSpeed=G,ei.setFitToSection=Q,ei.setLockAnchors=$,ei.setMouseWheelScrolling=J,ei.setAllowScrolling=tt,ei.setKeyboardScrolling=et,ei.moveSectionUp=it,ei.moveSectionDown=nt,ei.silentMoveTo=ot,ei.moveTo=st,ei.moveSlideRight=rt,ei.moveSlideLeft=at,ei.fitToSection=Et,ei.reBuild=lt,ei.setResponsive=ct,ei.destroy=Ze,function(){W.css3&&(W.css3=Be()),W.scrollBar=W.scrollBar||W.hybrid,ht(),dt(),tt(!0),Z(W.autoScrolling,"internal"),ve(),ze(),"complete"===i.readyState&&Qt(),q.on("load",Qt)}(),function(){q.on("scroll",kt).on("hashchange",$t).blur(se).resize(pe),N.keydown(Jt).keyup(ee).on("click touchstart",k+" a",re).on("click touchstart",O,ae).on("click",C,te),t(m).on("click touchstart",R,oe),W.normalScrollElements&&(N.on("mouseenter",W.normalScrollElements,function(){J(!1)}),N.on("mouseleave",W.normalScrollElements,function(){J(!0)}))}());var Ei=!1,Ci=0,Pi=0,Ai=0,Ii=0,Li=0,Yi=(new Date).getTime(),Hi=0,Xi=0,Mi=hi},"undefined"!=typeof IScroll&&(IScroll.prototype.wheelOn=function(){this.wrapper.addEventListener("wheel",this),this.wrapper.addEventListener("mousewheel",this),this.wrapper.addEventListener("DOMMouseScroll",this)},IScroll.prototype.wheelOff=function(){this.wrapper.removeEventListener("wheel",this),this.wrapper.removeEventListener("mousewheel",this),this.wrapper.removeEventListener("DOMMouseScroll",this)});var j={refreshId:null,iScrollInstances:[],toggleWheel:function(e){t(S).find(".fp-scrollable").each(function(){var i=t(this).data("iscrollInstance");void 0!==i&&i&&(e?i.wheelOn():i.wheelOff())})},onLeave:function(){j.toggleWheel(!1)},beforeLeave:function(){j.onLeave()},afterLoad:function(){j.toggleWheel(!0)},create:function(e,i){var n=e.find(".fp-scrollable");n.height(i),n.each(function(){var e=t(this),i=e.data("iscrollInstance");i&&t.each(j.iScrollInstances,function(){t(this).destroy()}),i=new IScroll(e.get(0),U),j.iScrollInstances.push(i),i.wheelOff(),e.data("iscrollInstance",i)})},isScrolled:function(t,e){var i=e.data("iscrollInstance");return!i||("top"===t?i.y>=0&&!e.scrollTop():"bottom"===t?0-i.y+e.scrollTop()+1+e.innerHeight()>=e[0].scrollHeight:void 0)},scrollable:function(t){return t.find(Y).length?t.find(I).find(".fp-scrollable"):t.find(".fp-scrollable")},scrollHeight:function(t){return t.find(".fp-scrollable").children().first().get(0).scrollHeight},remove:function(t){var e=t.find(".fp-scrollable");if(e.length){e.data("iscrollInstance").destroy(),e.data("iscrollInstance",null)}t.find(".fp-scrollable").children().first().children().first().unwrap().unwrap()},update:function(e,i){clearTimeout(j.refreshId),j.refreshId=setTimeout(function(){t.each(j.iScrollInstances,function(){t(this).get(0).refresh()})},150),e.find(".fp-scrollable").css("height",i+"px").parent().css("height",i+"px")},wrapContent:function(){return'<div class="fp-scrollable"><div class="fp-scroller"></div></div>'}}}),function(t,e){"use strict";"function"==typeof define&&define.amd?define(["jquery"],function(i){return e(i,t,t.document,t.Math)}):"object"==typeof exports&&exports?module.exports=e(require("jquery"),t,t.document,t.Math):e(jQuery,t,t.document,t.Math)}("undefined"!=typeof window?window:this,function(t,e,i,n,o){"use strict";var s="fullpage-wrapper",r="."+s,a="fp-scrollable",l="."+a,c="fp-responsive",h="fp-notransition",d="fp-destroyed",u="fp-enabled",f="fp-viewing",p="active",v="."+p,g="fp-completely",m="."+g,S="fp-section",w="."+S,x=w+v,y=w+":first",b=w+":last",T="fp-tableCell",k="."+T,E="fp-nav",C="#"+E,P="fp-tooltip",A="."+P,I="fp-slide",L="."+I,Y=L+v,H="fp-slides",X="."+H,M="fp-slidesContainer",z="."+M,B="fp-table",O="fp-slidesNav",R="."+O,D=R+" a",W="fp-controlArrow",_="."+W,F="fp-prev",V="."+F,q=W+" "+F,N=_+V,U="fp-next",j=W+" "+U,Z=_+".fp-next",K=t(e),G=t(i),Q={scrollbars:!0,mouseWheel:!0,hideScrollbars:!1,fadeScrollbars:!1,disableMouse:!0,interactiveScrollbars:!0};t.fn.fullpage=function(a){function l(e,i){
-e||ei(0),di("autoScrolling",e,i);var n=t(x);a.autoScrolling&&!a.scrollBar?(pi.css({overflow:"hidden",height:"100%"}),W(Di.recordHistory,"internal"),ki.css({"-ms-touch-action":"none","touch-action":"none"}),n.length&&ei(n.position().top)):(pi.css({overflow:"visible",height:"initial"}),W(!1,"internal"),ki.css({"-ms-touch-action":"","touch-action":""}),ri(ki),n.length&&pi.scrollTop(n.position().top)),ki.trigger("setAutoScrolling",[e])}function W(t,e){di("recordHistory",t,e)}function V(t,e){"internal"!==e&&a.fadingEffect&&gi.fadingEffect&&gi.fadingEffect.update(t),di("scrollingSpeed",t,e)}function U(t,e){di("fitToSection",t,e)}function J(t){a.lockAnchors=t}function tt(t){t?(je(),Ze()):(Ue(),Ke())}function et(e,i){void 0!==i?(i=i.replace(/ /g,"").split(","),t.each(i,function(t,i){ni(e,i,"m")})):e?(tt(!0),Ge()):(tt(!1),Qe())}function it(e,i){void 0!==i?(i=i.replace(/ /g,"").split(","),t.each(i,function(t,i){ni(e,i,"k")})):a.keyboardScrolling=e}function nt(){var e=t(x).prev(w);e.length||!a.loopTop&&!a.continuousVertical||(e=t(w).last()),e.length&&Vt(e,null,!0)}function ot(){var e=t(x).next(w);e.length||!a.loopBottom&&!a.continuousVertical||(e=t(w).first()),e.length&&Vt(e,null,!1)}function st(t,e){V(0,"internal"),rt(t,e),V(Di.scrollingSpeed,"internal")}function rt(t,e){var i=Be(t);void 0!==e?Re(t,e):i.length>0&&Vt(i)}function at(t){Wt("right",t)}function lt(t){Wt("left",t)}function ct(e){if(!ki.hasClass(d)){Ci=!0,Ei=K.height(),t(w).each(function(){var e=t(this).find(X),i=t(this).find(L);a.verticalCentered&&t(this).find(k).css("height",Me(t(this))+"px"),t(this).css("height",gt(t(this))+"px"),a.scrollOverflow&&(i.length?i.each(function(){He(t(this))}):He(t(this))),i.length>1&&Se(e,e.find(Y))});var i=t(x),n=i.index(w);n&&st(n+1),Ci=!1,t.isFunction(a.afterResize)&&e&&a.afterResize.call(ki),t.isFunction(a.afterReBuild)&&!e&&a.afterReBuild.call(ki)}}function ht(e){var i=vi.hasClass(c);e?i||(l(!1,"internal"),U(!1,"internal"),t(C).hide(),vi.addClass(c),t.isFunction(a.afterResponsive)&&a.afterResponsive.call(ki,e),a.responsiveSlides&&gi.responsiveSlides&&gi.responsiveSlides.toSections(),ki.trigger("afterResponsive",[e])):i&&(l(Di.autoScrolling,"internal"),U(Di.autoScrolling,"internal"),t(C).show(),vi.removeClass(c),t.isFunction(a.afterResponsive)&&a.afterResponsive.call(ki,e),a.responsiveSlides&&gi.responsiveSlides&&gi.responsiveSlides.toSlides(),ki.trigger("afterResponsive",[e]))}function dt(){return{options:a,internals:{canScroll:Ai,isScrollAllowed:Li,getDestinationPosition:Ft,isTouch:Ti,c:oe,getXmovement:Ye,removeAnimation:Ce,getTransforms:ii,lazyLoad:Gt,addAnimation:Ee,performHorizontalMove:ye,landscapeScroll:Se,silentLandscapeScroll:ti,keepSlidesPosition:_t,silentScroll:ei,styleSlides:vt,scrollHandler:At,getEventsPage:Je,getMSPointer:$e,isReallyTouch:Bt,checkParentForNormalScrollElement:zt,usingExtension:ai,toggleControlArrows:we}}}function ut(t){var i="fp_"+t+"Extension";Wi[t]=a[t+"Key"],gi[t]=void 0!==e[i]?new e[i]:null,gi[t]&&gi[t].c(t)}function ft(){var e=ki.find(a.sectionSelector);a.anchors.length||(a.anchors=e.filter("[data-anchor]").map(function(){return t(this).data("anchor").toString()}).get()),a.navigationTooltips.length||(a.navigationTooltips=e.filter("[data-tooltip]").map(function(){return t(this).data("tooltip").toString()}).get())}function pt(){ki.css({height:"100%",position:"relative"}),ki.addClass(s),t("html").addClass(u),Ei=K.height(),ki.removeClass(d),wt(),li("parallax","init"),t(w).each(function(e){var i=t(this),n=i.find(L),o=n.length;mt(i,e),St(i,e),o>0?vt(i,n,o):a.verticalCentered&&Xe(i)}),a.fixedElements&&a.css3&&t(a.fixedElements).appendTo(vi),a.navigation&&yt(),Tt(),a.fadingEffect&&gi.fadingEffect&&gi.fadingEffect.apply(),a.scrollOverflow?("complete"===i.readyState&&bt(),K.on("load",bt)):Ct()}function vt(e,i,n){var o=100*n,s=100/n;i.wrapAll('<div class="'+M+'" />'),i.parent().wrap('<div class="'+H+'" />'),e.find(z).css("width",o+"%"),n>1&&(a.controlArrows&&xt(e),a.slidesNavigation&&We(e,n)),i.each(function(e){t(this).css("width",s+"%"),a.verticalCentered&&Xe(t(this))});var r=e.find(Y);r.length&&(0!==t(x).index(w)||0===t(x).index(w)&&0!==r.index())?ti(r,"internal"):i.eq(0).addClass(p)}function gt(t){return a.offsetSections&&gi.offsetSections?gi.offsetSections.getWindowHeight(t):Ei}function mt(e,i){i||0!==t(x).length||e.addClass(p),xi=t(x),e.css("height",gt(e)+"px"),a.paddingTop&&e.css("padding-top",a.paddingTop),a.paddingBottom&&e.css("padding-bottom",a.paddingBottom),void 0!==a.sectionsColor[i]&&e.css("background-color",a.sectionsColor[i]),void 0!==a.anchors[i]&&e.attr("data-anchor",a.anchors[i])}function St(e,i){void 0!==a.anchors[i]&&e.hasClass(p)&&Ie(a.anchors[i],i),a.menu&&a.css3&&t(a.menu).closest(r).length&&t(a.menu).appendTo(vi)}function wt(){ki.find(a.sectionSelector).addClass(S),ki.find(a.slideSelector).addClass(I)}function xt(t){t.find(X).after('<div class="'+q+'"></div><div class="'+j+'"></div>'),"#fff"!=a.controlArrowColor&&(t.find(Z).css("border-color","transparent transparent transparent "+a.controlArrowColor),t.find(N).css("border-color","transparent "+a.controlArrowColor+" transparent transparent")),a.loopHorizontal||t.find(N).hide()}function yt(){vi.append('<div id="'+E+'"><ul></ul></div>');var e=t(C);e.addClass(function(){return a.showActiveTooltip?"fp-show-active "+a.navigationPosition:a.navigationPosition});for(var i=0;i<t(w).length;i++){var n="";a.anchors.length&&(n=a.anchors[i]);var o='<li><a href="#'+n+'"><span></span></a>',s=a.navigationTooltips[i];void 0!==s&&""!==s&&(o+='<div class="'+P+" "+a.navigationPosition+'">'+s+"</div>"),o+="</li>",e.find("ul").append(o)}t(C).css("margin-top","-"+t(C).height()/2+"px"),t(C).find("li").eq(t(x).index(w)).find("a").addClass(p)}function bt(){t(w).each(function(){var e=t(this).find(L);e.length?e.each(function(){He(t(this))}):He(t(this))}),Ct()}function Tt(){ki.find('iframe[src*="youtube.com/embed/"]').each(function(){kt(t(this),"enablejsapi=1")})}function kt(t,e){var i=t.attr("src");t.attr("src",i+Et(i)+e)}function Et(t){return/\?/.test(t)?"&":"?"}function Ct(){var e=t(x);e.addClass(g),a.scrollOverflowHandler.afterRender&&a.scrollOverflowHandler.afterRender(e),Gt(e),Qt(e),a.scrollOverflowHandler.afterLoad(),Pt()&&t.isFunction(a.afterLoad)&&a.afterLoad.call(e,e.data("anchor"),e.index(w)+1),t.isFunction(a.afterRender)&&a.afterRender.call(ki)}function Pt(){var t=e.location.hash.replace("#","").split("/"),i=Be(decodeURIComponent(t[0]));return!i.length||i.length&&i.index()===xi.index()}function At(){Zi||(requestAnimationFrame(It),Zi=!0)}function It(){ki.trigger("onScroll");var e;if((!a.autoScrolling||a.scrollBar||ai("dragAndMove"))&&!hi()){var o=ai("dragAndMove")?n.abs(gi.dragAndMove.getCurrentScroll()):K.scrollTop(),s=(Yt(o),0),r=o+K.height()/2,l=ai("dragAndMove")?gi.dragAndMove.getDocumentHeight():vi.height()-K.height(),c=l===o,h=i.querySelectorAll(w);if(c)s=h.length-1;else if(o)for(var d=0;d<h.length;++d){var u=h[d];u.offsetTop<=r&&(s=d)}else s=0;if(e=t(h).eq(s),!e.hasClass(p)){_i=!0;var f,v,g=t(x),m=g.index(w)+1,S=Le(e),y=e.data("anchor"),b=e.index(w)+1,T=e.find(Y);T.length&&(v=T.data("anchor"),f=T.index()),Ai&&(e.addClass(p).siblings().removeClass(p),li("parallax","afterLoad"),t.isFunction(a.onLeave)&&a.onLeave.call(g,m,b,S),t.isFunction(a.afterLoad)&&a.afterLoad.call(e,y,b),a.resetSliders&&gi.resetSliders&&gi.resetSliders.apply({localIsResizing:Ci,leavingSection:m}),Jt(g),Gt(e),Qt(e),Ie(y,b-1),a.anchors.length&&(mi=y),_e(f,v,y,b)),clearTimeout(Mi),Mi=setTimeout(function(){_i=!1},100)}a.fitToSection&&(clearTimeout(zi),zi=setTimeout(function(){a.fitToSection&&Lt()},a.fitToSectionDelay))}Zi=!1}function Lt(){Ai&&(Ci=!0,Vt(t(x)),Ci=!1)}function Yt(t){var e=t>Fi?"down":"up";return Fi=t,Ki=t,e}function Ht(t,e){if(Li.m[t]){var i="down"===t?"bottom":"top",n="down"===t?ot:nt;if(gi.scrollHorizontally&&(n=gi.scrollHorizontally.getScrollSection(t,n)),e.length>0){if(!a.scrollOverflowHandler.isScrolled(i,e))return!0;n()}else n()}}function Xt(t){var e=t.originalEvent;!zt(t.target)&&a.autoScrolling&&Bt(e)&&t.preventDefault()}function Mt(e){var i=e.originalEvent,o=t(i.target).closest(w);if(!zt(e.target)&&Bt(i)){a.autoScrolling&&e.preventDefault();var s=a.scrollOverflowHandler.scrollable(o),r=Je(i);Ni=r.y,Ui=r.x,o.find(X).length&&n.abs(qi-Ui)>n.abs(Vi-Ni)?!yi&&n.abs(qi-Ui)>K.outerWidth()/100*a.touchSensitivity&&(qi>Ui?Li.m.right&&at(o):Li.m.left&&lt(o)):a.autoScrolling&&Ai&&n.abs(Vi-Ni)>K.height()/100*a.touchSensitivity&&(Vi>Ni?Ht("down",s):Ni>Vi&&Ht("up",s))}}function zt(e,i){i=i||0;var n=t(e).parent();return!!(i<a.normalScrollElementTouchThreshold&&n.is(a.normalScrollElements))||i!=a.normalScrollElementTouchThreshold&&zt(n,++i)}function Bt(t){return void 0===t.pointerType||"mouse"!=t.pointerType}function Ot(t){var e=t.originalEvent;if(a.fitToSection&&pi.stop(),Bt(e)){var i=Je(e);Vi=i.y,qi=i.x}}function Rt(t,e){for(var i=0,o=t.slice(n.max(t.length-e,1)),s=0;s<o.length;s++)i+=o[s];return n.ceil(i/e)}function Dt(i){var o=(new Date).getTime(),s=t(m).hasClass("fp-normal-scroll");if(a.autoScrolling&&!wi&&!s){i=i||e.event;var r=i.wheelDelta||-i.deltaY||-i.detail,l=n.max(-1,n.min(1,r)),c=void 0!==i.wheelDeltaX||void 0!==i.deltaX,h=n.abs(i.wheelDeltaX)<n.abs(i.wheelDelta)||n.abs(i.deltaX)<n.abs(i.deltaY)||!c;Ii.length>149&&Ii.shift(),Ii.push(n.abs(r)),a.scrollBar&&(i.preventDefault?i.preventDefault():i.returnValue=!1);var d=t(x),u=a.scrollOverflowHandler.scrollable(d),f=o-ji;return ji=o,f>200&&(Ii=[]),Ai&&!ci()&&Rt(Ii,10)>=Rt(Ii,70)&&h&&(l<0?Ht("down",u):Ht("up",u)),!1}a.fitToSection&&pi.stop()}function Wt(e,i){var n=void 0===i?t(x):i,o=n.find(X);if(!(!o.length||ci()||yi||o.find(L).length<2)){var s=o.find(Y),r=null;if(r="left"===e?s.prev(L):s.next(L),!r.length){if(!a.loopHorizontal)return;r="left"===e?s.siblings(":last"):s.siblings(":first")}yi=!0,Se(o,r,e)}}function _t(){t(Y).each(function(){ti(t(this),"internal")})}function Ft(t){var e=t.position(),i=e.top,n=ai("dragAndMove")&&gi.dragAndMove.isGrabbing?gi.dragAndMove.isScrollingDown():e.top>Ki,o=i-Ei+t.outerHeight(),s=a.bigSectionsDestination;return t.outerHeight()>Ei?(n||s)&&"bottom"!==s||(i=o):(n||Ci&&t.is(":last-child"))&&(i=o),a.offsetSections&&gi.offsetSections&&(i=gi.offsetSections.getSectionPosition(n,i,t)),Ki=i,i}function Vt(e,i,n){if(void 0!==e&&e.length){var o,s,r=Ft(e),l={element:e,callback:i,isMovementUp:n,dtop:r,yMovement:Le(e),anchorLink:e.data("anchor"),sectionIndex:e.index(w),activeSlide:e.find(Y),activeSection:t(x),leavingSection:t(x).index(w)+1,localIsResizing:Ci};l.activeSection.is(e)&&!Ci||a.scrollBar&&K.scrollTop()===l.dtop&&!e.hasClass("fp-auto-height")||(l.activeSlide.length&&(o=l.activeSlide.data("anchor"),s=l.activeSlide.index()),li("parallax","apply",l),a.autoScrolling&&a.continuousVertical&&void 0!==l.isMovementUp&&(!l.isMovementUp&&"up"==l.yMovement||l.isMovementUp&&"down"==l.yMovement)&&(l=Ut(l)),t.isFunction(a.onLeave)&&!l.localIsResizing&&!1===a.onLeave.call(l.activeSection,l.leavingSection,l.sectionIndex+1,l.yMovement)||(ai("scrollOverflowReset")&&gi.scrollOverflowReset.setPrevious(l.activeSection),l.localIsResizing||Jt(l.activeSection),a.scrollOverflowHandler.beforeLeave(),e.addClass(p).siblings().removeClass(p),Gt(e),a.scrollOverflowHandler.onLeave(),Ai=!1,_e(s,o,l.anchorLink,l.sectionIndex),qt(l),mi=l.anchorLink,Ie(l.anchorLink,l.sectionIndex)))}}function qt(e){if(a.css3&&a.autoScrolling&&!a.scrollBar)ze("translate3d(0px, -"+n.round(e.dtop)+"px, 0px)",!0),a.scrollingSpeed?(clearTimeout(Hi),Hi=setTimeout(function(){Zt(e)},a.scrollingSpeed)):Zt(e);else{var i=Nt(e);t(i.element).animate(i.options,a.scrollingSpeed,a.easing).promise().done(function(){a.scrollBar?setTimeout(function(){Zt(e)},30):Zt(e)})}}function Nt(t){var e={};return a.autoScrolling&&!a.scrollBar?(e.options={top:-t.dtop},e.element=r):(e.options={scrollTop:t.dtop},e.element="html, body"),e}function Ut(e){return e.isMovementUp?e.activeSection.before(e.activeSection.nextAll(w)):e.activeSection.after(e.activeSection.prevAll(w).get().reverse()),ei(t(x).position().top),_t(),e.wrapAroundElements=e.activeSection,e.dtop=e.element.position().top,e.yMovement=Le(e.element),e.leavingSection=e.activeSection.index(w)+1,e.sectionIndex=e.element.index(w),t(r).trigger("onContinuousVertical",[e]),e}function jt(e){e.wrapAroundElements&&e.wrapAroundElements.length&&(e.isMovementUp?t(y).before(e.wrapAroundElements):t(b).after(e.wrapAroundElements),ei(t(x).position().top),_t(),e.sectionIndex=e.element.index(w),e.leavingSection=e.activeSection.index(w)+1)}function Zt(e){jt(e),t.isFunction(a.afterLoad)&&!e.localIsResizing&&a.afterLoad.call(e.element,e.anchorLink,e.sectionIndex+1),a.scrollOverflowHandler.afterLoad(),li("parallax","afterLoad"),ai("scrollOverflowReset")&&gi.scrollOverflowReset.reset(),a.resetSliders&&gi.resetSliders&&gi.resetSliders.apply(e),e.localIsResizing||Qt(e.element),e.element.addClass(g).siblings().removeClass(g),Ai=!0,t.isFunction(e.callback)&&e.callback.call(this)}function Kt(t,e){t.attr(e,t.data(e)).removeAttr("data-"+e)}function Gt(e){if(a.lazyLoading){var i;te(e).find("img[data-src], img[data-srcset], source[data-src], audio[data-src], iframe[data-src]").each(function(){i=t(this),t.each(["src","srcset"],function(t,e){var n=i.attr("data-"+e);void 0!==n&&n&&Kt(i,e)}),i.is("source")&&i.closest("video").get(0).load()})}}function Qt(e){var i=te(e);i.find("video, audio").each(function(){var e=t(this).get(0);e.hasAttribute("data-autoplay")&&"function"==typeof e.play&&e.play()}),i.find('iframe[src*="youtube.com/embed/"]').each(function(){var e=t(this).get(0);e.hasAttribute("data-autoplay")&&$t(e),e.onload=function(){e.hasAttribute("data-autoplay")&&$t(e)}})}function $t(t){t.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*")}function Jt(e){var i=te(e);i.find("video, audio").each(function(){var e=t(this).get(0);e.hasAttribute("data-keepplaying")||"function"!=typeof e.pause||e.pause()}),i.find('iframe[src*="youtube.com/embed/"]').each(function(){var e=t(this).get(0);/youtube\.com\/embed\//.test(t(this).attr("src"))&&!e.hasAttribute("data-keepplaying")&&t(this).get(0).contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*")})}function te(e){var i=e.find(Y);return i.length&&(e=t(i)),e}function ee(t){function e(t){var e,n,s,r,a,l,c,h="",d=0;for(t=t.replace(/[^A-Za-z0-9+\/=]/g,"");d<t.length;)r=o.indexOf(t.charAt(d++)),a=o.indexOf(t.charAt(d++)),l=o.indexOf(t.charAt(d++)),c=o.indexOf(t.charAt(d++)),e=r<<2|a>>4,n=(15&a)<<4|l>>2,s=(3&l)<<6|c,h+=String.fromCharCode(e),64!=l&&(h+=String.fromCharCode(n)),64!=c&&(h+=String.fromCharCode(s));return h=i(h)}function i(t){for(var e,i="",n=0,o=0,s=0;n<t.length;)o=t.charCodeAt(n),o<128?(i+=String.fromCharCode(o),n++):o>191&&o<224?(s=t.charCodeAt(n+1),i+=String.fromCharCode((31&o)<<6|63&s),n+=2):(s=t.charCodeAt(n+1),e=t.charCodeAt(n+2),i+=String.fromCharCode((15&o)<<12|(63&s)<<6|63&e),n+=3);return i}function n(t){return t.slice(3).slice(0,-3)}var o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";return function(t){return t}(function(t){var i=t.split("_");if(i.length>1){var o=i[1];return t.replace(n(i[1]),"").split("_")[0]+"_"+e(o.slice(3).slice(0,-3))}return n(t)}(e(t)))}function ie(){if(i.domain.length){for(var t=i.domain.replace(/^(www\.)/,"").split(".");t.length>2;)t.shift();return t.join(".").replace(/(^\.*)|(\.*$)/g,"")}return""}function ne(t){var e=ie(),i=["localhost","127.0.0.1","jshell.net","UDdDQU5ZNlNN"],n=i[0],o=i[1],s=i[2],r=ee(i[3]),a=[n,o,s].indexOf(e)<0&&0!==e.length,l=void 0!==Wi[t]&&Wi[t].length;if(!l&&a)return!1;var c=l?ee(Wi[t]):"";c=c.split("_");var h=c.length>1&&c[1].indexOf(t,c[1].length-t.length)>-1;return!(c[0].indexOf(e,c[0].length-e.length)<0&&a&&r!=c[0])&&h||!a}function oe(t){if(ai(t)&&gi[t]){var e=ee("MTIzPGRpdiBzdHlsZT0iei1pbmRleDo5OTk5OTk5O3Bvc2l0aW9uOmZpeGVkOyB0b3A6IDIwcHg7IGxlZnQ6MjBweDsgYmFja2dyb3VuZDpyZWQ7IHBhZGRpbmc6IDdweCAxNXB4OyBmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBhcmlhbDsgY29sb3I6ICNmZmY7IGRpc3BsYXk6IGlubGluZS1ibG9jazsiPjxhIGhyZWY9Imh0dHA6Ly9hbHZhcm90cmlnby5jb20vZnVsbFBhZ2UvZXh0ZW5zaW9ucy8iIHN0eWxlPSJjb2xvcjogI2ZmZjsgdGV4dC1kZWNvcmF0aW9uOm5vbmU7Ij5VbmxpY2Vuc2VkIGZ1bGxQYWdlLmpzIEV4dGVuc2lvbjwvYT48L2Rpdj4xMjM="),i=n.random()<.5;if(!ne(t)){var o,s=function(){o=i?vi.find("div").first():vi.find("div").last(),"9999999"!==o.css("z-index")&&(i?vi.prepend(e):vi.append(e))};s(),setInterval(s,2e3)}}}function se(){var t=e.location.hash.replace("#","").split("/"),i=decodeURIComponent(t[0]),n=decodeURIComponent(t[1]);i&&(a.animateAnchor?Re(i,n):st(i,n))}function re(){if(!_i&&!a.lockAnchors){var t=e.location.hash.replace("#","").split("/"),i=decodeURIComponent(t[0]),n=decodeURIComponent(t[1]),o=void 0===mi,s=void 0===mi&&void 0===n&&!yi;i.length&&(i&&i!==mi&&!o||s||!yi&&Si!=n)&&Re(i,n)}}function ae(e){clearTimeout(Bi);var i=t(":focus");if(!i.is("textarea")&&!i.is("input")&&!i.is("select")&&"true"!==i.attr("contentEditable")&&""!==i.attr("contentEditable")&&a.keyboardScrolling&&a.autoScrolling){var n=e.which,o=[40,38,32,33,34];t.inArray(n,o)>-1&&e.preventDefault(),wi=e.ctrlKey,Bi=setTimeout(function(){ge(e)},150)}}function le(){t(this).prev().trigger("click")}function ce(t){Pi&&(wi=t.ctrlKey)}function he(t){2==t.which&&(Gi=t.pageY,ki.on("mousemove",me))}function de(t){2==t.which&&ki.off("mousemove")}function ue(){var e=t(this).closest(w);t(this).hasClass(F)?Li.m.left&&lt(e):Li.m.right&&at(e)}function fe(){Pi=!1,wi=!1}function pe(e){e.preventDefault();var i=t(this).parent().index();Vt(t(w).eq(i))}function ve(e){e.preventDefault();var i=t(this).closest(w).find(X);Se(i,i.find(L).eq(t(this).closest("li").index()))}function ge(e){var i=e.shiftKey;if(Ai||!([37,39].indexOf(e.which)<0))switch(e.which){case 38:case 33:Li.k.up&&nt();break;case 32:if(i&&Li.k.up){nt();break}case 40:case 34:Li.k.down&&ot();break;case 36:Li.k.up&&rt(1);break;case 35:Li.k.down&&rt(t(w).length);break;case 37:Li.k.left&&lt();break;case 39:Li.k.right&&at();break;default:return}}function me(t){Ai&&(t.pageY<Gi&&Li.m.up?nt():t.pageY>Gi&&Li.m.down&&ot()),Gi=t.pageY}function Se(e,i,n){var o=e.closest(w),s={slides:e,destiny:i,direction:n,destinyPos:i.position(),slideIndex:i.index(),section:o,sectionIndex:o.index(w),anchorLink:o.data("anchor"),slidesNav:o.find(R),slideAnchor:Ve(i),prevSlide:o.find(Y),prevSlideIndex:o.find(Y).index(),localIsResizing:Ci};return s.xMovement=Ye(s.prevSlideIndex,s.slideIndex),s.localIsResizing||(Ai=!1),li("parallax","applyHorizontal",s),a.onSlideLeave&&!s.localIsResizing&&"none"!==s.xMovement&&t.isFunction(a.onSlideLeave)&&!1===a.onSlideLeave.call(s.prevSlide,s.anchorLink,s.sectionIndex+1,s.prevSlideIndex,s.xMovement,s.slideIndex)?void(yi=!1):(i.addClass(p).siblings().removeClass(p),s.localIsResizing||(Jt(s.prevSlide),Gt(i)),we(s),o.hasClass(p)&&!s.localIsResizing&&_e(s.slideIndex,s.slideAnchor,s.anchorLink,s.sectionIndex),gi.continuousHorizontal&&gi.continuousHorizontal.apply(s),hi()?xe(s):ye(e,s,!0),void(a.interlockedSlides&&gi.interlockedSlides&&gi.interlockedSlides.apply(s)))}function we(t){!a.loopHorizontal&&a.controlArrows&&(t.section.find(N).toggle(0!==t.slideIndex),t.section.find(Z).toggle(!t.destiny.is(":last-child")))}function xe(e){gi.continuousHorizontal&&gi.continuousHorizontal.afterSlideLoads(e),be(e.slidesNav,e.slideIndex),e.localIsResizing||(li("parallax","afterSlideLoads"),t.isFunction(a.afterSlideLoad)&&a.afterSlideLoad.call(e.destiny,e.anchorLink,e.sectionIndex+1,e.slideAnchor,e.slideIndex),Ai=!0,Qt(e.destiny)),yi=!1,gi.interlockedSlides&&gi.interlockedSlides.apply(e)}function ye(t,e,i){var o=e.destinyPos;if(a.css3){var s="translate3d(-"+n.round(o.left)+"px, 0px, 0px)";Ee(t.find(z)).css(ii(s)),Xi=setTimeout(function(){i&&xe(e)},a.scrollingSpeed,a.easing)}else t.animate({scrollLeft:n.round(o.left)},a.scrollingSpeed,a.easing,function(){i&&xe(e)})}function be(t,e){t.find(v).removeClass(p),t.find("li").eq(e).find("a").addClass(p)}function Te(){if(ki.trigger("onResize"),ke(),bi){var e=t(i.activeElement);if(!e.is("textarea")&&!e.is("input")&&!e.is("select")){var o=K.height();n.abs(o-Qi)>20*n.max(Qi,o)/100&&(ct(!0),Qi=o)}}else clearTimeout(Yi),Yi=setTimeout(function(){ct(!0)},350)}function ke(){var t=a.responsive||a.responsiveWidth,e=a.responsiveHeight,i=t&&K.outerWidth()<t,n=e&&K.height()<e;t&&e?ht(i||n):t?ht(i):e&&ht(n)}function Ee(t){var e="all "+a.scrollingSpeed+"ms "+a.easingcss3;return t.removeClass(h),t.css({"-webkit-transition":e,transition:e})}function Ce(t){return t.addClass(h)}function Pe(e,i){a.navigation&&(t(C).find(v).removeClass(p),e?t(C).find('a[href="#'+e+'"]').addClass(p):t(C).find("li").eq(i).find("a").addClass(p))}function Ae(e){a.menu&&(t(a.menu).find(v).removeClass(p),t(a.menu).find('[data-menuanchor="'+e+'"]').addClass(p))}function Ie(t,e){Ae(t),Pe(t,e)}function Le(e){var i=t(x).index(w),n=e.index(w);return i==n?"none":i>n?"up":"down"}function Ye(t,e){return t==e?"none":t>e?"left":"right"}function He(t){if(!t.hasClass("fp-noscroll")){t.css("overflow","hidden");var e,i=a.scrollOverflowHandler,n=i.wrapContent(),o=t.closest(w),s=i.scrollable(t);s.length?e=i.scrollHeight(t):(e=t.get(0).scrollHeight,a.verticalCentered&&(e=t.find(k).get(0).scrollHeight));var r=Me(o);e>r?s.length?i.update(t,r):(a.verticalCentered?t.find(k).wrapInner(n):t.wrapInner(n),i.create(t,r,a.scrollOverflowOptions)):i.remove(t),t.css("overflow","")}}function Xe(t){t.hasClass(B)||t.addClass(B).wrapInner('<div class="'+T+'" style="height:'+Me(t)+'px;" />')}function Me(t){var e=gt(t);if(a.paddingTop||a.paddingBottom){var i=t;i.hasClass(S)||(i=t.closest(w));var n=parseInt(i.css("padding-top"))+parseInt(i.css("padding-bottom"));e=Ei-n}return e}function ze(t,e){e?Ee(ki):Ce(ki),ki.css(ii(t)),setTimeout(function(){ki.removeClass(h)},10)}function Be(e){if(!e)return[];var i=ki.find(w+'[data-anchor="'+e+'"]');return i.length||(i=t(w).eq(e-1)),i}function Oe(t,e){var i=e.find(X),n=i.find(L+'[data-anchor="'+t+'"]');return n.length||(n=i.find(L).eq(t)),n}function Re(t,e){var i=Be(t);i.length&&(void 0===e&&(e=0),t===mi||i.hasClass(p)?De(i,e):Vt(i,function(){De(i,e)}))}function De(t,e){if(void 0!==e){var i=t.find(X),n=Oe(e,t);n.length&&Se(i,n)}}function We(t,e){t.append('<div class="'+O+'"><ul></ul></div>');var i=t.find(R);i.addClass(a.slidesNavPosition);for(var n=0;n<e;n++)i.find("ul").append('<li><a href="#"><span></span></a></li>');i.css("margin-left","-"+i.width()/2+"px"),i.find("li").first().find("a").addClass(p)}function _e(t,e,i,n){var o="";a.anchors.length&&!a.lockAnchors&&(t?(void 0!==i&&(o=i),void 0===e&&(e=t),Si=e,Fe(o+"/"+e)):void 0!==t?(Si=e,Fe(i)):Fe(i)),qe()}function Fe(t){if(a.recordHistory)location.hash=t;else if(bi||Ti)e.history.replaceState(o,o,"#"+t);else{var i=e.location.href.split("#")[0];e.location.replace(i+"#"+t)}}function Ve(t){var e=t.data("anchor"),i=t.index();return void 0===e&&(e=i),e}function qe(){var e=t(x),i=e.find(Y),n=Ve(e),o=Ve(i),s=String(n);i.length&&(s=s+"-"+o),s=s.replace("/","-").replace("#","");var r=new RegExp("\\b\\s?"+f+"-[^\\s]+\\b","g");vi[0].className=vi[0].className.replace(r,""),vi.addClass(f+"-"+s)}function Ne(){var t,n=i.createElement("p"),s={webkitTransform:"-webkit-transform",OTransform:"-o-transform",msTransform:"-ms-transform",MozTransform:"-moz-transform",transform:"transform"};i.body.insertBefore(n,null);for(var r in s)n.style[r]!==o&&(n.style[r]="translate3d(1px,1px,1px)",t=e.getComputedStyle(n).getPropertyValue(s[r]));return i.body.removeChild(n),t!==o&&t.length>0&&"none"!==t}function Ue(){i.addEventListener?(i.removeEventListener("mousewheel",Dt,!1),i.removeEventListener("wheel",Dt,!1),i.removeEventListener("MozMousePixelScroll",Dt,!1)):i.detachEvent("onmousewheel",Dt)}function je(){var t,n="";e.addEventListener?t="addEventListener":(t="attachEvent",n="on");var s="onwheel"in i.createElement("div")?"wheel":i.onmousewheel!==o?"mousewheel":"DOMMouseScroll";"DOMMouseScroll"==s?i[t](n+"MozMousePixelScroll",Dt,!1):i[t](n+s,Dt,!1)}function Ze(){ki.on("mousedown",he).on("mouseup",de)}function Ke(){ki.off("mousedown",he).off("mouseup",de)}function Ge(){(bi||Ti)&&(a.autoScrolling&&vi.off(Ri.touchmove).on(Ri.touchmove,Xt),t(r).off(Ri.touchstart).on(Ri.touchstart,Ot).off(Ri.touchmove).on(Ri.touchmove,Mt))}function Qe(){(bi||Ti)&&t(r).off(Ri.touchstart).off(Ri.touchmove)}function $e(){return e.PointerEvent?{down:"pointerdown",move:"pointermove"}:{down:"MSPointerDown",move:"MSPointerMove"}}function Je(t){var e=[];return e.y=void 0!==t.pageY&&(t.pageY||t.pageX)?t.pageY:t.touches[0].pageY,e.x=void 0!==t.pageX&&(t.pageY||t.pageX)?t.pageX:t.touches[0].pageX,Ti&&Bt(t)&&a.scrollBar&&(e.y=t.touches[0].pageY,e.x=t.touches[0].pageX),e}function ti(t,e){V(0,"internal"),void 0!==e&&(Ci=!0),Se(t.closest(X),t),void 0!==e&&(Ci=!1),V(Di.scrollingSpeed,"internal")}function ei(t){var e=n.round(t);a.css3&&a.autoScrolling&&!a.scrollBar?ze("translate3d(0px, -"+e+"px, 0px)",!1):a.autoScrolling&&!a.scrollBar?ki.css("top",-e):pi.scrollTop(e)}function ii(t){return{"-webkit-transform":t,"-moz-transform":t,"-ms-transform":t,transform:t}}function ni(t,e,i){switch(e){case"up":Li[i].up=t;break;case"down":Li[i].down=t;break;case"left":Li[i].left=t;break;case"right":Li[i].right=t;break;case"all":"m"==i?et(t):it(t)}}function oi(e){ki.trigger("destroy",[e]),l(!1,"internal"),et(!1),it(!1),ki.addClass(d),clearTimeout(Xi),clearTimeout(Hi),clearTimeout(Yi),clearTimeout(Mi),clearTimeout(zi),K.off("scroll",At).off("hashchange",re).off("resize",Te),G.off("click touchstart",C+" a").off("mouseenter",C+" li").off("mouseleave",C+" li").off("click touchstart",D).off("mouseover",a.normalScrollElements).off("mouseout",a.normalScrollElements),t(w).off("click touchstart",_),ai("dragAndMove")&&gi.dragAndMove.destroy(),clearTimeout(Xi),clearTimeout(Hi),e&&si()}function si(){ei(0),ki.find("img[data-src], source[data-src], audio[data-src], iframe[data-src]").each(function(){Kt(t(this),"src")}),ki.find("img[data-srcset]").each(function(){Kt(t(this),"srcset")}),t(C+", "+R+", "+_).remove(),t(w).css({height:"","background-color":"",padding:""}),t(L).css({width:""}),ki.css({height:"",position:"","-ms-touch-action":"","touch-action":""}),pi.css({overflow:"",height:""}),t("html").removeClass(u),vi.removeClass(c),t.each(vi.get(0).className.split(/\s+/),function(t,e){0===e.indexOf(f)&&vi.removeClass(e)}),t(w+", "+L).each(function(){a.scrollOverflowHandler.remove(t(this)),t(this).removeClass(B+" "+p)}),ri(ki),ki.find(k+", "+z+", "+X).each(function(){t(this).replaceWith(this.childNodes)}),pi.scrollTop(0);var e=[S,I,M];t.each(e,function(e,i){t("."+i).removeClass(i)})}function ri(t){return t.css({"-webkit-transition":"none",transition:"none"})}function ai(t){return null!==a[t]&&"object"==typeof a[t]?a[t].enabled&&gi[t]:a[t]&&gi[t]}function li(t,e,i){var n=Array.isArray(i)?i.join(", "):i;ai(t)&&gi[t][e](n)}function ci(){return ai("dragAndMove")&&gi.dragAndMove.isAnimating}function hi(){return ai("dragAndMove")&&gi.dragAndMove.isGrabbing}function di(t,e,i){a[t]=e,"internal"!==i&&(Di[t]=e)}function ui(){return t("html").hasClass(u)?void fi("error","Fullpage.js can only be initialized once and you are doing it multiple times!"):(a.continuousVertical&&(a.loopTop||a.loopBottom)&&(a.continuousVertical=!1,fi("warn","Option `loopTop/loopBottom` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),a.scrollBar&&a.scrollOverflow&&fi("warn","Option `scrollBar` is mutually exclusive with `scrollOverflow`. Sections with scrollOverflow might not work well in Firefox"),!a.continuousVertical||!a.scrollBar&&a.autoScrolling||(a.continuousVertical=!1,fi("warn","Scroll bars (`scrollBar:true` or `autoScrolling:false`) are mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),void t.each(a.anchors,function(e,i){var n=G.find("[name]").filter(function(){return t(this).attr("name")&&t(this).attr("name").toLowerCase()==i.toLowerCase()}),o=G.find("[id]").filter(function(){return t(this).attr("id")&&t(this).attr("id").toLowerCase()==i.toLowerCase()});(o.length||n.length)&&(fi("error","data-anchor tags can not have the same value as any `id` element on the site (or `name` element for IE)."),o.length&&fi("error",'"'+i+'" is is being used by another element `id` property'),n.length&&fi("error",'"'+i+'" is is being used by another element `name` property'))}))}function fi(t,e){console&&console[t]}if(t("html").hasClass(u))return void ui();var pi=t("html, body"),vi=t("body"),gi=t.fn.fullpage;a=t.extend(!0,{menu:!1,anchors:[],lockAnchors:!1,navigation:!1,navigationPosition:"right",navigationTooltips:[],showActiveTooltip:!1,slidesNavigation:!1,slidesNavPosition:"bottom",scrollBar:!1,hybrid:!1,css3:!0,scrollingSpeed:700,autoScrolling:!0,fitToSection:!0,fitToSectionDelay:1e3,easing:"easeInOutCubic",easingcss3:"ease",loopBottom:!1,loopTop:!1,loopHorizontal:!0,continuousVertical:!1,continuousHorizontal:!1,scrollHorizontally:!1,interlockedSlides:!1,dragAndMove:!1,offsetSections:!1,resetSliders:!1,fadingEffect:!1,normalScrollElements:null,scrollOverflow:!1,scrollOverflowReset:!1,scrollOverflowHandler:$,scrollOverflowOptions:null,touchSensitivity:5,normalScrollElementTouchThreshold:5,bigSectionsDestination:null,keyboardScrolling:!0,animateAnchor:!0,recordHistory:!0,controlArrows:!0,controlArrowColor:"#fff",verticalCentered:!0,sectionsColor:[],paddingTop:0,paddingBottom:0,fixedElements:null,responsive:0,responsiveWidth:0,responsiveHeight:0,responsiveSlides:!1,parallax:!1,parallaxOptions:{type:"reveal",percentage:62,property:"translate"},sectionSelector:".section",slideSelector:".slide",afterLoad:null,onLeave:null,afterRender:null,afterResize:null,afterReBuild:null,afterSlideLoad:null,onSlideLeave:null,afterResponsive:null,lazyLoading:!0},a);var mi,Si,wi,xi,yi=!1,bi=navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/),Ti="ontouchstart"in e||navigator.msMaxTouchPoints>0||navigator.maxTouchPoints,ki=t(this),Ei=K.height(),Ci=!1,Pi=!0,Ai=!0,Ii=[],Li={};Li.m={up:!0,down:!0,left:!0,right:!0},Li.k=t.extend(!0,{},Li.m);var Yi,Hi,Xi,Mi,zi,Bi,Oi=$e(),Ri={touchmove:"ontouchmove"in e?"touchmove":Oi.move,touchstart:"ontouchstart"in e?"touchstart":Oi.down},Di=t.extend(!0,{},a),Wi={};ui(),Q.click=Ti,a.scrollOverflowOptions=t.extend(Q,a.scrollOverflowOptions),t.extend(t.easing,{easeInOutCubic:function(t,e,i,n,o){return(e/=o/2)<1?n/2*e*e*e+i:n/2*((e-=2)*e*e+2)+i}}),t(this).length&&(gi.setAutoScrolling=l,gi.setRecordHistory=W,gi.setScrollingSpeed=V,gi.setFitToSection=U,gi.setLockAnchors=J,gi.setMouseWheelScrolling=tt,gi.setAllowScrolling=et,gi.setKeyboardScrolling=it,gi.moveSectionUp=nt,gi.moveSectionDown=ot,gi.silentMoveTo=st,gi.moveTo=rt,gi.moveSlideRight=at,gi.moveSlideLeft=lt,gi.fitToSection=Lt,gi.reBuild=ct,gi.setResponsive=ht,gi.getFullpageData=dt,gi.destroy=oi,gi.landscapeScroll=Se,ut("continuousHorizontal"),ut("scrollHorizontally"),ut("resetSliders"),ut("interlockedSlides"),ut("responsiveSlides"),ut("fadingEffect"),ut("dragAndMove"),ut("offsetSections"),ut("scrollOverflowReset"),ut("parallax"),ai("dragAndMove")&&gi.dragAndMove.init(),function(){a.css3&&(a.css3=Ne()),a.scrollBar=a.scrollBar||a.hybrid,ft(),pt(),et(!0),l(a.autoScrolling,"internal"),ke(),qe(),"complete"===i.readyState&&se(),K.on("load",se)}(),function(){K.on("scroll",At).on("hashchange",re).blur(fe).resize(Te),G.keydown(ae).keyup(ce).on("click touchstart",C+" a",pe).on("click touchstart",D,ve).on("click",A,le),t(w).on("click touchstart",_,ue),a.normalScrollElements&&(G.on("mouseenter",a.normalScrollElements,function(){tt(!1)}),G.on("mouseleave",a.normalScrollElements,function(){tt(!0)}))}(),ai("dragAndMove")&&gi.dragAndMove.turnOffTouch());var _i=!1,Fi=0,Vi=0,qi=0,Ni=0,Ui=0;!function(){var t=e.requestAnimationFrame||e.mozRequestAnimationFrame||e.webkitRequestAnimationFrame||e.msRequestAnimationFrame;e.requestAnimationFrame=t}();var ji=(new Date).getTime(),Zi=!1,Ki=0,Gi=0,Qi=Ei},"undefined"!=typeof IScroll&&(IScroll.prototype.wheelOn=function(){this.wrapper.addEventListener("wheel",this),this.wrapper.addEventListener("mousewheel",this),
-this.wrapper.addEventListener("DOMMouseScroll",this)},IScroll.prototype.wheelOff=function(){this.wrapper.removeEventListener("wheel",this),this.wrapper.removeEventListener("mousewheel",this),this.wrapper.removeEventListener("DOMMouseScroll",this)});var $={refreshId:null,iScrollInstances:[],toggleWheel:function(e){t(x).find(l).each(function(){var i=t(this).data("iscrollInstance");void 0!==i&&i&&(e?i.wheelOn():i.wheelOff())})},onLeave:function(){$.toggleWheel(!1)},beforeLeave:function(){$.onLeave()},afterLoad:function(){$.toggleWheel(!0)},create:function(e,i,n){var o=e.find(l);o.height(i),o.each(function(){var e=t(this),i=e.data("iscrollInstance");i&&t.each($.iScrollInstances,function(){t(this).destroy()}),i=new IScroll(e.get(0),n),i.on("scrollEnd",function(){this.fp_isAtTop=this.y>-30,this.fp_isAtEnd=this.y-this.maxScrollY<30}),$.iScrollInstances.push(i),i.wheelOff(),e.data("iscrollInstance",i)})},isScrolled:function(t,e){var i=e.data("iscrollInstance");return!i||("top"===t?i.y>=0&&!e.scrollTop():"bottom"===t?0-i.y+e.scrollTop()+1+e.innerHeight()>=e[0].scrollHeight:void 0)},scrollable:function(t){return t.find(X).length?t.find(Y).find(l):t.find(l)},scrollHeight:function(t){return t.find(l).children().first().get(0).scrollHeight},remove:function(t){var e=t.find(l);if(e.length){var i=e.data("iscrollInstance");i&&i.destroy(),e.data("iscrollInstance",null)}t.find(l).children().first().children().first().unwrap().unwrap()},update:function(e,i){clearTimeout($.refreshId),$.refreshId=setTimeout(function(){t.each($.iScrollInstances,function(){t(this).get(0).refresh()})},150),e.find(l).css("height",i+"px").parent().css("height",i+"px")},wrapContent:function(){return'<div class="'+a+'"><div class="fp-scroller"></div></div>'}}});
+/*!
+* Customized version of iScroll.js 0.0.1
+* It fixes bugs affecting its integration with fullpage.js
+*/
+/*! iScroll v5.2.0 ~ (c) 2008-2016 Matteo Spinelli ~ http://cubiq.org/license */
+(function (window, document, Math) {
+var rAF = window.requestAnimationFrame  ||
+    window.webkitRequestAnimationFrame  ||
+    window.mozRequestAnimationFrame     ||
+    window.oRequestAnimationFrame       ||
+    window.msRequestAnimationFrame      ||
+    function (callback) { window.setTimeout(callback, 1000 / 60); };
+
+var utils = (function () {
+    var me = {};
+
+    var _elementStyle = document.createElement('div').style;
+    var _vendor = (function () {
+        var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+            transform,
+            i = 0,
+            l = vendors.length;
+
+        for ( ; i < l; i++ ) {
+            transform = vendors[i] + 'ransform';
+            if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
+        }
+
+        return false;
+    })();
+
+    function _prefixStyle (style) {
+        if ( _vendor === false ) return false;
+        if ( _vendor === '' ) return style;
+        return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
+    }
+
+    me.getTime = Date.now || function getTime () { return new Date().getTime(); };
+
+    me.extend = function (target, obj) {
+        for ( var i in obj ) {
+            target[i] = obj[i];
+        }
+    };
+
+    me.addEvent = function (el, type, fn, capture) {
+        el.addEventListener(type, fn, !!capture);
+    };
+
+    me.removeEvent = function (el, type, fn, capture) {
+        el.removeEventListener(type, fn, !!capture);
+    };
+
+    me.prefixPointerEvent = function (pointerEvent) {
+        return window.MSPointerEvent ?
+            'MSPointer' + pointerEvent.charAt(7).toUpperCase() + pointerEvent.substr(8):
+            pointerEvent;
+    };
+
+    me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
+        var distance = current - start,
+            speed = Math.abs(distance) / time,
+            destination,
+            duration;
+
+        deceleration = deceleration === undefined ? 0.0006 : deceleration;
+
+        destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+        duration = speed / deceleration;
+
+        if ( destination < lowerMargin ) {
+            destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
+            distance = Math.abs(destination - current);
+            duration = distance / speed;
+        } else if ( destination > 0 ) {
+            destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
+            distance = Math.abs(current) + destination;
+            duration = distance / speed;
+        }
+
+        return {
+            destination: Math.round(destination),
+            duration: duration
+        };
+    };
+
+    var _transform = _prefixStyle('transform');
+
+    me.extend(me, {
+        hasTransform: _transform !== false,
+        hasPerspective: _prefixStyle('perspective') in _elementStyle,
+        hasTouch: 'ontouchstart' in window,
+        hasPointer: !!(window.PointerEvent || window.MSPointerEvent), // IE10 is prefixed
+        hasTransition: _prefixStyle('transition') in _elementStyle
+    });
+
+    /*
+    This should find all Android browsers lower than build 535.19 (both stock browser and webview)
+    - galaxy S2 is ok
+    - 2.3.6 : `AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1`
+    - 4.0.4 : `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+   - galaxy S3 is badAndroid (stock brower, webview)
+     `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+   - galaxy S4 is badAndroid (stock brower, webview)
+     `AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30`
+   - galaxy S5 is OK
+     `AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36 (Chrome/)`
+   - galaxy S6 is OK
+     `AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.36 (Chrome/)`
+  */
+    me.isBadAndroid = (function() {
+        var appVersion = window.navigator.appVersion;
+        // Android browser is not a chrome browser.
+        if (/Android/.test(appVersion) && !(/Chrome\/\d/.test(appVersion))) {
+            var safariVersion = appVersion.match(/Safari\/(\d+.\d)/);
+            if(safariVersion && typeof safariVersion === "object" && safariVersion.length >= 2) {
+                return parseFloat(safariVersion[1]) < 535.19;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    })();
+
+    me.extend(me.style = {}, {
+        transform: _transform,
+        transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
+        transitionDuration: _prefixStyle('transitionDuration'),
+        transitionDelay: _prefixStyle('transitionDelay'),
+        transformOrigin: _prefixStyle('transformOrigin')
+    });
+
+    me.hasClass = function (e, c) {
+        var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
+        return re.test(e.className);
+    };
+
+    me.addClass = function (e, c) {
+        if ( me.hasClass(e, c) ) {
+            return;
+        }
+
+        var newclass = e.className.split(' ');
+        newclass.push(c);
+        e.className = newclass.join(' ');
+    };
+
+    me.removeClass = function (e, c) {
+        if ( !me.hasClass(e, c) ) {
+            return;
+        }
+
+        var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
+        e.className = e.className.replace(re, ' ');
+    };
+
+    me.offset = function (el) {
+        var left = -el.offsetLeft,
+            top = -el.offsetTop;
+
+        // jshint -W084
+        while (el = el.offsetParent) {
+            left -= el.offsetLeft;
+            top -= el.offsetTop;
+        }
+        // jshint +W084
+
+        return {
+            left: left,
+            top: top
+        };
+    };
+
+    me.preventDefaultException = function (el, exceptions) {
+        for ( var i in exceptions ) {
+            if ( exceptions[i].test(el[i]) ) {
+                return true;
+            }
+        }
+
+        return false;
+    };
+
+    me.extend(me.eventType = {}, {
+        touchstart: 1,
+        touchmove: 1,
+        touchend: 1,
+
+        mousedown: 2,
+        mousemove: 2,
+        mouseup: 2,
+
+        pointerdown: 3,
+        pointermove: 3,
+        pointerup: 3,
+
+        MSPointerDown: 3,
+        MSPointerMove: 3,
+        MSPointerUp: 3
+    });
+
+    me.extend(me.ease = {}, {
+        quadratic: {
+            style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            fn: function (k) {
+                return k * ( 2 - k );
+            }
+        },
+        circular: {
+            style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',   // Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
+            fn: function (k) {
+                return Math.sqrt( 1 - ( --k * k ) );
+            }
+        },
+        back: {
+            style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+            fn: function (k) {
+                var b = 4;
+                return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
+            }
+        },
+        bounce: {
+            style: '',
+            fn: function (k) {
+                if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
+                    return 7.5625 * k * k;
+                } else if ( k < ( 2 / 2.75 ) ) {
+                    return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+                } else if ( k < ( 2.5 / 2.75 ) ) {
+                    return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+                } else {
+                    return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+                }
+            }
+        },
+        elastic: {
+            style: '',
+            fn: function (k) {
+                var f = 0.22,
+                    e = 0.4;
+
+                if ( k === 0 ) { return 0; }
+                if ( k == 1 ) { return 1; }
+
+                return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
+            }
+        }
+    });
+
+    me.tap = function (e, eventName) {
+        var ev = document.createEvent('Event');
+        ev.initEvent(eventName, true, true);
+        ev.pageX = e.pageX;
+        ev.pageY = e.pageY;
+        e.target.dispatchEvent(ev);
+    };
+
+    me.click = function (e) {
+        var target = e.target,
+            ev;
+
+        if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
+            // https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+            // initMouseEvent is deprecated.
+            ev = document.createEvent(window.MouseEvent ? 'MouseEvents' : 'Event');
+            ev.initEvent('click', true, true);
+            ev.view = e.view || window;
+            ev.detail = 1;
+            ev.screenX = target.screenX || 0;
+            ev.screenY = target.screenY || 0;
+            ev.clientX = target.clientX || 0;
+            ev.clientY = target.clientY || 0;
+            ev.ctrlKey = !!e.ctrlKey;
+            ev.altKey = !!e.altKey;
+            ev.shiftKey = !!e.shiftKey;
+            ev.metaKey = !!e.metaKey;
+            ev.button = 0;
+            ev.relatedTarget = null;
+            ev._constructed = true;
+            target.dispatchEvent(ev);
+        }
+    };
+
+    return me;
+})();
+function IScroll (el, options) {
+    this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
+    this.scroller = this.wrapper.children[0];
+    this.scrollerStyle = this.scroller.style;       // cache style for better performance
+
+    this.options = {
+
+        resizeScrollbars: true,
+
+        mouseWheelSpeed: 20,
+
+        snapThreshold: 0.334,
+
+// INSERT POINT: OPTIONS
+        disablePointer : !utils.hasPointer,
+        disableTouch : utils.hasPointer || !utils.hasTouch,
+        disableMouse : utils.hasPointer || utils.hasTouch,
+        startX: 0,
+        startY: 0,
+        scrollY: true,
+        directionLockThreshold: 5,
+        momentum: true,
+
+        bounce: true,
+        bounceTime: 600,
+        bounceEasing: '',
+
+        preventDefault: true,
+        preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|LABEL)$/ },
+
+        HWCompositing: true,
+        useTransition: true,
+        useTransform: true,
+        bindToWrapper: typeof window.onmousedown === "undefined"
+    };
+
+    for ( var i in options ) {
+        this.options[i] = options[i];
+    }
+
+    // Normalize options
+    this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+
+    this.options.useTransition = utils.hasTransition && this.options.useTransition;
+    this.options.useTransform = utils.hasTransform && this.options.useTransform;
+
+    this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+    this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+
+    // If you want eventPassthrough I have to lock one of the axes
+    this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
+    this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
+
+    // With eventPassthrough we also need lockDirection mechanism
+    this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
+    this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+
+    this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+
+    this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
+
+    if ( this.options.tap === true ) {
+        this.options.tap = 'tap';
+    }
+
+    // https://github.com/cubiq/iscroll/issues/1029
+    if (!this.options.useTransition && !this.options.useTransform) {
+        if(!(/relative|absolute/i).test(this.scrollerStyle.position)) {
+            this.scrollerStyle.position = "relative";
+        }
+    }
+
+    if ( this.options.shrinkScrollbars == 'scale' ) {
+        this.options.useTransition = false;
+    }
+
+    this.options.invertWheelDirection = this.options.invertWheelDirection ? -1 : 1;
+
+// INSERT POINT: NORMALIZATION
+
+    // Some defaults
+    this.x = 0;
+    this.y = 0;
+    this.directionX = 0;
+    this.directionY = 0;
+    this._events = {};
+
+// INSERT POINT: DEFAULTS
+
+    this._init();
+    this.refresh();
+
+    this.scrollTo(this.options.startX, this.options.startY);
+    this.enable();
+}
+
+IScroll.prototype = {
+    version: '5.2.0',
+
+    _init: function () {
+        this._initEvents();
+
+        if ( this.options.scrollbars || this.options.indicators ) {
+            this._initIndicators();
+        }
+
+        if ( this.options.mouseWheel ) {
+            this._initWheel();
+        }
+
+        if ( this.options.snap ) {
+            this._initSnap();
+        }
+
+        if ( this.options.keyBindings ) {
+            this._initKeys();
+        }
+
+// INSERT POINT: _init
+
+    },
+
+    destroy: function () {
+        this._initEvents(true);
+        clearTimeout(this.resizeTimeout);
+        this.resizeTimeout = null;
+        this._execEvent('destroy');
+    },
+
+    _transitionEnd: function (e) {
+        if ( e.target != this.scroller || !this.isInTransition ) {
+            return;
+        }
+
+        this._transitionTime();
+        if ( !this.resetPosition(this.options.bounceTime) ) {
+            this.isInTransition = false;
+            this._execEvent('scrollEnd');
+        }
+    },
+
+    _start: function (e) {
+        // React to left mouse button only
+        if ( utils.eventType[e.type] != 1 ) {
+          // for button property
+          // http://unixpapa.com/js/mouse.html
+          var button;
+        if (!e.which) {
+          /* IE case */
+          button = (e.button < 2) ? 0 :
+                   ((e.button == 4) ? 1 : 2);
+        } else {
+          /* All others */
+          button = e.button;
+        }
+            if ( button !== 0 ) {
+                return;
+            }
+        }
+
+        if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
+            return;
+        }
+
+        if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+            e.preventDefault();
+        }
+
+        var point = e.touches ? e.touches[0] : e,
+            pos;
+
+        this.initiated  = utils.eventType[e.type];
+        this.moved      = false;
+        this.distX      = 0;
+        this.distY      = 0;
+        this.directionX = 0;
+        this.directionY = 0;
+        this.directionLocked = 0;
+
+        this.startTime = utils.getTime();
+
+        if ( this.options.useTransition && this.isInTransition ) {
+            this._transitionTime();
+            this.isInTransition = false;
+            pos = this.getComputedPosition();
+            this._translate(Math.round(pos.x), Math.round(pos.y));
+            this._execEvent('scrollEnd');
+        } else if ( !this.options.useTransition && this.isAnimating ) {
+            this.isAnimating = false;
+            this._execEvent('scrollEnd');
+        }
+
+        this.startX    = this.x;
+        this.startY    = this.y;
+        this.absStartX = this.x;
+        this.absStartY = this.y;
+        this.pointX    = point.pageX;
+        this.pointY    = point.pageY;
+
+        this._execEvent('beforeScrollStart');
+    },
+
+    _move: function (e) {
+        if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+            return;
+        }
+
+        if ( this.options.preventDefault ) {    // increases performance on Android? TODO: check!
+            e.preventDefault();
+        }
+
+        var point       = e.touches ? e.touches[0] : e,
+            deltaX      = point.pageX - this.pointX,
+            deltaY      = point.pageY - this.pointY,
+            timestamp   = utils.getTime(),
+            newX, newY,
+            absDistX, absDistY;
+
+        this.pointX     = point.pageX;
+        this.pointY     = point.pageY;
+
+        this.distX      += deltaX;
+        this.distY      += deltaY;
+        absDistX        = Math.abs(this.distX);
+        absDistY        = Math.abs(this.distY);
+
+        // We need to move at least 10 pixels for the scrolling to initiate
+        if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
+            return;
+        }
+
+        // If you are scrolling in one direction lock the other
+        if ( !this.directionLocked && !this.options.freeScroll ) {
+            if ( absDistX > absDistY + this.options.directionLockThreshold ) {
+                this.directionLocked = 'h';     // lock horizontally
+            } else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
+                this.directionLocked = 'v';     // lock vertically
+            } else {
+                this.directionLocked = 'n';     // no lock
+            }
+        }
+
+        if ( this.directionLocked == 'h' ) {
+            if ( this.options.eventPassthrough == 'vertical' ) {
+                e.preventDefault();
+            } else if ( this.options.eventPassthrough == 'horizontal' ) {
+                this.initiated = false;
+                return;
+            }
+
+            deltaY = 0;
+        } else if ( this.directionLocked == 'v' ) {
+            if ( this.options.eventPassthrough == 'horizontal' ) {
+                e.preventDefault();
+            } else if ( this.options.eventPassthrough == 'vertical' ) {
+                this.initiated = false;
+                return;
+            }
+
+            deltaX = 0;
+        }
+
+        deltaX = this.hasHorizontalScroll ? deltaX : 0;
+        deltaY = this.hasVerticalScroll ? deltaY : 0;
+
+        newX = this.x + deltaX;
+        newY = this.y + deltaY;
+
+        // Slow down if outside of the boundaries
+        if ( newX > 0 || newX < this.maxScrollX ) {
+            newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+        }
+        if ( newY > 0 || newY < this.maxScrollY ) {
+            newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+        }
+
+        this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+        this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+
+        if ( !this.moved ) {
+            this._execEvent('scrollStart');
+        }
+
+        this.moved = true;
+
+        this._translate(newX, newY);
+
+/* REPLACE START: _move */
+
+        if ( timestamp - this.startTime > 300 ) {
+            this.startTime = timestamp;
+            this.startX = this.x;
+            this.startY = this.y;
+        }
+
+/* REPLACE END: _move */
+
+    },
+
+    _end: function (e) {
+        if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+            return;
+        }
+
+        if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+            e.preventDefault();
+        }
+
+        var point = e.changedTouches ? e.changedTouches[0] : e,
+            momentumX,
+            momentumY,
+            duration = utils.getTime() - this.startTime,
+            newX = Math.round(this.x),
+            newY = Math.round(this.y),
+            distanceX = Math.abs(newX - this.startX),
+            distanceY = Math.abs(newY - this.startY),
+            time = 0,
+            easing = '';
+
+        this.isInTransition = 0;
+        this.initiated = 0;
+        this.endTime = utils.getTime();
+
+        // reset if we are outside of the boundaries
+        if ( this.resetPosition(this.options.bounceTime) ) {
+            return;
+        }
+
+        this.scrollTo(newX, newY);  // ensures that the last position is rounded
+
+        // we scrolled less than 10 pixels
+        if ( !this.moved ) {
+            if ( this.options.tap ) {
+                utils.tap(e, this.options.tap);
+            }
+
+            if ( this.options.click ) {
+                utils.click(e);
+            }
+
+            this._execEvent('scrollCancel');
+            return;
+        }
+
+        if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+            this._execEvent('flick');
+            return;
+        }
+
+        // start momentum animation if needed
+        if ( this.options.momentum && duration < 300 ) {
+            momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
+            momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
+            newX = momentumX.destination;
+            newY = momentumY.destination;
+            time = Math.max(momentumX.duration, momentumY.duration);
+            this.isInTransition = 1;
+        }
+
+
+        if ( this.options.snap ) {
+            var snap = this._nearestSnap(newX, newY);
+            this.currentPage = snap;
+            time = this.options.snapSpeed || Math.max(
+                    Math.max(
+                        Math.min(Math.abs(newX - snap.x), 1000),
+                        Math.min(Math.abs(newY - snap.y), 1000)
+                    ), 300);
+            newX = snap.x;
+            newY = snap.y;
+
+            this.directionX = 0;
+            this.directionY = 0;
+            easing = this.options.bounceEasing;
+        }
+
+// INSERT POINT: _end
+
+        if ( newX != this.x || newY != this.y ) {
+            // change easing function when scroller goes out of the boundaries
+            if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
+                easing = utils.ease.quadratic;
+            }
+
+            this.scrollTo(newX, newY, time, easing);
+            return;
+        }
+
+        this._execEvent('scrollEnd');
+    },
+
+    _resize: function () {
+        var that = this;
+
+        clearTimeout(this.resizeTimeout);
+
+        this.resizeTimeout = setTimeout(function () {
+            that.refresh();
+        }, this.options.resizePolling);
+    },
+
+    resetPosition: function (time) {
+        var x = this.x,
+            y = this.y;
+
+        time = time || 0;
+
+        if ( !this.hasHorizontalScroll || this.x > 0 ) {
+            x = 0;
+        } else if ( this.x < this.maxScrollX ) {
+            x = this.maxScrollX;
+        }
+
+        if ( !this.hasVerticalScroll || this.y > 0 ) {
+            y = 0;
+        } else if ( this.y < this.maxScrollY ) {
+            y = this.maxScrollY;
+        }
+
+        if ( x == this.x && y == this.y ) {
+            return false;
+        }
+
+        this.scrollTo(x, y, time, this.options.bounceEasing);
+
+        return true;
+    },
+
+    disable: function () {
+        this.enabled = false;
+    },
+
+    enable: function () {
+        this.enabled = true;
+    },
+
+    refresh: function () {
+        var rf = this.wrapper.offsetHeight;     // Force reflow
+
+        this.wrapperWidth   = this.wrapper.clientWidth;
+        this.wrapperHeight  = this.wrapper.clientHeight;
+
+/* REPLACE START: refresh */
+
+        this.scrollerWidth  = this.scroller.offsetWidth;
+        this.scrollerHeight = this.scroller.offsetHeight;
+
+        this.maxScrollX     = this.wrapperWidth - this.scrollerWidth;
+        this.maxScrollY     = this.wrapperHeight - this.scrollerHeight;
+
+/* REPLACE END: refresh */
+
+        this.hasHorizontalScroll    = this.options.scrollX && this.maxScrollX < 0;
+        this.hasVerticalScroll      = this.options.scrollY && this.maxScrollY < 0;
+
+        if ( !this.hasHorizontalScroll ) {
+            this.maxScrollX = 0;
+            this.scrollerWidth = this.wrapperWidth;
+        }
+
+        if ( !this.hasVerticalScroll ) {
+            this.maxScrollY = 0;
+            this.scrollerHeight = this.wrapperHeight;
+        }
+
+        this.endTime = 0;
+        this.directionX = 0;
+        this.directionY = 0;
+
+        this.wrapperOffset = utils.offset(this.wrapper);
+
+        this._execEvent('refresh');
+
+        this.resetPosition();
+
+// INSERT POINT: _refresh
+
+    },
+
+    on: function (type, fn) {
+        if ( !this._events[type] ) {
+            this._events[type] = [];
+        }
+
+        this._events[type].push(fn);
+    },
+
+    off: function (type, fn) {
+        if ( !this._events[type] ) {
+            return;
+        }
+
+        var index = this._events[type].indexOf(fn);
+
+        if ( index > -1 ) {
+            this._events[type].splice(index, 1);
+        }
+    },
+
+    _execEvent: function (type) {
+        if ( !this._events[type] ) {
+            return;
+        }
+
+        var i = 0,
+            l = this._events[type].length;
+
+        if ( !l ) {
+            return;
+        }
+
+        for ( ; i < l; i++ ) {
+            this._events[type][i].apply(this, [].slice.call(arguments, 1));
+        }
+    },
+
+    scrollBy: function (x, y, time, easing) {
+        x = this.x + x;
+        y = this.y + y;
+        time = time || 0;
+
+        this.scrollTo(x, y, time, easing);
+    },
+
+    scrollTo: function (x, y, time, easing) {
+        easing = easing || utils.ease.circular;
+
+        this.isInTransition = this.options.useTransition && time > 0;
+        var transitionType = this.options.useTransition && easing.style;
+        if ( !time || transitionType ) {
+                if(transitionType) {
+                    this._transitionTimingFunction(easing.style);
+                    this._transitionTime(time);
+                }
+            this._translate(x, y);
+        } else {
+            this._animate(x, y, time, easing.fn);
+        }
+    },
+
+    scrollToElement: function (el, time, offsetX, offsetY, easing) {
+        el = el.nodeType ? el : this.scroller.querySelector(el);
+
+        if ( !el ) {
+            return;
+        }
+
+        var pos = utils.offset(el);
+
+        pos.left -= this.wrapperOffset.left;
+        pos.top  -= this.wrapperOffset.top;
+
+        // if offsetX/Y are true we center the element to the screen
+        if ( offsetX === true ) {
+            offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
+        }
+        if ( offsetY === true ) {
+            offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
+        }
+
+        pos.left -= offsetX || 0;
+        pos.top  -= offsetY || 0;
+
+        pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
+        pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
+
+        time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
+
+        this.scrollTo(pos.left, pos.top, time, easing);
+    },
+
+    _transitionTime: function (time) {
+        if (!this.options.useTransition) {
+            return;
+        }
+        time = time || 0;
+        var durationProp = utils.style.transitionDuration;
+        if(!durationProp) {
+            return;
+        }
+
+        this.scrollerStyle[durationProp] = time + 'ms';
+
+        if ( !time && utils.isBadAndroid ) {
+            this.scrollerStyle[durationProp] = '0.0001ms';
+            // remove 0.0001ms
+            var self = this;
+            rAF(function() {
+                if(self.scrollerStyle[durationProp] === '0.0001ms') {
+                    self.scrollerStyle[durationProp] = '0s';
+                }
+            });
+        }
+
+
+        if ( this.indicators ) {
+            for ( var i = this.indicators.length; i--; ) {
+                this.indicators[i].transitionTime(time);
+            }
+        }
+
+
+// INSERT POINT: _transitionTime
+
+    },
+
+    _transitionTimingFunction: function (easing) {
+        this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
+
+
+        if ( this.indicators ) {
+            for ( var i = this.indicators.length; i--; ) {
+                this.indicators[i].transitionTimingFunction(easing);
+            }
+        }
+
+
+// INSERT POINT: _transitionTimingFunction
+
+    },
+
+    _translate: function (x, y) {
+        if ( this.options.useTransform ) {
+
+/* REPLACE START: _translate */
+
+            this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
+
+/* REPLACE END: _translate */
+
+        } else {
+            x = Math.round(x);
+            y = Math.round(y);
+            this.scrollerStyle.left = x + 'px';
+            this.scrollerStyle.top = y + 'px';
+        }
+
+        this.x = x;
+        this.y = y;
+
+
+    if ( this.indicators ) {
+        for ( var i = this.indicators.length; i--; ) {
+            this.indicators[i].updatePosition();
+        }
+    }
+
+
+// INSERT POINT: _translate
+
+    },
+
+    _initEvents: function (remove) {
+        var eventType = remove ? utils.removeEvent : utils.addEvent,
+            target = this.options.bindToWrapper ? this.wrapper : window;
+
+        eventType(window, 'orientationchange', this);
+        eventType(window, 'resize', this);
+
+        if ( this.options.click ) {
+            eventType(this.wrapper, 'click', this, true);
+        }
+
+        if ( !this.options.disableMouse ) {
+            eventType(this.wrapper, 'mousedown', this);
+            eventType(target, 'mousemove', this);
+            eventType(target, 'mousecancel', this);
+            eventType(target, 'mouseup', this);
+        }
+
+        if ( utils.hasPointer && !this.options.disablePointer ) {
+            eventType(this.wrapper, utils.prefixPointerEvent('pointerdown'), this);
+            eventType(target, utils.prefixPointerEvent('pointermove'), this);
+            eventType(target, utils.prefixPointerEvent('pointercancel'), this);
+            eventType(target, utils.prefixPointerEvent('pointerup'), this);
+        }
+
+        if ( utils.hasTouch && !this.options.disableTouch ) {
+            eventType(this.wrapper, 'touchstart', this);
+            eventType(target, 'touchmove', this);
+            eventType(target, 'touchcancel', this);
+            eventType(target, 'touchend', this);
+        }
+
+        eventType(this.scroller, 'transitionend', this);
+        eventType(this.scroller, 'webkitTransitionEnd', this);
+        eventType(this.scroller, 'oTransitionEnd', this);
+        eventType(this.scroller, 'MSTransitionEnd', this);
+    },
+
+    getComputedPosition: function () {
+        var matrix = window.getComputedStyle(this.scroller, null),
+            x, y;
+
+        if ( this.options.useTransform ) {
+            matrix = matrix[utils.style.transform].split(')')[0].split(', ');
+            x = +(matrix[12] || matrix[4]);
+            y = +(matrix[13] || matrix[5]);
+        } else {
+            x = +matrix.left.replace(/[^-\d.]/g, '');
+            y = +matrix.top.replace(/[^-\d.]/g, '');
+        }
+
+        return { x: x, y: y };
+    },
+    _initIndicators: function () {
+        var interactive = this.options.interactiveScrollbars,
+            customStyle = typeof this.options.scrollbars != 'string',
+            indicators = [],
+            indicator;
+
+        var that = this;
+
+        this.indicators = [];
+
+        if ( this.options.scrollbars ) {
+            // Vertical scrollbar
+            if ( this.options.scrollY ) {
+                indicator = {
+                    el: createDefaultScrollbar('v', interactive, this.options.scrollbars),
+                    interactive: interactive,
+                    defaultScrollbars: true,
+                    customStyle: customStyle,
+                    resize: this.options.resizeScrollbars,
+                    shrink: this.options.shrinkScrollbars,
+                    fade: this.options.fadeScrollbars,
+                    listenX: false
+                };
+
+                this.wrapper.appendChild(indicator.el);
+                indicators.push(indicator);
+            }
+
+            // Horizontal scrollbar
+            if ( this.options.scrollX ) {
+                indicator = {
+                    el: createDefaultScrollbar('h', interactive, this.options.scrollbars),
+                    interactive: interactive,
+                    defaultScrollbars: true,
+                    customStyle: customStyle,
+                    resize: this.options.resizeScrollbars,
+                    shrink: this.options.shrinkScrollbars,
+                    fade: this.options.fadeScrollbars,
+                    listenY: false
+                };
+
+                this.wrapper.appendChild(indicator.el);
+                indicators.push(indicator);
+            }
+        }
+
+        if ( this.options.indicators ) {
+            // TODO: check concat compatibility
+            indicators = indicators.concat(this.options.indicators);
+        }
+
+        for ( var i = indicators.length; i--; ) {
+            this.indicators.push( new Indicator(this, indicators[i]) );
+        }
+
+        // TODO: check if we can use array.map (wide compatibility and performance issues)
+        function _indicatorsMap (fn) {
+            if (that.indicators) {
+                for ( var i = that.indicators.length; i--; ) {
+                    fn.call(that.indicators[i]);
+                }
+            }
+        }
+
+        if ( this.options.fadeScrollbars ) {
+            this.on('scrollEnd', function () {
+                _indicatorsMap(function () {
+                    this.fade();
+                });
+            });
+
+            this.on('scrollCancel', function () {
+                _indicatorsMap(function () {
+                    this.fade();
+                });
+            });
+
+            this.on('scrollStart', function () {
+                _indicatorsMap(function () {
+                    this.fade(1);
+                });
+            });
+
+            this.on('beforeScrollStart', function () {
+                _indicatorsMap(function () {
+                    this.fade(1, true);
+                });
+            });
+        }
+
+
+        this.on('refresh', function () {
+            _indicatorsMap(function () {
+                this.refresh();
+            });
+        });
+
+        this.on('destroy', function () {
+            _indicatorsMap(function () {
+                this.destroy();
+            });
+
+            delete this.indicators;
+        });
+    },
+
+    _initWheel: function () {
+        utils.addEvent(this.wrapper, 'wheel', this);
+        utils.addEvent(this.wrapper, 'mousewheel', this);
+        utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
+
+        this.on('destroy', function () {
+            clearTimeout(this.wheelTimeout);
+            this.wheelTimeout = null;
+            utils.removeEvent(this.wrapper, 'wheel', this);
+            utils.removeEvent(this.wrapper, 'mousewheel', this);
+            utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
+        });
+    },
+
+    _wheel: function (e) {
+        if ( !this.enabled ) {
+            return;
+        }
+
+        var wheelDeltaX, wheelDeltaY,
+            newX, newY,
+            that = this;
+
+        if ( this.wheelTimeout === undefined ) {
+            that._execEvent('scrollStart');
+        }
+
+        // Execute the scrollEnd event after 400ms the wheel stopped scrolling
+        clearTimeout(this.wheelTimeout);
+        this.wheelTimeout = setTimeout(function () {
+            if(!that.options.snap) {
+                that._execEvent('scrollEnd');
+            }
+            that.wheelTimeout = undefined;
+        }, 400);
+
+        if ( 'deltaX' in e ) {
+            if (e.deltaMode === 1) {
+                wheelDeltaX = -e.deltaX * this.options.mouseWheelSpeed;
+                wheelDeltaY = -e.deltaY * this.options.mouseWheelSpeed;
+            } else {
+                wheelDeltaX = -e.deltaX;
+                wheelDeltaY = -e.deltaY;
+            }
+        } else if ( 'wheelDeltaX' in e ) {
+            wheelDeltaX = e.wheelDeltaX / 120 * this.options.mouseWheelSpeed;
+            wheelDeltaY = e.wheelDeltaY / 120 * this.options.mouseWheelSpeed;
+        } else if ( 'wheelDelta' in e ) {
+            wheelDeltaX = wheelDeltaY = e.wheelDelta / 120 * this.options.mouseWheelSpeed;
+        } else if ( 'detail' in e ) {
+            wheelDeltaX = wheelDeltaY = -e.detail / 3 * this.options.mouseWheelSpeed;
+        } else {
+            return;
+        }
+
+        wheelDeltaX *= this.options.invertWheelDirection;
+        wheelDeltaY *= this.options.invertWheelDirection;
+
+        if ( !this.hasVerticalScroll ) {
+            wheelDeltaX = wheelDeltaY;
+            wheelDeltaY = 0;
+        }
+
+        if ( this.options.snap ) {
+            newX = this.currentPage.pageX;
+            newY = this.currentPage.pageY;
+
+            if ( wheelDeltaX > 0 ) {
+                newX--;
+            } else if ( wheelDeltaX < 0 ) {
+                newX++;
+            }
+
+            if ( wheelDeltaY > 0 ) {
+                newY--;
+            } else if ( wheelDeltaY < 0 ) {
+                newY++;
+            }
+
+            this.goToPage(newX, newY);
+
+            return;
+        }
+
+        newX = this.x + Math.round(this.hasHorizontalScroll ? wheelDeltaX : 0);
+        newY = this.y + Math.round(this.hasVerticalScroll ? wheelDeltaY : 0);
+
+        this.directionX = wheelDeltaX > 0 ? -1 : wheelDeltaX < 0 ? 1 : 0;
+        this.directionY = wheelDeltaY > 0 ? -1 : wheelDeltaY < 0 ? 1 : 0;
+
+        if ( newX > 0 ) {
+            newX = 0;
+        } else if ( newX < this.maxScrollX ) {
+            newX = this.maxScrollX;
+        }
+
+        if ( newY > 0 ) {
+            newY = 0;
+        } else if ( newY < this.maxScrollY ) {
+            newY = this.maxScrollY;
+        }
+
+        this.scrollTo(newX, newY, 0);
+
+// INSERT POINT: _wheel
+    },
+
+    _initSnap: function () {
+        this.currentPage = {};
+
+        if ( typeof this.options.snap == 'string' ) {
+            this.options.snap = this.scroller.querySelectorAll(this.options.snap);
+        }
+
+        this.on('refresh', function () {
+            var i = 0, l,
+                m = 0, n,
+                cx, cy,
+                x = 0, y,
+                stepX = this.options.snapStepX || this.wrapperWidth,
+                stepY = this.options.snapStepY || this.wrapperHeight,
+                el;
+
+            this.pages = [];
+
+            if ( !this.wrapperWidth || !this.wrapperHeight || !this.scrollerWidth || !this.scrollerHeight ) {
+                return;
+            }
+
+            if ( this.options.snap === true ) {
+                cx = Math.round( stepX / 2 );
+                cy = Math.round( stepY / 2 );
+
+                while ( x > -this.scrollerWidth ) {
+                    this.pages[i] = [];
+                    l = 0;
+                    y = 0;
+
+                    while ( y > -this.scrollerHeight ) {
+                        this.pages[i][l] = {
+                            x: Math.max(x, this.maxScrollX),
+                            y: Math.max(y, this.maxScrollY),
+                            width: stepX,
+                            height: stepY,
+                            cx: x - cx,
+                            cy: y - cy
+                        };
+
+                        y -= stepY;
+                        l++;
+                    }
+
+                    x -= stepX;
+                    i++;
+                }
+            } else {
+                el = this.options.snap;
+                l = el.length;
+                n = -1;
+
+                for ( ; i < l; i++ ) {
+                    if ( i === 0 || el[i].offsetLeft <= el[i-1].offsetLeft ) {
+                        m = 0;
+                        n++;
+                    }
+
+                    if ( !this.pages[m] ) {
+                        this.pages[m] = [];
+                    }
+
+                    x = Math.max(-el[i].offsetLeft, this.maxScrollX);
+                    y = Math.max(-el[i].offsetTop, this.maxScrollY);
+                    cx = x - Math.round(el[i].offsetWidth / 2);
+                    cy = y - Math.round(el[i].offsetHeight / 2);
+
+                    this.pages[m][n] = {
+                        x: x,
+                        y: y,
+                        width: el[i].offsetWidth,
+                        height: el[i].offsetHeight,
+                        cx: cx,
+                        cy: cy
+                    };
+
+                    if ( x > this.maxScrollX ) {
+                        m++;
+                    }
+                }
+            }
+
+            this.goToPage(this.currentPage.pageX || 0, this.currentPage.pageY || 0, 0);
+
+            // Update snap threshold if needed
+            if ( this.options.snapThreshold % 1 === 0 ) {
+                this.snapThresholdX = this.options.snapThreshold;
+                this.snapThresholdY = this.options.snapThreshold;
+            } else {
+                this.snapThresholdX = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].width * this.options.snapThreshold);
+                this.snapThresholdY = Math.round(this.pages[this.currentPage.pageX][this.currentPage.pageY].height * this.options.snapThreshold);
+            }
+        });
+
+        this.on('flick', function () {
+            var time = this.options.snapSpeed || Math.max(
+                    Math.max(
+                        Math.min(Math.abs(this.x - this.startX), 1000),
+                        Math.min(Math.abs(this.y - this.startY), 1000)
+                    ), 300);
+
+            this.goToPage(
+                this.currentPage.pageX + this.directionX,
+                this.currentPage.pageY + this.directionY,
+                time
+            );
+        });
+    },
+
+    _nearestSnap: function (x, y) {
+        if ( !this.pages.length ) {
+            return { x: 0, y: 0, pageX: 0, pageY: 0 };
+        }
+
+        var i = 0,
+            l = this.pages.length,
+            m = 0;
+
+        // Check if we exceeded the snap threshold
+        if ( Math.abs(x - this.absStartX) < this.snapThresholdX &&
+            Math.abs(y - this.absStartY) < this.snapThresholdY ) {
+            return this.currentPage;
+        }
+
+        if ( x > 0 ) {
+            x = 0;
+        } else if ( x < this.maxScrollX ) {
+            x = this.maxScrollX;
+        }
+
+        if ( y > 0 ) {
+            y = 0;
+        } else if ( y < this.maxScrollY ) {
+            y = this.maxScrollY;
+        }
+
+        for ( ; i < l; i++ ) {
+            if ( x >= this.pages[i][0].cx ) {
+                x = this.pages[i][0].x;
+                break;
+            }
+        }
+
+        l = this.pages[i].length;
+
+        for ( ; m < l; m++ ) {
+            if ( y >= this.pages[0][m].cy ) {
+                y = this.pages[0][m].y;
+                break;
+            }
+        }
+
+        if ( i == this.currentPage.pageX ) {
+            i += this.directionX;
+
+            if ( i < 0 ) {
+                i = 0;
+            } else if ( i >= this.pages.length ) {
+                i = this.pages.length - 1;
+            }
+
+            x = this.pages[i][0].x;
+        }
+
+        if ( m == this.currentPage.pageY ) {
+            m += this.directionY;
+
+            if ( m < 0 ) {
+                m = 0;
+            } else if ( m >= this.pages[0].length ) {
+                m = this.pages[0].length - 1;
+            }
+
+            y = this.pages[0][m].y;
+        }
+
+        return {
+            x: x,
+            y: y,
+            pageX: i,
+            pageY: m
+        };
+    },
+
+    goToPage: function (x, y, time, easing) {
+        easing = easing || this.options.bounceEasing;
+
+        if ( x >= this.pages.length ) {
+            x = this.pages.length - 1;
+        } else if ( x < 0 ) {
+            x = 0;
+        }
+
+        if ( y >= this.pages[x].length ) {
+            y = this.pages[x].length - 1;
+        } else if ( y < 0 ) {
+            y = 0;
+        }
+
+        var posX = this.pages[x][y].x,
+            posY = this.pages[x][y].y;
+
+        time = time === undefined ? this.options.snapSpeed || Math.max(
+            Math.max(
+                Math.min(Math.abs(posX - this.x), 1000),
+                Math.min(Math.abs(posY - this.y), 1000)
+            ), 300) : time;
+
+        this.currentPage = {
+            x: posX,
+            y: posY,
+            pageX: x,
+            pageY: y
+        };
+
+        this.scrollTo(posX, posY, time, easing);
+    },
+
+    next: function (time, easing) {
+        var x = this.currentPage.pageX,
+            y = this.currentPage.pageY;
+
+        x++;
+
+        if ( x >= this.pages.length && this.hasVerticalScroll ) {
+            x = 0;
+            y++;
+        }
+
+        this.goToPage(x, y, time, easing);
+    },
+
+    prev: function (time, easing) {
+        var x = this.currentPage.pageX,
+            y = this.currentPage.pageY;
+
+        x--;
+
+        if ( x < 0 && this.hasVerticalScroll ) {
+            x = 0;
+            y--;
+        }
+
+        this.goToPage(x, y, time, easing);
+    },
+
+    _initKeys: function (e) {
+        // default key bindings
+        var keys = {
+            pageUp: 33,
+            pageDown: 34,
+            end: 35,
+            home: 36,
+            left: 37,
+            up: 38,
+            right: 39,
+            down: 40
+        };
+        var i;
+
+        // if you give me characters I give you keycode
+        if ( typeof this.options.keyBindings == 'object' ) {
+            for ( i in this.options.keyBindings ) {
+                if ( typeof this.options.keyBindings[i] == 'string' ) {
+                    this.options.keyBindings[i] = this.options.keyBindings[i].toUpperCase().charCodeAt(0);
+                }
+            }
+        } else {
+            this.options.keyBindings = {};
+        }
+
+        for ( i in keys ) {
+            this.options.keyBindings[i] = this.options.keyBindings[i] || keys[i];
+        }
+
+        utils.addEvent(window, 'keydown', this);
+
+        this.on('destroy', function () {
+            utils.removeEvent(window, 'keydown', this);
+        });
+    },
+
+    _key: function (e) {
+        if ( !this.enabled ) {
+            return;
+        }
+
+        var snap = this.options.snap,   // we are using this alot, better to cache it
+            newX = snap ? this.currentPage.pageX : this.x,
+            newY = snap ? this.currentPage.pageY : this.y,
+            now = utils.getTime(),
+            prevTime = this.keyTime || 0,
+            acceleration = 0.250,
+            pos;
+
+        if ( this.options.useTransition && this.isInTransition ) {
+            pos = this.getComputedPosition();
+
+            this._translate(Math.round(pos.x), Math.round(pos.y));
+            this.isInTransition = false;
+        }
+
+        this.keyAcceleration = now - prevTime < 200 ? Math.min(this.keyAcceleration + acceleration, 50) : 0;
+
+        switch ( e.keyCode ) {
+            case this.options.keyBindings.pageUp:
+                if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+                    newX += snap ? 1 : this.wrapperWidth;
+                } else {
+                    newY += snap ? 1 : this.wrapperHeight;
+                }
+                break;
+            case this.options.keyBindings.pageDown:
+                if ( this.hasHorizontalScroll && !this.hasVerticalScroll ) {
+                    newX -= snap ? 1 : this.wrapperWidth;
+                } else {
+                    newY -= snap ? 1 : this.wrapperHeight;
+                }
+                break;
+            case this.options.keyBindings.end:
+                newX = snap ? this.pages.length-1 : this.maxScrollX;
+                newY = snap ? this.pages[0].length-1 : this.maxScrollY;
+                break;
+            case this.options.keyBindings.home:
+                newX = 0;
+                newY = 0;
+                break;
+            case this.options.keyBindings.left:
+                newX += snap ? -1 : 5 + this.keyAcceleration>>0;
+                break;
+            case this.options.keyBindings.up:
+                newY += snap ? 1 : 5 + this.keyAcceleration>>0;
+                break;
+            case this.options.keyBindings.right:
+                newX -= snap ? -1 : 5 + this.keyAcceleration>>0;
+                break;
+            case this.options.keyBindings.down:
+                newY -= snap ? 1 : 5 + this.keyAcceleration>>0;
+                break;
+            default:
+                return;
+        }
+
+        if ( snap ) {
+            this.goToPage(newX, newY);
+            return;
+        }
+
+        if ( newX > 0 ) {
+            newX = 0;
+            this.keyAcceleration = 0;
+        } else if ( newX < this.maxScrollX ) {
+            newX = this.maxScrollX;
+            this.keyAcceleration = 0;
+        }
+
+        if ( newY > 0 ) {
+            newY = 0;
+            this.keyAcceleration = 0;
+        } else if ( newY < this.maxScrollY ) {
+            newY = this.maxScrollY;
+            this.keyAcceleration = 0;
+        }
+
+        this.scrollTo(newX, newY, 0);
+
+        this.keyTime = now;
+    },
+
+    _animate: function (destX, destY, duration, easingFn) {
+        var that = this,
+            startX = this.x,
+            startY = this.y,
+            startTime = utils.getTime(),
+            destTime = startTime + duration;
+
+        function step () {
+            var now = utils.getTime(),
+                newX, newY,
+                easing;
+
+            if ( now >= destTime ) {
+                that.isAnimating = false;
+                that._translate(destX, destY);
+
+                if ( !that.resetPosition(that.options.bounceTime) ) {
+                    that._execEvent('scrollEnd');
+                }
+
+                return;
+            }
+
+            now = ( now - startTime ) / duration;
+            easing = easingFn(now);
+            newX = ( destX - startX ) * easing + startX;
+            newY = ( destY - startY ) * easing + startY;
+            that._translate(newX, newY);
+
+            if ( that.isAnimating ) {
+                rAF(step);
+            }
+        }
+
+        this.isAnimating = true;
+        step();
+    },
+    handleEvent: function (e) {
+        switch ( e.type ) {
+            case 'touchstart':
+            case 'pointerdown':
+            case 'MSPointerDown':
+            case 'mousedown':
+                this._start(e);
+                break;
+            case 'touchmove':
+            case 'pointermove':
+            case 'MSPointerMove':
+            case 'mousemove':
+                this._move(e);
+                break;
+            case 'touchend':
+            case 'pointerup':
+            case 'MSPointerUp':
+            case 'mouseup':
+            case 'touchcancel':
+            case 'pointercancel':
+            case 'MSPointerCancel':
+            case 'mousecancel':
+                this._end(e);
+                break;
+            case 'orientationchange':
+            case 'resize':
+                this._resize();
+                break;
+            case 'transitionend':
+            case 'webkitTransitionEnd':
+            case 'oTransitionEnd':
+            case 'MSTransitionEnd':
+                this._transitionEnd(e);
+                break;
+            case 'wheel':
+            case 'DOMMouseScroll':
+            case 'mousewheel':
+                this._wheel(e);
+                break;
+            case 'keydown':
+                this._key(e);
+                break;
+            case 'click':
+                if ( this.enabled && !e._constructed ) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                break;
+        }
+    }
+};
+function createDefaultScrollbar (direction, interactive, type) {
+    var scrollbar = document.createElement('div'),
+        indicator = document.createElement('div');
+
+    if ( type === true ) {
+        scrollbar.style.cssText = 'position:absolute;z-index:9999';
+        indicator.style.cssText = '-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.9);border-radius:3px';
+    }
+
+    indicator.className = 'iScrollIndicator';
+
+    if ( direction == 'h' ) {
+        if ( type === true ) {
+            scrollbar.style.cssText += ';height:7px;left:2px;right:2px;bottom:0';
+            indicator.style.height = '100%';
+        }
+        scrollbar.className = 'iScrollHorizontalScrollbar';
+    } else {
+        if ( type === true ) {
+            scrollbar.style.cssText += ';width:7px;bottom:2px;top:2px;right:1px';
+            indicator.style.width = '100%';
+        }
+        scrollbar.className = 'iScrollVerticalScrollbar';
+    }
+
+    scrollbar.style.cssText += ';overflow:hidden';
+
+    if ( !interactive ) {
+        scrollbar.style.pointerEvents = 'none';
+    }
+
+    scrollbar.appendChild(indicator);
+
+    return scrollbar;
+}
+
+function Indicator (scroller, options) {
+    this.wrapper = typeof options.el == 'string' ? document.querySelector(options.el) : options.el;
+    this.wrapperStyle = this.wrapper.style;
+    this.indicator = this.wrapper.children[0];
+    this.indicatorStyle = this.indicator.style;
+    this.scroller = scroller;
+
+    this.options = {
+        listenX: true,
+        listenY: true,
+        interactive: false,
+        resize: true,
+        defaultScrollbars: false,
+        shrink: false,
+        fade: false,
+        speedRatioX: 0,
+        speedRatioY: 0
+    };
+
+    for ( var i in options ) {
+        this.options[i] = options[i];
+    }
+
+    this.sizeRatioX = 1;
+    this.sizeRatioY = 1;
+    this.maxPosX = 0;
+    this.maxPosY = 0;
+
+    if ( this.options.interactive ) {
+        if ( !this.options.disableTouch ) {
+            utils.addEvent(this.indicator, 'touchstart', this);
+            utils.addEvent(window, 'touchend', this);
+        }
+        if ( !this.options.disablePointer ) {
+            utils.addEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+            utils.addEvent(window, utils.prefixPointerEvent('pointerup'), this);
+        }
+        if ( !this.options.disableMouse ) {
+            utils.addEvent(this.indicator, 'mousedown', this);
+            utils.addEvent(window, 'mouseup', this);
+        }
+    }
+
+    if ( this.options.fade ) {
+        this.wrapperStyle[utils.style.transform] = this.scroller.translateZ;
+        var durationProp = utils.style.transitionDuration;
+        if(!durationProp) {
+            return;
+        }
+        this.wrapperStyle[durationProp] = utils.isBadAndroid ? '0.0001ms' : '0ms';
+        // remove 0.0001ms
+        var self = this;
+        if(utils.isBadAndroid) {
+            rAF(function() {
+                if(self.wrapperStyle[durationProp] === '0.0001ms') {
+                    self.wrapperStyle[durationProp] = '0s';
+                }
+            });
+        }
+        this.wrapperStyle.opacity = '0';
+    }
+}
+
+Indicator.prototype = {
+    handleEvent: function (e) {
+        switch ( e.type ) {
+            case 'touchstart':
+            case 'pointerdown':
+            case 'MSPointerDown':
+            case 'mousedown':
+                this._start(e);
+                break;
+            case 'touchmove':
+            case 'pointermove':
+            case 'MSPointerMove':
+            case 'mousemove':
+                this._move(e);
+                break;
+            case 'touchend':
+            case 'pointerup':
+            case 'MSPointerUp':
+            case 'mouseup':
+            case 'touchcancel':
+            case 'pointercancel':
+            case 'MSPointerCancel':
+            case 'mousecancel':
+                this._end(e);
+                break;
+        }
+    },
+
+    destroy: function () {
+        if ( this.options.fadeScrollbars ) {
+            clearTimeout(this.fadeTimeout);
+            this.fadeTimeout = null;
+        }
+        if ( this.options.interactive ) {
+            utils.removeEvent(this.indicator, 'touchstart', this);
+            utils.removeEvent(this.indicator, utils.prefixPointerEvent('pointerdown'), this);
+            utils.removeEvent(this.indicator, 'mousedown', this);
+
+            utils.removeEvent(window, 'touchmove', this);
+            utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+            utils.removeEvent(window, 'mousemove', this);
+
+            utils.removeEvent(window, 'touchend', this);
+            utils.removeEvent(window, utils.prefixPointerEvent('pointerup'), this);
+            utils.removeEvent(window, 'mouseup', this);
+        }
+
+        if ( this.options.defaultScrollbars ) {
+            this.wrapper.parentNode.removeChild(this.wrapper);
+        }
+    },
+
+    _start: function (e) {
+        var point = e.touches ? e.touches[0] : e;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.transitionTime();
+
+        this.initiated = true;
+        this.moved = false;
+        this.lastPointX = point.pageX;
+        this.lastPointY = point.pageY;
+
+        this.startTime  = utils.getTime();
+
+        if ( !this.options.disableTouch ) {
+            utils.addEvent(window, 'touchmove', this);
+        }
+        if ( !this.options.disablePointer ) {
+            utils.addEvent(window, utils.prefixPointerEvent('pointermove'), this);
+        }
+        if ( !this.options.disableMouse ) {
+            utils.addEvent(window, 'mousemove', this);
+        }
+
+        this.scroller._execEvent('beforeScrollStart');
+    },
+
+    _move: function (e) {
+        var point = e.touches ? e.touches[0] : e,
+            deltaX, deltaY,
+            newX, newY,
+            timestamp = utils.getTime();
+
+        if ( !this.moved ) {
+            this.scroller._execEvent('scrollStart');
+        }
+
+        this.moved = true;
+
+        deltaX = point.pageX - this.lastPointX;
+        this.lastPointX = point.pageX;
+
+        deltaY = point.pageY - this.lastPointY;
+        this.lastPointY = point.pageY;
+
+        newX = this.x + deltaX;
+        newY = this.y + deltaY;
+
+        this._pos(newX, newY);
+
+// INSERT POINT: indicator._move
+
+        e.preventDefault();
+        e.stopPropagation();
+    },
+
+    _end: function (e) {
+        if ( !this.initiated ) {
+            return;
+        }
+
+        this.initiated = false;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        utils.removeEvent(window, 'touchmove', this);
+        utils.removeEvent(window, utils.prefixPointerEvent('pointermove'), this);
+        utils.removeEvent(window, 'mousemove', this);
+
+        if ( this.scroller.options.snap ) {
+            var snap = this.scroller._nearestSnap(this.scroller.x, this.scroller.y);
+
+            var time = this.options.snapSpeed || Math.max(
+                    Math.max(
+                        Math.min(Math.abs(this.scroller.x - snap.x), 1000),
+                        Math.min(Math.abs(this.scroller.y - snap.y), 1000)
+                    ), 300);
+
+            if ( this.scroller.x != snap.x || this.scroller.y != snap.y ) {
+                this.scroller.directionX = 0;
+                this.scroller.directionY = 0;
+                this.scroller.currentPage = snap;
+                this.scroller.scrollTo(snap.x, snap.y, time, this.scroller.options.bounceEasing);
+            }
+        }
+
+        if ( this.moved ) {
+            this.scroller._execEvent('scrollEnd');
+        }
+    },
+
+    transitionTime: function (time) {
+        time = time || 0;
+        var durationProp = utils.style.transitionDuration;
+        if(!durationProp) {
+            return;
+        }
+
+        this.indicatorStyle[durationProp] = time + 'ms';
+
+        if ( !time && utils.isBadAndroid ) {
+            this.indicatorStyle[durationProp] = '0.0001ms';
+            // remove 0.0001ms
+            var self = this;
+            rAF(function() {
+                if(self.indicatorStyle[durationProp] === '0.0001ms') {
+                    self.indicatorStyle[durationProp] = '0s';
+                }
+            });
+        }
+    },
+
+    transitionTimingFunction: function (easing) {
+        this.indicatorStyle[utils.style.transitionTimingFunction] = easing;
+    },
+
+    refresh: function () {
+        this.transitionTime();
+
+        if ( this.options.listenX && !this.options.listenY ) {
+            this.indicatorStyle.display = this.scroller.hasHorizontalScroll ? 'block' : 'none';
+        } else if ( this.options.listenY && !this.options.listenX ) {
+            this.indicatorStyle.display = this.scroller.hasVerticalScroll ? 'block' : 'none';
+        } else {
+            this.indicatorStyle.display = this.scroller.hasHorizontalScroll || this.scroller.hasVerticalScroll ? 'block' : 'none';
+        }
+
+        if ( this.scroller.hasHorizontalScroll && this.scroller.hasVerticalScroll ) {
+            utils.addClass(this.wrapper, 'iScrollBothScrollbars');
+            utils.removeClass(this.wrapper, 'iScrollLoneScrollbar');
+
+            if ( this.options.defaultScrollbars && this.options.customStyle ) {
+                if ( this.options.listenX ) {
+                    this.wrapper.style.right = '8px';
+                } else {
+                    this.wrapper.style.bottom = '8px';
+                }
+            }
+        } else {
+            utils.removeClass(this.wrapper, 'iScrollBothScrollbars');
+            utils.addClass(this.wrapper, 'iScrollLoneScrollbar');
+
+            if ( this.options.defaultScrollbars && this.options.customStyle ) {
+                if ( this.options.listenX ) {
+                    this.wrapper.style.right = '2px';
+                } else {
+                    this.wrapper.style.bottom = '2px';
+                }
+            }
+        }
+
+        var r = this.wrapper.offsetHeight;  // force refresh
+
+        if ( this.options.listenX ) {
+            this.wrapperWidth = this.wrapper.clientWidth;
+            if ( this.options.resize ) {
+                this.indicatorWidth = Math.max(Math.round(this.wrapperWidth * this.wrapperWidth / (this.scroller.scrollerWidth || this.wrapperWidth || 1)), 8);
+                this.indicatorStyle.width = this.indicatorWidth + 'px';
+            } else {
+                this.indicatorWidth = this.indicator.clientWidth;
+            }
+
+            this.maxPosX = this.wrapperWidth - this.indicatorWidth;
+
+            if ( this.options.shrink == 'clip' ) {
+                this.minBoundaryX = -this.indicatorWidth + 8;
+                this.maxBoundaryX = this.wrapperWidth - 8;
+            } else {
+                this.minBoundaryX = 0;
+                this.maxBoundaryX = this.maxPosX;
+            }
+
+            this.sizeRatioX = this.options.speedRatioX || (this.scroller.maxScrollX && (this.maxPosX / this.scroller.maxScrollX));
+        }
+
+        if ( this.options.listenY ) {
+            this.wrapperHeight = this.wrapper.clientHeight;
+            if ( this.options.resize ) {
+                this.indicatorHeight = Math.max(Math.round(this.wrapperHeight * this.wrapperHeight / (this.scroller.scrollerHeight || this.wrapperHeight || 1)), 8);
+                this.indicatorStyle.height = this.indicatorHeight + 'px';
+            } else {
+                this.indicatorHeight = this.indicator.clientHeight;
+            }
+
+            this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+
+            if ( this.options.shrink == 'clip' ) {
+                this.minBoundaryY = -this.indicatorHeight + 8;
+                this.maxBoundaryY = this.wrapperHeight - 8;
+            } else {
+                this.minBoundaryY = 0;
+                this.maxBoundaryY = this.maxPosY;
+            }
+
+            this.maxPosY = this.wrapperHeight - this.indicatorHeight;
+            this.sizeRatioY = this.options.speedRatioY || (this.scroller.maxScrollY && (this.maxPosY / this.scroller.maxScrollY));
+        }
+
+        this.updatePosition();
+    },
+
+    updatePosition: function () {
+        var x = this.options.listenX && Math.round(this.sizeRatioX * this.scroller.x) || 0,
+            y = this.options.listenY && Math.round(this.sizeRatioY * this.scroller.y) || 0;
+
+        if ( !this.options.ignoreBoundaries ) {
+            if ( x < this.minBoundaryX ) {
+                if ( this.options.shrink == 'scale' ) {
+                    this.width = Math.max(this.indicatorWidth + x, 8);
+                    this.indicatorStyle.width = this.width + 'px';
+                }
+                x = this.minBoundaryX;
+            } else if ( x > this.maxBoundaryX ) {
+                if ( this.options.shrink == 'scale' ) {
+                    this.width = Math.max(this.indicatorWidth - (x - this.maxPosX), 8);
+                    this.indicatorStyle.width = this.width + 'px';
+                    x = this.maxPosX + this.indicatorWidth - this.width;
+                } else {
+                    x = this.maxBoundaryX;
+                }
+            } else if ( this.options.shrink == 'scale' && this.width != this.indicatorWidth ) {
+                this.width = this.indicatorWidth;
+                this.indicatorStyle.width = this.width + 'px';
+            }
+
+            if ( y < this.minBoundaryY ) {
+                if ( this.options.shrink == 'scale' ) {
+                    this.height = Math.max(this.indicatorHeight + y * 3, 8);
+                    this.indicatorStyle.height = this.height + 'px';
+                }
+                y = this.minBoundaryY;
+            } else if ( y > this.maxBoundaryY ) {
+                if ( this.options.shrink == 'scale' ) {
+                    this.height = Math.max(this.indicatorHeight - (y - this.maxPosY) * 3, 8);
+                    this.indicatorStyle.height = this.height + 'px';
+                    y = this.maxPosY + this.indicatorHeight - this.height;
+                } else {
+                    y = this.maxBoundaryY;
+                }
+            } else if ( this.options.shrink == 'scale' && this.height != this.indicatorHeight ) {
+                this.height = this.indicatorHeight;
+                this.indicatorStyle.height = this.height + 'px';
+            }
+        }
+
+        this.x = x;
+        this.y = y;
+
+        if ( this.scroller.options.useTransform ) {
+            this.indicatorStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.scroller.translateZ;
+        } else {
+            this.indicatorStyle.left = x + 'px';
+            this.indicatorStyle.top = y + 'px';
+        }
+    },
+
+    _pos: function (x, y) {
+        if ( x < 0 ) {
+            x = 0;
+        } else if ( x > this.maxPosX ) {
+            x = this.maxPosX;
+        }
+
+        if ( y < 0 ) {
+            y = 0;
+        } else if ( y > this.maxPosY ) {
+            y = this.maxPosY;
+        }
+
+        x = this.options.listenX ? Math.round(x / this.sizeRatioX) : this.scroller.x;
+        y = this.options.listenY ? Math.round(y / this.sizeRatioY) : this.scroller.y;
+
+        this.scroller.scrollTo(x, y);
+    },
+
+    fade: function (val, hold) {
+        if ( hold && !this.visible ) {
+            return;
+        }
+
+        clearTimeout(this.fadeTimeout);
+        this.fadeTimeout = null;
+
+        var time = val ? 250 : 500,
+            delay = val ? 0 : 300;
+
+        val = val ? '1' : '0';
+
+        this.wrapperStyle[utils.style.transitionDuration] = time + 'ms';
+
+        this.fadeTimeout = setTimeout((function (val) {
+            this.wrapperStyle.opacity = val;
+            this.visible = +val;
+        }).bind(this, val), delay);
+    }
+};
+
+IScroll.utils = utils;
+
+if ( typeof module != 'undefined' && module.exports ) {
+    module.exports = IScroll;
+} else if ( typeof define == 'function' && define.amd ) {
+        define( function () { return IScroll; } );
+} else {
+    window.IScroll = IScroll;
+}
+
+})(window, document, Math);
+/*!
+ * fullPage 2.9.4
+ * https://github.com/alvarotrigo/fullPage.js
+ * @license MIT licensed
+ *
+ * Copyright (C) 2015 alvarotrigo.com - A project by Alvaro Trigo
+ */
+(function(global, factory) {
+    'use strict';
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], function($) {
+          return factory($, global, global.document, global.Math);
+        });
+    } else if (typeof exports === "object" && exports) {
+        module.exports = factory(require('jquery'), global, global.document, global.Math);
+    } else {
+        factory(jQuery, global, global.document, global.Math);
+    }
+})(typeof window !== 'undefined' ? window : this, function($, window, document, Math, undefined) {
+    'use strict';
+
+    // keeping central set of classnames and selectors
+    var WRAPPER =               'fullpage-wrapper';
+    var WRAPPER_SEL =           '.' + WRAPPER;
+
+    // slimscroll
+    var SCROLLABLE =            'fp-scrollable';
+    var SCROLLABLE_SEL =        '.' + SCROLLABLE;
+
+    // util
+    var RESPONSIVE =            'fp-responsive';
+    var NO_TRANSITION =         'fp-notransition';
+    var DESTROYED =             'fp-destroyed';
+    var ENABLED =               'fp-enabled';
+    var VIEWING_PREFIX =        'fp-viewing';
+    var ACTIVE =                'active';
+    var ACTIVE_SEL =            '.' + ACTIVE;
+    var COMPLETELY =            'fp-completely';
+    var COMPLETELY_SEL =        '.' + COMPLETELY;
+
+    // section
+    var SECTION_DEFAULT_SEL =   '.section';
+    var SECTION =               'fp-section';
+    var SECTION_SEL =           '.' + SECTION;
+    var SECTION_ACTIVE_SEL =    SECTION_SEL + ACTIVE_SEL;
+    var SECTION_FIRST_SEL =     SECTION_SEL + ':first';
+    var SECTION_LAST_SEL =      SECTION_SEL + ':last';
+    var TABLE_CELL =            'fp-tableCell';
+    var TABLE_CELL_SEL =        '.' + TABLE_CELL;
+    var AUTO_HEIGHT =           'fp-auto-height';
+    var AUTO_HEIGHT_SEL =       '.fp-auto-height';
+    var NORMAL_SCROLL =         'fp-normal-scroll';
+    var NORMAL_SCROLL_SEL =     '.fp-normal-scroll';
+
+    // section nav
+    var SECTION_NAV =           'fp-nav';
+    var SECTION_NAV_SEL =       '#' + SECTION_NAV;
+    var SECTION_NAV_TOOLTIP =   'fp-tooltip';
+    var SECTION_NAV_TOOLTIP_SEL='.'+SECTION_NAV_TOOLTIP;
+    var SHOW_ACTIVE_TOOLTIP =   'fp-show-active';
+
+    // slide
+    var SLIDE_DEFAULT_SEL =     '.slide';
+    var SLIDE =                 'fp-slide';
+    var SLIDE_SEL =             '.' + SLIDE;
+    var SLIDE_ACTIVE_SEL =      SLIDE_SEL + ACTIVE_SEL;
+    var SLIDES_WRAPPER =        'fp-slides';
+    var SLIDES_WRAPPER_SEL =    '.' + SLIDES_WRAPPER;
+    var SLIDES_CONTAINER =      'fp-slidesContainer';
+    var SLIDES_CONTAINER_SEL =  '.' + SLIDES_CONTAINER;
+    var TABLE =                 'fp-table';
+
+    // slide nav
+    var SLIDES_NAV =            'fp-slidesNav';
+    var SLIDES_NAV_SEL =        '.' + SLIDES_NAV;
+    var SLIDES_NAV_LINK_SEL =   SLIDES_NAV_SEL + ' a';
+    var SLIDES_ARROW =          'fp-controlArrow';
+    var SLIDES_ARROW_SEL =      '.' + SLIDES_ARROW;
+    var SLIDES_PREV =           'fp-prev';
+    var SLIDES_PREV_SEL =       '.' + SLIDES_PREV;
+    var SLIDES_ARROW_PREV =     SLIDES_ARROW + ' ' + SLIDES_PREV;
+    var SLIDES_ARROW_PREV_SEL = SLIDES_ARROW_SEL + SLIDES_PREV_SEL;
+    var SLIDES_NEXT =           'fp-next';
+    var SLIDES_NEXT_SEL =       '.' + SLIDES_NEXT;
+    var SLIDES_ARROW_NEXT =     SLIDES_ARROW + ' ' + SLIDES_NEXT;
+    var SLIDES_ARROW_NEXT_SEL = SLIDES_ARROW_SEL + SLIDES_NEXT_SEL;
+
+    var $window = $(window);
+    var $document = $(document);
+
+    // Default options for iScroll.js used when using scrollOverflow
+    var iscrollOptions = {
+        scrollbars: true,
+        mouseWheel: true,
+        hideScrollbars: false,
+        fadeScrollbars: false,
+        disableMouse: true,
+        interactiveScrollbars: true
+    };
+
+    $.fn.fullpage = function(options) {
+        //only once my friend!
+        if($('html').hasClass(ENABLED)){ displayWarnings(); return; }
+
+        // common jQuery objects
+        var $htmlBody = $('html, body');
+        var $body = $('body');
+
+        var FP = $.fn.fullpage;
+
+        // Creating some defaults, extending them with any options that were provided
+        options = $.extend({
+            //navigation
+            menu: false,
+            anchors:[],
+            lockAnchors: false,
+            navigation: false,
+            navigationPosition: 'right',
+            navigationTooltips: [],
+            showActiveTooltip: false,
+            slidesNavigation: false,
+            slidesNavPosition: 'bottom',
+            scrollBar: false,
+            hybrid: false,
+
+            //scrolling
+            css3: true,
+            scrollingSpeed: 700,
+            autoScrolling: true,
+            fitToSection: true,
+            fitToSectionDelay: 1000,
+            easing: 'easeInOutCubic',
+            easingcss3: 'ease',
+            loopBottom: false,
+            loopTop: false,
+            loopHorizontal: true,
+            continuousVertical: false,
+            continuousHorizontal: false,
+            scrollHorizontally: false,
+            interlockedSlides: false,
+            dragAndMove: false,
+            offsetSections: false,
+            resetSliders: false,
+            fadingEffect: false,
+            normalScrollElements: null,
+            scrollOverflow: false,
+            scrollOverflowReset: false,
+            scrollOverflowHandler: iscrollHandler,
+            scrollOverflowOptions: null,
+            touchSensitivity: 5,
+            normalScrollElementTouchThreshold: 5,
+            bigSectionsDestination: null,
+
+            //Accessibility
+            keyboardScrolling: true,
+            animateAnchor: true,
+            recordHistory: true,
+
+            //design
+            controlArrows: true,
+            controlArrowColor: '#fff',
+            verticalCentered: true,
+            sectionsColor : [],
+            paddingTop: 0,
+            paddingBottom: 0,
+            fixedElements: null,
+            responsive: 0, //backwards compabitility with responsiveWiddth
+            responsiveWidth: 0,
+            responsiveHeight: 0,
+            responsiveSlides: false,
+            parallax: false,
+            parallaxOptions: {
+                type: 'reveal',
+                percentage: 62,
+                property: 'translate'
+            },
+
+            //Custom selectors
+            sectionSelector: SECTION_DEFAULT_SEL,
+            slideSelector: SLIDE_DEFAULT_SEL,
+
+            //events
+            afterLoad: null,
+            onLeave: null,
+            afterRender: null,
+            afterResize: null,
+            afterReBuild: null,
+            afterSlideLoad: null,
+            onSlideLeave: null,
+            afterResponsive: null,
+
+            lazyLoading: true
+        }, options);
+
+        //flag to avoid very fast sliding for landscape sliders
+        var slideMoving = false;
+
+        var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
+        var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints));
+        var container = $(this);
+        var windowsHeight = $window.height();
+        var isResizing = false;
+        var isWindowFocused = true;
+        var lastScrolledDestiny;
+        var lastScrolledSlide;
+        var canScroll = true;
+        var scrollings = [];
+        var controlPressed;
+        var startingSection;
+        var isScrollAllowed = {};
+        isScrollAllowed.m = {  'up':true, 'down':true, 'left':true, 'right':true };
+        isScrollAllowed.k = $.extend(true,{}, isScrollAllowed.m);
+        var MSPointer = getMSPointer();
+        var events = {
+            touchmove: 'ontouchmove' in window ? 'touchmove' :  MSPointer.move,
+            touchstart: 'ontouchstart' in window ? 'touchstart' :  MSPointer.down
+        };
+
+        //timeouts
+        var resizeId;
+        var afterSectionLoadsId;
+        var afterSlideLoadsId;
+        var scrollId;
+        var scrollId2;
+        var keydownId;
+        var originals = $.extend(true, {}, options); //deep copy
+
+        displayWarnings();
+
+        //fixing bug in iScroll with links: https://github.com/cubiq/iscroll/issues/783
+        iscrollOptions.click = isTouch; // see #2035
+
+        //extending iScroll options with the user custom ones
+        iscrollOptions = $.extend(iscrollOptions, options.scrollOverflowOptions);
+
+        //easeInOutCubic animation included in the plugin
+        $.extend($.easing,{ easeInOutCubic: function (x, t, b, c, d) {if ((t/=d/2) < 1) return c/2*t*t*t + b;return c/2*((t-=2)*t*t + 2) + b;}});
+
+        /**
+        * Sets the autoScroll option.
+        * It changes the scroll bar visibility and the history of the site as a result.
+        */
+        function setAutoScrolling(value, type){
+            //removing the transformation
+            if(!value){
+                silentScroll(0);
+            }
+
+            setVariableState('autoScrolling', value, type);
+
+            var element = $(SECTION_ACTIVE_SEL);
+
+            if(options.autoScrolling && !options.scrollBar){
+                $htmlBody.css({
+                    'overflow' : 'hidden',
+                    'height' : '100%'
+                });
+
+                setRecordHistory(originals.recordHistory, 'internal');
+
+                //for IE touch devices
+                container.css({
+                    '-ms-touch-action': 'none',
+                    'touch-action': 'none'
+                });
+
+                if(element.length){
+                    //moving the container up
+                    silentScroll(element.position().top);
+                }
+
+            }else{
+                $htmlBody.css({
+                    'overflow' : 'visible',
+                    'height' : 'initial'
+                });
+
+                setRecordHistory(false, 'internal');
+
+                //for IE touch devices
+                container.css({
+                    '-ms-touch-action': '',
+                    'touch-action': ''
+                });
+
+                //scrolling the page to the section with no animation
+                if (element.length) {
+                    $htmlBody.scrollTop(element.position().top);
+                }
+            }
+        }
+
+        /**
+        * Defines wheter to record the history for each hash change in the URL.
+        */
+        function setRecordHistory(value, type){
+            setVariableState('recordHistory', value, type);
+        }
+
+        /**
+        * Defines the scrolling speed
+        */
+        function setScrollingSpeed(value, type){
+            setVariableState('scrollingSpeed', value, type);
+        }
+
+        /**
+        * Sets fitToSection
+        */
+        function setFitToSection(value, type){
+            setVariableState('fitToSection', value, type);
+        }
+
+        /**
+        * Sets lockAnchors
+        */
+        function setLockAnchors(value){
+            options.lockAnchors = value;
+        }
+
+        /**
+        * Adds or remove the possiblity of scrolling through sections by using the mouse wheel or the trackpad.
+        */
+        function setMouseWheelScrolling(value){
+            if(value){
+                addMouseWheelHandler();
+                addMiddleWheelHandler();
+            }else{
+                removeMouseWheelHandler();
+                removeMiddleWheelHandler();
+            }
+        }
+
+        /**
+        * Adds or remove the possibility of scrolling through sections by using the mouse wheel/trackpad or touch gestures.
+        * Optionally a second parameter can be used to specify the direction for which the action will be applied.
+        *
+        * @param directions string containing the direction or directions separated by comma.
+        */
+        function setAllowScrolling(value, directions){
+            if(typeof directions !== 'undefined'){
+                directions = directions.replace(/ /g,'').split(',');
+
+                $.each(directions, function (index, direction){
+                    setIsScrollAllowed(value, direction, 'm');
+                });
+            }
+            else if(value){
+                setMouseWheelScrolling(true);
+                addTouchHandler();
+            }else{
+                setMouseWheelScrolling(false);
+                removeTouchHandler();
+            }
+        }
+
+        /**
+        * Adds or remove the possibility of scrolling through sections by using the keyboard arrow keys
+        */
+        function setKeyboardScrolling(value, directions){
+            if(typeof directions !== 'undefined'){
+                directions = directions.replace(/ /g,'').split(',');
+
+                $.each(directions, function (index, direction){
+                    setIsScrollAllowed(value, direction, 'k');
+                });
+            }else{
+                options.keyboardScrolling = value;
+            }
+        }
+
+        /**
+        * Moves the page up one section.
+        */
+        function moveSectionUp(){
+            var prev = $(SECTION_ACTIVE_SEL).prev(SECTION_SEL);
+
+            //looping to the bottom if there's no more sections above
+            if (!prev.length && (options.loopTop || options.continuousVertical)) {
+                prev = $(SECTION_SEL).last();
+            }
+
+            if (prev.length) {
+                scrollPage(prev, null, true);
+            }
+        }
+
+        /**
+        * Moves the page down one section.
+        */
+        function moveSectionDown(){
+            var next = $(SECTION_ACTIVE_SEL).next(SECTION_SEL);
+
+            //looping to the top if there's no more sections below
+            if(!next.length &&
+                (options.loopBottom || options.continuousVertical)){
+                next = $(SECTION_SEL).first();
+            }
+
+            if(next.length){
+                scrollPage(next, null, false);
+            }
+        }
+
+        /**
+        * Moves the page to the given section and slide with no animation.
+        * Anchors or index positions can be used as params.
+        */
+        function silentMoveTo(sectionAnchor, slideAnchor){
+            setScrollingSpeed (0, 'internal');
+            moveTo(sectionAnchor, slideAnchor);
+            setScrollingSpeed (originals.scrollingSpeed, 'internal');
+        }
+
+        /**
+        * Moves the page to the given section and slide.
+        * Anchors or index positions can be used as params.
+        */
+        function moveTo(sectionAnchor, slideAnchor){
+            var destiny = getSectionByAnchor(sectionAnchor);
+
+            if (typeof slideAnchor !== 'undefined'){
+                scrollPageAndSlide(sectionAnchor, slideAnchor);
+            }else if(destiny.length > 0){
+                scrollPage(destiny);
+            }
+        }
+
+        /**
+        * Slides right the slider of the active section.
+        * Optional `section` param.
+        */
+        function moveSlideRight(section){
+            moveSlide('right', section);
+        }
+
+        /**
+        * Slides left the slider of the active section.
+        * Optional `section` param.
+        */
+        function moveSlideLeft(section){
+            moveSlide('left', section);
+        }
+
+        /**
+         * When resizing is finished, we adjust the slides sizes and positions
+         */
+        function reBuild(resizing){
+            if(container.hasClass(DESTROYED)){ return; }  //nothing to do if the plugin was destroyed
+
+            isResizing = true;
+
+            windowsHeight = $window.height();  //updating global var
+
+            $(SECTION_SEL).each(function(){
+                var slidesWrap = $(this).find(SLIDES_WRAPPER_SEL);
+                var slides = $(this).find(SLIDE_SEL);
+
+                //adjusting the height of the table-cell for IE and Firefox
+                if(options.verticalCentered){
+                    $(this).find(TABLE_CELL_SEL).css('height', getTableHeight($(this)) + 'px');
+                }
+
+                $(this).css('height', windowsHeight + 'px');
+
+                //resizing the scrolling divs
+                if(options.scrollOverflow){
+                    if(slides.length){
+                        slides.each(function(){
+                            createScrollBar($(this));
+                        });
+                    }else{
+                        createScrollBar($(this));
+                    }
+                }
+
+                //adjusting the position fo the FULL WIDTH slides...
+                if (slides.length > 1) {
+                    landscapeScroll(slidesWrap, slidesWrap.find(SLIDE_ACTIVE_SEL));
+                }
+            });
+
+            var activeSection = $(SECTION_ACTIVE_SEL);
+            var sectionIndex = activeSection.index(SECTION_SEL);
+
+            //isn't it the first section?
+            if(sectionIndex){
+                //adjusting the position for the current section
+                silentMoveTo(sectionIndex + 1);
+            }
+
+            isResizing = false;
+            $.isFunction( options.afterResize ) && resizing && options.afterResize.call(container);
+            $.isFunction( options.afterReBuild ) && !resizing && options.afterReBuild.call(container);
+        }
+
+        /**
+        * Turns fullPage.js to normal scrolling mode when the viewport `width` or `height`
+        * are smaller than the set limit values.
+        */
+        function setResponsive(active){
+            var isResponsive = $body.hasClass(RESPONSIVE);
+
+            if(active){
+                if(!isResponsive){
+                    setAutoScrolling(false, 'internal');
+                    setFitToSection(false, 'internal');
+                    $(SECTION_NAV_SEL).hide();
+                    $body.addClass(RESPONSIVE);
+                    $.isFunction( options.afterResponsive ) && options.afterResponsive.call( container, active);
+                }
+            }
+            else if(isResponsive){
+                setAutoScrolling(originals.autoScrolling, 'internal');
+                setFitToSection(originals.autoScrolling, 'internal');
+                $(SECTION_NAV_SEL).show();
+                $body.removeClass(RESPONSIVE);
+                $.isFunction( options.afterResponsive ) && options.afterResponsive.call( container, active);
+            }
+        }
+
+        if($(this).length){
+            //public functions
+            FP.setAutoScrolling = setAutoScrolling;
+            FP.setRecordHistory = setRecordHistory;
+            FP.setScrollingSpeed = setScrollingSpeed;
+            FP.setFitToSection = setFitToSection;
+            FP.setLockAnchors = setLockAnchors;
+            FP.setMouseWheelScrolling = setMouseWheelScrolling;
+            FP.setAllowScrolling = setAllowScrolling;
+            FP.setKeyboardScrolling = setKeyboardScrolling;
+            FP.moveSectionUp = moveSectionUp;
+            FP.moveSectionDown = moveSectionDown;
+            FP.silentMoveTo = silentMoveTo;
+            FP.moveTo = moveTo;
+            FP.moveSlideRight = moveSlideRight;
+            FP.moveSlideLeft = moveSlideLeft;
+            FP.fitToSection = fitToSection;
+            FP.reBuild = reBuild;
+            FP.setResponsive = setResponsive;
+            FP.destroy = destroy;
+
+            init();
+
+            bindEvents();
+        }
+
+        function init(){
+            //if css3 is not supported, it will use jQuery animations
+            if(options.css3){
+                options.css3 = support3d();
+            }
+
+            options.scrollBar = options.scrollBar || options.hybrid;
+
+            setOptionsFromDOM();
+            prepareDom();
+            setAllowScrolling(true);
+            setAutoScrolling(options.autoScrolling, 'internal');
+            responsive();
+
+            //setting the class for the body element
+            setBodyClass();
+
+            if(document.readyState === 'complete'){
+                scrollToAnchor();
+            }
+            $window.on('load', scrollToAnchor);
+        }
+
+        function bindEvents(){
+            $window
+                //when scrolling...
+                .on('scroll', scrollHandler)
+
+                //detecting any change on the URL to scroll to the given anchor link
+                //(a way to detect back history button as we play with the hashes on the URL)
+                .on('hashchange', hashChangeHandler)
+
+                //when opening a new tab (ctrl + t), `control` won't be pressed when coming back.
+                .blur(blurHandler)
+
+                //when resizing the site, we adjust the heights of the sections, slimScroll...
+                .resize(resizeHandler);
+
+            $document
+                //Sliding with arrow keys, both, vertical and horizontal
+                .keydown(keydownHandler)
+
+                //to prevent scrolling while zooming
+                .keyup(keyUpHandler)
+
+                //Scrolls to the section when clicking the navigation bullet
+                .on('click touchstart', SECTION_NAV_SEL + ' a', sectionBulletHandler)
+
+                //Scrolls the slider to the given slide destination for the given section
+                .on('click touchstart', SLIDES_NAV_LINK_SEL, slideBulletHandler)
+
+                .on('click', SECTION_NAV_TOOLTIP_SEL, tooltipTextHandler);
+
+            //Scrolling horizontally when clicking on the slider controls.
+            $(SECTION_SEL).on('click touchstart', SLIDES_ARROW_SEL, slideArrowHandler);
+
+            /**
+            * Applying normalScroll elements.
+            * Ignoring the scrolls over the specified selectors.
+            */
+            if(options.normalScrollElements){
+                $document.on('mouseenter', options.normalScrollElements, function () {
+                    setMouseWheelScrolling(false);
+                });
+
+                $document.on('mouseleave', options.normalScrollElements, function(){
+                    setMouseWheelScrolling(true);
+                });
+            }
+        }
+
+        /**
+        * Setting options from DOM elements if they are not provided.
+        */
+        function setOptionsFromDOM(){
+            var sections = container.find(options.sectionSelector);
+
+            //no anchors option? Checking for them in the DOM attributes
+            if(!options.anchors.length){
+                options.anchors = sections.filter('[data-anchor]').map(function(){
+                    return $(this).data('anchor').toString();
+                }).get();
+            }
+
+            //no tooltips option? Checking for them in the DOM attributes
+            if(!options.navigationTooltips.length){
+                options.navigationTooltips = sections.filter('[data-tooltip]').map(function(){
+                    return $(this).data('tooltip').toString();
+                }).get();
+            }
+        }
+
+        /**
+        * Works over the DOM structure to set it up for the current fullpage options.
+        */
+        function prepareDom(){
+            container.css({
+                'height': '100%',
+                'position': 'relative'
+            });
+
+            //adding a class to recognize the container internally in the code
+            container.addClass(WRAPPER);
+            $('html').addClass(ENABLED);
+
+            //due to https://github.com/alvarotrigo/fullPage.js/issues/1502
+            windowsHeight = $window.height();
+
+            container.removeClass(DESTROYED); //in case it was destroyed before initializing it again
+
+            addInternalSelectors();
+
+             //styling the sections / slides / menu
+            $(SECTION_SEL).each(function(index){
+                var section = $(this);
+                var slides = section.find(SLIDE_SEL);
+                var numSlides = slides.length;
+
+                styleSection(section, index);
+                styleMenu(section, index);
+
+                // if there's any slide
+                if (numSlides > 0) {
+                    styleSlides(section, slides, numSlides);
+                }else{
+                    if(options.verticalCentered){
+                        addTableClass(section);
+                    }
+                }
+            });
+
+            //fixed elements need to be moved out of the plugin container due to problems with CSS3.
+            if(options.fixedElements && options.css3){
+                $(options.fixedElements).appendTo($body);
+            }
+
+            //vertical centered of the navigation + active bullet
+            if(options.navigation){
+                addVerticalNavigation();
+            }
+
+            enableYoutubeAPI();
+
+            if(options.scrollOverflow){
+                if(document.readyState === 'complete'){
+                    createScrollBarHandler();
+                }
+                //after DOM and images are loaded
+                $window.on('load', createScrollBarHandler);
+            }else{
+                afterRenderActions();
+            }
+        }
+
+        /**
+        * Styles the horizontal slides for a section.
+        */
+        function styleSlides(section, slides, numSlides){
+            var sliderWidth = numSlides * 100;
+            var slideWidth = 100 / numSlides;
+
+            slides.wrapAll('<div class="' + SLIDES_CONTAINER + '" />');
+            slides.parent().wrap('<div class="' + SLIDES_WRAPPER + '" />');
+
+            section.find(SLIDES_CONTAINER_SEL).css('width', sliderWidth + '%');
+
+            if(numSlides > 1){
+                if(options.controlArrows){
+                    createSlideArrows(section);
+                }
+
+                if(options.slidesNavigation){
+                    addSlidesNavigation(section, numSlides);
+                }
+            }
+
+            slides.each(function(index) {
+                $(this).css('width', slideWidth + '%');
+
+                if(options.verticalCentered){
+                    addTableClass($(this));
+                }
+            });
+
+            var startingSlide = section.find(SLIDE_ACTIVE_SEL);
+
+            //if the slide won't be an starting point, the default will be the first one
+            //the active section isn't the first one? Is not the first slide of the first section? Then we load that section/slide by default.
+            if( startingSlide.length &&  ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) !== 0 || ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) === 0 && startingSlide.index() !== 0))){
+                silentLandscapeScroll(startingSlide, 'internal');
+            }else{
+                slides.eq(0).addClass(ACTIVE);
+            }
+        }
+
+        /**
+        * Styling vertical sections
+        */
+        function styleSection(section, index){
+            //if no active section is defined, the 1st one will be the default one
+            if(!index && $(SECTION_ACTIVE_SEL).length === 0) {
+                section.addClass(ACTIVE);
+            }
+            startingSection = $(SECTION_ACTIVE_SEL);
+
+            section.css('height', windowsHeight + 'px');
+
+            if(options.paddingTop){
+                section.css('padding-top', options.paddingTop);
+            }
+
+            if(options.paddingBottom){
+                section.css('padding-bottom', options.paddingBottom);
+            }
+
+            if (typeof options.sectionsColor[index] !==  'undefined') {
+                section.css('background-color', options.sectionsColor[index]);
+            }
+
+            if (typeof options.anchors[index] !== 'undefined') {
+                section.attr('data-anchor', options.anchors[index]);
+            }
+        }
+
+        /**
+        * Sets the data-anchor attributes to the menu elements and activates the current one.
+        */
+        function styleMenu(section, index){
+            if (typeof options.anchors[index] !== 'undefined') {
+                //activating the menu / nav element on load
+                if(section.hasClass(ACTIVE)){
+                    activateMenuAndNav(options.anchors[index], index);
+                }
+            }
+
+            //moving the menu outside the main container if it is inside (avoid problems with fixed positions when using CSS3 tranforms)
+            if(options.menu && options.css3 && $(options.menu).closest(WRAPPER_SEL).length){
+                $(options.menu).appendTo($body);
+            }
+        }
+
+        /**
+        * Adds internal classes to be able to provide customizable selectors
+        * keeping the link with the style sheet.
+        */
+        function addInternalSelectors(){
+            container.find(options.sectionSelector).addClass(SECTION);
+            container.find(options.slideSelector).addClass(SLIDE);
+        }
+
+        /**
+        * Creates the control arrows for the given section
+        */
+        function createSlideArrows(section){
+            section.find(SLIDES_WRAPPER_SEL).after('<div class="' + SLIDES_ARROW_PREV + '"></div><div class="' + SLIDES_ARROW_NEXT + '"></div>');
+
+            if(options.controlArrowColor!='#fff'){
+                section.find(SLIDES_ARROW_NEXT_SEL).css('border-color', 'transparent transparent transparent '+options.controlArrowColor);
+                section.find(SLIDES_ARROW_PREV_SEL).css('border-color', 'transparent '+ options.controlArrowColor + ' transparent transparent');
+            }
+
+            if(!options.loopHorizontal){
+                section.find(SLIDES_ARROW_PREV_SEL).hide();
+            }
+        }
+
+        /**
+        * Creates a vertical navigation bar.
+        */
+        function addVerticalNavigation(){
+            $body.append('<div id="' + SECTION_NAV + '"><ul></ul></div>');
+            var nav = $(SECTION_NAV_SEL);
+
+            nav.addClass(function() {
+                return options.showActiveTooltip ? SHOW_ACTIVE_TOOLTIP + ' ' + options.navigationPosition : options.navigationPosition;
+            });
+
+            for (var i = 0; i < $(SECTION_SEL).length; i++) {
+                var link = '';
+                if (options.anchors.length) {
+                    link = options.anchors[i];
+                }
+
+                var li = '<li><a href="#' + link + '"><span></span></a>';
+
+                // Only add tooltip if needed (defined by user)
+                var tooltip = options.navigationTooltips[i];
+
+                if (typeof tooltip !== 'undefined' && tooltip !== '') {
+                    li += '<div class="' + SECTION_NAV_TOOLTIP + ' ' + options.navigationPosition + '">' + tooltip + '</div>';
+                }
+
+                li += '</li>';
+
+                nav.find('ul').append(li);
+            }
+
+            //centering it vertically
+            $(SECTION_NAV_SEL).css('margin-top', '-' + ($(SECTION_NAV_SEL).height()/2) + 'px');
+
+            //activating the current active section
+            $(SECTION_NAV_SEL).find('li').eq($(SECTION_ACTIVE_SEL).index(SECTION_SEL)).find('a').addClass(ACTIVE);
+        }
+
+        /**
+        * Creates the slim scroll scrollbar for the sections and slides inside them.
+        */
+        function createScrollBarHandler(){
+            $(SECTION_SEL).each(function(){
+                var slides = $(this).find(SLIDE_SEL);
+
+                if(slides.length){
+                    slides.each(function(){
+                        createScrollBar($(this));
+                    });
+                }else{
+                    createScrollBar($(this));
+                }
+
+            });
+            afterRenderActions();
+        }
+
+        /*
+        * Enables the Youtube videos API so we can control their flow if necessary.
+        */
+        function enableYoutubeAPI(){
+            container.find('iframe[src*="youtube.com/embed/"]').each(function(){
+                addURLParam($(this), 'enablejsapi=1');
+            });
+        }
+
+        /**
+        * Adds a new parameter and its value to the `src` of a given element
+        */
+        function addURLParam(element, newParam){
+            var originalSrc = element.attr('src');
+            element.attr('src', originalSrc + getUrlParamSign(originalSrc) + newParam);
+        }
+
+        /*
+        * Returns the prefix sign to use for a new parameter in an existen URL.
+        *
+        * @return {String}  ? | &
+        */
+        function getUrlParamSign(url){
+            return ( !/\?/.test( url ) ) ? '?' : '&';
+        }
+
+        /**
+        * Actions and callbacks to fire afterRender
+        */
+        function afterRenderActions(){
+            var section = $(SECTION_ACTIVE_SEL);
+
+            section.addClass(COMPLETELY);
+
+            if(options.scrollOverflowHandler.afterRender){
+                options.scrollOverflowHandler.afterRender(section);
+            }
+            lazyLoad(section);
+            playMedia(section);
+            options.scrollOverflowHandler.afterLoad();
+            
+            if(isDestinyTheStartingSection()){
+                $.isFunction( options.afterLoad ) && options.afterLoad.call(section, section.data('anchor'), (section.index(SECTION_SEL) + 1));
+            }
+
+            $.isFunction( options.afterRender ) && options.afterRender.call(container);
+        }
+
+        /**
+        * Determines if the URL anchor destiny is the starting section (the one using 'active' class before initialization)
+        */
+        function isDestinyTheStartingSection(){
+            var anchors =  window.location.hash.replace('#', '').split('/');
+            var destinationSection = getSectionByAnchor(decodeURIComponent(anchors[0]));
+    
+            return !destinationSection.length || destinationSection.length && destinationSection.index() === startingSection.index();
+        }
+
+
+        var isScrolling = false;
+        var lastScroll = 0;
+
+        //when scrolling...
+        function scrollHandler(){
+            var currentSection;
+
+            if(!options.autoScrolling || options.scrollBar){
+                var currentScroll = $window.scrollTop();
+                var scrollDirection = getScrollDirection(currentScroll);
+                var visibleSectionIndex = 0;
+                var screen_mid = currentScroll + ($window.height() / 2.0);
+                var isAtBottom = $body.height() - $window.height() === currentScroll;
+                var sections =  document.querySelectorAll(SECTION_SEL);
+
+                //when using `auto-height` for a small last section it won't be centered in the viewport
+                if(isAtBottom){
+                    visibleSectionIndex = sections.length - 1;
+                }
+                //is at top? when using `auto-height` for a small first section it won't be centered in the viewport
+                else if(!currentScroll){
+                    visibleSectionIndex = 0;
+                }
+
+                //taking the section which is showing more content in the viewport
+                else{
+                    for (var i = 0; i < sections.length; ++i) {
+                        var section = sections[i];
+
+                        // Pick the the last section which passes the middle line of the screen.
+                        if (section.offsetTop <= screen_mid)
+                        {
+                            visibleSectionIndex = i;
+                        }
+                    }
+                }
+
+                if(isCompletelyInViewPort(scrollDirection)){
+                    if(!$(SECTION_ACTIVE_SEL).hasClass(COMPLETELY)){
+                        $(SECTION_ACTIVE_SEL).addClass(COMPLETELY).siblings().removeClass(COMPLETELY);
+                    }
+                }
+
+                //geting the last one, the current one on the screen
+                currentSection = $(sections).eq(visibleSectionIndex);
+
+                //setting the visible section as active when manually scrolling
+                //executing only once the first time we reach the section
+                if(!currentSection.hasClass(ACTIVE)){
+                    isScrolling = true;
+                    var leavingSection = $(SECTION_ACTIVE_SEL);
+                    var leavingSectionIndex = leavingSection.index(SECTION_SEL) + 1;
+                    var yMovement = getYmovement(currentSection);
+                    var anchorLink  = currentSection.data('anchor');
+                    var sectionIndex = currentSection.index(SECTION_SEL) + 1;
+                    var activeSlide = currentSection.find(SLIDE_ACTIVE_SEL);
+                    var slideIndex;
+                    var slideAnchorLink;
+
+                    if(activeSlide.length){
+                        slideAnchorLink = activeSlide.data('anchor');
+                        slideIndex = activeSlide.index();
+                    }
+
+                    if(canScroll){
+                        currentSection.addClass(ACTIVE).siblings().removeClass(ACTIVE);
+
+                        $.isFunction( options.onLeave ) && options.onLeave.call( leavingSection, leavingSectionIndex, sectionIndex, yMovement);
+                        $.isFunction( options.afterLoad ) && options.afterLoad.call( currentSection, anchorLink, sectionIndex);
+
+                        stopMedia(leavingSection);
+                        lazyLoad(currentSection);
+                        playMedia(currentSection);
+
+                        activateMenuAndNav(anchorLink, sectionIndex - 1);
+
+                        if(options.anchors.length){
+                            //needed to enter in hashChange event when using the menu with anchor links
+                            lastScrolledDestiny = anchorLink;
+                        }
+                        setState(slideIndex, slideAnchorLink, anchorLink, sectionIndex);
+                    }
+
+                    //small timeout in order to avoid entering in hashChange event when scrolling is not finished yet
+                    clearTimeout(scrollId);
+                    scrollId = setTimeout(function(){
+                        isScrolling = false;
+                    }, 100);
+                }
+
+                if(options.fitToSection){
+                    //for the auto adjust of the viewport to fit a whole section
+                    clearTimeout(scrollId2);
+
+                    scrollId2 = setTimeout(function(){
+                        //checking it again in case it changed during the delay
+                        if(options.fitToSection){
+                            fitToSection();
+                        }
+                    }, options.fitToSectionDelay);
+                }
+            }
+        }
+
+        /**
+        * Fits the site to the nearest active section
+        */
+        function fitToSection(){
+            //checking fitToSection again in case it was set to false before the timeout delay
+            if(canScroll){
+                //allows to scroll to an active section and
+                //if the section is already active, we prevent firing callbacks
+                isResizing = true;
+
+                scrollPage($(SECTION_ACTIVE_SEL));
+                isResizing = false;
+            }
+        }
+
+        /**
+        * Determines whether the active section has seen in its whole or not.
+        */
+        function isCompletelyInViewPort(movement){
+            var top = $(SECTION_ACTIVE_SEL).position().top;
+            var bottom = top + $window.height();
+
+            if(movement == 'up'){
+                return bottom >= ($window.scrollTop() + $window.height());
+            }
+            return top <= $window.scrollTop();
+        }
+
+        /**
+        * Gets the directon of the the scrolling fired by the scroll event.
+        */
+        function getScrollDirection(currentScroll){
+            var direction = currentScroll > lastScroll ? 'down' : 'up';
+
+            lastScroll = currentScroll;
+
+            //needed for auto-height sections to determine if we want to scroll to the top or bottom of the destination
+            previousDestTop = currentScroll;
+
+            return direction;
+        }
+
+        /**
+        * Determines the way of scrolling up or down:
+        * by 'automatically' scrolling a section or by using the default and normal scrolling.
+        */
+        function scrolling(type, scrollable){
+            if (!isScrollAllowed.m[type]){
+                return;
+            }
+            var check = (type === 'down') ? 'bottom' : 'top';
+            var scrollSection = (type === 'down') ? moveSectionDown : moveSectionUp;
+
+            if(scrollable.length > 0 ){
+                //is the scrollbar at the start/end of the scroll?
+                if(options.scrollOverflowHandler.isScrolled(check, scrollable)){
+                    scrollSection();
+                }else{
+                    return true;
+                }
+            }else{
+                // moved up/down
+                scrollSection();
+            }
+        }
+
+        /*
+        * Preventing bouncing in iOS #2285
+        */
+        function preventBouncing(event){
+            var e = event.originalEvent;
+            if(!checkParentForNormalScrollElement(event.target) && options.autoScrolling && isReallyTouch(e)){
+                //preventing the easing on iOS devices
+                event.preventDefault();
+            }
+        }
+
+        var touchStartY = 0;
+        var touchStartX = 0;
+        var touchEndY = 0;
+        var touchEndX = 0;
+
+        /* Detecting touch events
+
+        * As we are changing the top property of the page on scrolling, we can not use the traditional way to detect it.
+        * This way, the touchstart and the touch moves shows an small difference between them which is the
+        * used one to determine the direction.
+        */
+        function touchMoveHandler(event){
+            var e = event.originalEvent;
+            var activeSection = $(e.target).closest(SECTION_SEL);
+
+            // additional: if one of the normalScrollElements isn't within options.normalScrollElementTouchThreshold hops up the DOM chain
+            if (!checkParentForNormalScrollElement(event.target) && isReallyTouch(e) ) {
+
+                if(options.autoScrolling){
+                    //preventing the easing on iOS devices
+                    event.preventDefault();
+                }
+
+                var scrollable = options.scrollOverflowHandler.scrollable(activeSection);
+                var touchEvents = getEventsPage(e);
+
+                touchEndY = touchEvents.y;
+                touchEndX = touchEvents.x;
+
+                //if movement in the X axys is greater than in the Y and the currect section has slides...
+                if (activeSection.find(SLIDES_WRAPPER_SEL).length && Math.abs(touchStartX - touchEndX) > (Math.abs(touchStartY - touchEndY))) {
+
+                    //is the movement greater than the minimum resistance to scroll?
+                    if (!slideMoving && Math.abs(touchStartX - touchEndX) > ($window.outerWidth() / 100 * options.touchSensitivity)) {
+                        if (touchStartX > touchEndX) {
+                            if(isScrollAllowed.m.right){
+                                moveSlideRight(activeSection); //next
+                            }
+                        } else {
+                            if(isScrollAllowed.m.left){
+                                moveSlideLeft(activeSection); //prev
+                            }
+                        }
+                    }
+                }
+
+                //vertical scrolling (only when autoScrolling is enabled)
+                else if(options.autoScrolling && canScroll){
+
+                    //is the movement greater than the minimum resistance to scroll?
+                    if (Math.abs(touchStartY - touchEndY) > ($window.height() / 100 * options.touchSensitivity)) {
+                        if (touchStartY > touchEndY) {
+                            scrolling('down', scrollable);
+                        } else if (touchEndY > touchStartY) {
+                            scrolling('up', scrollable);
+                        }
+                    }
+                }
+            }
+        }
+
+        /**
+         * recursive function to loop up the parent nodes to check if one of them exists in options.normalScrollElements
+         * Currently works well for iOS - Android might need some testing
+         * @param  {Element} el  target element / jquery selector (in subsequent nodes)
+         * @param  {int}     hop current hop compared to options.normalScrollElementTouchThreshold
+         * @return {boolean} true if there is a match to options.normalScrollElements
+         */
+        function checkParentForNormalScrollElement (el, hop) {
+            hop = hop || 0;
+            var parent = $(el).parent();
+
+            if (hop < options.normalScrollElementTouchThreshold &&
+                parent.is(options.normalScrollElements) ) {
+                return true;
+            } else if (hop == options.normalScrollElementTouchThreshold) {
+                return false;
+            } else {
+                return checkParentForNormalScrollElement(parent, ++hop);
+            }
+        }
+
+        /**
+        * As IE >= 10 fires both touch and mouse events when using a mouse in a touchscreen
+        * this way we make sure that is really a touch event what IE is detecting.
+        */
+        function isReallyTouch(e){
+            //if is not IE   ||  IE is detecting `touch` or `pen`
+            return typeof e.pointerType === 'undefined' || e.pointerType != 'mouse';
+        }
+
+        /**
+        * Handler for the touch start event.
+        */
+        function touchStartHandler(event){
+            var e = event.originalEvent;
+
+            //stopping the auto scroll to adjust to a section
+            if(options.fitToSection){
+                $htmlBody.stop();
+            }
+
+            if(isReallyTouch(e)){
+                var touchEvents = getEventsPage(e);
+                touchStartY = touchEvents.y;
+                touchStartX = touchEvents.x;
+            }
+        }
+
+        /**
+        * Gets the average of the last `number` elements of the given array.
+        */
+        function getAverage(elements, number){
+            var sum = 0;
+
+            //taking `number` elements from the end to make the average, if there are not enought, 1
+            var lastElements = elements.slice(Math.max(elements.length - number, 1));
+
+            for(var i = 0; i < lastElements.length; i++){
+                sum = sum + lastElements[i];
+            }
+
+            return Math.ceil(sum/number);
+        }
+
+        /**
+         * Detecting mousewheel scrolling
+         *
+         * http://blogs.sitepointstatic.com/examples/tech/mouse-wheel/index.html
+         * http://www.sitepoint.com/html5-javascript-mouse-wheel/
+         */
+        var prevTime = new Date().getTime();
+
+        function MouseWheelHandler(e) {
+            var curTime = new Date().getTime();
+            var isNormalScroll = $(COMPLETELY_SEL).hasClass(NORMAL_SCROLL);
+
+            //autoscrolling and not zooming?
+            if(options.autoScrolling && !controlPressed && !isNormalScroll){
+                // cross-browser wheel delta
+                e = e || window.event;
+                var value = e.wheelDelta || -e.deltaY || -e.detail;
+                var delta = Math.max(-1, Math.min(1, value));
+
+                var horizontalDetection = typeof e.wheelDeltaX !== 'undefined' || typeof e.deltaX !== 'undefined';
+                var isScrollingVertically = (Math.abs(e.wheelDeltaX) < Math.abs(e.wheelDelta)) || (Math.abs(e.deltaX ) < Math.abs(e.deltaY) || !horizontalDetection);
+
+                //Limiting the array to 150 (lets not waste memory!)
+                if(scrollings.length > 149){
+                    scrollings.shift();
+                }
+
+                //keeping record of the previous scrollings
+                scrollings.push(Math.abs(value));
+
+                //preventing to scroll the site on mouse wheel when scrollbar is present
+                if(options.scrollBar){
+                    e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                }
+
+                var activeSection = $(SECTION_ACTIVE_SEL);
+                var scrollable = options.scrollOverflowHandler.scrollable(activeSection);
+
+                //time difference between the last scroll and the current one
+                var timeDiff = curTime-prevTime;
+                prevTime = curTime;
+
+                //haven't they scrolled in a while?
+                //(enough to be consider a different scrolling action to scroll another section)
+                if(timeDiff > 200){
+                    //emptying the array, we dont care about old scrollings for our averages
+                    scrollings = [];
+                }
+
+                if(canScroll){
+                    var averageEnd = getAverage(scrollings, 10);
+                    var averageMiddle = getAverage(scrollings, 70);
+                    var isAccelerating = averageEnd >= averageMiddle;
+
+                    //to avoid double swipes...
+                    if(isAccelerating && isScrollingVertically){
+                        //scrolling down?
+                        if (delta < 0) {
+                            scrolling('down', scrollable);
+
+                        //scrolling up?
+                        }else {
+                            scrolling('up', scrollable);
+                        }
+                    }
+                }
+
+                return false;
+            }
+
+            if(options.fitToSection){
+                //stopping the auto scroll to adjust to a section
+                $htmlBody.stop();
+            }
+        }
+
+        /**
+        * Slides a slider to the given direction.
+        * Optional `section` param.
+        */
+        function moveSlide(direction, section){
+            var activeSection = typeof section === 'undefined' ? $(SECTION_ACTIVE_SEL) : section;
+            var slides = activeSection.find(SLIDES_WRAPPER_SEL);
+            var numSlides = slides.find(SLIDE_SEL).length;
+
+            // more than one slide needed and nothing should be sliding
+            if (!slides.length || slideMoving || numSlides < 2) {
+                return;
+            }
+
+            var currentSlide = slides.find(SLIDE_ACTIVE_SEL);
+            var destiny = null;
+
+            if(direction === 'left'){
+                destiny = currentSlide.prev(SLIDE_SEL);
+            }else{
+                destiny = currentSlide.next(SLIDE_SEL);
+            }
+
+            //isn't there a next slide in the secuence?
+            if(!destiny.length){
+                //respect loopHorizontal settin
+                if (!options.loopHorizontal) return;
+
+                if(direction === 'left'){
+                    destiny = currentSlide.siblings(':last');
+                }else{
+                    destiny = currentSlide.siblings(':first');
+                }
+            }
+
+            slideMoving = true;
+
+            landscapeScroll(slides, destiny, direction);
+        }
+
+        /**
+        * Maintains the active slides in the viewport
+        * (Because the `scroll` animation might get lost with some actions, such as when using continuousVertical)
+        */
+        function keepSlidesPosition(){
+            $(SLIDE_ACTIVE_SEL).each(function(){
+                silentLandscapeScroll($(this), 'internal');
+            });
+        }
+
+        var previousDestTop = 0;
+        /**
+        * Returns the destination Y position based on the scrolling direction and
+        * the height of the section.
+        */
+        function getDestinationPosition(element){
+            var elemPosition = element.position();
+
+            //top of the desination will be at the top of the viewport
+            var position = elemPosition.top;
+            var isScrollingDown =  elemPosition.top > previousDestTop;
+            var sectionBottom = position - windowsHeight + element.outerHeight();
+            var bigSectionsDestination = options.bigSectionsDestination;
+
+            //is the destination element bigger than the viewport?
+            if(element.outerHeight() > windowsHeight){
+                //scrolling up?
+                if(!isScrollingDown && !bigSectionsDestination || bigSectionsDestination === 'bottom' ){
+                    position = sectionBottom;
+                }
+            }
+
+            //sections equal or smaller than the viewport height && scrolling down? ||  is resizing and its in the last section
+            else if(isScrollingDown || (isResizing && element.is(':last-child')) ){
+                //The bottom of the destination will be at the bottom of the viewport
+                position = sectionBottom;
+            }
+
+            /*
+            Keeping record of the last scrolled position to determine the scrolling direction.
+            No conventional methods can be used as the scroll bar might not be present
+            AND the section might not be active if it is auto-height and didnt reach the middle
+            of the viewport.
+            */
+            previousDestTop = position;
+            return position;
+        }
+
+        /**
+        * Scrolls the site to the given element and scrolls to the slide if a callback is given.
+        */
+        function scrollPage(element, callback, isMovementUp){
+            if(typeof element === 'undefined'){ return; } //there's no element to scroll, leaving the function
+
+            var dtop = getDestinationPosition(element);
+            var slideAnchorLink;
+            var slideIndex;
+
+            //local variables
+            var v = {
+                element: element,
+                callback: callback,
+                isMovementUp: isMovementUp,
+                dtop: dtop,
+                yMovement: getYmovement(element),
+                anchorLink: element.data('anchor'),
+                sectionIndex: element.index(SECTION_SEL),
+                activeSlide: element.find(SLIDE_ACTIVE_SEL),
+                activeSection: $(SECTION_ACTIVE_SEL),
+                leavingSection: $(SECTION_ACTIVE_SEL).index(SECTION_SEL) + 1,
+
+                //caching the value of isResizing at the momment the function is called
+                //because it will be checked later inside a setTimeout and the value might change
+                localIsResizing: isResizing
+            };
+
+            //quiting when destination scroll is the same as the current one
+            if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.scrollTop() === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }
+
+            if(v.activeSlide.length){
+                slideAnchorLink = v.activeSlide.data('anchor');
+                slideIndex = v.activeSlide.index();
+            }
+
+            // If continuousVertical && we need to wrap around
+            if (options.autoScrolling && options.continuousVertical && typeof (v.isMovementUp) !== "undefined" &&
+                ((!v.isMovementUp && v.yMovement == 'up') || // Intending to scroll down but about to go up or
+                (v.isMovementUp && v.yMovement == 'down'))) { // intending to scroll up but about to go down
+
+                v = createInfiniteSections(v);
+            }
+
+            //callback (onLeave) if the site is not just resizing and readjusting the slides
+            if($.isFunction(options.onLeave) && !v.localIsResizing){
+                if(options.onLeave.call(v.activeSection, v.leavingSection, (v.sectionIndex + 1), v.yMovement) === false){
+                    return;
+                }
+            }
+
+            //pausing media of the leaving section (if we are not just resizing, as destinatino will be the same one)
+            if(!v.localIsResizing){
+                stopMedia(v.activeSection);
+            }
+
+            options.scrollOverflowHandler.beforeLeave();
+            element.addClass(ACTIVE).siblings().removeClass(ACTIVE);
+            lazyLoad(element);
+            options.scrollOverflowHandler.onLeave();
+
+
+            //preventing from activating the MouseWheelHandler event
+            //more than once if the page is scrolling
+            canScroll = false;
+
+            setState(slideIndex, slideAnchorLink, v.anchorLink, v.sectionIndex);
+
+            performMovement(v);
+
+            //flag to avoid callingn `scrollPage()` twice in case of using anchor links
+            lastScrolledDestiny = v.anchorLink;
+
+            //avoid firing it twice (as it does also on scroll)
+            activateMenuAndNav(v.anchorLink, v.sectionIndex);
+        }
+
+        /**
+        * Performs the vertical movement (by CSS3 or by jQuery)
+        */
+        function performMovement(v){
+            // using CSS3 translate functionality
+            if (options.css3 && options.autoScrolling && !options.scrollBar) {
+
+                // The first section can have a negative value in iOS 10. Not quite sure why: -0.0142822265625
+                // that's why we round it to 0.
+                var translate3d = 'translate3d(0px, -' + Math.round(v.dtop) + 'px, 0px)';
+                transformContainer(translate3d, true);
+
+                //even when the scrollingSpeed is 0 there's a little delay, which might cause the
+                //scrollingSpeed to change in case of using silentMoveTo();
+                if(options.scrollingSpeed){
+                    clearTimeout(afterSectionLoadsId);
+                    afterSectionLoadsId = setTimeout(function () {
+                        afterSectionLoads(v);
+                    }, options.scrollingSpeed);
+                }else{
+                    afterSectionLoads(v);
+                }
+            }
+
+            // using jQuery animate
+            else{
+                var scrollSettings = getScrollSettings(v);
+
+                $(scrollSettings.element).animate(
+                    scrollSettings.options,
+                options.scrollingSpeed, options.easing).promise().done(function () { //only one single callback in case of animating  `html, body`
+                    if(options.scrollBar){
+
+                        /* Hack!
+                        The timeout prevents setting the most dominant section in the viewport as "active" when the user
+                        scrolled to a smaller section by using the mousewheel (auto scrolling) rather than draging the scroll bar.
+
+                        When using scrollBar:true It seems like the scroll events still getting propagated even after the scrolling animation has finished.
+                        */
+                        setTimeout(function(){
+                            afterSectionLoads(v);
+                        },30);
+                    }else{
+                        afterSectionLoads(v);
+                    }
+                });
+            }
+        }
+
+        /**
+        * Gets the scrolling settings depending on the plugin autoScrolling option
+        */
+        function getScrollSettings(v){
+            var scroll = {};
+
+            if(options.autoScrolling && !options.scrollBar){
+                scroll.options = { 'top': -v.dtop};
+                scroll.element = WRAPPER_SEL;
+            }else{
+                scroll.options = { 'scrollTop': v.dtop};
+                scroll.element = 'html, body';
+            }
+
+            return scroll;
+        }
+
+        /**
+        * Adds sections before or after the current one to create the infinite effect.
+        */
+        function createInfiniteSections(v){
+            // Scrolling down
+            if (!v.isMovementUp) {
+                // Move all previous sections to after the active section
+                $(SECTION_ACTIVE_SEL).after(v.activeSection.prevAll(SECTION_SEL).get().reverse());
+            }
+            else { // Scrolling up
+                // Move all next sections to before the active section
+                $(SECTION_ACTIVE_SEL).before(v.activeSection.nextAll(SECTION_SEL));
+            }
+
+            // Maintain the displayed position (now that we changed the element order)
+            silentScroll($(SECTION_ACTIVE_SEL).position().top);
+
+            // Maintain the active slides visible in the viewport
+            keepSlidesPosition();
+
+            // save for later the elements that still need to be reordered
+            v.wrapAroundElements = v.activeSection;
+
+            // Recalculate animation variables
+            v.dtop = v.element.position().top;
+            v.yMovement = getYmovement(v.element);
+
+            return v;
+        }
+
+        /**
+        * Fix section order after continuousVertical changes have been animated
+        */
+        function continuousVerticalFixSectionOrder (v) {
+            // If continuousVertical is in effect (and autoScrolling would also be in effect then),
+            // finish moving the elements around so the direct navigation will function more simply
+            if (!v.wrapAroundElements || !v.wrapAroundElements.length) {
+                return;
+            }
+
+            if (v.isMovementUp) {
+                $(SECTION_FIRST_SEL).before(v.wrapAroundElements);
+            }
+            else {
+                $(SECTION_LAST_SEL).after(v.wrapAroundElements);
+            }
+
+            silentScroll($(SECTION_ACTIVE_SEL).position().top);
+
+            // Maintain the active slides visible in the viewport
+            keepSlidesPosition();
+        }
+
+
+        /**
+        * Actions to do once the section is loaded.
+        */
+        function afterSectionLoads (v){
+            continuousVerticalFixSectionOrder(v);
+
+            //callback (afterLoad) if the site is not just resizing and readjusting the slides
+            $.isFunction(options.afterLoad) && !v.localIsResizing && options.afterLoad.call(v.element, v.anchorLink, (v.sectionIndex + 1));
+            options.scrollOverflowHandler.afterLoad();
+
+            if(!v.localIsResizing){
+                playMedia(v.element);
+            }
+
+            v.element.addClass(COMPLETELY).siblings().removeClass(COMPLETELY);
+
+            canScroll = true;
+
+            $.isFunction(v.callback) && v.callback.call(this);
+        }
+
+        /**
+        * Sets the value for the given attribute from the `data-` attribute with the same suffix
+        * ie: data-srcset ==> srcset  |  data-src ==> src
+        */
+        function setSrc(element, attribute){
+            element
+                .attr(attribute, element.data(attribute))
+                .removeAttr('data-' + attribute);
+        }
+
+        /**
+        * Lazy loads image, video and audio elements.
+        */
+        function lazyLoad(destiny){
+            if (!options.lazyLoading){
+                return;
+            }
+
+            var panel = getSlideOrSection(destiny);
+            var element;
+            
+            panel.find('img[data-src], img[data-srcset], source[data-src], audio[data-src], iframe[data-src]').each(function(){
+                element = $(this);
+
+                $.each(['src', 'srcset'], function(index, type){
+                    var attribute = element.attr('data-' + type);
+                    if(typeof attribute !== 'undefined' && attribute){
+                        setSrc(element, type);
+                    }
+                });
+
+                if(element.is('source')){
+                    element.closest('video').get(0).load();
+                }
+            });
+        }
+
+        /**
+        * Plays video and audio elements.
+        */
+        function playMedia(destiny){
+            var panel = getSlideOrSection(destiny);
+
+            //playing HTML5 media elements
+            panel.find('video, audio').each(function(){
+                var element = $(this).get(0);
+
+                if( element.hasAttribute('data-autoplay') && typeof element.play === 'function' ) {
+                    element.play();
+                }
+            });
+
+            //youtube videos
+            panel.find('iframe[src*="youtube.com/embed/"]').each(function(){
+                var element = $(this).get(0);
+
+                if ( element.hasAttribute('data-autoplay') ){
+                    playYoutube(element);
+                }
+
+                //in case the URL was not loaded yet. On page load we need time for the new URL (with the API string) to load.
+                element.onload = function() {
+                    if ( element.hasAttribute('data-autoplay') ){
+                        playYoutube(element);
+                    }
+                };
+            });
+        }
+
+        /**
+        * Plays a youtube video
+        */
+        function playYoutube(element){
+            element.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        }
+
+        /**
+        * Stops video and audio elements.
+        */
+        function stopMedia(destiny){
+            var panel = getSlideOrSection(destiny);
+
+            //stopping HTML5 media elements
+            panel.find('video, audio').each(function(){
+                var element = $(this).get(0);
+
+                if( !element.hasAttribute('data-keepplaying') && typeof element.pause === 'function' ) {
+                    element.pause();
+                }
+            });
+
+            //youtube videos
+            panel.find('iframe[src*="youtube.com/embed/"]').each(function(){
+                var element = $(this).get(0);
+
+                if( /youtube\.com\/embed\//.test($(this).attr('src')) && !element.hasAttribute('data-keepplaying')){
+                    $(this).get(0).contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*');
+                }
+            });
+        }
+
+        /**
+        * Gets the active slide (or section) for the given section
+        */
+        function getSlideOrSection(destiny){
+            var slide = destiny.find(SLIDE_ACTIVE_SEL);
+            if( slide.length ) {
+                destiny = $(slide);
+            }
+
+            return destiny;
+        }
+
+        /**
+        * Scrolls to the anchor in the URL when loading the site
+        */
+        function scrollToAnchor(){
+            //getting the anchor link in the URL and deleting the `#`
+            var value =  window.location.hash.replace('#', '').split('/');
+            var sectionAnchor = decodeURIComponent(value[0]);
+            var slideAnchor = decodeURIComponent(value[1]);
+
+            if(sectionAnchor){  //if theres any #
+                if(options.animateAnchor){
+                    scrollPageAndSlide(sectionAnchor, slideAnchor);
+                }else{
+                    silentMoveTo(sectionAnchor, slideAnchor);
+                }
+            }
+        }
+
+        /**
+        * Detecting any change on the URL to scroll to the given anchor link
+        * (a way to detect back history button as we play with the hashes on the URL)
+        */
+        function hashChangeHandler(){
+            if(!isScrolling && !options.lockAnchors){
+                var value =  window.location.hash.replace('#', '').split('/');
+                var sectionAnchor = decodeURIComponent(value[0]);
+                var slideAnchor = decodeURIComponent(value[1]);
+
+                    //when moving to a slide in the first section for the first time (first time to add an anchor to the URL)
+                    var isFirstSlideMove =  (typeof lastScrolledDestiny === 'undefined');
+                    var isFirstScrollMove = (typeof lastScrolledDestiny === 'undefined' && typeof slideAnchor === 'undefined' && !slideMoving);
+
+
+                if(sectionAnchor.length){
+                    /*in order to call scrollpage() only once for each destination at a time
+                    It is called twice for each scroll otherwise, as in case of using anchorlinks `hashChange`
+                    event is fired on every scroll too.*/
+                    if ((sectionAnchor && sectionAnchor !== lastScrolledDestiny) && !isFirstSlideMove || isFirstScrollMove || (!slideMoving && lastScrolledSlide != slideAnchor ))  {
+                        scrollPageAndSlide(sectionAnchor, slideAnchor);
+                    }
+                }
+            }
+        }
+
+        //Sliding with arrow keys, both, vertical and horizontal
+        function keydownHandler(e) {
+
+            clearTimeout(keydownId);
+
+            var activeElement = $(':focus');
+
+            if(!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select') &&
+                activeElement.attr('contentEditable') !== "true" && activeElement.attr('contentEditable') !== '' &&
+                options.keyboardScrolling && options.autoScrolling){
+                var keyCode = e.which;
+
+                //preventing the scroll with arrow keys & spacebar & Page Up & Down keys
+                var keyControls = [40, 38, 32, 33, 34];
+                if($.inArray(keyCode, keyControls) > -1){
+                    e.preventDefault();
+                }
+
+                controlPressed = e.ctrlKey;
+
+                keydownId = setTimeout(function(){
+                    onkeydown(e);
+                },150);
+            }
+        }
+
+        function tooltipTextHandler(){
+            $(this).prev().trigger('click');
+        }
+
+        //to prevent scrolling while zooming
+        function keyUpHandler(e){
+            if(isWindowFocused){ //the keyup gets fired on new tab ctrl + t in Firefox
+                controlPressed = e.ctrlKey;
+            }
+        }
+
+        //binding the mousemove when the mouse's middle button is released
+        function mouseDownHandler(e){
+            //middle button
+            if (e.which == 2){
+                oldPageY = e.pageY;
+                container.on('mousemove', mouseMoveHandler);
+            }
+        }
+
+        //unbinding the mousemove when the mouse's middle button is released
+        function mouseUpHandler(e){
+            //middle button
+            if (e.which == 2){
+                container.off('mousemove');
+            }
+        }
+
+        //Scrolling horizontally when clicking on the slider controls.
+        function slideArrowHandler(){
+            var section = $(this).closest(SECTION_SEL);
+
+            if ($(this).hasClass(SLIDES_PREV)) {
+                if(isScrollAllowed.m.left){
+                    moveSlideLeft(section);
+                }
+            } else {
+                if(isScrollAllowed.m.right){
+                    moveSlideRight(section);
+                }
+            }
+        }
+
+        //when opening a new tab (ctrl + t), `control` won't be pressed when coming back.
+        function blurHandler(){
+            isWindowFocused = false;
+            controlPressed = false;
+        }
+
+        //Scrolls to the section when clicking the navigation bullet
+        function sectionBulletHandler(e){
+            e.preventDefault();
+            var index = $(this).parent().index();
+            scrollPage($(SECTION_SEL).eq(index));
+        }
+
+        //Scrolls the slider to the given slide destination for the given section
+        function slideBulletHandler(e){
+            e.preventDefault();
+            var slides = $(this).closest(SECTION_SEL).find(SLIDES_WRAPPER_SEL);
+            var destiny = slides.find(SLIDE_SEL).eq($(this).closest('li').index());
+
+            landscapeScroll(slides, destiny);
+        }
+
+        /**
+        * Keydown event
+        */
+        function onkeydown(e){
+            var shiftPressed = e.shiftKey;
+
+            //do nothing if we can not scroll or we are not using horizotnal key arrows.
+            if(!canScroll && [37,39].indexOf(e.which) < 0){
+                return;
+            }
+
+            switch (e.which) {
+                //up
+                case 38:
+                case 33:
+                    if(isScrollAllowed.k.up){
+                        moveSectionUp();
+                    }
+                    break;
+
+                //down
+                case 32: //spacebar
+                    if(shiftPressed && isScrollAllowed.k.up){
+                        moveSectionUp();
+                        break;
+                    }
+                /* falls through */
+                case 40:
+                case 34:
+                    if(isScrollAllowed.k.down){
+                        moveSectionDown();
+                    }
+                    break;
+
+                //Home
+                case 36:
+                    if(isScrollAllowed.k.up){
+                        moveTo(1);
+                    }
+                    break;
+
+                //End
+                case 35:
+                     if(isScrollAllowed.k.down){
+                        moveTo( $(SECTION_SEL).length );
+                    }
+                    break;
+
+                //left
+                case 37:
+                    if(isScrollAllowed.k.left){
+                        moveSlideLeft();
+                    }
+                    break;
+
+                //right
+                case 39:
+                    if(isScrollAllowed.k.right){
+                        moveSlideRight();
+                    }
+                    break;
+
+                default:
+                    return; // exit this handler for other keys
+            }
+        }
+
+        /**
+        * Detecting the direction of the mouse movement.
+        * Used only for the middle button of the mouse.
+        */
+        var oldPageY = 0;
+        function mouseMoveHandler(e){
+            if(canScroll){
+                // moving up
+                if (e.pageY < oldPageY && isScrollAllowed.m.up){
+                    moveSectionUp();
+                }
+
+                // moving down
+                else if(e.pageY > oldPageY && isScrollAllowed.m.down){
+                    moveSectionDown();
+                }
+            }
+            oldPageY = e.pageY;
+        }
+
+        /**
+        * Scrolls horizontal sliders.
+        */
+        function landscapeScroll(slides, destiny, direction){
+            var section = slides.closest(SECTION_SEL);
+            var v = {
+                slides: slides,
+                destiny: destiny,
+                direction: direction,
+                destinyPos: destiny.position(),
+                slideIndex: destiny.index(),
+                section: section,
+                sectionIndex: section.index(SECTION_SEL),
+                anchorLink: section.data('anchor'),
+                slidesNav: section.find(SLIDES_NAV_SEL),
+                slideAnchor:  getAnchor(destiny),
+                prevSlide: section.find(SLIDE_ACTIVE_SEL),
+                prevSlideIndex: section.find(SLIDE_ACTIVE_SEL).index(),
+
+                //caching the value of isResizing at the momment the function is called
+                //because it will be checked later inside a setTimeout and the value might change
+                localIsResizing: isResizing
+            };
+            v.xMovement = getXmovement(v.prevSlideIndex, v.slideIndex);
+
+            //important!! Only do it when not resizing
+            if(!v.localIsResizing){
+                //preventing from scrolling to the next/prev section when using scrollHorizontally
+                canScroll = false;
+            }
+
+            if(options.onSlideLeave){
+
+                //if the site is not just resizing and readjusting the slides
+                if(!v.localIsResizing && v.xMovement!=='none'){
+                    if($.isFunction( options.onSlideLeave )){
+                        if(options.onSlideLeave.call( v.prevSlide, v.anchorLink, (v.sectionIndex + 1), v.prevSlideIndex, v.xMovement, v.slideIndex ) === false){
+                            slideMoving = false;
+                            return;
+                        }
+                    }
+                }
+            }
+
+            destiny.addClass(ACTIVE).siblings().removeClass(ACTIVE);
+
+            if(!v.localIsResizing){
+                stopMedia(v.prevSlide);
+                lazyLoad(destiny);
+            }
+
+            if(!options.loopHorizontal && options.controlArrows){
+                //hidding it for the fist slide, showing for the rest
+                section.find(SLIDES_ARROW_PREV_SEL).toggle(v.slideIndex!==0);
+
+                //hidding it for the last slide, showing for the rest
+                section.find(SLIDES_ARROW_NEXT_SEL).toggle(!destiny.is(':last-child'));
+            }
+
+            //only changing the URL if the slides are in the current section (not for resize re-adjusting)
+            if(section.hasClass(ACTIVE) && !v.localIsResizing){
+                setState(v.slideIndex, v.slideAnchor, v.anchorLink, v.sectionIndex);
+            }
+
+            performHorizontalMove(slides, v, true);
+        }
+
+
+        function afterSlideLoads(v){
+            activeSlidesNavigation(v.slidesNav, v.slideIndex);
+
+            //if the site is not just resizing and readjusting the slides
+            if(!v.localIsResizing){
+                $.isFunction( options.afterSlideLoad ) && options.afterSlideLoad.call( v.destiny, v.anchorLink, (v.sectionIndex + 1), v.slideAnchor, v.slideIndex);
+
+                //needs to be inside the condition to prevent problems with continuousVertical and scrollHorizontally
+                //and to prevent double scroll right after a windows resize
+                canScroll = true;
+
+                playMedia(v.destiny);
+            }
+
+            //letting them slide again
+            slideMoving = false;
+        }
+
+        /**
+        * Performs the horizontal movement. (CSS3 or jQuery)
+        *
+        * @param fireCallback {Bool} - determines whether or not to fire the callback
+        */
+        function performHorizontalMove(slides, v, fireCallback){
+            var destinyPos = v.destinyPos;
+
+            if(options.css3){
+                var translate3d = 'translate3d(-' + Math.round(destinyPos.left) + 'px, 0px, 0px)';
+
+                addAnimation(slides.find(SLIDES_CONTAINER_SEL)).css(getTransforms(translate3d));
+
+                afterSlideLoadsId = setTimeout(function(){
+                    fireCallback && afterSlideLoads(v);
+                }, options.scrollingSpeed, options.easing);
+            }else{
+                slides.animate({
+                    scrollLeft : Math.round(destinyPos.left)
+                }, options.scrollingSpeed, options.easing, function() {
+
+                    fireCallback && afterSlideLoads(v);
+                });
+            }
+        }
+
+        /**
+        * Sets the state for the horizontal bullet navigations.
+        */
+        function activeSlidesNavigation(slidesNav, slideIndex){
+            slidesNav.find(ACTIVE_SEL).removeClass(ACTIVE);
+            slidesNav.find('li').eq(slideIndex).find('a').addClass(ACTIVE);
+        }
+
+        var previousHeight = windowsHeight;
+
+        //when resizing the site, we adjust the heights of the sections, slimScroll...
+        function resizeHandler(){
+            //checking if it needs to get responsive
+            responsive();
+
+            // rebuild immediately on touch devices
+            if (isTouchDevice) {
+                var activeElement = $(document.activeElement);
+
+                //if the keyboard is NOT visible
+                if (!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select')) {
+                    var currentHeight = $window.height();
+
+                    //making sure the change in the viewport size is enough to force a rebuild. (20 % of the window to avoid problems when hidding scroll bars)
+                    if( Math.abs(currentHeight - previousHeight) > (20 * Math.max(previousHeight, currentHeight) / 100) ){
+                        reBuild(true);
+                        previousHeight = currentHeight;
+                    }
+                }
+            }else{
+                //in order to call the functions only when the resize is finished
+                //http://stackoverflow.com/questions/4298612/jquery-how-to-call-resize-event-only-once-its-finished-resizing
+                clearTimeout(resizeId);
+
+                resizeId = setTimeout(function(){
+                    reBuild(true);
+                }, 350);
+            }
+        }
+
+        /**
+        * Checks if the site needs to get responsive and disables autoScrolling if so.
+        * A class `fp-responsive` is added to the plugin's container in case the user wants to use it for his own responsive CSS.
+        */
+        function responsive(){
+            var widthLimit = options.responsive || options.responsiveWidth; //backwards compatiblity
+            var heightLimit = options.responsiveHeight;
+
+            //only calculating what we need. Remember its called on the resize event.
+            var isBreakingPointWidth = widthLimit && $window.outerWidth() < widthLimit;
+            var isBreakingPointHeight = heightLimit && $window.height() < heightLimit;
+
+            if(widthLimit && heightLimit){
+                setResponsive(isBreakingPointWidth || isBreakingPointHeight);
+            }
+            else if(widthLimit){
+                setResponsive(isBreakingPointWidth);
+            }
+            else if(heightLimit){
+                setResponsive(isBreakingPointHeight);
+            }
+        }
+
+        /**
+        * Adds transition animations for the given element
+        */
+        function addAnimation(element){
+            var transition = 'all ' + options.scrollingSpeed + 'ms ' + options.easingcss3;
+
+            element.removeClass(NO_TRANSITION);
+            return element.css({
+                '-webkit-transition': transition,
+                'transition': transition
+            });
+        }
+
+        /**
+        * Remove transition animations for the given element
+        */
+        function removeAnimation(element){
+            return element.addClass(NO_TRANSITION);
+        }
+
+        /**
+        * Activating the vertical navigation bullets according to the given slide name.
+        */
+        function activateNavDots(name, sectionIndex){
+            if(options.navigation){
+                $(SECTION_NAV_SEL).find(ACTIVE_SEL).removeClass(ACTIVE);
+                if(name){
+                    $(SECTION_NAV_SEL).find('a[href="#' + name + '"]').addClass(ACTIVE);
+                }else{
+                    $(SECTION_NAV_SEL).find('li').eq(sectionIndex).find('a').addClass(ACTIVE);
+                }
+            }
+        }
+
+        /**
+        * Activating the website main menu elements according to the given slide name.
+        */
+        function activateMenuElement(name){
+            if(options.menu){
+                $(options.menu).find(ACTIVE_SEL).removeClass(ACTIVE);
+                $(options.menu).find('[data-menuanchor="'+name+'"]').addClass(ACTIVE);
+            }
+        }
+
+        /**
+        * Sets to active the current menu and vertical nav items.
+        */
+        function activateMenuAndNav(anchor, index){
+            activateMenuElement(anchor);
+            activateNavDots(anchor, index);
+        }
+
+        /**
+        * Retuns `up` or `down` depending on the scrolling movement to reach its destination
+        * from the current section.
+        */
+        function getYmovement(destiny){
+            var fromIndex = $(SECTION_ACTIVE_SEL).index(SECTION_SEL);
+            var toIndex = destiny.index(SECTION_SEL);
+            if( fromIndex == toIndex){
+                return 'none';
+            }
+            if(fromIndex > toIndex){
+                return 'up';
+            }
+            return 'down';
+        }
+
+        /**
+        * Retuns `right` or `left` depending on the scrolling movement to reach its destination
+        * from the current slide.
+        */
+        function getXmovement(fromIndex, toIndex){
+            if( fromIndex == toIndex){
+                return 'none';
+            }
+            if(fromIndex > toIndex){
+                return 'left';
+            }
+            return 'right';
+        }
+
+        /**
+        * Checks if the element needs scrollbar and if the user wants to apply it.
+        * If so it creates it.
+        *
+        * @param {Object} element   jQuery object of the section or slide
+        */
+        function createScrollBar(element){
+            //User doesn't want scrollbar here? Sayonara baby!
+            if(element.hasClass('fp-noscroll')) return;
+
+            //needed to make `scrollHeight` work under Opera 12
+            element.css('overflow', 'hidden');
+
+            var scrollOverflowHandler = options.scrollOverflowHandler;
+            var wrap = scrollOverflowHandler.wrapContent();
+            //in case element is a slide
+            var section = element.closest(SECTION_SEL);
+            var scrollable = scrollOverflowHandler.scrollable(element);
+            var contentHeight;
+
+            //if there was scroll, the contentHeight will be the one in the scrollable section
+            if(scrollable.length){
+                contentHeight = scrollOverflowHandler.scrollHeight(element);
+            }else{
+                contentHeight = element.get(0).scrollHeight;
+                if(options.verticalCentered){
+                    contentHeight = element.find(TABLE_CELL_SEL).get(0).scrollHeight;
+                }
+            }
+
+            var scrollHeight = windowsHeight - parseInt(section.css('padding-bottom')) - parseInt(section.css('padding-top'));
+
+            //needs scroll?
+            if ( contentHeight > scrollHeight) {
+                //did we already have an scrollbar ? Updating it
+                if(scrollable.length){
+                    scrollOverflowHandler.update(element, scrollHeight);
+                }
+                //creating the scrolling
+                else{
+                    if(options.verticalCentered){
+                        element.find(TABLE_CELL_SEL).wrapInner(wrap);
+                    }else{
+                        element.wrapInner(wrap);
+                    }
+                    scrollOverflowHandler.create(element, scrollHeight);
+                }
+            }
+            //removing the scrolling when it is not necessary anymore
+            else{
+                scrollOverflowHandler.remove(element);
+            }
+
+            //undo
+            element.css('overflow', '');
+        }
+
+        function addTableClass(element){
+            //In case we are styling for the 2nd time as in with reponsiveSlides
+            if(!element.hasClass(TABLE)){
+                element.addClass(TABLE).wrapInner('<div class="' + TABLE_CELL + '" style="height:' + getTableHeight(element) + 'px;" />');
+            }
+        }
+
+        function getTableHeight(element){
+            var sectionHeight = windowsHeight;
+
+            if(options.paddingTop || options.paddingBottom){
+                var section = element;
+                if(!section.hasClass(SECTION)){
+                    section = element.closest(SECTION_SEL);
+                }
+
+                var paddings = parseInt(section.css('padding-top')) + parseInt(section.css('padding-bottom'));
+                sectionHeight = (windowsHeight - paddings);
+            }
+
+            return sectionHeight;
+        }
+
+        /**
+        * Adds a css3 transform property to the container class with or without animation depending on the animated param.
+        */
+        function transformContainer(translate3d, animated){
+            if(animated){
+                addAnimation(container);
+            }else{
+                removeAnimation(container);
+            }
+
+            container.css(getTransforms(translate3d));
+
+            //syncronously removing the class after the animation has been applied.
+            setTimeout(function(){
+                container.removeClass(NO_TRANSITION);
+            },10);
+        }
+
+        /**
+        * Gets a section by its anchor / index
+        */
+        function getSectionByAnchor(sectionAnchor){
+            if(!sectionAnchor) return [];
+
+            var section = container.find(SECTION_SEL + '[data-anchor="'+sectionAnchor+'"]');
+            if(!section.length){
+                section = $(SECTION_SEL).eq( sectionAnchor -1);
+            }
+
+            return section;
+        }
+
+        /**
+        * Gets a slide inside a given section by its anchor / index
+        */
+        function getSlideByAnchor(slideAnchor, section){
+            var slides = section.find(SLIDES_WRAPPER_SEL);
+            var slide =  slides.find(SLIDE_SEL + '[data-anchor="'+slideAnchor+'"]');
+
+            if(!slide.length){
+                slide = slides.find(SLIDE_SEL).eq(slideAnchor);
+            }
+
+            return slide;
+        }
+
+        /**
+        * Scrolls to the given section and slide anchors
+        */
+        function scrollPageAndSlide(destiny, slide){
+            var section = getSectionByAnchor(destiny);
+
+            //do nothing if there's no section with the given anchor name
+            if(!section.length) return;
+
+            //default slide
+            if (typeof slide === 'undefined') {
+                slide = 0;
+            }
+
+            //we need to scroll to the section and then to the slide
+            if (destiny !== lastScrolledDestiny && !section.hasClass(ACTIVE)){
+                scrollPage(section, function(){
+                    scrollSlider(section, slide);
+                });
+            }
+            //if we were already in the section
+            else{
+                scrollSlider(section, slide);
+            }
+        }
+
+        /**
+        * Scrolls the slider to the given slide destination for the given section
+        */
+        function scrollSlider(section, slideAnchor){
+            if(typeof slideAnchor !== 'undefined'){
+                var slides = section.find(SLIDES_WRAPPER_SEL);
+                var destiny =  getSlideByAnchor(slideAnchor, section);
+
+                if(destiny.length){
+                    landscapeScroll(slides, destiny);
+                }
+            }
+        }
+
+        /**
+        * Creates a landscape navigation bar with dots for horizontal sliders.
+        */
+        function addSlidesNavigation(section, numSlides){
+            section.append('<div class="' + SLIDES_NAV + '"><ul></ul></div>');
+            var nav = section.find(SLIDES_NAV_SEL);
+
+            //top or bottom
+            nav.addClass(options.slidesNavPosition);
+
+            for(var i=0; i< numSlides; i++){
+                nav.find('ul').append('<li><a href="#"><span></span></a></li>');
+            }
+
+            //centering it
+            nav.css('margin-left', '-' + (nav.width()/2) + 'px');
+
+            nav.find('li').first().find('a').addClass(ACTIVE);
+        }
+
+
+        /**
+        * Sets the state of the website depending on the active section/slide.
+        * It changes the URL hash when needed and updates the body class.
+        */
+        function setState(slideIndex, slideAnchor, anchorLink, sectionIndex){
+            var sectionHash = '';
+
+            if(options.anchors.length && !options.lockAnchors){
+
+                //isn't it the first slide?
+                if(slideIndex){
+                    if(typeof anchorLink !== 'undefined'){
+                        sectionHash = anchorLink;
+                    }
+
+                    //slide without anchor link? We take the index instead.
+                    if(typeof slideAnchor === 'undefined'){
+                        slideAnchor = slideIndex;
+                    }
+
+                    lastScrolledSlide = slideAnchor;
+                    setUrlHash(sectionHash + '/' + slideAnchor);
+
+                //first slide won't have slide anchor, just the section one
+                }else if(typeof slideIndex !== 'undefined'){
+                    lastScrolledSlide = slideAnchor;
+                    setUrlHash(anchorLink);
+                }
+
+                //section without slides
+                else{
+                    setUrlHash(anchorLink);
+                }
+            }
+
+            setBodyClass();
+        }
+
+        /**
+        * Sets the URL hash.
+        */
+        function setUrlHash(url){
+            if(options.recordHistory){
+                location.hash = url;
+            }else{
+                //Mobile Chrome doesn't work the normal way, so... lets use HTML5 for phones :)
+                if(isTouchDevice || isTouch){
+                    window.history.replaceState(undefined, undefined, '#' + url);
+                }else{
+                    var baseUrl = window.location.href.split('#')[0];
+                    window.location.replace( baseUrl + '#' + url );
+                }
+            }
+        }
+
+        /**
+        * Gets the anchor for the given slide / section. Its index will be used if there's none.
+        */
+        function getAnchor(element){
+            var anchor = element.data('anchor');
+            var index = element.index();
+
+            //Slide without anchor link? We take the index instead.
+            if(typeof anchor === 'undefined'){
+                anchor = index;
+            }
+
+            return anchor;
+        }
+
+        /**
+        * Sets a class for the body of the page depending on the active section / slide
+        */
+        function setBodyClass(){
+            var section = $(SECTION_ACTIVE_SEL);
+            var slide = section.find(SLIDE_ACTIVE_SEL);
+
+            var sectionAnchor = getAnchor(section);
+            var slideAnchor = getAnchor(slide);
+
+            var text = String(sectionAnchor);
+
+            if(slide.length){
+                text = text + '-' + slideAnchor;
+            }
+
+            //changing slash for dash to make it a valid CSS style
+            text = text.replace('/', '-').replace('#','');
+
+            //removing previous anchor classes
+            var classRe = new RegExp('\\b\\s?' + VIEWING_PREFIX + '-[^\\s]+\\b', "g");
+            $body[0].className = $body[0].className.replace(classRe, '');
+
+            //adding the current anchor
+            $body.addClass(VIEWING_PREFIX + '-' + text);
+        }
+
+        /**
+        * Checks for translate3d support
+        * @return boolean
+        * http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
+        */
+        function support3d() {
+            var el = document.createElement('p'),
+                has3d,
+                transforms = {
+                    'webkitTransform':'-webkit-transform',
+                    'OTransform':'-o-transform',
+                    'msTransform':'-ms-transform',
+                    'MozTransform':'-moz-transform',
+                    'transform':'transform'
+                };
+
+            // Add it to the body to get the computed style.
+            document.body.insertBefore(el, null);
+
+            for (var t in transforms) {
+                if (el.style[t] !== undefined) {
+                    el.style[t] = 'translate3d(1px,1px,1px)';
+                    has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+                }
+            }
+
+            document.body.removeChild(el);
+
+            return (has3d !== undefined && has3d.length > 0 && has3d !== 'none');
+        }
+
+        /**
+        * Removes the auto scrolling action fired by the mouse wheel and trackpad.
+        * After this function is called, the mousewheel and trackpad movements won't scroll through sections.
+        */
+        function removeMouseWheelHandler(){
+            if (document.addEventListener) {
+                document.removeEventListener('mousewheel', MouseWheelHandler, false); //IE9, Chrome, Safari, Oper
+                document.removeEventListener('wheel', MouseWheelHandler, false); //Firefox
+                document.removeEventListener('MozMousePixelScroll', MouseWheelHandler, false); //old Firefox
+            } else {
+                document.detachEvent('onmousewheel', MouseWheelHandler); //IE 6/7/8
+            }
+        }
+
+        /**
+        * Adds the auto scrolling action for the mouse wheel and trackpad.
+        * After this function is called, the mousewheel and trackpad movements will scroll through sections
+        * https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+        */
+        function addMouseWheelHandler(){
+            var prefix = '';
+            var _addEventListener;
+
+            if (window.addEventListener){
+                _addEventListener = "addEventListener";
+            }else{
+                _addEventListener = "attachEvent";
+                prefix = 'on';
+            }
+
+             // detect available wheel event
+            var support = 'onwheel' in document.createElement('div') ? 'wheel' : // Modern browsers support "wheel"
+                      document.onmousewheel !== undefined ? 'mousewheel' : // Webkit and IE support at least "mousewheel"
+                      'DOMMouseScroll'; // let's assume that remaining browsers are older Firefox
+
+
+            if(support == 'DOMMouseScroll'){
+                document[ _addEventListener ](prefix + 'MozMousePixelScroll', MouseWheelHandler, false);
+            }
+
+            //handle MozMousePixelScroll in older Firefox
+            else{
+                document[ _addEventListener ](prefix + support, MouseWheelHandler, false);
+            }
+        }
+
+        /**
+        * Binding the mousemove when the mouse's middle button is pressed
+        */
+        function addMiddleWheelHandler(){
+            container
+                .on('mousedown', mouseDownHandler)
+                .on('mouseup', mouseUpHandler);
+        }
+
+        /**
+        * Unbinding the mousemove when the mouse's middle button is released
+        */
+        function removeMiddleWheelHandler(){
+            container
+                .off('mousedown', mouseDownHandler)
+                .off('mouseup', mouseUpHandler);
+        }
+
+        /**
+        * Adds the possibility to auto scroll through sections on touch devices.
+        */
+        function addTouchHandler(){
+            if(isTouchDevice || isTouch){
+                if(options.autoScrolling){
+                    $body.off(events.touchmove).on(events.touchmove, preventBouncing);
+                }
+
+                $(WRAPPER_SEL)
+                    .off(events.touchstart).on(events.touchstart, touchStartHandler)
+                    .off(events.touchmove).on(events.touchmove, touchMoveHandler);
+            }
+        }
+
+        /**
+        * Removes the auto scrolling for touch devices.
+        */
+        function removeTouchHandler(){
+            if(isTouchDevice || isTouch){
+                $(WRAPPER_SEL)
+                    .off(events.touchstart)
+                    .off(events.touchmove);
+            }
+        }
+
+        /*
+        * Returns and object with Microsoft pointers (for IE<11 and for IE >= 11)
+        * http://msdn.microsoft.com/en-us/library/ie/dn304886(v=vs.85).aspx
+        */
+        function getMSPointer(){
+            var pointer;
+
+            //IE >= 11 & rest of browsers
+            if(window.PointerEvent){
+                pointer = { down: 'pointerdown', move: 'pointermove'};
+            }
+
+            //IE < 11
+            else{
+                pointer = { down: 'MSPointerDown', move: 'MSPointerMove'};
+            }
+
+            return pointer;
+        }
+
+        /**
+        * Gets the pageX and pageY properties depending on the browser.
+        * https://github.com/alvarotrigo/fullPage.js/issues/194#issuecomment-34069854
+        */
+        function getEventsPage(e){
+            var events = [];
+
+            events.y = (typeof e.pageY !== 'undefined' && (e.pageY || e.pageX) ? e.pageY : e.touches[0].pageY);
+            events.x = (typeof e.pageX !== 'undefined' && (e.pageY || e.pageX) ? e.pageX : e.touches[0].pageX);
+
+            //in touch devices with scrollBar:true, e.pageY is detected, but we have to deal with touch events. #1008
+            if(isTouch && isReallyTouch(e) && options.scrollBar){
+                events.y = e.touches[0].pageY;
+                events.x = e.touches[0].pageX;
+            }
+
+            return events;
+        }
+
+        /**
+        * Slides silently (with no animation) the active slider to the given slide.
+        * @param noCallback {bool} true or defined -> no callbacks
+        */
+        function silentLandscapeScroll(activeSlide, noCallbacks){
+            setScrollingSpeed (0, 'internal');
+
+            if(typeof noCallbacks !== 'undefined'){
+                //preventing firing callbacks afterSlideLoad etc.
+                isResizing = true;
+            }
+
+            landscapeScroll(activeSlide.closest(SLIDES_WRAPPER_SEL), activeSlide);
+
+            if(typeof noCallbacks !== 'undefined'){
+                isResizing = false;
+            }
+
+            setScrollingSpeed(originals.scrollingSpeed, 'internal');
+        }
+
+        /**
+        * Scrolls silently (with no animation) the page to the given Y position.
+        */
+        function silentScroll(top){
+            // The first section can have a negative value in iOS 10. Not quite sure why: -0.0142822265625
+            // that's why we round it to 0.
+            var roundedTop = Math.round(top);
+
+            if (options.css3 && options.autoScrolling && !options.scrollBar){
+                var translate3d = 'translate3d(0px, -' + roundedTop + 'px, 0px)';
+                transformContainer(translate3d, false);
+            }
+            else if(options.autoScrolling && !options.scrollBar){
+                container.css('top', -roundedTop);
+            }
+            else{
+                $htmlBody.scrollTop(roundedTop);
+            }
+        }
+
+        /**
+        * Returns the cross-browser transform string.
+        */
+        function getTransforms(translate3d){
+            return {
+                '-webkit-transform': translate3d,
+                '-moz-transform': translate3d,
+                '-ms-transform':translate3d,
+                'transform': translate3d
+            };
+        }
+
+        /**
+        * Allowing or disallowing the mouse/swipe scroll in a given direction. (not for keyboard)
+        * @type  m (mouse) or k (keyboard)
+        */
+        function setIsScrollAllowed(value, direction, type){
+            switch (direction){
+                case 'up': isScrollAllowed[type].up = value; break;
+                case 'down': isScrollAllowed[type].down = value; break;
+                case 'left': isScrollAllowed[type].left = value; break;
+                case 'right': isScrollAllowed[type].right = value; break;
+                case 'all':
+                    if(type == 'm'){
+                        setAllowScrolling(value);
+                    }else{
+                        setKeyboardScrolling(value);
+                    }
+            }
+        }
+
+        /*
+        * Destroys fullpage.js plugin events and optinally its html markup and styles
+        */
+        function destroy(all){
+            setAutoScrolling(false, 'internal');
+            setAllowScrolling(false);
+            setKeyboardScrolling(false);
+            container.addClass(DESTROYED);
+
+            clearTimeout(afterSlideLoadsId);
+            clearTimeout(afterSectionLoadsId);
+            clearTimeout(resizeId);
+            clearTimeout(scrollId);
+            clearTimeout(scrollId2);
+
+            $window
+                .off('scroll', scrollHandler)
+                .off('hashchange', hashChangeHandler)
+                .off('resize', resizeHandler);
+
+            $document
+                .off('click touchstart', SECTION_NAV_SEL + ' a')
+                .off('mouseenter', SECTION_NAV_SEL + ' li')
+                .off('mouseleave', SECTION_NAV_SEL + ' li')
+                .off('click touchstart', SLIDES_NAV_LINK_SEL)
+                .off('mouseover', options.normalScrollElements)
+                .off('mouseout', options.normalScrollElements);
+
+            $(SECTION_SEL)
+                .off('click touchstart', SLIDES_ARROW_SEL);
+
+            clearTimeout(afterSlideLoadsId);
+            clearTimeout(afterSectionLoadsId);
+
+            //lets make a mess!
+            if(all){
+                destroyStructure();
+            }
+        }
+
+        /*
+        * Removes inline styles added by fullpage.js
+        */
+        function destroyStructure(){
+            //reseting the `top` or `translate` properties to 0
+            silentScroll(0);
+
+            //loading all the lazy load content
+            container.find('img[data-src], source[data-src], audio[data-src], iframe[data-src]').each(function(){
+                setSrc($(this), 'src');
+            });
+
+            container.find('img[data-srcset]').each(function(){
+                setSrc($(this), 'srcset');
+            });
+
+            $(SECTION_NAV_SEL + ', ' + SLIDES_NAV_SEL +  ', ' + SLIDES_ARROW_SEL).remove();
+
+            //removing inline styles
+            $(SECTION_SEL).css( {
+                'height': '',
+                'background-color' : '',
+                'padding': ''
+            });
+
+            $(SLIDE_SEL).css( {
+                'width': ''
+            });
+
+            container.css({
+                'height': '',
+                'position': '',
+                '-ms-touch-action': '',
+                'touch-action': ''
+            });
+
+            $htmlBody.css({
+                'overflow': '',
+                'height': ''
+            });
+
+            // remove .fp-enabled class
+            $('html').removeClass(ENABLED);
+
+            // remove .fp-responsive class
+            $body.removeClass(RESPONSIVE);
+
+            // remove all of the .fp-viewing- classes
+            $.each($body.get(0).className.split(/\s+/), function (index, className) {
+                if (className.indexOf(VIEWING_PREFIX) === 0) {
+                    $body.removeClass(className);
+                }
+            });
+
+            //removing added classes
+            $(SECTION_SEL + ', ' + SLIDE_SEL).each(function(){
+                options.scrollOverflowHandler.remove($(this));
+                $(this).removeClass(TABLE + ' ' + ACTIVE);
+            });
+
+            removeAnimation(container);
+
+            //Unwrapping content
+            container.find(TABLE_CELL_SEL + ', ' + SLIDES_CONTAINER_SEL + ', ' + SLIDES_WRAPPER_SEL).each(function(){
+                //unwrap not being use in case there's no child element inside and its just text
+                $(this).replaceWith(this.childNodes);
+            });
+
+            //removing the applied transition from the fullpage wrapper
+            container.css({
+                '-webkit-transition': 'none',
+                'transition': 'none'
+            });
+
+            //scrolling the page to the top with no animation
+            $htmlBody.scrollTop(0);
+
+            //removing selectors
+            var usedSelectors = [SECTION, SLIDE, SLIDES_CONTAINER];
+            $.each(usedSelectors, function(index, value){
+                $('.' + value).removeClass(value);
+            });
+        }
+
+        /*
+        * Sets the state for a variable with multiple states (original, and temporal)
+        * Some variables such as `autoScrolling` or `recordHistory` might change automatically its state when using `responsive` or `autoScrolling:false`.
+        * This function is used to keep track of both states, the original and the temporal one.
+        * If type is not 'internal', then we assume the user is globally changing the variable.
+        */
+        function setVariableState(variable, value, type){
+            options[variable] = value;
+            if(type !== 'internal'){
+                originals[variable] = value;
+            }
+        }
+
+        /**
+        * Displays warnings
+        */
+        function displayWarnings(){
+            var extensions = ['fadingEffect', 'continuousHorizontal', 'scrollHorizontally', 'interlockedSlides', 'resetSliders', 'responsiveSlides', 'offsetSections', 'dragAndMove', 'scrollOverflowReset', 'parallax'];
+            if($('html').hasClass(ENABLED)){
+                showError('error', 'Fullpage.js can only be initialized once and you are doing it multiple times!');
+                return;
+            }
+
+            // Disable mutually exclusive settings
+            if (options.continuousVertical &&
+                (options.loopTop || options.loopBottom)) {
+                options.continuousVertical = false;
+                showError('warn', 'Option `loopTop/loopBottom` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled');
+            }
+
+            if(options.scrollBar && options.scrollOverflow){
+                showError('warn', 'Option `scrollBar` is mutually exclusive with `scrollOverflow`. Sections with scrollOverflow might not work well in Firefox');
+            }
+
+            if(options.continuousVertical && (options.scrollBar || !options.autoScrolling)){
+                options.continuousVertical = false;
+                showError('warn', 'Scroll bars (`scrollBar:true` or `autoScrolling:false`) are mutually exclusive with `continuousVertical`; `continuousVertical` disabled');
+            }
+
+            //using extensions? Wrong file!
+            $.each(extensions, function(index, extension){
+                //is the option set to true?
+                if(options[extension]){
+                    showError('warn', 'fullpage.js extensions require jquery.fullpage.extensions.min.js file instead of the usual jquery.fullpage.js. Requested: '+ extension);
+                }
+            });
+
+            //anchors can not have the same value as any element ID or NAME
+            $.each(options.anchors, function(index, name){
+
+                //case insensitive selectors (http://stackoverflow.com/a/19465187/1081396)
+                var nameAttr = $document.find('[name]').filter(function() {
+                    return $(this).attr('name') && $(this).attr('name').toLowerCase() == name.toLowerCase();
+                });
+
+                var idAttr = $document.find('[id]').filter(function() {
+                    return $(this).attr('id') && $(this).attr('id').toLowerCase() == name.toLowerCase();
+                });
+
+                if(idAttr.length || nameAttr.length ){
+                    showError('error', 'data-anchor tags can not have the same value as any `id` element on the site (or `name` element for IE).');
+                    idAttr.length && showError('error', '"' + name + '" is is being used by another element `id` property');
+                    nameAttr.length && showError('error', '"' + name + '" is is being used by another element `name` property');
+                }
+            });
+        }
+
+        /**
+        * Shows a message in the console of the given type.
+        */
+        function showError(type, text){
+            console && console[type] && console[type]('fullPage: ' + text);
+        }
+
+    }; //end of $.fn.fullpage
+
+    if(typeof IScroll !== 'undefined'){
+        /*
+        * Turns iScroll `mousewheel` option off dynamically
+        * https://github.com/cubiq/iscroll/issues/1036
+        */
+        IScroll.prototype.wheelOn = function () {
+            this.wrapper.addEventListener('wheel', this);
+            this.wrapper.addEventListener('mousewheel', this);
+            this.wrapper.addEventListener('DOMMouseScroll', this);
+        };
+
+        /*
+        * Turns iScroll `mousewheel` option on dynamically
+        * https://github.com/cubiq/iscroll/issues/1036
+        */
+        IScroll.prototype.wheelOff = function () {
+            this.wrapper.removeEventListener('wheel', this);
+            this.wrapper.removeEventListener('mousewheel', this);
+            this.wrapper.removeEventListener('DOMMouseScroll', this);
+        };
+    }
+
+    /**
+     * An object to handle overflow scrolling.
+     * This uses jquery.slimScroll to accomplish overflow scrolling.
+     * It is possible to pass in an alternate scrollOverflowHandler
+     * to the fullpage.js option that implements the same functions
+     * as this handler.
+     *
+     * @type {Object}
+     */
+    var iscrollHandler = {
+        refreshId: null,
+        iScrollInstances: [],
+
+        // Enables or disables the mouse wheel for the active section or all slides in it
+        toggleWheel: function(value){
+            var scrollable = $(SECTION_ACTIVE_SEL).find(SCROLLABLE_SEL);
+            scrollable.each(function(){
+                var iScrollInstance = $(this).data('iscrollInstance');
+                if(typeof iScrollInstance !== 'undefined' && iScrollInstance){
+                    if(value){
+                        iScrollInstance.wheelOn();
+                    }
+                    else{
+                        iScrollInstance.wheelOff();
+                    }
+                }
+            });
+        },
+
+        /**
+        * Turns off iScroll for the destination section.
+        * When scrolling very fast on some trackpads (and Apple laptops) the inertial scrolling would
+        * scroll the destination section/slide before the sections animations ends.
+        */
+        onLeave: function(){
+            iscrollHandler.toggleWheel(false);
+        },
+
+        // Turns off iScroll for the leaving section
+        beforeLeave: function(){
+            iscrollHandler.onLeave()
+        },
+
+        // Turns on iScroll on section load
+        afterLoad: function(){
+            iscrollHandler.toggleWheel(true);
+        },
+
+        /**
+         * Called when overflow scrolling is needed for a section.
+         *
+         * @param  {Object} element      jQuery object containing current section
+         * @param  {Number} scrollHeight Current window height in pixels
+         */
+        create: function(element, scrollHeight) {
+            var scrollable = element.find(SCROLLABLE_SEL);
+
+            scrollable.height(scrollHeight);
+            scrollable.each(function() {
+                var $this = $(this);
+                var iScrollInstance = $this.data('iscrollInstance');
+                if (iScrollInstance) {
+                    $.each(iscrollHandler.iScrollInstances, function(){
+                        $(this).destroy();
+                    });
+                }
+
+                iScrollInstance = new IScroll($this.get(0), iscrollOptions);
+                iscrollHandler.iScrollInstances.push(iScrollInstance);
+
+                //off by default until the section gets active
+                iScrollInstance.wheelOff();
+
+                $this.data('iscrollInstance', iScrollInstance);
+            });
+        },
+
+        /**
+         * Return a boolean depending on whether the scrollable element is a
+         * the end or at the start of the scrolling depending on the given type.
+         *
+         * @param  {String}  type       Either 'top' or 'bottom'
+         * @param  {Object}  scrollable jQuery object for the scrollable element
+         * @return {Boolean}
+         */
+        isScrolled: function(type, scrollable) {
+            var scroller = scrollable.data('iscrollInstance');
+
+            //no scroller?
+            if (!scroller) {
+                return true;
+            }
+
+            if (type === 'top') {
+                return scroller.y >= 0 && !scrollable.scrollTop();
+            } else if (type === 'bottom') {
+                return (0 - scroller.y) + scrollable.scrollTop() + 1 + scrollable.innerHeight() >= scrollable[0].scrollHeight;
+            }
+        },
+
+        /**
+         * Returns the scrollable element for the given section.
+         * If there are landscape slides, will only return a scrollable element
+         * if it is in the active slide.
+         *
+         * @param  {Object}  activeSection jQuery object containing current section
+         * @return {Boolean}
+         */
+        scrollable: function(activeSection){
+            // if there are landscape slides, we check if the scrolling bar is in the current one or not
+            if (activeSection.find(SLIDES_WRAPPER_SEL).length) {
+                return activeSection.find(SLIDE_ACTIVE_SEL).find(SCROLLABLE_SEL);
+            }
+            return activeSection.find(SCROLLABLE_SEL);
+        },
+
+        /**
+         * Returns the scroll height of the wrapped content.
+         * If this is larger than the window height minus section padding,
+         * overflow scrolling is needed.
+         *
+         * @param  {Object} element jQuery object containing current section
+         * @return {Number}
+         */
+        scrollHeight: function(element) {
+            return element.find(SCROLLABLE_SEL).children().first().get(0).scrollHeight;
+        },
+
+        /**
+         * Called when overflow scrolling is no longer needed for a section.
+         *
+         * @param  {Object} element      jQuery object containing current section
+         */
+        remove: function(element) {
+            var scrollable = element.find(SCROLLABLE_SEL);
+            if (scrollable.length) {
+                var iScrollInstance = scrollable.data('iscrollInstance');
+                iScrollInstance.destroy();
+
+                scrollable.data('iscrollInstance', null);
+            }
+            element.find(SCROLLABLE_SEL).children().first().children().first().unwrap().unwrap();
+        },
+
+        /**
+         * Called when overflow scrolling has already been setup but the
+         * window height has potentially changed.
+         *
+         * @param  {Object} element      jQuery object containing current section
+         * @param  {Number} scrollHeight Current window height in pixels
+         */
+        update: function(element, scrollHeight) {
+            //using a timeout in order to execute the refresh function only once when `update` is called multiple times in a
+            //short period of time.
+            //it also comes on handy because iScroll requires the use of timeout when using `refresh`.
+            clearTimeout(iscrollHandler.refreshId);
+            iscrollHandler.refreshId = setTimeout(function(){
+                $.each(iscrollHandler.iScrollInstances, function(){
+                    $(this).get(0).refresh();
+                });
+            }, 150);
+
+            //updating the wrappers height
+            element.find(SCROLLABLE_SEL).css('height', scrollHeight + 'px').parent().css('height', scrollHeight + 'px');
+        },
+
+        /**
+         * Called to get any additional elements needed to wrap the section
+         * content in order to facilitate overflow scrolling.
+         *
+         * @return {String|Object} Can be a string containing HTML,
+         *                         a DOM element, or jQuery object.
+         */
+        wrapContent: function() {
+            return '<div class="' + SCROLLABLE + '"><div class="fp-scroller"></div></div>';
+        }
+    };
+});
+
+/*!
+ * fullPage 2.9.4 - Extensions 0.0.8
+ * https://github.com/alvarotrigo/fullPage.js
+ * @license http://alvarotrigo.com/fullPage/extensions/#license
+ *
+ * Copyright (C) 2015 alvarotrigo.com - A project by Alvaro Trigo
+ */
+!function(e,n){"use strict";"function"==typeof define&&define.amd?define(["jquery"],function(t){return n(t,e,e.document,e.Math)}):"object"==typeof exports&&exports?module.exports=n(require("jquery"),e,e.document,e.Math):n(jQuery,e,e.document,e.Math)}("undefined"!=typeof window?window:this,function(e,n,t,o,i){"use strict";var r="fullpage-wrapper",a="."+r,l="fp-scrollable",s="."+l,c="fp-responsive",d="fp-notransition",f="fp-destroyed",u="fp-enabled",h="fp-viewing",p="active",v="."+p,g="fp-completely",m="."+g,S=".section",w="fp-section",y="."+w,b=y+v,x=y+":first",C=y+":last",A="fp-tableCell",T="."+A,I="fp-auto-height",k="fp-normal-scroll",L="fp-nav",M="#"+L,O="fp-tooltip",E="."+O,R="fp-show-active",H=".slide",z="fp-slide",B="."+z,D=B+v,P="fp-slides",F="."+P,V="fp-slidesContainer",W="."+V,j="fp-table",Z="fp-slidesNav",Y="."+Z,N=Y+" a",q="fp-controlArrow",U="."+q,G="fp-prev",X="."+G,Q=q+" "+G,_=U+X,K="fp-next",J="."+K,$=q+" "+K,ee=U+J,ne=e(n),te=e(t),oe={scrollbars:!0,mouseWheel:!0,hideScrollbars:!1,fadeScrollbars:!1,disableMouse:!0,interactiveScrollbars:!0};e.fn.fullpage=function(l){function s(n,t){n||ct(0),wt("autoScrolling",n,t);var o=e(b);l.autoScrolling&&!l.scrollBar?(xt.css({overflow:"hidden",height:"100%"}),q(Gt.recordHistory,"internal"),Rt.css({"-ms-touch-action":"none","touch-action":"none"}),o.length&&ct(o.position().top)):(xt.css({overflow:"visible",height:"initial"}),q(!1,"internal"),Rt.css({"-ms-touch-action":"","touch-action":""}),pt(Rt),o.length&&xt.scrollTop(o.position().top)),Rt.trigger("setAutoScrolling",[n])}function q(e,n){wt("recordHistory",e,n)}function X(e,n){"internal"!==n&&l.fadingEffect&&At.fadingEffect&&At.fadingEffect.update(e),wt("scrollingSpeed",e,n)}function K(e,n){wt("fitToSection",e,n)}function J(e){l.lockAnchors=e}function re(e){e?(nt(),tt()):(et(),ot())}function ae(n,t){"undefined"!=typeof t?(t=t.replace(/ /g,"").split(","),e.each(t,function(e,t){ft(n,t,"m")})):n?(re(!0),it()):(re(!1),rt())}function le(n,t){"undefined"!=typeof t?(t=t.replace(/ /g,"").split(","),e.each(t,function(e,t){ft(n,t,"k")})):l.keyboardScrolling=n}function se(){var n=e(b).prev(y);n.length||!l.loopTop&&!l.continuousVertical||(n=e(y).last()),n.length&&_e(n,null,!0)}function ce(){var n=e(b).next(y);n.length||!l.loopBottom&&!l.continuousVertical||(n=e(y).first()),n.length&&_e(n,null,!1)}function de(e,n){X(0,"internal"),fe(e,n),X(Gt.scrollingSpeed,"internal")}function fe(e,n){var t=Nn(e);"undefined"!=typeof n?Un(e,n):t.length>0&&_e(t)}function ue(e){Ge("right",e)}function he(e){Ge("left",e)}function pe(n){if(!Rt.hasClass(f)){zt=!0,Ht=ne.height(),e(y).each(function(){var n=e(this).find(F),t=e(this).find(B);l.verticalCentered&&e(this).find(T).css("height",Zn(e(this))+"px"),e(this).css("height",Ce(e(this))+"px"),l.scrollOverflow&&(t.length?t.each(function(){Wn(e(this))}):Wn(e(this))),t.length>1&&In(n,n.find(D))});var t=e(b),o=t.index(y);o&&de(o+1),zt=!1,e.isFunction(l.afterResize)&&n&&l.afterResize.call(Rt),e.isFunction(l.afterReBuild)&&!n&&l.afterReBuild.call(Rt)}}function ve(n){var t=Ct.hasClass(c);n?t||(s(!1,"internal"),K(!1,"internal"),e(M).hide(),Ct.addClass(c),e.isFunction(l.afterResponsive)&&l.afterResponsive.call(Rt,n),l.responsiveSlides&&At.responsiveSlides&&At.responsiveSlides.toSections(),Rt.trigger("afterResponsive",[n])):t&&(s(Gt.autoScrolling,"internal"),K(Gt.autoScrolling,"internal"),e(M).show(),Ct.removeClass(c),e.isFunction(l.afterResponsive)&&l.afterResponsive.call(Rt,n),l.responsiveSlides&&At.responsiveSlides&&At.responsiveSlides.toSlides(),Rt.trigger("afterResponsive",[n]))}function ge(){return{options:l,internals:{canScroll:Dt,isScrollAllowed:Ft,getDestinationPosition:Qe,isTouch:Et,c:un,getXmovement:Vn,removeAnimation:zn,getTransforms:dt,lazyLoad:on,addAnimation:Hn,performHorizontalMove:Mn,landscapeScroll:In,silentLandscapeScroll:st,keepSlidesPosition:Xe,silentScroll:ct,styleSlides:xe,scrollHandler:Be,getEventsPage:lt,getMSPointer:at,isReallyTouch:Ye,checkParentForNormalScrollElement:Ze,usingExtension:vt,toggleControlArrows:kn}}}function me(){l.css3&&(l.css3=$n()),l.scrollBar=l.scrollBar||l.hybrid,ye(),be(),ae(!0),s(l.autoScrolling,"internal"),Rn(),Jn(),"complete"===t.readyState&&hn(),ne.on("load",hn)}function Se(){ne.on("scroll",Be).on("hashchange",pn).blur(bn).resize(En),te.keydown(vn).keyup(mn).on("click touchstart",M+" a",xn).on("click touchstart",N,Cn).on("click",E,gn),e(y).on("click touchstart",U,yn),l.normalScrollElements&&(te.on("mouseenter",l.normalScrollElements,function(){re(!1)}),te.on("mouseleave",l.normalScrollElements,function(){re(!0)}))}function we(e){var t="fp_"+e+"Extension";Xt[e]=l[e+"Key"],At[e]="undefined"!=typeof n[t]?new n[t]:null,At[e]&&At[e].c(e)}function ye(){var n=Rt.find(l.sectionSelector);l.anchors.length||(l.anchors=n.filter("[data-anchor]").map(function(){return e(this).data("anchor").toString()}).get()),l.navigationTooltips.length||(l.navigationTooltips=n.filter("[data-tooltip]").map(function(){return e(this).data("tooltip").toString()}).get())}function be(){Rt.css({height:"100%",position:"relative"}),Rt.addClass(r),e("html").addClass(u),Ht=ne.height(),Rt.removeClass(f),Ie(),gt("parallax","init"),e(y).each(function(n){var t=e(this),o=t.find(B),i=o.length;Ae(t,n),Te(t,n),i>0?xe(t,o,i):l.verticalCentered&&jn(t)}),l.fixedElements&&l.css3&&e(l.fixedElements).appendTo(Ct),l.navigation&&Le(),Oe(),l.fadingEffect&&At.fadingEffect&&At.fadingEffect.apply(),l.scrollOverflow?("complete"===t.readyState&&Me(),ne.on("load",Me)):He()}function xe(n,t,o){var i=100*o,r=100/o;t.wrapAll('<div class="'+V+'" />'),t.parent().wrap('<div class="'+P+'" />'),n.find(W).css("width",i+"%"),o>1&&(l.controlArrows&&ke(n),l.slidesNavigation&&Xn(n,o)),t.each(function(n){e(this).css("width",r+"%"),l.verticalCentered&&jn(e(this))});var a=n.find(D);a.length&&(0!==e(b).index(y)||0===e(b).index(y)&&0!==a.index())?st(a,"internal"):t.eq(0).addClass(p)}function Ce(e){return l.offsetSections&&At.offsetSections?At.offsetSections.getWindowHeight(e):Ht}function Ae(n,t){t||0!==e(b).length||n.addClass(p),Lt=e(b),n.css("height",Ce(n)+"px"),l.paddingTop&&n.css("padding-top",l.paddingTop),l.paddingBottom&&n.css("padding-bottom",l.paddingBottom),"undefined"!=typeof l.sectionsColor[t]&&n.css("background-color",l.sectionsColor[t]),"undefined"!=typeof l.anchors[t]&&n.attr("data-anchor",l.anchors[t])}function Te(n,t){"undefined"!=typeof l.anchors[t]&&n.hasClass(p)&&Pn(l.anchors[t],t),l.menu&&l.css3&&e(l.menu).closest(a).length&&e(l.menu).appendTo(Ct)}function Ie(){Rt.find(l.sectionSelector).addClass(w),Rt.find(l.slideSelector).addClass(z)}function ke(e){e.find(F).after('<div class="'+Q+'"></div><div class="'+$+'"></div>'),"#fff"!=l.controlArrowColor&&(e.find(ee).css("border-color","transparent transparent transparent "+l.controlArrowColor),e.find(_).css("border-color","transparent "+l.controlArrowColor+" transparent transparent")),l.loopHorizontal||e.find(_).hide()}function Le(){Ct.append('<div id="'+L+'"><ul></ul></div>');var n=e(M);n.addClass(function(){return l.showActiveTooltip?R+" "+l.navigationPosition:l.navigationPosition});for(var t=0;t<e(y).length;t++){var o="";l.anchors.length&&(o=l.anchors[t]);var i='<li><a href="#'+o+'"><span></span></a>',r=l.navigationTooltips[t];"undefined"!=typeof r&&""!==r&&(i+='<div class="'+O+" "+l.navigationPosition+'">'+r+"</div>"),i+="</li>",n.find("ul").append(i)}e(M).css("margin-top","-"+e(M).height()/2+"px"),e(M).find("li").eq(e(b).index(y)).find("a").addClass(p)}function Me(){e(y).each(function(){var n=e(this).find(B);n.length?n.each(function(){Wn(e(this))}):Wn(e(this))}),He()}function Oe(){Rt.find('iframe[src*="youtube.com/embed/"]').each(function(){Ee(e(this),"enablejsapi=1")})}function Ee(e,n){var t=e.attr("src");e.attr("src",t+Re(t)+n)}function Re(e){return/\?/.test(e)?"&":"?"}function He(){var n=e(b);n.addClass(g),l.scrollOverflowHandler.afterRender&&l.scrollOverflowHandler.afterRender(n),on(n),rn(n),l.scrollOverflowHandler.afterLoad(),ze()&&e.isFunction(l.afterLoad)&&l.afterLoad.call(n,n.data("anchor"),n.index(y)+1),e.isFunction(l.afterRender)&&l.afterRender.call(Rt)}function ze(){var e=n.location.hash.replace("#","").split("/"),t=Nn(decodeURIComponent(e[0]));return!t.length||t.length&&t.index()===Lt.index()}function Be(){to||(requestAnimationFrame(De),to=!0)}function De(){Rt.trigger("onScroll");var n;if((!l.autoScrolling||l.scrollBar||vt("dragAndMove"))&&!St()){var i=vt("dragAndMove")?o.abs(At.dragAndMove.getCurrentScroll()):ne.scrollTop(),r=(Fe(i),0),a=i+ne.height()/2,s=vt("dragAndMove")?At.dragAndMove.getDocumentHeight():Ct.height()-ne.height(),c=s===i,d=t.querySelectorAll(y);if(c)r=d.length-1;else if(i)for(var f=0;f<d.length;++f){var u=d[f];u.offsetTop<=a&&(r=f)}else r=0;if(n=e(d).eq(r),!n.hasClass(p)){Qt=!0;var h,v,g=e(b),m=g.index(y)+1,S=Fn(n),w=n.data("anchor"),x=n.index(y)+1,C=n.find(D);C.length&&(v=C.data("anchor"),h=C.index()),Dt&&(n.addClass(p).siblings().removeClass(p),gt("parallax","afterLoad"),e.isFunction(l.onLeave)&&l.onLeave.call(g,m,x,S),e.isFunction(l.afterLoad)&&l.afterLoad.call(n,w,x),l.resetSliders&&At.resetSliders&&At.resetSliders.apply({localIsResizing:zt,leavingSection:m}),ln(g),on(n),rn(n),Pn(w,x-1),l.anchors.length&&(Tt=w),Qn(h,v,w,x)),clearTimeout(Zt),Zt=setTimeout(function(){Qt=!1},100)}l.fitToSection&&(clearTimeout(Yt),Yt=setTimeout(function(){l.fitToSection&&Pe()},l.fitToSectionDelay))}to=!1}function Pe(){Dt&&(zt=!0,_e(e(b)),zt=!1)}function Fe(e){var n=e>_t?"down":"up";return _t=e,oo=e,n}function Ve(e,n){if(Ft.m[e]){var t="down"===e?"bottom":"top",o="down"===e?ce:se;if(At.scrollHorizontally&&(o=At.scrollHorizontally.getScrollSection(e,o)),n.length>0){if(!l.scrollOverflowHandler.isScrolled(t,n))return!0;o()}else o()}}function We(e){var n=e.originalEvent;!Ze(e.target)&&l.autoScrolling&&Ye(n)&&e.preventDefault()}function je(n){var t=n.originalEvent,i=e(t.target).closest(y);if(!Ze(n.target)&&Ye(t)){l.autoScrolling&&n.preventDefault();var r=l.scrollOverflowHandler.scrollable(i),a=lt(t);$t=a.y,eo=a.x,i.find(F).length&&o.abs(Jt-eo)>o.abs(Kt-$t)?!Mt&&o.abs(Jt-eo)>ne.outerWidth()/100*l.touchSensitivity&&(Jt>eo?Ft.m.right&&ue(i):Ft.m.left&&he(i)):l.autoScrolling&&Dt&&o.abs(Kt-$t)>ne.height()/100*l.touchSensitivity&&(Kt>$t?Ve("down",r):$t>Kt&&Ve("up",r))}}function Ze(n,t){t=t||0;var o=e(n).parent();return!!(t<l.normalScrollElementTouchThreshold&&o.is(l.normalScrollElements))||t!=l.normalScrollElementTouchThreshold&&Ze(o,++t)}function Ye(e){return"undefined"==typeof e.pointerType||"mouse"!=e.pointerType}function Ne(e){var n=e.originalEvent;if(l.fitToSection&&xt.stop(),Ye(n)){var t=lt(n);Kt=t.y,Jt=t.x}}function qe(e,n){for(var t=0,i=e.slice(o.max(e.length-n,1)),r=0;r<i.length;r++)t+=i[r];return o.ceil(t/n)}function Ue(t){var i=(new Date).getTime(),r=e(m).hasClass(k);if(l.autoScrolling&&!kt&&!r){t=t||n.event;var a=t.wheelDelta||-t.deltaY||-t.detail,s=o.max(-1,o.min(1,a)),c="undefined"!=typeof t.wheelDeltaX||"undefined"!=typeof t.deltaX,d=o.abs(t.wheelDeltaX)<o.abs(t.wheelDelta)||o.abs(t.deltaX)<o.abs(t.deltaY)||!c;Pt.length>149&&Pt.shift(),Pt.push(o.abs(a)),l.scrollBar&&(t.preventDefault?t.preventDefault():t.returnValue=!1);var f=e(b),u=l.scrollOverflowHandler.scrollable(f),h=i-no;if(no=i,h>200&&(Pt=[]),Dt&&!mt()){var p=qe(Pt,10),v=qe(Pt,70),g=p>=v;g&&d&&(s<0?Ve("down",u):Ve("up",u))}return!1}l.fitToSection&&xt.stop()}function Ge(n,t){var o="undefined"==typeof t?e(b):t,i=o.find(F);if(!(!i.length||mt()||Mt||i.find(B).length<2)){var r=i.find(D),a=null;if(a="left"===n?r.prev(B):r.next(B),!a.length){if(!l.loopHorizontal)return;a="left"===n?r.siblings(":last"):r.siblings(":first")}Mt=!0,In(i,a,n)}}function Xe(){e(D).each(function(){st(e(this),"internal")})}function Qe(e){var n=e.position(),t=n.top,o=vt("dragAndMove")&&At.dragAndMove.isGrabbing?At.dragAndMove.isScrollingDown():n.top>oo,i=t-Ht+e.outerHeight(),r=l.bigSectionsDestination;return e.outerHeight()>Ht?(o||r)&&"bottom"!==r||(t=i):(o||zt&&e.is(":last-child"))&&(t=i),l.offsetSections&&At.offsetSections&&(t=At.offsetSections.getSectionPosition(o,t,e)),oo=t,t}function _e(n,t,o){if("undefined"!=typeof n&&n.length){var i,r,a=Qe(n),s={element:n,callback:t,isMovementUp:o,dtop:a,yMovement:Fn(n),anchorLink:n.data("anchor"),sectionIndex:n.index(y),activeSlide:n.find(D),activeSection:e(b),leavingSection:e(b).index(y)+1,localIsResizing:zt};s.activeSection.is(n)&&!zt||l.scrollBar&&ne.scrollTop()===s.dtop&&!n.hasClass(I)||(s.activeSlide.length&&(i=s.activeSlide.data("anchor"),r=s.activeSlide.index()),gt("parallax","apply",s),l.autoScrolling&&l.continuousVertical&&"undefined"!=typeof s.isMovementUp&&(!s.isMovementUp&&"up"==s.yMovement||s.isMovementUp&&"down"==s.yMovement)&&(s=$e(s)),e.isFunction(l.onLeave)&&!s.localIsResizing&&l.onLeave.call(s.activeSection,s.leavingSection,s.sectionIndex+1,s.yMovement)===!1||(vt("scrollOverflowReset")&&At.scrollOverflowReset.setPrevious(s.activeSection),s.localIsResizing||ln(s.activeSection),l.scrollOverflowHandler.beforeLeave(),n.addClass(p).siblings().removeClass(p),on(n),l.scrollOverflowHandler.onLeave(),Dt=!1,Qn(r,i,s.anchorLink,s.sectionIndex),Ke(s),Tt=s.anchorLink,Pn(s.anchorLink,s.sectionIndex)))}}function Ke(n){if(l.css3&&l.autoScrolling&&!l.scrollBar){var t="translate3d(0px, -"+o.round(n.dtop)+"px, 0px)";Yn(t,!0),l.scrollingSpeed?(clearTimeout(Wt),Wt=setTimeout(function(){nn(n)},l.scrollingSpeed)):nn(n)}else{var i=Je(n);e(i.element).animate(i.options,l.scrollingSpeed,l.easing).promise().done(function(){l.scrollBar?setTimeout(function(){nn(n)},30):nn(n)})}}function Je(e){var n={};return l.autoScrolling&&!l.scrollBar?(n.options={top:-e.dtop},n.element=a):(n.options={scrollTop:e.dtop},n.element="html, body"),n}function $e(n){return n.isMovementUp?n.activeSection.before(n.activeSection.nextAll(y)):n.activeSection.after(n.activeSection.prevAll(y).get().reverse()),ct(e(b).position().top),Xe(),n.wrapAroundElements=n.activeSection,n.dtop=n.element.position().top,n.yMovement=Fn(n.element),n.leavingSection=n.activeSection.index(y)+1,n.sectionIndex=n.element.index(y),e(a).trigger("onContinuousVertical",[n]),n}function en(n){n.wrapAroundElements&&n.wrapAroundElements.length&&(n.isMovementUp?e(x).before(n.wrapAroundElements):e(C).after(n.wrapAroundElements),ct(e(b).position().top),Xe(),n.sectionIndex=n.element.index(y),n.leavingSection=n.activeSection.index(y)+1)}function nn(n){en(n),e.isFunction(l.afterLoad)&&!n.localIsResizing&&l.afterLoad.call(n.element,n.anchorLink,n.sectionIndex+1),l.scrollOverflowHandler.afterLoad(),gt("parallax","afterLoad"),vt("scrollOverflowReset")&&At.scrollOverflowReset.reset(),l.resetSliders&&At.resetSliders&&At.resetSliders.apply(n),n.localIsResizing||rn(n.element),n.element.addClass(g).siblings().removeClass(g),Dt=!0,e.isFunction(n.callback)&&n.callback.call(this)}function tn(e,n){e.attr(n,e.data(n)).removeAttr("data-"+n)}function on(n){if(l.lazyLoading){var t,o=sn(n);o.find("img[data-src], img[data-srcset], source[data-src], audio[data-src], iframe[data-src]").each(function(){t=e(this),e.each(["src","srcset"],function(e,n){var o=t.attr("data-"+n);"undefined"!=typeof o&&o&&tn(t,n)}),t.is("source")&&t.closest("video").get(0).load()})}}function rn(n){var t=sn(n);t.find("video, audio").each(function(){var n=e(this).get(0);n.hasAttribute("data-autoplay")&&"function"==typeof n.play&&n.play()}),t.find('iframe[src*="youtube.com/embed/"]').each(function(){var n=e(this).get(0);n.hasAttribute("data-autoplay")&&an(n),n.onload=function(){n.hasAttribute("data-autoplay")&&an(n)}})}function an(e){e.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}',"*")}function ln(n){var t=sn(n);t.find("video, audio").each(function(){var n=e(this).get(0);n.hasAttribute("data-keepplaying")||"function"!=typeof n.pause||n.pause()}),t.find('iframe[src*="youtube.com/embed/"]').each(function(){var n=e(this).get(0);/youtube\.com\/embed\//.test(e(this).attr("src"))&&!n.hasAttribute("data-keepplaying")&&e(this).get(0).contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}',"*")})}function sn(n){var t=n.find(D);return t.length&&(n=e(t)),n}function cn(e){function n(e){var n,o,i,r,l,s,c,d="",f=0;for(e=e.replace(/[^A-Za-z0-9+\/=]/g,"");f<e.length;)r=a.indexOf(e.charAt(f++)),l=a.indexOf(e.charAt(f++)),s=a.indexOf(e.charAt(f++)),c=a.indexOf(e.charAt(f++)),n=r<<2|l>>4,o=(15&l)<<4|s>>2,i=(3&s)<<6|c,d+=String.fromCharCode(n),64!=s&&(d+=String.fromCharCode(o)),64!=c&&(d+=String.fromCharCode(i));return d=t(d)}function t(e){for(var n,t="",o=0,i=0,r=0;o<e.length;)i=e.charCodeAt(o),i<128?(t+=String.fromCharCode(i),o++):i>191&&i<224?(r=e.charCodeAt(o+1),t+=String.fromCharCode((31&i)<<6|63&r),o+=2):(r=e.charCodeAt(o+1),n=e.charCodeAt(o+2),t+=String.fromCharCode((15&i)<<12|(63&r)<<6|63&n),o+=3);return t}function o(e){return e}function i(e){return e.slice(3).slice(0,-3)}function r(e){var t=e.split("_");if(t.length>1){var o=t[1],r=e.replace(i(t[1]),"").split("_")[0],a=r;return a+"_"+n(o.slice(3).slice(0,-3))}return i(e)}var a="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";return o(r(n(e)))}function dn(){if(t.domain.length){for(var e=t.domain.replace(/^(www\.)/,"").split(".");e.length>2;){e.shift()}var n=e.join(".");return n.replace(/(^\.*)|(\.*$)/g,"")}return""}function fn(e){var n=dn(),t=["localhost","127.0.0.1","jshell.net","UDdDQU5ZNlNN"],o=t[0],i=t[1],r=t[2],a=cn(t[3]),l=[o,i,r].indexOf(n)<0&&0!==n.length,s="undefined"!=typeof Xt[e]&&Xt[e].length;if(!s&&l)return!1;var c=s?cn(Xt[e]):"";c=c.split("_");var d=c.length>1&&c[1].indexOf(e,c[1].length-e.length)>-1,f=c[0].indexOf(n,c[0].length-n.length)<0;return!(f&&l&&a!=c[0])&&d||!l}function un(e){if(vt(e)&&At[e]){var n=cn("MTIzPGRpdiBzdHlsZT0iei1pbmRleDo5OTk5OTk5O3Bvc2l0aW9uOmZpeGVkOyB0b3A6IDIwcHg7IGxlZnQ6MjBweDsgYmFja2dyb3VuZDpyZWQ7IHBhZGRpbmc6IDdweCAxNXB4OyBmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBhcmlhbDsgY29sb3I6ICNmZmY7IGRpc3BsYXk6IGlubGluZS1ibG9jazsiPjxhIGhyZWY9Imh0dHA6Ly9hbHZhcm90cmlnby5jb20vZnVsbFBhZ2UvZXh0ZW5zaW9ucy8iIHN0eWxlPSJjb2xvcjogI2ZmZjsgdGV4dC1kZWNvcmF0aW9uOm5vbmU7Ij5VbmxpY2Vuc2VkIGZ1bGxQYWdlLmpzIEV4dGVuc2lvbjwvYT48L2Rpdj4xMjM="),t=o.random()<.5;if(!fn(e)){var i,r="9999999",a="z-index",l=function(){i=t?Ct.find("div").first():Ct.find("div").last(),i.css(a)!==r&&(t?Ct.prepend(n):Ct.append(n))};l(),setInterval(l,2e3)}}}function hn(){var e=n.location.hash.replace("#","").split("/"),t=decodeURIComponent(e[0]),o=decodeURIComponent(e[1]);t&&(l.animateAnchor?Un(t,o):de(t,o))}function pn(){if(!Qt&&!l.lockAnchors){var e=n.location.hash.replace("#","").split("/"),t=decodeURIComponent(e[0]),o=decodeURIComponent(e[1]),i="undefined"==typeof Tt,r="undefined"==typeof Tt&&"undefined"==typeof o&&!Mt;t.length&&(t&&t!==Tt&&!i||r||!Mt&&It!=o)&&Un(t,o)}}function vn(n){clearTimeout(Nt);var t=e(":focus");if(!t.is("textarea")&&!t.is("input")&&!t.is("select")&&"true"!==t.attr("contentEditable")&&""!==t.attr("contentEditable")&&l.keyboardScrolling&&l.autoScrolling){var o=n.which,i=[40,38,32,33,34];e.inArray(o,i)>-1&&n.preventDefault(),kt=n.ctrlKey,Nt=setTimeout(function(){An(n)},150)}}function gn(){e(this).prev().trigger("click")}function mn(e){Bt&&(kt=e.ctrlKey)}function Sn(e){2==e.which&&(io=e.pageY,Rt.on("mousemove",Tn))}function wn(e){2==e.which&&Rt.off("mousemove")}function yn(){var n=e(this).closest(y);e(this).hasClass(G)?Ft.m.left&&he(n):Ft.m.right&&ue(n)}function bn(){Bt=!1,kt=!1}function xn(n){n.preventDefault();var t=e(this).parent().index();_e(e(y).eq(t))}function Cn(n){n.preventDefault();var t=e(this).closest(y).find(F),o=t.find(B).eq(e(this).closest("li").index());In(t,o)}function An(n){var t=n.shiftKey;if(Dt||!([37,39].indexOf(n.which)<0))switch(n.which){case 38:case 33:Ft.k.up&&se();break;case 32:if(t&&Ft.k.up){se();break}case 40:case 34:Ft.k.down&&ce();break;case 36:Ft.k.up&&fe(1);break;case 35:Ft.k.down&&fe(e(y).length);break;case 37:Ft.k.left&&he();break;case 39:Ft.k.right&&ue();break;default:return}}function Tn(e){Dt&&(e.pageY<io&&Ft.m.up?se():e.pageY>io&&Ft.m.down&&ce()),io=e.pageY}function In(n,t,o){var i=n.closest(y),r={slides:n,destiny:t,direction:o,destinyPos:t.position(),slideIndex:t.index(),section:i,sectionIndex:i.index(y),anchorLink:i.data("anchor"),slidesNav:i.find(Y),slideAnchor:Kn(t),prevSlide:i.find(D),prevSlideIndex:i.find(D).index(),localIsResizing:zt};return r.xMovement=Vn(r.prevSlideIndex,r.slideIndex),r.localIsResizing||(Dt=!1),gt("parallax","applyHorizontal",r),l.onSlideLeave&&!r.localIsResizing&&"none"!==r.xMovement&&e.isFunction(l.onSlideLeave)&&l.onSlideLeave.call(r.prevSlide,r.anchorLink,r.sectionIndex+1,r.prevSlideIndex,r.xMovement,r.slideIndex)===!1?void(Mt=!1):(t.addClass(p).siblings().removeClass(p),r.localIsResizing||(ln(r.prevSlide),on(t)),kn(r),i.hasClass(p)&&!r.localIsResizing&&Qn(r.slideIndex,r.slideAnchor,r.anchorLink,r.sectionIndex),At.continuousHorizontal&&At.continuousHorizontal.apply(r),St()?Ln(r):Mn(n,r,!0),void(l.interlockedSlides&&At.interlockedSlides&&At.interlockedSlides.apply(r)))}function kn(e){!l.loopHorizontal&&l.controlArrows&&(e.section.find(_).toggle(0!==e.slideIndex),e.section.find(ee).toggle(!e.destiny.is(":last-child")))}function Ln(n){At.continuousHorizontal&&At.continuousHorizontal.afterSlideLoads(n),On(n.slidesNav,n.slideIndex),n.localIsResizing||(gt("parallax","afterSlideLoads"),e.isFunction(l.afterSlideLoad)&&l.afterSlideLoad.call(n.destiny,n.anchorLink,n.sectionIndex+1,n.slideAnchor,n.slideIndex),Dt=!0,rn(n.destiny)),Mt=!1,At.interlockedSlides&&At.interlockedSlides.apply(n)}function Mn(e,n,t){var i=n.destinyPos;if(l.css3){var r="translate3d(-"+o.round(i.left)+"px, 0px, 0px)";Hn(e.find(W)).css(dt(r)),jt=setTimeout(function(){t&&Ln(n)},l.scrollingSpeed,l.easing)}else e.animate({scrollLeft:o.round(i.left)},l.scrollingSpeed,l.easing,function(){t&&Ln(n)})}function On(e,n){e.find(v).removeClass(p),e.find("li").eq(n).find("a").addClass(p)}function En(){if(Rt.trigger("onResize"),Rn(),Ot){var n=e(t.activeElement);if(!n.is("textarea")&&!n.is("input")&&!n.is("select")){var i=ne.height();o.abs(i-ro)>20*o.max(ro,i)/100&&(pe(!0),ro=i)}}else clearTimeout(Vt),Vt=setTimeout(function(){pe(!0)},350)}function Rn(){var e=l.responsive||l.responsiveWidth,n=l.responsiveHeight,t=e&&ne.outerWidth()<e,o=n&&ne.height()<n;e&&n?ve(t||o):e?ve(t):n&&ve(o)}function Hn(e){var n="all "+l.scrollingSpeed+"ms "+l.easingcss3;return e.removeClass(d),e.css({"-webkit-transition":n,transition:n})}function zn(e){return e.addClass(d)}function Bn(n,t){l.navigation&&(e(M).find(v).removeClass(p),n?e(M).find('a[href="#'+n+'"]').addClass(p):e(M).find("li").eq(t).find("a").addClass(p))}function Dn(n){l.menu&&(e(l.menu).find(v).removeClass(p),e(l.menu).find('[data-menuanchor="'+n+'"]').addClass(p))}function Pn(e,n){Dn(e),Bn(e,n)}function Fn(n){var t=e(b).index(y),o=n.index(y);return t==o?"none":t>o?"up":"down"}function Vn(e,n){return e==n?"none":e>n?"left":"right"}function Wn(e){if(!e.hasClass("fp-noscroll")){e.css("overflow","hidden");var n,t=l.scrollOverflowHandler,o=t.wrapContent(),i=e.closest(y),r=t.scrollable(e);r.length?n=t.scrollHeight(e):(n=e.get(0).scrollHeight,l.verticalCentered&&(n=e.find(T).get(0).scrollHeight));var a=Zn(i);n>a?r.length?t.update(e,a):(l.verticalCentered?e.find(T).wrapInner(o):e.wrapInner(o),t.create(e,a,l.scrollOverflowOptions)):t.remove(e),e.css("overflow","")}}function jn(e){e.hasClass(j)||e.addClass(j).wrapInner('<div class="'+A+'" style="height:'+Zn(e)+'px;" />')}function Zn(e){var n=Ce(e);if(l.paddingTop||l.paddingBottom){var t=e;t.hasClass(w)||(t=e.closest(y));var o=parseInt(t.css("padding-top"))+parseInt(t.css("padding-bottom"));n=Ht-o}return n}function Yn(e,n){n?Hn(Rt):zn(Rt),Rt.css(dt(e)),setTimeout(function(){Rt.removeClass(d)},10)}function Nn(n){if(!n)return[];var t=Rt.find(y+'[data-anchor="'+n+'"]');return t.length||(t=e(y).eq(n-1)),t}function qn(e,n){var t=n.find(F),o=t.find(B+'[data-anchor="'+e+'"]');return o.length||(o=t.find(B).eq(e)),o}function Un(e,n){var t=Nn(e);t.length&&("undefined"==typeof n&&(n=0),e===Tt||t.hasClass(p)?Gn(t,n):_e(t,function(){Gn(t,n)}))}function Gn(e,n){if("undefined"!=typeof n){var t=e.find(F),o=qn(n,e);o.length&&In(t,o)}}function Xn(e,n){e.append('<div class="'+Z+'"><ul></ul></div>');var t=e.find(Y);t.addClass(l.slidesNavPosition);for(var o=0;o<n;o++)t.find("ul").append('<li><a href="#"><span></span></a></li>');t.css("margin-left","-"+t.width()/2+"px"),t.find("li").first().find("a").addClass(p)}function Qn(e,n,t,o){var i="";l.anchors.length&&!l.lockAnchors&&(e?("undefined"!=typeof t&&(i=t),"undefined"==typeof n&&(n=e),It=n,_n(i+"/"+n)):"undefined"!=typeof e?(It=n,_n(t)):_n(t)),Jn()}function _n(e){if(l.recordHistory)location.hash=e;else if(Ot||Et)n.history.replaceState(i,i,"#"+e);else{var t=n.location.href.split("#")[0];n.location.replace(t+"#"+e)}}function Kn(e){var n=e.data("anchor"),t=e.index();return"undefined"==typeof n&&(n=t),n}function Jn(){var n=e(b),t=n.find(D),o=Kn(n),i=Kn(t),r=String(o);t.length&&(r=r+"-"+i),r=r.replace("/","-").replace("#","");var a=new RegExp("\\b\\s?"+h+"-[^\\s]+\\b","g");Ct[0].className=Ct[0].className.replace(a,""),Ct.addClass(h+"-"+r)}function $n(){var e,o=t.createElement("p"),r={webkitTransform:"-webkit-transform",OTransform:"-o-transform",msTransform:"-ms-transform",MozTransform:"-moz-transform",transform:"transform"};t.body.insertBefore(o,null);for(var a in r)o.style[a]!==i&&(o.style[a]="translate3d(1px,1px,1px)",e=n.getComputedStyle(o).getPropertyValue(r[a]));return t.body.removeChild(o),e!==i&&e.length>0&&"none"!==e}function et(){t.addEventListener?(t.removeEventListener("mousewheel",Ue,!1),t.removeEventListener("wheel",Ue,!1),t.removeEventListener("MozMousePixelScroll",Ue,!1)):t.detachEvent("onmousewheel",Ue)}function nt(){var e,o="";n.addEventListener?e="addEventListener":(e="attachEvent",o="on");var r="onwheel"in t.createElement("div")?"wheel":t.onmousewheel!==i?"mousewheel":"DOMMouseScroll";"DOMMouseScroll"==r?t[e](o+"MozMousePixelScroll",Ue,!1):t[e](o+r,Ue,!1)}function tt(){Rt.on("mousedown",Sn).on("mouseup",wn)}function ot(){Rt.off("mousedown",Sn).off("mouseup",wn)}function it(){(Ot||Et)&&(l.autoScrolling&&Ct.off(Ut.touchmove).on(Ut.touchmove,We),e(a).off(Ut.touchstart).on(Ut.touchstart,Ne).off(Ut.touchmove).on(Ut.touchmove,je))}function rt(){(Ot||Et)&&e(a).off(Ut.touchstart).off(Ut.touchmove)}function at(){var e;return e=n.PointerEvent?{down:"pointerdown",move:"pointermove"}:{down:"MSPointerDown",move:"MSPointerMove"}}function lt(e){var n=[];return n.y="undefined"!=typeof e.pageY&&(e.pageY||e.pageX)?e.pageY:e.touches[0].pageY,n.x="undefined"!=typeof e.pageX&&(e.pageY||e.pageX)?e.pageX:e.touches[0].pageX,Et&&Ye(e)&&l.scrollBar&&(n.y=e.touches[0].pageY,n.x=e.touches[0].pageX),n}function st(e,n){X(0,"internal"),"undefined"!=typeof n&&(zt=!0),In(e.closest(F),e),"undefined"!=typeof n&&(zt=!1),X(Gt.scrollingSpeed,"internal")}function ct(e){var n=o.round(e);if(l.css3&&l.autoScrolling&&!l.scrollBar){var t="translate3d(0px, -"+n+"px, 0px)";Yn(t,!1)}else l.autoScrolling&&!l.scrollBar?Rt.css("top",-n):xt.scrollTop(n)}function dt(e){return{"-webkit-transform":e,"-moz-transform":e,"-ms-transform":e,transform:e}}function ft(e,n,t){switch(n){case"up":Ft[t].up=e;break;case"down":Ft[t].down=e;break;case"left":Ft[t].left=e;break;case"right":Ft[t].right=e;break;case"all":"m"==t?ae(e):le(e)}}function ut(n){Rt.trigger("destroy",[n]),s(!1,"internal"),ae(!1),le(!1),Rt.addClass(f),clearTimeout(jt),clearTimeout(Wt),clearTimeout(Vt),clearTimeout(Zt),clearTimeout(Yt),ne.off("scroll",Be).off("hashchange",pn).off("resize",En),te.off("click touchstart",M+" a").off("mouseenter",M+" li").off("mouseleave",M+" li").off("click touchstart",N).off("mouseover",l.normalScrollElements).off("mouseout",l.normalScrollElements),e(y).off("click touchstart",U),vt("dragAndMove")&&At.dragAndMove.destroy(),clearTimeout(jt),clearTimeout(Wt),n&&ht()}function ht(){ct(0),Rt.find("img[data-src], source[data-src], audio[data-src], iframe[data-src]").each(function(){tn(e(this),"src")}),Rt.find("img[data-srcset]").each(function(){tn(e(this),"srcset")}),e(M+", "+Y+", "+U).remove(),e(y).css({height:"","background-color":"",padding:""}),e(B).css({width:""}),Rt.css({height:"",position:"","-ms-touch-action":"","touch-action":""}),xt.css({overflow:"",height:""}),e("html").removeClass(u),Ct.removeClass(c),e.each(Ct.get(0).className.split(/\s+/),function(e,n){0===n.indexOf(h)&&Ct.removeClass(n)}),e(y+", "+B).each(function(){l.scrollOverflowHandler.remove(e(this)),e(this).removeClass(j+" "+p)}),pt(Rt),Rt.find(T+", "+W+", "+F).each(function(){e(this).replaceWith(this.childNodes)}),xt.scrollTop(0);var n=[w,z,V];e.each(n,function(n,t){e("."+t).removeClass(t)})}function pt(e){return e.css({"-webkit-transition":"none",transition:"none"})}function vt(e){return null!==l[e]&&"object"==typeof l[e]?l[e].enabled&&At[e]:l[e]&&At[e]}function gt(e,n,t){var o=Array.isArray(t)?t.join(", "):t;vt(e)&&At[e][n](o)}function mt(){return vt("dragAndMove")&&At.dragAndMove.isAnimating}function St(){return vt("dragAndMove")&&At.dragAndMove.isGrabbing}function wt(e,n,t){l[e]=n,"internal"!==t&&(Gt[e]=n)}function yt(){return e("html").hasClass(u)?void bt("error","Fullpage.js can only be initialized once and you are doing it multiple times!"):(l.continuousVertical&&(l.loopTop||l.loopBottom)&&(l.continuousVertical=!1,bt("warn","Option `loopTop/loopBottom` is mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),l.scrollBar&&l.scrollOverflow&&bt("warn","Option `scrollBar` is mutually exclusive with `scrollOverflow`. Sections with scrollOverflow might not work well in Firefox"),!l.continuousVertical||!l.scrollBar&&l.autoScrolling||(l.continuousVertical=!1,bt("warn","Scroll bars (`scrollBar:true` or `autoScrolling:false`) are mutually exclusive with `continuousVertical`; `continuousVertical` disabled")),void e.each(l.anchors,function(n,t){var o=te.find("[name]").filter(function(){return e(this).attr("name")&&e(this).attr("name").toLowerCase()==t.toLowerCase()}),i=te.find("[id]").filter(function(){return e(this).attr("id")&&e(this).attr("id").toLowerCase()==t.toLowerCase()});(i.length||o.length)&&(bt("error","data-anchor tags can not have the same value as any `id` element on the site (or `name` element for IE)."),i.length&&bt("error",'"'+t+'" is is being used by another element `id` property'),o.length&&bt("error",'"'+t+'" is is being used by another element `name` property'))}))}function bt(e,n){console&&console[e]&&console[e]("fullPage: "+n)}if(e("html").hasClass(u))return void yt();var xt=e("html, body"),Ct=e("body"),At=e.fn.fullpage;l=e.extend(!0,{menu:!1,anchors:[],lockAnchors:!1,navigation:!1,navigationPosition:"right",navigationTooltips:[],showActiveTooltip:!1,slidesNavigation:!1,slidesNavPosition:"bottom",scrollBar:!1,hybrid:!1,css3:!0,scrollingSpeed:700,autoScrolling:!0,fitToSection:!0,fitToSectionDelay:1e3,easing:"easeInOutCubic",easingcss3:"ease",loopBottom:!1,loopTop:!1,loopHorizontal:!0,continuousVertical:!1,continuousHorizontal:!1,scrollHorizontally:!1,interlockedSlides:!1,dragAndMove:!1,offsetSections:!1,resetSliders:!1,fadingEffect:!1,normalScrollElements:null,scrollOverflow:!1,scrollOverflowReset:!1,scrollOverflowHandler:ie,scrollOverflowOptions:null,touchSensitivity:5,normalScrollElementTouchThreshold:5,bigSectionsDestination:null,keyboardScrolling:!0,animateAnchor:!0,recordHistory:!0,controlArrows:!0,controlArrowColor:"#fff",verticalCentered:!0,sectionsColor:[],paddingTop:0,paddingBottom:0,fixedElements:null,responsive:0,responsiveWidth:0,responsiveHeight:0,responsiveSlides:!1,parallax:!1,parallaxOptions:{type:"reveal",percentage:62,property:"translate"},sectionSelector:S,slideSelector:H,afterLoad:null,onLeave:null,afterRender:null,afterResize:null,afterReBuild:null,afterSlideLoad:null,onSlideLeave:null,afterResponsive:null,lazyLoading:!0},l);var Tt,It,kt,Lt,Mt=!1,Ot=navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/),Et="ontouchstart"in n||navigator.msMaxTouchPoints>0||navigator.maxTouchPoints,Rt=e(this),Ht=ne.height(),zt=!1,Bt=!0,Dt=!0,Pt=[],Ft={};Ft.m={up:!0,down:!0,left:!0,right:!0},Ft.k=e.extend(!0,{},Ft.m);var Vt,Wt,jt,Zt,Yt,Nt,qt=at(),Ut={
+touchmove:"ontouchmove"in n?"touchmove":qt.move,touchstart:"ontouchstart"in n?"touchstart":qt.down},Gt=e.extend(!0,{},l),Xt={};yt(),oe.click=Et,l.scrollOverflowOptions=e.extend(oe,l.scrollOverflowOptions),e.extend(e.easing,{easeInOutCubic:function(e,n,t,o,i){return(n/=i/2)<1?o/2*n*n*n+t:o/2*((n-=2)*n*n+2)+t}}),e(this).length&&(At.setAutoScrolling=s,At.setRecordHistory=q,At.setScrollingSpeed=X,At.setFitToSection=K,At.setLockAnchors=J,At.setMouseWheelScrolling=re,At.setAllowScrolling=ae,At.setKeyboardScrolling=le,At.moveSectionUp=se,At.moveSectionDown=ce,At.silentMoveTo=de,At.moveTo=fe,At.moveSlideRight=ue,At.moveSlideLeft=he,At.fitToSection=Pe,At.reBuild=pe,At.setResponsive=ve,At.getFullpageData=ge,At.destroy=ut,At.landscapeScroll=In,we("continuousHorizontal"),we("scrollHorizontally"),we("resetSliders"),we("interlockedSlides"),we("responsiveSlides"),we("fadingEffect"),we("dragAndMove"),we("offsetSections"),we("scrollOverflowReset"),we("parallax"),vt("dragAndMove")&&At.dragAndMove.init(),me(),Se(),vt("dragAndMove")&&At.dragAndMove.turnOffTouch());var Qt=!1,_t=0,Kt=0,Jt=0,$t=0,eo=0;!function(){var e=n.requestAnimationFrame||n.mozRequestAnimationFrame||n.webkitRequestAnimationFrame||n.msRequestAnimationFrame;n.requestAnimationFrame=e}();var no=(new Date).getTime(),to=!1,oo=0,io=0,ro=Ht},"undefined"!=typeof IScroll&&(IScroll.prototype.wheelOn=function(){this.wrapper.addEventListener("wheel",this),this.wrapper.addEventListener("mousewheel",this),this.wrapper.addEventListener("DOMMouseScroll",this)},IScroll.prototype.wheelOff=function(){this.wrapper.removeEventListener("wheel",this),this.wrapper.removeEventListener("mousewheel",this),this.wrapper.removeEventListener("DOMMouseScroll",this)});var ie={refreshId:null,iScrollInstances:[],toggleWheel:function(n){var t=e(b).find(s);t.each(function(){var t=e(this).data("iscrollInstance");"undefined"!=typeof t&&t&&(n?t.wheelOn():t.wheelOff())})},onLeave:function(){ie.toggleWheel(!1)},beforeLeave:function(){ie.onLeave()},afterLoad:function(){ie.toggleWheel(!0)},create:function(n,t,o){var i=n.find(s);i.height(t),i.each(function(){var n=e(this),t=n.data("iscrollInstance");t&&e.each(ie.iScrollInstances,function(){e(this).destroy()}),t=new IScroll(n.get(0),o),t.on("scrollEnd",function(){this.fp_isAtTop=this.y>-30,this.fp_isAtEnd=this.y-this.maxScrollY<30}),ie.iScrollInstances.push(t),t.wheelOff(),n.data("iscrollInstance",t)})},isScrolled:function(e,n){var t=n.data("iscrollInstance");return!t||("top"===e?t.y>=0&&!n.scrollTop():"bottom"===e?0-t.y+n.scrollTop()+1+n.innerHeight()>=n[0].scrollHeight:void 0)},scrollable:function(e){return e.find(F).length?e.find(D).find(s):e.find(s)},scrollHeight:function(e){return e.find(s).children().first().get(0).scrollHeight},remove:function(e){var n=e.find(s);if(n.length){var t=n.data("iscrollInstance");t&&t.destroy(),n.data("iscrollInstance",null)}e.find(s).children().first().children().first().unwrap().unwrap()},update:function(n,t){clearTimeout(ie.refreshId),ie.refreshId=setTimeout(function(){e.each(ie.iScrollInstances,function(){e(this).get(0).refresh()})},150),n.find(s).css("height",t+"px").parent().css("height",t+"px")},wrapContent:function(){return'<div class="'+l+'"><div class="fp-scroller"></div></div>'}}});

@@ -3,39 +3,33 @@
 
 @section('header_class', 'fixed_header')
 @section('body_class', 'pm_dark_type page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
+@section('body_style', 'overflow-y: hidden;')
 
 @section('content')
-    <div class="pm_blog_listing_container pm_columns_2 pm_with_margin">
+    <div class="pm_blog_listing_container pm_columns_4 pm_with_margin">
         <br>
         <div class="pm_blog_listing blog_isotope">
             @foreach($posts as $post)
-                <div class="pm_blog_item" style="margin-top: 30px;"><!-- Item 1 -->
+                <div class="pm_blog_item"><!-- Item 1 -->
                     <div class="pm_blog_item_wrapper">
                         <div class="pm_blog_featured_image_wrapper">
-
-                            <div class="post-short-intro" >
-
+                            <img src="{{ asset('img/posts/' . $post->image) }}" alt="">
+                            <div class="pm_post_likes_wrapper">
+                                <a class="pm_portfolio_read_more" href="blog/{{ $post->slug }}"></a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">
                                 <a href="{{ route('categories.slug', $post->category->slug) }}">
                                     @include('components._posticon')
                                 </a>
-                                <span class="info-time">
-                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
-                                    {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
+                                <span class="video-info info-tiny">
+                                    <i class="pm_load_more_back fa fa-clock-o fa-lg"></i> {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                 </span>
-
-                                <div class="pm_blog_item_title">
-                                    {{ str_limit($post->title, $limit= 42, $end="...") }}
-                                </div>
-
-                                <div class="pm_post_likes_wrapper">
-                                    <a class="pm_portfolio_read_more" href="blog/{{ $post->slug }}"></a>
-                                </div>
-
                             </div>
-                                <img src="{{ asset('img/posts/' . $post->image) }}" alt="" style="float:left;">
-                                <div class="pm_blog_item_desc">{!! str_limit($post->body, $limit= 333, $end="...") !!}</div>
                         </div>
-
+                        <div class="pm_blog_post_title">
+                            {{ str_limit($post->title, $limit= 42, $end="...") }}
+                        </div>
                     </div>
                 </div><!-- blog_item -->
             @endforeach
