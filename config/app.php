@@ -175,7 +175,7 @@ return [
          */
 
         Mews\Purifier\PurifierServiceProvider::class,
-
+        Syntax\SteamApi\SteamApiServiceProvider::class,
         /*
          * Application Service Providers...
          */

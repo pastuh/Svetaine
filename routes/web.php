@@ -67,8 +67,10 @@ Route::get('/profile', function () {
 /******************************************************************************************************/
 /*****************************************REIKIA TVARKYTI**********************************************/
 
-Route::resource('video', 'VideoController');
-
+/* Rodo 40 Twitch streameriu */
+Route::resource('video', 'VideoController', ['only' => ['index']]);
+/* Rodo Steam naujienas */
+Route::resource('news', 'NewsController');
 
 /*
  * Route::get('trophies', function () {
@@ -83,13 +85,6 @@ Route::get('trophies/single', function () {
 /*
 Route::get('locations', function () {
     return view('pages.locations');
-});
-*/
-
-/* Gal suristi Steam naujienas su blog */
-/*
- * Route::get('news', function () {
-    return view('pages.news');
 });
 */
 

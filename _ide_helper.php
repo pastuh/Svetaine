@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.4 on 2017-09-15.
+ * Generated for Laravel 5.5.4 on 2017-09-23.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12222,6 +12222,57 @@ namespace Laratrust {
  
 }
 
+namespace Syntax\SteamApi\Facades { 
+
+    class SteamApi {
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function get()
+        {
+            return \Syntax\SteamApi\Client::get();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getSteamId()
+        {
+            return \Syntax\SteamApi\Client::getSteamId();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function getRedirectUrl()
+        {
+            return \Syntax\SteamApi\Client::getRedirectUrl();
+        }
+        
+        /**
+         * 
+         *
+         * @param string|int $id
+         * @param string|null $format
+         * @return mixed 
+         * @static 
+         */ 
+        public static function convertId($id, $format = null)
+        {
+            return \Syntax\SteamApi\Client::convertId($id, $format);
+        }
+         
+    }
+ 
+}
+
 namespace Anhskohbo\NoCaptcha\Facades { 
 
     class NoCaptcha {
@@ -14400,6 +14451,8 @@ namespace  {
     class Image extends \Intervention\Image\Facades\Image {}
 
     class Laratrust extends \Laratrust\Laratrust {}
+
+    class Steam extends \Syntax\SteamApi\Facades\SteamApi {}
 
     class NoCaptcha extends \Anhskohbo\NoCaptcha\Facades\NoCaptcha {}
  

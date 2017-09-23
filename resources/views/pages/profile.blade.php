@@ -72,6 +72,7 @@
                                     </div>
                                 </div>
 
+
                                 <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3">
                                     <div class="input-group input-group-lg">
                                                 <span class="input-group-addon" id="basic-addon1" rel="tooltip"
@@ -94,6 +95,7 @@
                                     </div>
 
                                 </div>
+
 
                                 <div class="clearfix"></div>
                             </div>
@@ -124,38 +126,4 @@
     <div class="pm_slide_title_wrapper pm_simple_title">
         Profilis
     </div>
-@endsection
-
-@section('scripts')
-    <script type="text/javascript">
-        (function ($) {
-
-            'use strict';
-
-            $(document).on('show.bs.tab', '.nav-tabs-responsive [data-toggle="tab"]', function (e) {
-                var $target = $(e.target);
-                var $tabs = $target.closest('.nav-tabs-responsive');
-                var $current = $target.closest('li');
-                var $parent = $current.closest('li.dropdown');
-                $current = $parent.length > 0 ? $parent : $current;
-                var $next = $current.next();
-                var $prev = $current.prev();
-                var updateDropdownMenu = function ($el, position) {
-                    $el
-                        .find('.dropdown-menu')
-                        .removeClass('pull-xs-left pull-xs-center pull-xs-right')
-                        .addClass('pull-xs-' + position);
-                };
-
-                $tabs.find('>li').removeClass('next prev');
-                $prev.addClass('prev');
-                $next.addClass('next');
-
-                updateDropdownMenu($prev, 'left');
-                updateDropdownMenu($current, 'center');
-                updateDropdownMenu($next, 'right');
-            });
-
-        })(jQuery);
-    </script>
 @endsection

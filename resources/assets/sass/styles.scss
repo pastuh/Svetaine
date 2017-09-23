@@ -39,7 +39,7 @@ textarea.pm_comment_respond_field {
 .pm_wrapper {
   padding-bottom: 100px;
   overflow: hidden;
-  padding-top: 50px;
+  padding-top: 100px;
 }
 
 /* Navigacija */
@@ -352,8 +352,8 @@ textarea.pm_comment_respond_field {
 }
 
 #slug {
-  background: #ffc500;
-  color: #000 !important;
+  background: hsla(0,0%,9%,.75)!important;
+  color: #fff!important;
 }
 
 .panel-body {
@@ -497,7 +497,7 @@ input[type=file] {
 .main-text {
   margin-top: 14px;
   padding: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 10px;
   padding-top: 10px;
 }
 
@@ -798,7 +798,8 @@ li.comment:nth-child(odd) {
 .pm_post_meta_standard {
   margin-bottom: 0;
   color: #ffc500;
-  padding-bottom: 0;
+  padding: 20px;
+  padding-top: 0;
 }
 
 .pm_post_comments_standard {

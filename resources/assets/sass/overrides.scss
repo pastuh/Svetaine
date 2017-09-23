@@ -170,22 +170,22 @@ textarea:focus {
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: #54514d; //!important
+  color: red; //!important
 }
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: #54514d; //!important
+  color: red; //!important
 }
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-  color: #54514d; //!important
+  color: red; //!important
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: #54514d; //!important
+  color: red; //!important
 }
 
 button::-moz-focus-inner {
@@ -457,15 +457,14 @@ button#close-module {
 }
 
 .tags-list .info-tiny {
-  color: #4f4f4f;
-  background: rgba(34,32,28,.75);
+  margin-left: 10px;
 }
 .tags-list .info-tiny:hover {
   background: #ffc500;
+  color: #333;
 }
 
 #tag-zyma {
-  color: #4f4f4f;
   cursor: pointer;
 }
 
