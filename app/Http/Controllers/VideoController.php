@@ -19,8 +19,8 @@ class VideoController extends Controller
         $EmptyVideo = true;
 
         if(!empty($TwitchVideos)) {
-            $VisibleVideos = array_slice($TwitchVideos['streams'],0, 8);
-            $HiddenVideos = array_slice($TwitchVideos['streams'],8);
+            $VisibleVideos = array_slice($TwitchVideos['streams'],0, 4);
+            $HiddenVideos = array_slice($TwitchVideos['streams'],4);
             $EmptyVideo = false;
         }
 //        dd($HiddenVideos);

@@ -32,10 +32,10 @@ class BlogController extends Controller
             // Jeigu neturi jokiu irasu ir leidimo kurti postus, tai eiti i profili
             return redirect()->route('profile');
 
-        } elseif($count <= 4) {
+        } elseif($count <= 2) {
             $posts_number = $count;
         }else {
-            $posts_number = 4;
+            $posts_number = 2;
         }
 
         // Isvedu pirmus postus pagal data

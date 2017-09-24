@@ -36,30 +36,31 @@
                     <div class="pm_blog_item"><!-- Item 1 -->
                         <div class="pm_blog_item_wrapper">
                             <div class="pm_blog_featured_image_wrapper">
-                                <img src="{{ $TwitchVideo['preview']['large'] }}" alt="">
-                                <div class="pm_post_likes_wrapper">
-                                    {{--<a class="pm_potrfolio_watch" href="javascript:void(0)"></a>--}}
-                                    <a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;"
-                                       data-toggle="modal" data-target="#myModal"
-                                       data-video="http://player.twitch.tv/?autoplay=false&channel={{ $TwitchVideo['channel']['display_name'] }}">
-                                    </a>
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="post-short-intro"
-                                     style="float:left; margin-top: -40px; position: relative;">
-                                <span class="video-info info-tiny">
-                                   <a href="{{ $TwitchVideo['channel']['url'] }}"
-                                      target="_blank">{{ $TwitchVideo['channel']['display_name'] }}</a>
-                                </span>
 
-                                    <span class="video-info info-tiny">
-                                    <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
-                                </span>
+                                <div class="post-short-intro" >
+
+                                    <span class="info-time">
+                                        <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
+                                    </span>
+
+                                    <div class="pm_blog_item_title">
+                                        {{ $TwitchVideo['channel']['display_name'] }}
+                                    </div>
+
+                                    <div class="pm_post_likes_wrapper">
+                                        <a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;"
+                                           data-toggle="modal" data-target="#myModal"
+                                           data-video="http://player.twitch.tv/?autoplay=false&channel={{ $TwitchVideo['channel']['display_name'] }}">
+                                        </a>
+                                        <div class="clear"></div>
+                                    </div>
+
                                 </div>
+                                <img src="{{ $TwitchVideo['preview']['large'] }}" alt="" style="float:left;">
+                                <div class="clearfix"></div>
+                                <div class="pm_blog_item_desc">{{ str_limit($TwitchVideo['channel']['status'], $limit= 37, $end="...") }}</div>
                             </div>
-                            <div class="pm_blog_post_title">
-                                {{ str_limit($TwitchVideo['channel']['status'], $limit= 42, $end="...") }}
-                            </div>
+
                         </div>
                     </div><!-- blog_item -->
                 @endforeach
@@ -99,6 +100,8 @@
 
     {{--Kad veiktu MAIN list--}}
     <script type="text/javascript" src="{{  url('js\template.js') }}"></script>
+
+    <script type="text/javascript" src="{{  url('js\load-post.js') }}"></script>
 
     {{--Laiko konvertavimas--}}
     @include('components._time')

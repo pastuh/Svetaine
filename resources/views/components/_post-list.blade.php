@@ -22,11 +22,13 @@
             }
 
             if ((loaded_images + now_load) == img_count) jQuery(this).fadeOut();
+
             if (loaded_images < 1) {
                 var i_start = 1;
             } else {
                 i_start = loaded_images + 1;
             }
+
             if (now_load > 0) {
                 // load more elements
                 for (var i = i_start - 1; i < i_start + now_load - 1; i++) {
@@ -46,24 +48,22 @@
                     loaded_object = loaded_object +
                         '<div class="pm_blog_item added">' +
                         '<div class="pm_blog_item_wrapper">' +
-                        '<div class="pm_blog_featured_image_wrapper ' + post_published + '">' +
-                        '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" />' +
-                        '<div class="pm_post_likes_wrapper">' +
-                        '<a class="pm_portfolio_read_more" href="posts/' + addon_options.items[i].id + '"></a>' +
-                        '<div class="clear"></div>' +
-                        '</div>' +
-
-                        '<div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">' +
+                        '<div class="pm_blog_featured_image_wrapper">' +
+                        '<div class="post-short-intro">' +
+                        '<div class="' + post_published + '"></div>' +
                         '<a href="{{ route('categories.slug', $post->category->slug) }}">' +
                         "@include('components._posticon')" +
                         '</a>' +
-                        '<span class="video-info info-tiny">' +
+                        '<span class="info-time">' +
                         '<i class="pm_load_more_back fa fa-clock-o fa-lg"></i>' + post_time +
                         '</span>' +
+                        '<div class="pm_post_likes_wrapper">' +
+                        '<a class="pm_portfolio_read_more" href="posts/' + addon_options.items[i].id + '"></a>' +
                         '</div>' +
-
                         '</div>' +
-                        '<div class="pm_blog_post_title">' + post_title +
+                        '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" style="float:left;"/>' +
+                        '<div class="clearfix"></div>' +
+                        '<div class="pm_blog_item_desc">' + post_title + '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>'

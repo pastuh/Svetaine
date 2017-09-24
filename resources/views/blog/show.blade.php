@@ -35,7 +35,7 @@ width: 100%;')
                         <div class="pm_content_standard">
                             <div class="post-body">
 
-                                <div class="post-short-intro" >
+                                <div class="post-short-info" >
 
                                         <a href="{{ route('categories.slug', $post->category->slug) }}">
                                             @include('components._posticon')

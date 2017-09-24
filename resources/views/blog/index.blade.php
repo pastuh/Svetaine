@@ -9,7 +9,7 @@
         <br>
         <div class="pm_blog_listing blog_isotope">
             @foreach($posts as $post)
-                <div class="pm_blog_item" style="margin-top: 30px;"><!-- Item 1 -->
+                <div class="pm_blog_item"><!-- Item 1 -->
                     <div class="pm_blog_item_wrapper">
                         <div class="pm_blog_featured_image_wrapper">
 
@@ -33,6 +33,7 @@
 
                             </div>
                                 <img src="{{ asset('img/posts/' . $post->image) }}" alt="" style="float:left;">
+                                <div class="clearfix"></div>
                                 <div class="pm_blog_item_desc">{!! str_limit($post->body, $limit= 333, $end="...") !!}</div>
                         </div>
 
@@ -48,7 +49,7 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         {{--Rodomas mygtukas LOAD MORE jeigu yra virs 4 postu--}}
-        @if($count > 4)
+        @if($count > 2)
             <li>
                 <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
                     <i class="fa fa-history fa-lg"></i>
@@ -87,6 +88,8 @@
 
     {{--Kad veiktu MAIN list--}}
     <script type="text/javascript" src="{{  url('js\template.js') }}"></script>
+
+    <script type="text/javascript" src="{{  url('js\load-post.js') }}"></script>
 
     {{--Laiko konvertavimas--}}
     @include('components._time')

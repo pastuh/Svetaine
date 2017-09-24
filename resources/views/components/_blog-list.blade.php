@@ -38,28 +38,37 @@
                     var title_count = 42;
                     var post_title = post_title.slice(0, title_count) + (post_title.length > title_count ? "..." : "");
                     var post_time = moment(addon_options.items[i].created_at).format('YYYY-MM-DD HH:mm');
+                    var post_desc = addon_options.items[i].body;
+                    var desc_count = 333;
+                    var post_desc =  post_desc.slice(0, desc_count) + (post_desc.length > desc_count ? "..." : "");
 
                     loaded_object = loaded_object +
                         '<div class="pm_blog_item added">' +
                         '<div class="pm_blog_item_wrapper">' +
                         '<div class="pm_blog_featured_image_wrapper">' +
-                        '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" />' +
-                        '<div class="pm_post_likes_wrapper">' +
-                        '<a class="pm_portfolio_read_more" href="blog/' + addon_options.items[i].slug + '"></a>' +
-                        '<div class="clear"></div>' +
-                        '</div>' +
-
-                        '<div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">' +
+                        '<div class="post-short-intro">' +
+                        /* Kategorijos icon */
                         '<a href="{{ route('categories.slug', $post->category->slug) }}">' +
                         "@include('components._posticon')" +
                         '</a>' +
-                        '<span class="video-info info-tiny">' +
+                        /* Post laikas */
+                        '<span class="info-time">' +
                         '<i class="pm_load_more_back fa fa-clock-o fa-lg"></i>' + post_time +
                         '</span>' +
+                        /* Posto pavadinimas */
+                        '<div class="pm_blog_item_title">' + post_title +
                         '</div>' +
-
+                        /* Skaityti daugiau */
+                        '<div class="pm_post_likes_wrapper">' +
+                        '<a class="pm_portfolio_read_more" href="blog/' + addon_options.items[i].slug + '"></a>' +
                         '</div>' +
-                        '<div class="pm_blog_post_title">' + post_title +
+                        '</div>' +
+                        /* Posto img */
+                        '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" style="float:left;" />' +
+                        '<div class="clearfix"></div>' +
+                        /* Posto aprasymas */
+                        '<div class="pm_blog_item_desc">' + post_desc +
+                        '</div>'+
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -81,7 +90,7 @@
     jQuery('.news_page').each(function () {
         var items_set = {!! json_encode($old_posts->toArray()) !!};
         jQuery('#list').blog_listing_addon_title({
-            load_count: 4,
+            load_count: 2,
             items: items_set
         });
     });

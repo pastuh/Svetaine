@@ -5,32 +5,37 @@
 @section('body_class', 'pm_dark_type page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 
 @section('content')
-    <div class="pm_blog_listing_container pm_columns_4 pm_with_margin">
+    <div class="pm_blog_listing_container pm_columns_4 pm_with_margin pm_posts_listing">
         <br>
         <div class="pm_blog_listing blog_isotope">
             @foreach($posts as $post)
+
                 <div class="pm_blog_item"><!-- Item 1 -->
                     <div class="pm_blog_item_wrapper">
-                        <div class="pm_blog_featured_image_wrapper {{ $post->published ? 'post_published' : 'post_invisible' }}">
-                            <img src="{{ asset('img/posts/' . $post->image) }}" alt="">
-                            <div class="pm_post_likes_wrapper">
-                                <a class="pm_portfolio_read_more" href="posts/{{ $post->id }}"></a>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">
+                        <div class="pm_blog_featured_image_wrapper">
+
+                            <div class="post-short-intro" >
+                                <div class="{{ $post->published ? 'post_published' : 'post_invisible' }}"></div>
                                 <a href="{{ route('categories.slug', $post->category->slug) }}">
                                     @include('components._posticon')
                                 </a>
-                                <span class="video-info info-tiny">
-                                    <i class="pm_load_more_back fa fa-clock-o fa-lg"></i> {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
+                                <span class="info-time">
+                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                    {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                 </span>
+
+                                <div class="pm_post_likes_wrapper">
+                                    <a class="pm_portfolio_read_more" href="posts/{{ $post->id }}"></a>
+                                </div>
+
                             </div>
+                            <img src="{{ asset('img/posts/' . $post->image) }}" alt="" style="float:left;">
+                            <div class="clearfix"></div>
+                            <div class="pm_blog_item_desc">{{ str_limit($post->title, $limit= 42, $end="...") }}</div>
                         </div>
-                        <div class="pm_blog_post_title">
-                            {{ str_limit($post->title, $limit= 42, $end="...") }}
-                        </div>
+
                     </div>
-                </div><!-- pm_blog_item -->
+                </div><!-- blog_item -->
             @endforeach
         </div><!-- pm_blog_listing -->
         {{--<a href="javascript:void(0)" class="pm_load_more"><span class="pm_load_more_back"></span></a>--}}
@@ -69,6 +74,8 @@
 
     {{--Kad veiktu MAIN list--}}
     <script type="text/javascript" src="{{  url('js\template.js') }}"></script>
+
+    <script type="text/javascript" src="{{  url('js\load-post.js') }}"></script>
 
     {{--Laiko konvertavimas--}}
     @include('components._time')

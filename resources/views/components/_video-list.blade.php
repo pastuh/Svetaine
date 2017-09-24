@@ -35,33 +35,34 @@
                     var post_title = addon_options.items[i].channel.status;
                     var title_count = 42;
                     var post_title = post_title.slice(0, title_count) + (post_title.length > title_count ? "..." : "");
-                    var post_time = addon_options.items[i].viewers;
+                    var viewers = addon_options.items[i].viewers;
                     var video_author = addon_options.items[i].channel.display_name;
+                    var preview_img = addon_options.items[i].preview.large;
+                    var post_status = addon_options.items[i].channel.status;
+                    var status_count = 37;
+                    var post_status = post_status.slice(0, status_count) + (post_status.length > status_count ? "..." : "");
 
                     loaded_object = loaded_object +
                         '<div class="pm_blog_item added">' +
                         '<div class="pm_blog_item_wrapper">' +
                         '<div class="pm_blog_featured_image_wrapper">' +
-                        '<img src="' + addon_options.items[i].preview.large + '" alt="" />' +
+                        '<div class="post-short-intro" >' +
+                        '<span class="info-time">' +
+                        '<i class="pm_load_more_back fa fa-twitch fa-lg"></i>' + viewers +
+                        '</span>' +
+                        '<div class="pm_blog_item_title">' + video_author +
+                        '</div>' +
                         '<div class="pm_post_likes_wrapper">' +
-                        '<a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;"' +
-                        ' data-toggle="modal" data-target="#myModal"' +
-                        ' data-video="http://player.twitch.tv/?autoplay=false&channel=' + video_author + '">'+
+                        '<a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;" ' +
+                        'data-toggle="modal" data-target="#myModal" ' +
+                        'data-video="http://player.twitch.tv/?autoplay=false&channel=' + video_author + '">' +
                         '</a>' +
                         '<div class="clear"></div>' +
                         '</div>' +
-
-                        '<div class="post-short-intro" style="float:left; margin-top: -40px; position: relative;">' +
-                        '<span class="video-info info-tiny">' +
-                        '<a href="' + addon_options.items[i].channel.url + '" target="_blank">' + video_author + '</a>' +
-                        '</span>' +
-                        '<span class="video-info info-tiny">' +
-                        '<i class="pm_load_more_back fa fa-twitch fa-lg"></i>' + post_time +
-                        '</span>' +
                         '</div>' +
-
-                        '</div>' +
-                        '<div class="pm_blog_post_title">' + post_title +
+                        '<img src="' + preview_img + '" alt="" style="float:left;">' +
+                        '<div class="clearfix"></div>' +
+                        '<div class="pm_blog_item_desc">' + post_status + '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -80,7 +81,7 @@
         });
     };
 
-jQuery('.news_page').each(function () {
+    jQuery('.news_page').each(function () {
 
         var items_set = {!! json_encode($HiddenVideos) !!};
 

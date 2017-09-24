@@ -2,6 +2,7 @@
     "/css/app.css": "/css/app.css",
     "/js/top.js": "/js/top.js",
     "/js/template.js": "/js/template.js",
+    "/js/load-post.js": "/js/load-post.js",
     "/js/parsley.js": "/js/parsley.js",
     "/js/slug.js": "/js/slug.js",
     "/js/bootstrap-table.js": "/js/bootstrap-table.js",
