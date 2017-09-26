@@ -56,6 +56,12 @@
                 </a>
             </li>
         @endif
+        {{--Rodomas mygtukas i STEAM postus--}}
+        <li>
+            <a href="{{ route('news.index') }}" aria-label="Sukurti įrašą">
+                <i class="fa fa-steam-square fa-lg"></i>
+            </a>
+        </li>
 
         {{--Rodomas mygtukas POSTS jeigu turi Savo postu ir gali perziureti postus--}}
         @if(Auth::check() and Auth::user()->posts->count() > 0 and Auth::user()->hasPermission('read-posts'))

@@ -77,12 +77,18 @@
             Šiuo metu niekas nestreamina
         </div>
     @endsection
+@else
+    @section('bottom-footer-info')
+        <div class="pm_slide_title_wrapper pm_simple_title">
+            Twitch transliacijos: {{ count($VisibleVideos) + count($HiddenVideos) }}
+        </div>
+    @endsection
 @endif
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         @if(!$EmptyVideo)
-            @if(count($HiddenVideos) > 1)
+            @if(count($HiddenVideos) >= 1)
                 <li>
                     <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
                         <i class="pm_load_more_back fa fa-history fa-lg"></i>

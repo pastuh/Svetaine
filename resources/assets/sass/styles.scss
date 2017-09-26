@@ -178,6 +178,9 @@ textarea.pm_comment_respond_field {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+.pm_blog_item .steam_desc {
+  min-height: 240px;
+}
 
 .pm_blog_item .pm_blog_item_title {
   float: right;
@@ -208,6 +211,9 @@ textarea.pm_comment_respond_field {
   //padding: 20px;
   //padding-top: 30px;
   //box-shadow: 0 0 15px #000000;
+}
+.steam-image {
+  padding-right: 20px;
 }
 
 .pm_navigation_container {
@@ -1240,6 +1246,9 @@ only screen and (min-resolution: 144dpi) {
 }
 
 @media only screen and (max-width: 769px) {
+  .steam-image {
+    padding-right: 0;
+  }
   .page-template-page-blog-ajax .pm_blog_item .pm_blog_featured_image_wrapper img {
     width: 100%;
   }

@@ -40,7 +40,6 @@ mix.scripts(['resources/assets/js/main.js',
 mix.scripts(['resources/assets/js/load-post.js'
 ], 'public/js/load-post.js');
 
-
 /* Isveda JS kuris tikrina klaidas suvestame tekste */
 mix.scripts(['resources/assets/js/parsley.min.js',
     'resources/assets/js/parsley-lt.js'

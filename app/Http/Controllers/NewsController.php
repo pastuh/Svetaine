@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Steam;
 
 class NewsController extends Controller
 {
@@ -14,7 +15,13 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $appID = 518790;
+        $news = Steam::news()->GetNewsForApp($appID, 40)->newsitems;
 
+        $VisibleNews = array_slice($news,0, 4);
+        $HiddenNews = array_slice($news,4);
+
+        return view('news.index', compact('VisibleNews', 'HiddenNews'));
     }
 
     /**
