@@ -80,7 +80,7 @@
                         '</div>' +
                             /* Skaityti daugiau */
                         '<div class="pm_post_likes_wrapper">' +
-                        '<a class="pm_portfolio_read_more" href="' + addon_options.items[i].url + '"></a>' +
+                        '<a class="pm_portfolio_read_more" href="' + addon_options.items[i].url + '" target="_blank"></a>' +
                         '</div>' +
                         '</div>' +
 
