@@ -15,8 +15,9 @@ class NewsController extends Controller
      */
     public function index()
     {
+        /* Zaidimo ID Steame */
         $appID = 518790;
-        $news = Steam::news()->GetNewsForApp($appID, 40)->newsitems;
+        $news = Steam::news()->GetNewsForApp($appID, 16)->newsitems;
 
         $VisibleNews = array_slice($news,0, 4);
         $HiddenNews = array_slice($news,4);

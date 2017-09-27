@@ -39,7 +39,6 @@
                                 <img src="{{ $images[0] }}" alt="" class="feed-item-image img-responsive steam-image" style="float:left; max-height: 200px; width: auto">
                             @else
                                 <img src="{{ asset('/img/news/empty-foto.jpg') }}" alt="" class="feed-item-image img-responsive steam-image" style="float:left; max-height: 200px; width: auto">
-
                             @endif
 
                             {{--<div class="clearfix"></div>--}}
@@ -50,9 +49,9 @@
                                 $description = preg_replace($search,$replace,$news->contents);
                                 $search = "/(\[b\]|\[\/b\])/";
                                 $description = preg_replace($search,$replace,$description);
-                                $description = str_replace("https://www.twitch.tv/expansiveworlds","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(127, 41, 36);'>Twitch/ExpansiveWorlds</a> ",$description);
-                                $description = str_replace("Twitch channel[www.twitch.tv]","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(127, 41, 36);'>Twitch/ExpansiveWorlds</a> ",$description);
-                                $description = str_replace("Twitch[www.twitch.tv]","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(127, 41, 36);'>Twitch/ExpansiveWorlds</a> ",$description);
+                                $description = str_replace("https://www.twitch.tv/expansiveworlds","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(182, 81, 60);'>Twitch/ExpansiveWorlds</a> ",$description);
+                                $description = str_replace("Twitch channel[www.twitch.tv]","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(182, 81, 60);'>Twitch/ExpansiveWorlds</a> ",$description);
+                                $description = str_replace("Twitch[www.twitch.tv]","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(182, 81, 60);'>Twitch/ExpansiveWorlds</a> ",$description);
                                 $description = str_replace("theHunter: Call of the Wild","<b>theHunter: Call of the Wild</b>",$description);
                             @endphp
 
@@ -84,14 +83,14 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Steam įrašai: {{ count($VisibleNews) + count($HiddenNews) }}
+        Naujausi STEAM įrašai: {{ count($VisibleNews) + count($HiddenNews) }}
     </div>
 @endsection
 
 @section('script')
 
     {{--Kad pridetu history list--}}
-    {{--@include('components._blog-list')--}}
+    @include('components._news-list')
 
     {{--Kad veiktu MAIN list--}}
     <script type="text/javascript" src="{{  url('js\template.js') }}"></script>

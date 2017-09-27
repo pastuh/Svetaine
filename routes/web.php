@@ -70,7 +70,7 @@ Route::get('/profile', function () {
 /* Rodo 40 Twitch streameriu */
 Route::resource('video', 'VideoController', ['only' => ['index']]);
 /* Rodo Steam naujienas */
-Route::resource('news', 'NewsController');
+Route::resource('news', 'NewsController', ['only' => ['index']]);
 
 /*
  * Route::get('trophies', function () {
