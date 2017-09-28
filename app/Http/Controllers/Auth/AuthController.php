@@ -68,6 +68,12 @@ class AuthController extends Controller
                         $user->avatar = $info->avatarfull;
                         $user->steamid = $info->steamID64;
                         $user->save();
+
+                        /*Uzregistravus STEAM, uzregistruojamas kaip MEMBER*/
+                        if($user->hasRole('lurker')){
+                            $user->syncRoles(7);
+                        }
+
                         return redirect($this->redirectURL);
                     } else {
                         Session::flash('status', 'Negali naudoti STEAM Link antrą kartą.');

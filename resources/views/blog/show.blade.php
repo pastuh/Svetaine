@@ -35,14 +35,14 @@ width: 100%;')
                         <div class="pm_content_standard">
                             <div class="post-body">
 
-                                <div class="post-short-info" >
+                                <div class="post-short-info">
 
-                                        <a href="{{ route('categories.slug', $post->category->slug) }}">
-                                            @include('components._posticon')
-                                        </a>
-                                        <span class="info-time">
+                                    <a href="{{ route('categories.slug', $post->category->slug) }}">
+                                        @include('components._posticon')
+                                    </a>
+                                    <span class="info-time">
                                         <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
-                                            {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
+                                        {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                     </span>
 
                                 </div>
@@ -55,7 +55,8 @@ width: 100%;')
                                     <span><i id="tag-zyma" class="icon fa fa-tags fa-lg" style="margin-left: 6px;"></i></span>
                                     @foreach($post->tags as $tag)
                                         {{ $loop->first ? '' : '&nbsp;' }}
-                                        <a href="{{ route('tags.slug', $tag->slug) }}" class="tags-list" style="visibility: hidden;">
+                                        <a href="{{ route('tags.slug', $tag->slug) }}" class="tags-list"
+                                           style="visibility: hidden;">
                                             <span class="info-tiny">{{ $tag->name }}</span>
                                         </a>
                                     @endforeach
@@ -170,13 +171,16 @@ width: 100%;')
                                     </form>
                                 </div>
                             @endif
+                            @if(Auth::check() and Auth::user()->hasRole('lurker'))
+                                <div class="info-perziura" style="text-align: center;">
+                                    <a href="{{ route('profile') }}">Norėdami komentuoti privalote prisijungti prie STEAM (Profilio puslapyje)</a>
+                                </div>
+                            @endif
 
                         </div><!-- comments_standard -->
                         <div class="clearfix"></div>
                     </div> <!-- comments col -->
                 </div> <!-- comments row -->
-
-
 
 
             </div><!-- col_12 -->
@@ -231,7 +235,8 @@ width: 100%;')
         @endif
         <li>
             <a class="fluidbox fluid-image-fix" href="{{ asset('/img/posts/' . $post->image) }}">
-                <img src="{{ asset('/img/posts/' . $post->image) }}" class="fluid-image-fix" height="0px" width="1px" style="margin-right: -6px;"/>
+                <img src="{{ asset('/img/posts/' . $post->image) }}" class="fluid-image-fix" height="0px" width="1px"
+                     style="margin-right: -6px;"/>
                 <i class="fa fa-picture-o fa-lg"></i>
             </a>
         </li>
@@ -259,7 +264,7 @@ width: 100%;')
 
     {{--Image preview--}}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.fluidbox').fluidbox();
         });
     </script>

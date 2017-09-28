@@ -72,6 +72,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ])->syncRoles(8);
-
+        /*Pagal nutylejima priskiria LURKER role*/
     }
 }

@@ -81,13 +81,13 @@
                                                             style="width: 30px;"></span></span>
                                         <input id="status" type="text" class="form-control info-perziura" name="steam"
                                                value=
-                                               @if(substr(Auth::user()->steamid, 0, 1) !== '_')
-                                                       "{{ Auth::user()->steamid }}"
+                                       @if(is_numeric(Auth::user()->steamid))
+                                               "{{ Auth::user()->steamid }}"
                                         @else
                                             "-"
                                         @endif
                                         readonly>
-                                        @if(substr(Auth::user()->steamid, 0, 1) == '_')
+                                        @if(!is_numeric(Auth::user()->steamid))
                                             <a href="{{ route('link.steam') }}" class="steam-link-image"><img
                                                         src="{{ asset('img/navigation/steam_large.png') }}" border="0"
                                                         alt="Link Steam"></a>
