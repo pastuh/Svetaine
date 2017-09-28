@@ -37,7 +37,7 @@
                         <div class="pm_blog_item_wrapper">
                             <div class="pm_blog_featured_image_wrapper">
 
-                                <div class="post-short-intro" >
+                                <div class="post-short-intro {{ $TwitchVideo['channel']['display_name'] == 'expansiveworlds' ? 'featured-video' : '' }}" >
 
                                     <span class="info-time">
                                         <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}

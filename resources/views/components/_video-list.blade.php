@@ -42,11 +42,19 @@
                     var status_count = 37;
                     var post_status = post_status.slice(0, status_count) + (post_status.length > status_count ? "..." : "");
 
+                    /* Jeigu suranda reikiama stream */
+                    var featured = '';
+                    if (video_author == 'expansiveworlds') {
+                        featured = 'featured-video';
+                    } else {
+                        featured = '';
+                    }
+
                     loaded_object = loaded_object +
                         '<div class="pm_blog_item added">' +
                         '<div class="pm_blog_item_wrapper">' +
                         '<div class="pm_blog_featured_image_wrapper">' +
-                        '<div class="post-short-intro" >' +
+                        '<div class="post-short-intro ' + featured + '" >' +
                         '<span class="info-time">' +
                         '<i class="pm_load_more_back fa fa-twitch fa-lg"></i>' + viewers +
                         '</span>' +

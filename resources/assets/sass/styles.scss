@@ -43,6 +43,10 @@ textarea.pm_comment_respond_field {
   margin-top: 30px;
 }
 
+.featured-video {
+ border-bottom: 2px solid red !important;
+}
+
 /* Navigacija */
 .navbar-header {
   margin-left: 10px !important;
@@ -196,7 +200,7 @@ textarea.pm_comment_respond_field {
   //padding-left: 10px;
   //padding-bottom: 10px;
   //padding-right: 10px;
-  padding: 20px;
+  //padding: 20px;
   //background: rgba(23, 23, 23, 0.75);
   color: #c0bab8;
   border-bottom-left-radius: 10px;
