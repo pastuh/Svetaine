@@ -71,12 +71,14 @@
                         '<div class="pm_blog_featured_image_wrapper">' +
 
                         '<div class="post-short-intro">' +
+                        '<div class="mini-info-block">' +
                             /* Post laikas */
                         '<span class="info-time">' +
                         '<i class="pm_load_more_back fa fa-clock-o fa-lg"></i>' + post_time +
                         '</span>' +
                             /* Posto pavadinimas */
                         '<div class="pm_blog_item_title">' + post_title +
+                        '</div>' +
                         '</div>' +
                             /* Skaityti daugiau */
                         '<div class="pm_post_likes_wrapper">' +

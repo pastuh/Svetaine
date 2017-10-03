@@ -14,16 +14,16 @@
                         <div class="pm_blog_featured_image_wrapper">
 
                             <div class="post-short-intro">
+                                <div class="mini-info-block">
+                                    <span class="info-time">
+                                            <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                        {{ Date::createFromTimestamp($news->date)->format('Y-m-d H:i') }}
+                                    </span>
 
-                                <span class="info-time">
-                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
-                                    {{ Date::createFromTimestamp($news->date)->format('Y-m-d H:i') }}
-                                </span>
-
-                                <div class="pm_blog_item_title">
-                                    {{ str_limit($news->title, $limit= 80, $end="...") }}
+                                    <div class="pm_blog_item_title">
+                                        {{ str_limit($news->title, $limit= 80, $end="...") }}
+                                    </div>
                                 </div>
-
                                 <div class="pm_post_likes_wrapper">
                                     <a class="pm_portfolio_read_more" href="{{ $news->url }}" target='_blank'></a>
                                 </div>
