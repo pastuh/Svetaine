@@ -17,15 +17,15 @@ class TrophyController extends Controller
         // Kiek puslapyje atvaizduos Trofeju
         if ($count < 1){
             // Tikrinu ar useris prisijunges
-            if(Auth::check() and Auth::user()->hasRole('editor|administrator|superadministrator')){
-                return redirect()->route('animals.create');
+            if(Auth::check() and Auth::user()->hasPermission('create-animals')){
+                return view('animals.create');
             }
             // Jeigu neturi jokiu irasu ir leidimo kurti Trofejus, tai eiti i profili
             return redirect()->route('profile');
-        } elseif($count <= 1) {
+        } elseif($count <= 4) {
             $animals_number = $count;
         }else {
-            $animals_number = 1;
+            $animals_number = 4;
         }
 
         // Isvedu pirmus trofejus pagal data

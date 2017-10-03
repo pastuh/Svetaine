@@ -47,7 +47,7 @@
                         <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                             <div class="panel-body">
                                 <form id="main-form" method="POST"
-                                      action="{{ route('trophies.store') }}"
+                                      action="{{ route('animals.store') }}"
                                       class="form-horizontal" enctype="multipart/form-data">
 
                                     <div class="row">
@@ -195,7 +195,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('posts.index') }}" aria-label="Atšaukti įrašo kūrimą">
+            <a href="{{ route('animals.index') }}" aria-label="Atšaukti gyvūno kūrimą">
                 <i class="pm_likes_icon fa fa-reply"></i>
             </a>
         </li>

@@ -204,7 +204,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('animals.index') }}" aria-label="Atšaukti įrašo kūrimą">
+            <a href="{{ route('animals.index') }}" aria-label="Atšaukti gyvūno redagavimą">
                 <i class="pm_likes_icon fa fa-reply"></i>
             </a>
         </li>
