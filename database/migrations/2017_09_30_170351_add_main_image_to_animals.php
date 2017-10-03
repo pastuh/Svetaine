@@ -14,7 +14,7 @@ class AddMainImageToAnimals extends Migration
     public function up()
     {
         Schema::table('animals', function (Blueprint $table) {
-            $table->string('main_image')->nullable()->after('body_2');
+            $table->string('main_image')->nullable();
         });
     }
 

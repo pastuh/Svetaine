@@ -14,7 +14,7 @@ class AddStatusColToAnimals extends Migration
     public function up()
     {
         Schema::table('animals', function (Blueprint $table) {
-            $table->boolean('status')->default(true)->after('reserve_3');
+            $table->boolean('status')->default(true);
         });
     }
 
