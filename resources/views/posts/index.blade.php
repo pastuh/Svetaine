@@ -15,6 +15,7 @@
                         <div class="pm_blog_featured_image_wrapper">
 
                             <div class="post-short-intro" >
+                                <div class="mini-info-block">
                                 <div class="{{ $post->published ? 'post_published' : 'post_invisible' }}"></div>
                                 <a href="{{ route('categories.slug', $post->category->slug) }}">
                                     @include('components._posticon')
@@ -23,7 +24,7 @@
                                         <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
                                     {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                 </span>
-
+                                </div>
                                 <div class="pm_post_likes_wrapper">
                                     <a class="pm_portfolio_read_more" href="posts/{{ $post->id }}"></a>
                                 </div>
@@ -46,7 +47,7 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        @if($user_posts > 4)
+        @if(count($old_posts) >= 1)
         <li>
             <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
                 <i class="pm_load_more_back fa fa-history fa-lg"></i>
@@ -63,7 +64,7 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Mano sukurti įrašai: {{ $user_posts }}
+        Sukurti įrašai: {{ $user_posts }}
     </div>
 @endsection
 

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Naujas įrašas')
+@section('title', '| ' . htmlspecialchars($post->title) . " įrašo redagavimas")
 
 @section('stylesheet')
     <link href="{{  url('js\selectbox\css\select2.min.css') }}" rel="stylesheet" type="text/css" media="all">

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Profilis')
+@section('title', '| Puslapis nerastas')
 
 @section('body_class', 'pm_dark_type single-post pm_overflow_visible background-info2')
 

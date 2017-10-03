@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        /* PAKEISTA. Jeigu nerandamas puslapis */
+        /* Jeigu nerandamas puslapis kur nuvedamas lankytojas. */
         /*if($exception instanceof NotFoundHttpException){
             return redirect()->route('error.403');
         }*/

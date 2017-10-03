@@ -38,15 +38,15 @@
                             <div class="pm_blog_featured_image_wrapper">
 
                                 <div class="post-short-intro {{ $TwitchVideo['channel']['display_name'] == 'expansiveworlds' ? 'featured-video' : '' }}" >
+                                    <div class="mini-info-block">
+                                        <span class="info-time">
+                                            <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
+                                        </span>
 
-                                    <span class="info-time">
-                                        <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
-                                    </span>
-
-                                    <div class="pm_blog_item_title">
-                                        {{ $TwitchVideo['channel']['display_name'] }}
+                                        <div class="pm_blog_item_title">
+                                            {{ $TwitchVideo['channel']['display_name'] }}
+                                        </div>
                                     </div>
-
                                     <div class="pm_post_likes_wrapper">
                                         <a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;"
                                            data-toggle="modal" data-target="#myModal"

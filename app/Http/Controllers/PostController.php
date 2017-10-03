@@ -311,7 +311,7 @@ class PostController extends Controller
             return redirect()->route('posts.index');
         }
 
-        Session::flash('status', 'Neturite leidimo naikinti įrašą');
+        Session::flash('status', 'Neturite leidimo naikinti publikuotą įrašą');
         return redirect()->route('posts.show', $post->id);
     }
 }

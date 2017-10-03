@@ -55,10 +55,12 @@
                         '<div class="pm_blog_item_wrapper">' +
                         '<div class="pm_blog_featured_image_wrapper">' +
                         '<div class="post-short-intro ' + featured + '" >' +
+                        '<div class="mini-info-block">' +
                         '<span class="info-time">' +
                         '<i class="pm_load_more_back fa fa-twitch fa-lg"></i>' + viewers +
                         '</span>' +
                         '<div class="pm_blog_item_title">' + video_author +
+                        '</div>' +
                         '</div>' +
                         '<div class="pm_post_likes_wrapper">' +
                         '<a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;" ' +

@@ -14,17 +14,18 @@
                         <div class="pm_blog_featured_image_wrapper">
 
                             <div class="post-short-intro" >
+                                <div class="mini-info-block">
+                                    <a href="{{ route('categories.slug', $post->category->slug) }}">
+                                        @include('components._posticon')
+                                    </a>
+                                    <span class="info-time">
+                                            <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                        {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
+                                    </span>
 
-                                <a href="{{ route('categories.slug', $post->category->slug) }}">
-                                    @include('components._posticon')
-                                </a>
-                                <span class="info-time">
-                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
-                                    {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
-                                </span>
-
-                                <div class="pm_blog_item_title">
-                                    {{ str_limit($post->title, $limit= 42, $end="...") }}
+                                    <div class="pm_blog_item_title">
+                                        {{ str_limit($post->title, $limit= 42, $end="...") }}
+                                    </div>
                                 </div>
 
                                 <div class="pm_post_likes_wrapper">
@@ -49,7 +50,7 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         {{--Rodomas mygtukas LOAD MORE jeigu yra virs 4 postu--}}
-        @if($count > 2)
+        @if(count($old_posts) >= 1)
             <li>
                 <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
                     <i class="fa fa-history fa-lg"></i>
@@ -58,7 +59,7 @@
         @endif
         {{--Rodomas mygtukas i STEAM postus--}}
         <li>
-            <a href="{{ route('news.index') }}" aria-label="Sukurti įrašą">
+            <a href="{{ route('news.index') }}" aria-label="Steam naujienos">
                 <i class="fa fa-steam-square fa-lg"></i>
             </a>
         </li>

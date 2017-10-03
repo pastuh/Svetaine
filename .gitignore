@@ -3,6 +3,8 @@
 /public/storage
 /public/img/posts/*.jpg
 /public/img/posts/*.png
+/public/img/animals/*.jpg
+/public/img/animals/*.png
 /storage/*.key
 /vendor
 /.idea
