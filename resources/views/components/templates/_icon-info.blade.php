@@ -1,6 +1,6 @@
 <div class="col-sm-3 space-icon-info">'+
     '<div class="image-wrap">'+
-        '<img class="block__features-image" src="{{ url('img/icons/svoris.png') }}">'+
+        '<img class="block__features-image" src="{{ asset('img/icons/svoris.png') }}">'+
     '</div>'+
     '<div class="block__features-title">Svoris</div>'+
     '<div class="block__features-text">'+
@@ -9,7 +9,7 @@
 '</div>'+
 '<div class="col-sm-3 space-icon-info">'+
     '<div class="image-wrap">'+
-        '<img class="block__features-image" src="{{ url('img/icons/greitis.png') }}">'+
+        '<img class="block__features-image" src="{{ asset('img/icons/greitis.png') }}">'+
         '</div>'+
     '<div class="block__features-title">Greitis</div>'+
     '<div class="block__features-text">'+
@@ -18,7 +18,7 @@
 '</div>'+
 '<div class="col-sm-3 space-icon-info">'+
     '<div class="image-wrap">'+
-        '<img class="block__features-image" src="{{ url('img/icons/diena.png') }}">'+
+        '<img class="block__features-image" src="{{ asset('img/icons/diena.png') }}">'+
         '</div>'+
     '<div class="block__features-title">Diena</div>'+
     '<div class="block__features-text">'+
@@ -27,7 +27,7 @@
 '</div>'+
 '<div class="col-sm-3">'+
     '<div class="image-wrap">'+
-        '<img class="block__features-image" src="{{ url('img/icons/naktis.png') }}">'+
+        '<img class="block__features-image" src="{{ asset('img/icons/naktis.png') }}">'+
         '</div>'+
     '<div class="block__features-title">Naktis</div>'+
     '<div class="block__features-text">'+
