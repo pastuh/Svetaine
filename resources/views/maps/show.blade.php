@@ -4,7 +4,8 @@
 @section('header_class', 'fixed_header')
 
 @section('stylesheet')
-    <link href="{{  url('js\fullscreen\jquery.fullPage.css') }}" rel="stylesheet" type="text/css" media="all"> {{--Fullscreen veikimas--}}
+    <link href="{{  url('js\fullscreen\jquery.fullPage.css') }}" rel="stylesheet" type="text/css"
+          media="all"> {{--Fullscreen veikimas--}}
     <link href="{{  url('css\info.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
@@ -12,10 +13,12 @@
     <!--SVG navigacijai -->
     <div class="svg-wrap" style="display: none;">
         <svg width="64" height="64" viewBox="0 0 64 64">
-            <path id="arrow-left-1" d="M46.077 55.738c0.858 0.867 0.858 2.266 0 3.133s-2.243 0.867-3.101 0l-25.056-25.302c-0.858-0.867-0.858-2.269 0-3.133l25.056-25.306c0.858-0.867 2.243-0.867 3.101 0s0.858 2.266 0 3.133l-22.848 23.738 22.848 23.738z" />
+            <path id="arrow-left-1"
+                  d="M46.077 55.738c0.858 0.867 0.858 2.266 0 3.133s-2.243 0.867-3.101 0l-25.056-25.302c-0.858-0.867-0.858-2.269 0-3.133l25.056-25.306c0.858-0.867 2.243-0.867 3.101 0s0.858 2.266 0 3.133l-22.848 23.738 22.848 23.738z"/>
         </svg>
         <svg width="64" height="64" viewBox="0 0 64 64">
-            <path id="arrow-right-1" d="M17.919 55.738c-0.858 0.867-0.858 2.266 0 3.133s2.243 0.867 3.101 0l25.056-25.302c0.858-0.867 0.858-2.269 0-3.133l-25.056-25.306c-0.858-0.867-2.243-0.867-3.101 0s-0.858 2.266 0 3.133l22.848 23.738-22.848 23.738z" />
+            <path id="arrow-right-1"
+                  d="M17.919 55.738c-0.858 0.867-0.858 2.266 0 3.133s2.243 0.867 3.101 0l25.056-25.302c0.858-0.867 0.858-2.269 0-3.133l-25.056-25.306c-0.858-0.867-2.243-0.867-3.101 0s-0.858 2.266 0 3.133l22.848 23.738-22.848 23.738z"/>
         </svg>
     </div>
 
@@ -24,24 +27,16 @@
             <div class="fp-bg"
                  style='background-image: url("{{ url('../img/maps/' . $map->main_image) }}"); background-size: cover; background-position: top center; height: 100%'>
                 <div class="block__inner">
-                    <div class="container">
+                    <div class="container trophy-title-block" style="display:none;">
                         <div class="row">
                             <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                                 <div class="block__header">
                                     <h2 class="heading heading--medium">
                                         {{ $map->title }}</h2>
                                 </div>
+
                                 <div class="block__location">
                                     <p class="block__location-text">{{ $map->sub_title }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-                                <div class="block__features-text features-text-fix">
-                                    {!!  $map->body !!}
                                 </div>
                             </div>
                         </div>
@@ -49,8 +44,36 @@
                 </div>
             </div>
         </div>
-    </div> <!-- fullpage -->
+        <div class="section" id="section1">
+            <div class="fp-bg"
+                 style='background-image: url("{{ url('../img/maps/' . $map->info_image) }}"); background-size: cover; background-position: top center; height: 100%; display: flex; justify-content: center; align-items: center;'>
+                <div {{--id="post-page{{ $post->id }}"--}} class="pm_wrapper pm_container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                                    <div class="pm_content_standard">
 
+                                        {{--Body startas--}}
+                                        <div class="block__features-text features-text-fix">
+                                            {!! $map->body !!}
+                                        </div>
+                                        <br>
+                                        <div class="block__features-text features-text-fix">
+                                            {!! $map->body_2 !!}
+                                        </div>
+
+                                        <div class="fix-space-bottom"></div>
+
+                                    </div>
+                                </div> <!-- col -->
+                            </div><!-- info row -->
+                        </div><!-- col12 -->
+                    </div><!-- row -->
+                </div><!-- wrapper -->
+            </div>
+        </div>
+    </div>
     {{--Posto sunaikinimo forma--}}
     <form id="main-form" class="hidden" method="POST" action="{{ route('maps.destroy', $map->id) }}">
         {{ method_field('DELETE') }}

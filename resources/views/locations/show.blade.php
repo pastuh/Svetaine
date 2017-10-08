@@ -2,7 +2,7 @@
 @section('title', '| '. htmlspecialchars($map->title))
 
 @section('header_class', 'fixed_header')
-    
+
 @section('stylesheet')
     <link href="{{  url('js\fullscreen\jquery.fullPage.css') }}" rel="stylesheet" type="text/css"
           media="all"> {{--Fullscreen veikimas--}}
@@ -13,10 +13,12 @@
     <!--SVG navigacijai -->
     <div class="svg-wrap" style="display: none;">
         <svg width="64" height="64" viewBox="0 0 64 64">
-            <path id="arrow-left-1" d="M46.077 55.738c0.858 0.867 0.858 2.266 0 3.133s-2.243 0.867-3.101 0l-25.056-25.302c-0.858-0.867-0.858-2.269 0-3.133l25.056-25.306c0.858-0.867 2.243-0.867 3.101 0s0.858 2.266 0 3.133l-22.848 23.738 22.848 23.738z" />
+            <path id="arrow-left-1"
+                  d="M46.077 55.738c0.858 0.867 0.858 2.266 0 3.133s-2.243 0.867-3.101 0l-25.056-25.302c-0.858-0.867-0.858-2.269 0-3.133l25.056-25.306c0.858-0.867 2.243-0.867 3.101 0s0.858 2.266 0 3.133l-22.848 23.738 22.848 23.738z"/>
         </svg>
         <svg width="64" height="64" viewBox="0 0 64 64">
-            <path id="arrow-right-1" d="M17.919 55.738c-0.858 0.867-0.858 2.266 0 3.133s2.243 0.867 3.101 0l25.056-25.302c0.858-0.867 0.858-2.269 0-3.133l-25.056-25.306c-0.858-0.867-2.243-0.867-3.101 0s-0.858 2.266 0 3.133l22.848 23.738-22.848 23.738z" />
+            <path id="arrow-right-1"
+                  d="M17.919 55.738c-0.858 0.867-0.858 2.266 0 3.133s2.243 0.867 3.101 0l25.056-25.302c0.858-0.867 0.858-2.269 0-3.133l-25.056-25.306c-0.858-0.867-2.243-0.867-3.101 0s-0.858 2.266 0 3.133l22.848 23.738-22.848 23.738z"/>
         </svg>
     </div>
 
@@ -52,17 +54,16 @@
                                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                                     <div class="pm_content_standard">
 
-                                            {{--Body startas--}}
-                                            <div class="block__features-text features-text-fix">
-                                                {!! $map->body !!}
-                                            </div>
+                                        {{--Body startas--}}
+                                        <div class="block__features-text features-text-fix">
+                                            {!! $map->body !!}
+                                        </div>
+                                        <br>
+                                        <div class="block__features-text features-text-fix">
+                                            {!! $map->body_2 !!}
+                                        </div>
 
-
-                                            <div class="row">
-                                                {!! $map->body_2 !!}
-                                            </div>
-
-                                            <div class="fix-space-bottom"></div>
+                                        <div class="fix-space-bottom"></div>
 
                                     </div>
                                 </div> <!-- col -->
@@ -137,8 +138,8 @@
 
     <script>
 
-        $( ".trophy-info" ).click(function() {
-            $( ".trophy-title-block:not(.still)" ).slideToggle( "slow", function() {
+        $(".trophy-info").click(function () {
+            $(".trophy-title-block:not(.still)").slideToggle("slow", function () {
                 $(".pm_simple_title").slideToggle("slow", function () {
 
                 });
