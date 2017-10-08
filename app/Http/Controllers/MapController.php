@@ -286,7 +286,14 @@ class MapController extends Controller
             $map->animals()->detach();
             $filename_old = $map->main_image;
             $filename_old2 = $map->info_image;
-            Storage::disk('images')->delete(['maps/' . $filename_old, 'maps/' . $filename_old2]);
+
+            if($filename_old){
+                Storage::disk('images')->delete(['maps/' . $filename_old]);
+            }
+
+            if($filename_old2) {
+                Storage::disk('images')->delete(['maps/' . $filename_old2]);
+            }
 
             $map->delete();
 
