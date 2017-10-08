@@ -27,7 +27,7 @@
             <div class="fp-bg"
                  style='background-image: url("{{ url('../img/maps/' . $map->main_image) }}"); background-size: cover; background-position: top center; height: 100%'>
                 <div class="block__inner">
-                    <div class="container trophy-title-block" style="display:none;">
+                    <div class="container trophy-title-block">
                         <div class="row">
                             <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                                 <div class="block__header">
