@@ -5,6 +5,8 @@
 /public/img/posts/*.png
 /public/img/animals/*.jpg
 /public/img/animals/*.png
+/public/img/maps/*.jpg
+/public/img/maps/*.png
 /storage/*.key
 /vendor
 /.idea
