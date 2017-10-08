@@ -37,40 +37,32 @@
                     var post_title = addon_options.items[i].title;
                     var title_count = 42;
                     var post_title = post_title.slice(0, title_count) + (post_title.length > title_count ? "..." : "");
-                    var post_time = moment(addon_options.items[i].created_at).format('YYYY-MM-DD HH:mm');
-                    var post_desc = addon_options.items[i].body;
-                    var desc_count = 200;
-                    var post_desc =  post_desc.slice(0, desc_count) + (post_desc.length > desc_count ? "..." : "");
+                    var post_slug = addon_options.items[i].slug;
+                    var post_tag = '';
 
-                    loaded_object = loaded_object +
+                    @foreach($tags as $real_tag)
+                    if(post_slug === "{{$real_tag->slug}}" ){
+                        if("{{$real_tag->posts()->where('published', '1')->count()}}" > 0) {
+                            post_tag = '<a href="tags/' + post_slug + '"><span class="pm_add_icon"><i class="pm_load_more_back fa fa-paw fa-lg"></i></span> {{ $real_tag->posts()->where("published", "1")->count() }}</a>';
+                        }
+                    }
+                    @endforeach
+
+                        loaded_object = loaded_object +
                         '<div class="pm_blog_item added">' +
                         '<div class="pm_blog_item_wrapper">' +
                         '<div class="pm_blog_featured_image_wrapper">' +
                         '<div class="post-short-intro">' +
                         '<div class="mini-info-block">' +
-                        /* Kategorijos icon */
-                        '<a href="{{ route('categories.slug', $post->category->slug) }}">' +
-                        "@include('components._posticon')" +
-                        '</a>' +
-                        /* Post laikas */
-                        '<span class="info-time">' +
-                        '<i class="pm_load_more_back fa fa-clock-o fa-lg"></i>' + post_time +
-                        '</span>' +
-                        /* Posto pavadinimas */
-                        '<div class="pm_blog_item_title">' + post_title +
+                        post_tag +
                         '</div>' +
-                        '</div>' +
-                        /* Skaityti daugiau */
                         '<div class="pm_post_likes_wrapper">' +
-                        '<a class="pm_portfolio_read_more" href="blog/' + addon_options.items[i].slug + '"></a>' +
+                        '<a class="pm_portfolio_read_more" href="maps/' + post_slug + '"></a>' +
                         '</div>' +
                         '</div>' +
-                        /* Posto img */
-                        '<img src="../img/posts/' + addon_options.items[i].image + '" alt="" style="float:left;" />' +
+                        '<img src="../img/maps/' + addon_options.items[i].main_image + '" alt="" style="float:left;"/>' +
                         '<div class="clearfix"></div>' +
-                        /* Posto aprasymas */
-                        '<div class="pm_blog_item_desc">' + post_desc +
-                        '</div>'+
+                        '<div class="pm_blog_item_desc">' + post_title + '</div>' +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -90,9 +82,11 @@
     };
 
     jQuery('.news_page').each(function () {
-        var items_set = {!! json_encode($old_posts->toArray()) !!};
+
+        var items_set = {!! json_encode($old_maps->toArray()) !!};
+
         jQuery('#list').blog_listing_addon_title({
-            load_count: 2,
+            load_count: 3,
             items: items_set
         });
     });

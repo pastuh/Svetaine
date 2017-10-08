@@ -76,7 +76,7 @@
                                 <div class="col-lg-8 col-lg-offset-2 col-md-6 col-md-offset-3">
                                     <div class="input-group input-group-lg">
                                                 <span class="input-group-addon" id="basic-addon1" rel="tooltip"
-                                                      title="Steam ID <br> <i>(Ateityje bus naudojama)</i>"><span
+                                                      title="Steam ID <br> <i>(Aktyvuoja komentarus)</i>"><span
                                                             class="fa fa-steam-square fa-lg"
                                                             style="width: 30px;"></span></span>
                                         <input id="status" type="text" class="form-control info-perziura" name="steam"

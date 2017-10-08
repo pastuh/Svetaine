@@ -39,7 +39,7 @@ textarea.pm_comment_respond_field {
 .pm_wrapper {
   padding-bottom: 100px;
   overflow: hidden;
-  padding-top: 60px;
+  //padding-top: 60px;
   margin-top: 30px;
 }
 
@@ -47,20 +47,42 @@ textarea.pm_comment_respond_field {
  border-bottom: 2px solid red !important;
 }
 
+.block__features-wrap {
+  padding-right: 10px;
+  text-align: center;
+}
+
+.map-fix-image {
+  max-height: 100px;
+}
+
+.fix-padding {
+  padding-top: 10px;
+}
+
 /* Navigacija */
+.fixed_header {
+  position: fixed !important;
+}
 .navbar-header {
   margin-left: 10px !important;
 }
 
 .navbar-default {
   border: none;
-  background: hsla(0,0%,9%,.75);
+  background-color: transparent;
+  //background: hsla(0,0%,9%,.75);
 }
 
 .navbar-fixed-top {
+  position: relative;
   overflow: hidden;
   height: 50px;
   //background: transparent;
+  background: hsla(0,0%,9%,.75) !important;
+}
+
+.navbar-collapse {
   background: hsla(0,0%,9%,.75);
 }
 .nav-up {
@@ -207,7 +229,7 @@ textarea.pm_comment_respond_field {
 
 .pm_with_margin .pm_blog_listing {
   /*Redaguota*/
-  margin: 30px 0 0 0;
+  //margin: 30px 0 0 0;
 }
 
 .pm_with_margin .pm_blog_item_wrapper {
@@ -1286,7 +1308,7 @@ only screen and (min-resolution: 144dpi) {
 
 @media only screen and (max-width: 737px) {
   .pm_wrapper {
-    padding-top: 40px;
+    //padding-top: 40px;
   }
   .pm_load_more {
     padding: 9px 20px;
@@ -1340,6 +1362,16 @@ only screen and (min-resolution: 144dpi) {
 }
 
 @media only screen and (max-width: 569px) {
+
+  .wide-nav {
+    width: 100%;
+  }
+
+  .wide-nav > li {
+    width: 20%;
+    text-align: center;
+  }
+
   .page-template-page-blog-ajax .pm_blog_item {
     width: 100%;
   }
@@ -1392,5 +1424,31 @@ only screen and (min-resolution: 144dpi) {
   }
   .navbar-nav {
     margin-right: 0 !important;
+  }
+}
+
+/* Trophies BG fix*/
+.trophy-title-block {
+  position: absolute;
+  bottom: 100px;
+  text-shadow: rgba(0, 0, 0, 0.75) 0px 2px 3px;
+}
+
+@media only screen and (max-width: 768px) {
+  .fallow-deer {
+    background-position: 70% center !important;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+  }
+}
+@media only screen and (min-width: 769px) {
+  .fallow-deer {
+    background-position: top center !important;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
   }
 }

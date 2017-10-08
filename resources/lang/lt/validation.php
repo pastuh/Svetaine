@@ -130,7 +130,8 @@ return [
         'featured_image'        =>  'Paveiksliukas',
         'display_name'          =>  'Pavadinimas',
         'description'           =>  'Aprašymas',
-        'g-recaptcha-response'  =>  'reCaptcha'
+        'g-recaptcha-response'  =>  'reCaptcha',
+        'animals'               =>  'Gyvūnai'
     ],
 
 ];

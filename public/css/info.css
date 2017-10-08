@@ -22,8 +22,9 @@
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
     /*padding: 80px 0;*/
-    padding-bottom: 100px;
+    padding-bottom: 60px;
     z-index: 10;
+    -webkit-transition: all 1s;
 }
 
 /* Intro text */
@@ -65,7 +66,7 @@
 
 .heading--medium {
     color: #fff;
-    font-size: 100px;
+    font-size: 70px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -80,17 +81,32 @@
 }
 
 /* Review */
+.image-wrap {
+    margin: 0;
+    text-align: center;
+    padding-right: 10px;
+    margin-left: 10px;
+    float: left;
+}
+
+.image-wrap img {
+    height: 50px;
+    padding-top: 20px;
+}
+
 .block__description {
     color: #fff;
     margin-bottom: 35px;
     padding: 10px;
 }
-.block__features-description {
+.block__features-title {
     text-transform: uppercase;
     color: #fff;
     margin-bottom: 10px;
     font-weight: 500;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
+    margin-top: 25px;
+    margin-left: 10px;
 }
 
 .block__features-text {
@@ -98,6 +114,7 @@
     padding: 10px;
     border-radius: 4px;
     color: #e7e0dd;
+    margin-top: 2px;
 }
 .block__features {
     width: 100%;
@@ -108,8 +125,15 @@ figure {
     text-align: center;
 }
 .block__product {
-    padding-top: 80px;
+    padding-top: 30px;
     padding-bottom: 40px;
+}
+.fix-padding p {
+    padding: 20px;
+}
+
+.space-icon-info {
+    padding-right: 10px;
 }
 
 @media (max-width: 1280px) {
@@ -119,9 +143,16 @@ figure {
 }
 
 @media only screen and (max-width: 768px) {
-    .block__features-text {
-
+    .space-icon-info {
+        padding-right: 0;
     }
+    .block__features-title {
+        margin-bottom: 0;
+    }
+    .image-wrap {
+        margin-top: 7px;
+    }
+
     .block__features {
         text-align: center;
         margin-right: 10px;
@@ -133,7 +164,7 @@ figure {
         /*margin-right: 29px;*/
     }
     .features-text-fix {
-        margin-top: 90px;
+        margin-top: 20px;
     }
 }
 

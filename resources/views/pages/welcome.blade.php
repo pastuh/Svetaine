@@ -2,6 +2,7 @@
 
 @section('body_class', 'pm_dark_type album_fullscreen_page pm_overflow_hidden')
 
+@if(count($posts) >= 2)
 @section('simple-menu')
         <div class="pm_navigation_container">
             <div class="pm_prev_slide_button">
@@ -15,6 +16,7 @@
             </div>
         </div>
 @endsection
+@endif
 
 @section('content')
     <!-- Content -->

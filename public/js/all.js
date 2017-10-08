@@ -15,6 +15,7 @@ setTimeout("jQuery('html').addClass('show-scrollbar');", 1000);
 
 /*Navigacijos ir mygtuku valdymas*/
 
+
 $(document).ready(function () {
 
     /* Paspaudus Hamburget uzslepia virsutiniu mini meniu */
@@ -25,12 +26,18 @@ $(document).ready(function () {
         $('.navbar-fixed-bottom').toggleClass('transp-bg');
         $('.navbar-collapse.collapse').toggleClass('dark-bg');
     });
+
     /* Submit forma */
     $("#submit-button").click(function () {
         $("#main-form").submit();
     });
 
-    /* Show hide header */
+});
+
+/*
+$(document).ready(function () {
+
+    /!* Show hide header *!/
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -69,7 +76,8 @@ $(document).ready(function () {
         lastScrollTop = st;
     }
 
-});
+});*/
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

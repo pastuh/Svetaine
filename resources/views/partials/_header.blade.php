@@ -1,5 +1,5 @@
 <!-- Virsutinis puslapio meniu -->
-<header class="nav-down navbar navbar-default navbar-fixed-top" role="navigation">
+<header class="nav-down navbar navbar-default navbar-fixed-top @yield('header_class')" role="navigation">
     <div class="container footer-width">
         <div class="navbar-top-bar">
             <a class="navbar-brand" href="/"><img src="{{ url('img/logo.png') }}" alt="theHunter Lietuva logo"></a>

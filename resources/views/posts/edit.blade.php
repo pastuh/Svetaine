@@ -4,33 +4,12 @@
 @section('stylesheet')
     <link href="{{  url('js\selectbox\css\select2.min.css') }}" rel="stylesheet" type="text/css" media="all">
     <script type="text/javascript" src="{{  url('js\tinymce\tinymce.min.js') }}"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            theme: 'modern',
-            plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'template paste textcolor colorpicker textpattern imagetools toc'
-            ],
-            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor | code',
-            toolbar2: '',
-            image_advtab: true,
-            templates: [
-                {title: 'Test template 1', content: 'Test 1'},
-                {title: 'Test template 2', content: 'Test 2'}
-            ],
-            content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'
-            ],
-            branding: false
-        });
-    </script>
+
+    @include('components._tinymce')
+
 @endsection
 
-@section('body_class', 'pm_dark_type single-post')
+@section('body_class', 'pm_dark_type')
 
 @section('body_style', 'background: url("/img/posts/' . htmlspecialchars($post->image_blured) . '") no-repeat center center fixed;
 -webkit-background-size: cover;

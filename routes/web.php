@@ -47,14 +47,15 @@ Route::resource('categories', 'CategoryController', ['except' => ['create']]);
 Route::get('blog/{slug}','BlogController@getSingle')->name('blog.slug')->where('slug', '[\w\d\-\_]+');
 Route::get('blog','BlogController@getIndex')->name('blog.index');
 
-/*TROPHY valdymas */
-Route::get('animals/single', function () {
-    return view('animals.single');
-})->name('animals.single');
-
+/* TROPHIES valdymas */
 Route::get('trophy/{slug}','TrophyController@getSingle')->name('trophy.slug')->where('slug', '[\w\d\-\_]+');
 Route::get('trophies','TrophyController@getIndex')->name('trophies.index');
 Route::resource('animals', 'AnimalController');
+
+/* LOCATIONS valdymas */
+Route::get('location/{slug}','LocationController@getSingle')->name('location.slug')->where('slug', '[\w\d\-\_]+');
+Route::get('locations','LocationController@getIndex')->name('locations.index');
+Route::resource('maps', 'MapController');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -82,12 +83,11 @@ Route::resource('video', 'VideoController', ['only' => ['index']]);
 /* Rodo Steam naujienas */
 Route::resource('news', 'NewsController', ['only' => ['index']]);
 
-/*
-Route::get('locations', function () {
-    return view('pages.locations');
-});
-*/
 
 Route::get('info', function () {
     return view('pages.info');
+});
+
+Route::get('single', function () {
+    return view('animals.single');
 });

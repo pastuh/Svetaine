@@ -83,7 +83,7 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Naujausi STEAM įrašai: {{ count($VisibleNews) + count($HiddenNews) }}
+        STEAM įrašai: {{ count($VisibleNews) + count($HiddenNews) }}
     </div>
 @endsection
 

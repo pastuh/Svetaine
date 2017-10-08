@@ -83,7 +83,9 @@ class AnimalController extends Controller
             'title' => 'required|min:2|max:90',
             'lt_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
+            'body_2' => 'required|min:10',
             'main_image' => 'required|image',
+            'info_image' => 'required|image',
             'status_check' => 'sometimes'
         ));
 
@@ -94,6 +96,7 @@ class AnimalController extends Controller
         $animal->lt_title = $request->lt_title;
         $animal->slug = str_slug($request->title, "-");
         $animal->body = Purifier::clean($request->body);
+        $animal->body_2 = Purifier::clean($request->body_2);
 
         //save main_image
         if ($request->hasFile('main_image')) {
@@ -104,6 +107,17 @@ class AnimalController extends Controller
             $location = public_path('img/animals/') . $filename;
             Image::make($image)->save($location);
             $animal->main_image = $filename;
+        }
+
+        //save info_image
+        if ($request->hasFile('info_image')) {
+            $image2 = $request->file('info_image');
+            $filename2 = uniqid() . time() . '.' . $image2->getClientOriginalExtension();
+
+            // Trofejaus #2 IMG
+            $location2 = public_path('img/animals/') . $filename2;
+            Image::make($image2)->save($location2);
+            $animal->info_image = $filename2;
         }
 
         //save publish status (Jeigu pazymeta, tai grazinti kad true)
@@ -179,7 +193,9 @@ class AnimalController extends Controller
                 'title' => 'required|min:2|max:90',
                 'lt_title' => 'required|min:2|max:90',
                 'body' => 'required|min:10',
+                'body_2' => 'required|min:10',
                 'main_image' => 'sometimes|image',
+                'info_image' => 'sometimes|image',
                 'status_check' => 'sometimes',
                 'published_check' => 'sometimes'
             ));
@@ -188,6 +204,7 @@ class AnimalController extends Controller
             $animal->lt_title = $request->lt_title;
             $animal->slug = str_slug($request->title, "-");
             $animal->body = Purifier::clean($request->body);
+            $animal->body_2 = Purifier::clean($request->body_2);
 
             //save main_image
             if ($request->hasFile('main_image')) {
@@ -198,13 +215,30 @@ class AnimalController extends Controller
                 $location = public_path('img/animals/') . $filename;
                 Image::make($image)->save($location);
 
-                $old_main_image = $animal->image;
+                $old_main_image = $animal->main_image;
 
                 $animal->main_image = $filename;
 
                 // Trinu sena foto jeigu ikelta nauja
                 Storage::disk('images')->delete(['animals/' . $old_main_image]);
             }
+
+        //save info_image
+        if ($request->hasFile('info_image')) {
+            $image2 = $request->file('info_image');
+            $filename2 = uniqid() . time() . '.' . $image2->getClientOriginalExtension();
+
+            // Trofejaus #1 IMG
+            $location2 = public_path('img/animals/') . $filename2;
+            Image::make($image2)->save($location2);
+
+            $old_info_image = $animal->info_image;
+
+            $animal->info_image = $filename2;
+
+            // Trinu sena foto jeigu ikelta nauja
+            Storage::disk('images')->delete(['animals/' . $old_info_image]);
+        }
 
             if ($request->status_check == 'true') {
                 $animal->status = 1;
@@ -240,7 +274,8 @@ class AnimalController extends Controller
         if ($animal->published == 0) {
 
             $filename_old = $animal->main_image;
-            Storage::disk('images')->delete(['animals/' . $filename_old]);
+            $filename_old2 = $animal->info_image;
+            Storage::disk('images')->delete(['animals/' . $filename_old, 'animals/' . $filename_old2]);
 
             $animal->delete();
 

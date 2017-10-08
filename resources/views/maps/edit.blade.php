@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Naujas trofėjus')
+@section('title', '| ' . htmlspecialchars($map->title) . " vietovės redagavimas")
 
 @section('stylesheet')
     <link href="{{  url('js\selectbox\css\select2.min.css') }}" rel="stylesheet" type="text/css" media="all">
@@ -9,7 +9,7 @@
 
 @endsection
 
-@section('body_class', 'pm_dark_type single-post background-info2')
+@section('body_class', 'pm_dark_type background-info2')
 
 @section('content')
     <div class="pm_wrapper pm_container">
@@ -20,7 +20,7 @@
                         <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                             <div class="panel-body">
                                 <form id="main-form" method="POST"
-                                      action="{{ route('animals.store') }}"
+                                      action="{{ route('maps.update', $map->id) }}"
                                       class="form-horizontal" enctype="multipart/form-data">
 
                                     <div class="row">
@@ -46,7 +46,7 @@
                                                             class="fa fa-font" style="width: 30px;"></span></span>
                                                 <input id="title" type="text" class="form-control" name="title"
                                                        placeholder="EN pavadinimas"
-                                                       value="{{ old('title') }}" required autofocus
+                                                       value="{{ old('title', $map->title) }}" required autofocus
                                                        minlength="2" maxlength="90">
                                             </div>
                                             @if ($errors->has('title'))
@@ -61,18 +61,18 @@
                                     <div class="col-lg-5 col-lg-push-2" v-model="visible"
                                          v-show="visible == 'aprasymas'">
 
-                                        <div class="{{ $errors->has('lt_title') ? ' has-error' : '' }}">
+                                        <div class="{{ $errors->has('sub_title') ? ' has-error' : '' }}">
                                             <div class="input-group input-group-lg">
                                                 <span class="input-group-addon" id="basic-addon1"><span
                                                             class="fa fa-bold" style="width: 30px;"></span></span>
-                                                <input type="text" class="form-control" name="lt_title"
+                                                <input type="text" class="form-control" name="sub_title"
                                                        placeholder="LT pavadinimas"
-                                                       value="{{ old('lt_title') }}" required
+                                                       value="{{ old('sub_title', $map->sub_title) }}" required
                                                        minlength="2" maxlength="90">
                                             </div>
-                                            @if ($errors->has('lt_title'))
+                                            @if ($errors->has('sub_title'))
                                                 <span class="help-block">
-                                                {{ $errors->first('lt_title') }}
+                                                {{ $errors->first('sub_title') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -83,10 +83,38 @@
                                         <div class="col-lg-12">
                                             <div class="{{ $errors->has('body') ? ' has-error' : '' }}">
                                                 <textarea id="body" class="form-control" name="body" rows="5"
-                                                          cols="45">{{ old('body') }}</textarea>
+                                                          cols="45">{{ old('body', $map->body) }}</textarea>
                                                 @if ($errors->has('body'))
                                                     <span class="help-block">
                                                     {{ $errors->first('body') }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" v-model="visible" v-show="visible == 'aprasymas'" style="margin-top: 10px">
+                                        <div class="col-lg-12">
+                                            <div class="{{ $errors->has('animals') ? ' has-error' : '' }}">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"><span
+                                                                class="fa fa-paw" style="width: 38px;"></span></span>
+                                                    <select id="animals" class="select2-multi" multiple="multiple"
+                                                            title="Pasirink žymą"
+                                                            name="animals[]">
+                                                        @foreach($animals as $animal)
+                                                            <option
+                                                                    @foreach($map->animals as $real_animal)
+                                                                    {{ ($real_animal->id == $animal->id) ? 'selected="selected"' : '' }}
+                                                                    @endforeach
+                                                                    value="{{ $animal->id }}">{{ $animal->title }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @if ($errors->has('animals'))
+                                                    <span class="help-block">
+                                                    {{ $errors->first('animals') }}
                                                     </span>
                                                 @endif
                                             </div>
@@ -109,16 +137,17 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-5 col-lg-offset-2">
+
+                                        <div class="col-lg-5 col-lg-push-2">
                                             <div class="{{ $errors->has('info_image') ? ' has-error' : '' }}">
                                                 <input type="file" class="filestyle" name="info_image" id="image_src2"
                                                        data-badge="false" data-iconName="fa fa-upload"
                                                        data-buttonBefore="true" data-placeholder="..."
-                                                       data-buttonText="#2 Paveiksliukas"/>
+                                                       data-buttonText="#2 paveiksliukas"/>
                                                 @if ($errors->has('info_image'))
                                                     <span class="help-block">
-                                                    {{ $errors->first('info_image') }}
-                                                    </span>
+                                                        {{ $errors->first('info_image') }}
+                                                        </span>
                                                 @endif
                                             </div>
                                         </div>
@@ -127,7 +156,7 @@
                                         <div class="col-lg-12">
                                             <div class="{{ $errors->has('body_2') ? ' has-error' : '' }}">
                                                 <textarea id="body_2" class="form-control" name="body_2" rows="5"
-                                                          cols="45">{{ old('body_2') }}</textarea>
+                                                          cols="45">{{ old('body_2', $map->body_2) }}</textarea>
                                                 @if ($errors->has('body_2'))
                                                     <span class="help-block">
                                                     {{ $errors->first('body_2') }}
@@ -140,13 +169,22 @@
                                             <label class="control control-checkbox">
                                                 Patvirtinu, kad įrašas pilnai užpildytas.
                                                 <input id="status_check" type="checkbox" name="status_check"
-                                                       value="true" {{ old('status_check') ? 'checked' : '' }} />
+                                                       value="true" {{ $map->status ? 'checked' : '' }} />
                                                 <div class="control_indicator"></div>
                                             </label>
+                                            <br>
+                                            @if(Auth::user()->hasRole('editor|administrator|superadministrator'))
+                                                <label class="control control-checkbox">
+                                                    Publikuoti įrašą?
+                                                    <input id="published_check" type="checkbox" name="published_check"
+                                                           value="true" {{ $map->published ? 'checked' : '' }} />
+                                                    <div class="control_indicator"></div>
+                                                </label>
+                                            @endif
                                         </div>
-
                                     </div>
 
+                                    {{ method_field('PUT') }}
                                     {{ csrf_field() }}
 
                                 </form>
@@ -167,7 +205,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('animals.index') }}" aria-label="Atšaukti gyvūno kūrimą">
+            <a href="{{ route('maps.index') }}" aria-label="Atšaukti vietovės redagavimą">
                 <i class="pm_likes_icon fa fa-reply"></i>
             </a>
         </li>
@@ -176,7 +214,7 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Trofėjaus kūrimas
+        Naujos vietovės kūrimas
     </div>
 @endsection
 

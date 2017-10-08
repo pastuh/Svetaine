@@ -5,34 +5,7 @@
     <link href="{{  url('js\selectbox\css\select2.min.css') }}" rel="stylesheet" type="text/css" media="all">
     <script type="text/javascript" src="{{  url('js\tinymce\tinymce.min.js') }}"></script>
 
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            theme: 'modern',
-            forced_root_block : "",
-            force_br_newlines : false,
-            force_p_newlines : false,
-            oninit : "setPlainText",
-            plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'template paste textcolor colorpicker textpattern imagetools toc paste'
-            ],
-            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor | code',
-            toolbar2: '',
-            image_advtab: true,
-            templates: [
-                {title: 'Test template 1', content: 'Test 1'},
-                {title: 'Test template 2', content: 'Test 2'}
-            ],
-            content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'
-            ],
-            branding: false
-        });
-    </script>
+    @include('components._tinymce')
 
 @endsection
 
@@ -136,8 +109,8 @@
                                             </div>
                                         </div>
 
-                                        {{-- Bus naudojama ateityje --}}
-                                        {{--<div class="col-lg-5 col-lg-push-2">
+
+                                        <div class="col-lg-5 col-lg-push-2">
                                             <div class="{{ $errors->has('info_image') ? ' has-error' : '' }}">
                                                 <input type="file" class="filestyle" name="info_image" id="image_src2"
                                                        data-badge="false" data-iconName="fa fa-upload"
@@ -149,20 +122,20 @@
                                                         </span>
                                                 @endif
                                             </div>
-                                        </div>--}}
+                                        </div>
 
-                                        {{-- Bus naudojama ateityje --}}
-                                        {{--<div class="col-lg-12">
+
+                                        <div class="col-lg-12">
                                             <div class="{{ $errors->has('body_2') ? ' has-error' : '' }}">
                                                 <textarea id="body_2" class="form-control" name="body_2" rows="5"
-                                                          cols="45">{{ old('body_2') }}</textarea>
+                                                          cols="45">{{ old('body_2', $animal->body_2) }}</textarea>
                                                 @if ($errors->has('body_2'))
                                                     <span class="help-block">
                                                     {{ $errors->first('body_2') }}
                                                     </span>
                                                 @endif
                                             </div>
-                                        </div>--}}
+                                        </div>
 
                                         <div class="col-xs-12 control-margin" style="margin-top: 10px;">
                                             <label class="control control-checkbox">
@@ -218,6 +191,9 @@
 @endsection
 
 @section('script')
+
+    @include('components._vue-init')
+
     {{--Geresnis selectbox--}}
     <script type="text/javascript" src="{{  url('js\selectbox\js\select2.min.js') }}"></script>
     <script>
@@ -227,15 +203,5 @@
 
     {{--Grazesnis failo parinkimas ir uploud--}}
     <script type="text/javascript" src="{{  url('js\filestyle\bootstrap-filestyle.min.js') }}"></script>
-    <script src="{{  url('js/vue.min.js') }}" type="text/javascript"></script> {{-- VUE --}}
-
-    <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                visible: 'aprasymas'
-            }
-        })
-    </script>
 
 @endsection

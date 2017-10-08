@@ -1,12 +1,10 @@
 @extends('layouts.main')
 @section('title', '| Visi trofėjai')
 
-@section('header_class', 'fixed_header')
 @section('body_class', 'pm_dark_type page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 
 @section('content')
     <div class="pm_blog_listing_container pm_columns_4 pm_with_margin pm_posts_listing">
-        <br>
         <div class="pm_blog_listing blog_isotope">
             @foreach($animals as $animal)
                 <div class="pm_blog_item"><!-- Item 1 -->
@@ -36,7 +34,7 @@
                 </div><!-- blog_item -->
             @endforeach
         </div><!-- pm_blog_listing -->
-        {{--<a href="javascript:void(0)" class="pm_load_more"><span class="pm_load_more_back"></span></a>--}}
+
         <div class="clear"></div>
     </div><!-- pm_blog_listing_container -->
     <div style="padding-top: 80px;"></div>

@@ -47,7 +47,7 @@
                     var post_tag = '';
 
                     @foreach($tags as $real_tag)
-                    if(post_slug = "{{$real_tag->slug}}" ){
+                    if(post_slug === "{{$real_tag->slug}}" ){
                         if("{{$real_tag->posts()->where('published', '1')->count()}}" > 0) {
                             post_tag = '<a href="tags/' + post_slug + '"><span class="pm_add_icon"><i class="pm_load_more_back fa fa-paw fa-lg"></i></span> {{ $real_tag->posts()->where("published", "1")->count() }}</a>';
                         }

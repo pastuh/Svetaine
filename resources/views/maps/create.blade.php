@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Naujas trofėjus')
+@section('title', '| Nauja vietovė')
 
 @section('stylesheet')
     <link href="{{  url('js\selectbox\css\select2.min.css') }}" rel="stylesheet" type="text/css" media="all">
@@ -9,7 +9,7 @@
 
 @endsection
 
-@section('body_class', 'pm_dark_type single-post background-info2')
+@section('body_class', 'pm_dark_type background-info2')
 
 @section('content')
     <div class="pm_wrapper pm_container">
@@ -20,7 +20,7 @@
                         <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                             <div class="panel-body">
                                 <form id="main-form" method="POST"
-                                      action="{{ route('animals.store') }}"
+                                      action="{{ route('maps.store') }}"
                                       class="form-horizontal" enctype="multipart/form-data">
 
                                     <div class="row">
@@ -45,7 +45,7 @@
                                                 <span class="input-group-addon" id="basic-addon1"><span
                                                             class="fa fa-font" style="width: 30px;"></span></span>
                                                 <input id="title" type="text" class="form-control" name="title"
-                                                       placeholder="EN pavadinimas"
+                                                       placeholder="Pavadinimas"
                                                        value="{{ old('title') }}" required autofocus
                                                        minlength="2" maxlength="90">
                                             </div>
@@ -61,18 +61,18 @@
                                     <div class="col-lg-5 col-lg-push-2" v-model="visible"
                                          v-show="visible == 'aprasymas'">
 
-                                        <div class="{{ $errors->has('lt_title') ? ' has-error' : '' }}">
+                                        <div class="{{ $errors->has('sub_title') ? ' has-error' : '' }}">
                                             <div class="input-group input-group-lg">
                                                 <span class="input-group-addon" id="basic-addon1"><span
                                                             class="fa fa-bold" style="width: 30px;"></span></span>
-                                                <input type="text" class="form-control" name="lt_title"
-                                                       placeholder="LT pavadinimas"
-                                                       value="{{ old('lt_title') }}" required
+                                                <input type="text" class="form-control" name="sub_title"
+                                                       placeholder="Vietovės apibūdinimas"
+                                                       value="{{ old('sub_title') }}" required
                                                        minlength="2" maxlength="90">
                                             </div>
-                                            @if ($errors->has('lt_title'))
+                                            @if ($errors->has('sub_title'))
                                                 <span class="help-block">
-                                                {{ $errors->first('lt_title') }}
+                                                {{ $errors->first('sub_title') }}
                                                 </span>
                                             @endif
                                         </div>
@@ -90,11 +90,38 @@
                                                     </span>
                                                 @endif
                                             </div>
+                                        </div>                                        
+                                    </div>
+
+                                    <div class="row" v-model="visible" v-show="visible == 'aprasymas'" style="margin-top: 10px">
+                                        <div class="col-lg-12">
+                                            <div class="{{ $errors->has('animals') ? ' has-error' : '' }}">
+                                                <div class="input-group">
+                                                <span class="input-group-addon" id="basic-addon1"><span
+                                                            class="fa fa-paw" style="width: 38px;"></span></span>
+                                                    <select id="animals" class="select2-multi" multiple="multiple"
+                                                            title="Pasirink žymą"
+                                                            name="animals[]">
+                                                        @foreach($animals as $animal)
+                                                            <option
+                                                                    @for($i = 0; $i < count($animals); $i++)
+                                                                    {{ ($animal->id == old('animals.' . $i) ? 'selected="selected"' : '') }}
+                                                                    @endfor
+                                                                    value="{{ $animal->id }}">{{ $animal->title }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @if ($errors->has('animals'))
+                                                    <span class="help-block">
+                                                    {{ $errors->first('animals') }}
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="row" v-model="visible" v-show="visible == 'info'">
-
                                         <div class="col-lg-5">
                                             <div class="{{ $errors->has('main_image') ? ' has-error' : '' }}">
                                                 <input type="file" class="filestyle" name="main_image" id="image_src"
@@ -167,7 +194,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('animals.index') }}" aria-label="Atšaukti gyvūno kūrimą">
+            <a href="{{ route('maps.index') }}" aria-label="Atšaukti vietovės kūrimą">
                 <i class="pm_likes_icon fa fa-reply"></i>
             </a>
         </li>
@@ -176,7 +203,7 @@
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        Trofėjaus kūrimas
+        Vietovės kūrimas
     </div>
 @endsection
 
