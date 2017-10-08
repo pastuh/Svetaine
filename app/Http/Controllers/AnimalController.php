@@ -274,8 +274,16 @@ class AnimalController extends Controller
         if ($animal->published == 0) {
 
             $filename_old = $animal->main_image;
+
             $filename_old2 = $animal->info_image;
-            Storage::disk('images')->delete(['animals/' . $filename_old, 'animals/' . $filename_old2]);
+
+            if($filename_old){
+                Storage::disk('images')->delete(['animals/' . $filename_old]);
+            }
+
+            if($filename_old2) {
+                Storage::disk('images')->delete(['animals/' . $filename_old2]);
+            }
 
             $animal->delete();
 
