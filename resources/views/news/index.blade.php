@@ -1,12 +1,10 @@
 @extends('layouts.main')
 @section('title', '| Steam įrašai')
 
-@section('header_class', 'fixed_header')
 @section('body_class', 'pm_dark_type page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 
 @section('content')
     <div class="pm_blog_listing_container pm_columns_2 pm_with_margin">
-        <br>
         <div class="pm_blog_listing blog_isotope">
             @foreach($VisibleNews as $news)
                 <div class="pm_blog_item"><!-- Item 1 -->
