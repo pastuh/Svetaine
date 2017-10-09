@@ -1306,7 +1306,15 @@ only screen and (min-resolution: 144dpi) {
   }
 }
 
+.slide-info-block {
+  display: none !important;
+}
+
 @media only screen and (max-width: 737px) {
+  .slide-info-block {
+    display: block !important;
+  }
+
   .pm_wrapper {
     //padding-top: 40px;
   }

@@ -12072,7 +12072,14 @@ li.comment:nth-child(odd) {
   }
 }
 
+.slide-info-block {
+  display: none !important;
+}
+
 @media only screen and (max-width: 737px) {
+  .slide-info-block {
+    display: block !important;
+  }
   .pm_load_more {
     padding: 9px 20px;
   }

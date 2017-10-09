@@ -215,6 +215,11 @@ width: 100%;')
 
     <ul class="nav navbar-nav short-menu">
         <li>
+            <a href="javascript:void(0)" class="slide-info-block">
+                <i class="fa fa-info-circle fa-lg"></i>
+            </a>
+        </li>
+        <li>
             <a href="javascript:void(0)" class="comment-post">
                 <i class="fa fa-comments fa-lg">
                     <span class="menu-simple-text">{{ $comments->count() }}</span>
@@ -233,7 +238,7 @@ width: 100%;')
                 </a>
             </li>
         @endif
-        <li>
+        <li class="show-image">
             <a class="fluidbox fluid-image-fix" href="{{ asset('/img/posts/' . $post->image) }}">
                 <img src="{{ asset('/img/posts/' . $post->image) }}" class="fluid-image-fix" height="0px" width="1px"
                      style="margin-right: -6px;"/>
@@ -266,6 +271,16 @@ width: 100%;')
     <script type="text/javascript">
         $(document).ready(function () {
             $('.fluidbox').fluidbox();
+        });
+    </script>
+
+    <script>
+        $(".slide-info-block").click(function () {
+            $(".pm_simple_title").slideToggle("slow", function () {
+                $(".nav-slit a, .show-image, .comment-post").slideToggle("slow", function () {
+
+                });
+            });
         });
     </script>
 
