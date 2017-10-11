@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Steam;
 
 class NewsController extends Controller
@@ -18,11 +21,17 @@ class NewsController extends Controller
         /* Zaidimo ID Steame */
         $appID = 518790;
         $news = Steam::news()->GetNewsForApp($appID, 16)->newsitems;
+        $news_total = count($news);
 
-        $VisibleNews = array_slice($news,0, 4);
-        $HiddenNews = array_slice($news,4);
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $col = new Collection($news);
+        $perPage = 4;
+        $currentPageSearchResults = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
 
-        return view('news.index', compact('VisibleNews', 'HiddenNews'));
+        $entries = new LengthAwarePaginator($currentPageSearchResults, count($col), $perPage, '', ['path'=>url('news/')]);
+
+        return view('news.index', compact('entries', 'news_total'));
+
     }
 
     /**

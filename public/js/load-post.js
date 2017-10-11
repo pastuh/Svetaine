@@ -1,13 +1,1 @@
-$(".pm_load_more").click(function () {
-
-    var $allElements = $(".pm_blog_item.added");
-    var $firstElement = $('.pm_blog_item.added:not(.checked):first');
-
-    $allElements.addClass('checked');
-
-    $('html, body').stop(true).animate({
-        scrollTop: $firstElement.offset().top - 200
-    }, 1000);
-
-    return false;
-});
+$(".pm_load_more").click(function(){var e=$(".pm_blog_item.added"),d=$(".pm_blog_item.added:not(.checked):first");return e.addClass("checked"),$("html, body").stop(!0).animate({scrollTop:d.offset().top-200},1e3),!1});

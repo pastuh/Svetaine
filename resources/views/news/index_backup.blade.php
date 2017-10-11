@@ -6,7 +6,7 @@
 @section('content')
     <div class="pm_blog_listing_container pm_columns_2 pm_with_margin">
         <div class="pm_blog_listing blog_isotope">
-            @foreach($entries as $item)
+            @foreach($VisibleNews as $news)
                 <div class="pm_blog_item"><!-- Item 1 -->
                     <div class="pm_blog_item_wrapper">
                         <div class="pm_blog_featured_image_wrapper">
@@ -15,21 +15,21 @@
                                 <div class="mini-info-block">
                                     <span class="info-time">
                                             <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
-                                        {{ Date::createFromTimestamp($item->date)->format('Y-m-d H:i') }}
+                                        {{ Date::createFromTimestamp($news->date)->format('Y-m-d H:i') }}
                                     </span>
 
                                     <div class="pm_blog_item_title">
-                                        {{ str_limit($item->title, $limit= 80, $end="...") }}
+                                        {{ str_limit($news->title, $limit= 80, $end="...") }}
                                     </div>
                                 </div>
                                 <div class="pm_post_likes_wrapper">
-                                    <a class="pm_portfolio_read_more" href="{{ $item->url }}" target='_blank'></a>
+                                    <a class="pm_portfolio_read_more" href="{{ $news->url }}" target='_blank'></a>
                                 </div>
 
                             </div>
 
                             @php
-                                $has_image = preg_match('/(http:\/\/cdn.*?(jpg|png))/', $item->contents, $images);
+                                $has_image = preg_match('/(http:\/\/cdn.*?(jpg|png))/', $news->contents, $images);
                             @endphp
 
                             <div class="pm_blog_item_desc steam_desc">
@@ -39,29 +39,14 @@
                                 <img src="{{ asset('/img/news/empty-foto.jpg') }}" alt="" class="feed-item-image img-responsive steam-image" style="float:left; max-height: 200px; width: auto">
                             @endif
 
+                            {{--<div class="clearfix"></div>--}}
+
                             @php
-                                $search = "/(\[img.*img\]|\[list\]|\[\*\])/";
+                                $search = "/(\[img.*img\])/";
                                 $replace = "";
-                                $description = preg_replace($search,$replace,$item->contents);
+                                $description = preg_replace($search,$replace,$news->contents);
                                 $search = "/(\[b\]|\[\/b\])/";
                                 $description = preg_replace($search,$replace,$description);
-
-                                /* URL i paprasta href */
-                                $find = "/\[url=(.*)\](.*)\[\/url\]/";
-                                $description = preg_replace($find,'<a href=\"$1\" target="_blank" style="color: rgb(182, 81, 60);">$2</a>', $description);
-
-                                /* H1 */
-                                $find = "/\[h1\](.*)\[\/h1\]/";
-                                $description = preg_replace($find,'<b>$1</b>', $description);
-
-                                /* i */
-                                $find = "/\[i\](.*)\[\/i\]/";
-                                $description = preg_replace($find,'<i>$1</i>', $description);
-                                /* remove last [i] */
-                                $search = "/(\[i\]|\[\/i\])/";
-                                $description = preg_replace($search,$replace,$description);
-
-
                                 $description = str_replace("https://www.twitch.tv/expansiveworlds","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(182, 81, 60);'>Twitch/ExpansiveWorlds</a> ",$description);
                                 $description = str_replace("Twitch channel[www.twitch.tv]","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(182, 81, 60);'>Twitch/ExpansiveWorlds</a> ",$description);
                                 $description = str_replace("Twitch[www.twitch.tv]","<a href='https://www.twitch.tv/expansiveworlds' title='twitch.tv/expansiveworlds' target='_blank' style='font-weight: bold; color:rgb(182, 81, 60);'>Twitch/ExpansiveWorlds</a> ",$description);
@@ -77,91 +62,39 @@
             @endforeach
         </div><!-- blog_listing -->
         <div class="clear"></div>
-        {{ $entries->links() }}
     </div><!-- blog_listing_container -->
-
-
     <div style="padding-top: 80px;"></div>
 @endsection
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
+        {{--Rodomas mygtukas LOAD MORE jeigu yra virs 4 postu--}}
+        @if(count($HiddenNews) >= 1)
             <li>
                 <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
                     <i class="fa fa-history fa-lg"></i>
                 </a>
             </li>
+        @endif
     </ul>
 @endsection
 
 @section('bottom-footer-info')
     <div class="pm_slide_title_wrapper pm_simple_title">
-        <a href="{{route('news.index')}}">STEAM įrašai: {{ $news_total }}</a>
-    </div>
-
-    <div class="scroller-status">
-        <div class="infinite-scroll-request loader-ellips">
-            <span class="loader-ellips__dot"></span>
-        </div>
-        <p class="infinite-scroll-last"></p>
-        <p class="infinite-scroll-error">Daugiau puslapių nėra</p>
+        STEAM įrašai: {{ count($VisibleNews) + count($HiddenNews) }}
     </div>
 @endsection
 
 @section('script')
 
-    <script>
-        $(document).ready(function() {
+    {{--Kad pridetu history list--}}
+    @include('components._news-list')
 
-            var $grid = $('.blog_isotope').isotope({
-                itemSelector: '.pm_blog_item',
-                layoutMode: 'fitRows',
-            });
+    {{--Kad veiktu MAIN list--}}
+    <script type="text/javascript" src="{{  url('js\template.js') }}"></script>
 
-            var iso = $grid.data('isotope');
+    <script type="text/javascript" src="{{  url('js\load-post.js') }}"></script>
 
-            $grid.infiniteScroll({
-                path: '.pagination__next',
-                append: '.pm_blog_item',
-                prefill: false,
-//                scrollThreshold: 200,
-                loadOnScroll: false,
-                button: '.pm_load_more',
-                outlayer: iso,
-                status: '.scroller-status',
-                hideNav: '.pagination',
-//                history: true,
-                debug: true,
-                onInit: function() {
-
-                    this.on('request', function () {
-                        $allElements = $(".pm_blog_item");
-                        $allElements.addClass('checked');
-                    });
-                }
-            });
-
-        });
-    </script>
-
-    <script type="text/javascript" src="{{  url('js\infinite.js') }}"></script>
-    <script type="text/javascript" src="{{  url('js\isotope.min.js') }}"></script>
-
-    <script>
-
-            $(".pm_load_more").click(function () {
-
-                /* Scroolinti i nauja-pirma elementa kuris neturi checked klases */
-                $('.blog_isotope').on( 'append.infiniteScroll', function() {
-                    $firstElement = $('.pm_blog_item:not(.checked):first');
-
-                    $('html, body').stop(true).animate({
-                     scrollTop: $firstElement.offset().top - 250
-                     }, 1000);
-                });
-
-            });
-
-    </script>
-
+    {{--Laiko konvertavimas--}}
+    @include('components._time')
 @endsection

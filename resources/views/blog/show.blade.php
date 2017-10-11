@@ -273,7 +273,7 @@ width: 100%;')
             $('.fluidbox').fluidbox();
         });
     </script>
-
+    {{--Mobilaus uzslepimas nereikalingu mygtuku--}}
     <script>
         $(".slide-info-block").click(function () {
             $(".pm_simple_title").slideToggle("slow", function () {

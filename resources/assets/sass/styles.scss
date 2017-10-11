@@ -290,7 +290,7 @@ textarea.pm_comment_respond_field {
 }
 
 .pm_slide_title_wrapper a {
-  padding: 16px 20px;
+  padding: 16px 0;
   color: #333;
 }
 
@@ -739,6 +739,70 @@ nav.nav-slit {
 
 .text-left {
   text-align: left !important;
+}
+
+/* Loading post*/
+.scroller-status {
+  display: none;
+}
+.loader-ellips {
+  font-size: 20px; /* change size here */
+  position: relative;
+  width: 4em;
+  height: 1em;
+  margin: 10px auto;
+  padding-top: 6px;
+  margin-left: 20px;
+}
+
+.loader-ellips__dot {
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-radius: 0.5em;
+  background: #ffc500; /* change color here */
+  position: absolute;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+.loader-ellips__dot:nth-child(1),
+.loader-ellips__dot:nth-child(2) {
+  left: 0;
+}
+.loader-ellips__dot:nth-child(3) { left: 1.5em; }
+.loader-ellips__dot:nth-child(4) { left: 3em; }
+
+@keyframes reveal {
+  from { transform: scale(0.001); }
+  to { transform: scale(1); }
+}
+
+@keyframes slide {
+  to { transform: translateX(1.5em) }
+}
+
+.loader-ellips__dot:nth-child(1) {
+  animation-name: reveal;
+}
+
+.loader-ellips__dot:nth-child(2),
+.loader-ellips__dot:nth-child(3) {
+  animation-name: slide;
+}
+
+.loader-ellips__dot:nth-child(4) {
+  animation-name: reveal;
+  animation-direction: reverse;
+}
+
+.infinite-scroll-last,
+.infinite-scroll-error {
+  margin-top: 16px;
+  margin-left: 20px;
+  color: #fff;
+  font-weight: bold;
 }
 
 /* Loading screen */
