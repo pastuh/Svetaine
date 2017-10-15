@@ -31,6 +31,12 @@ img.avatar {
   margin-top: 10px;
 }
 
+.simple-pagination .pagination > .simple-pagination li:first-child > a, .simple-pagination .pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
 .row {
   margin: 0;
 }

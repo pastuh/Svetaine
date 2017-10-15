@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', '| ' . htmlspecialchars($post->title))
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_visible')
+@section('body_class', ' single-post main_overflow_visible')
 
 @section('body_style', "background: url('/img/posts/" . htmlspecialchars($post->image_blured) . "') no-repeat center center fixed;
 -webkit-background-size: cover;
@@ -23,12 +23,12 @@ width: 100%;")
         </svg>
     </div>
 
-    <div {{--id="post-page{{ $post->id }}"--}} class="pm_wrapper pm_container">
+    <div {{--id="post-page{{ $post->id }}"--}} class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <div class="pm_content_standard">
+                        <div class="main_content_standard">
                             <div class="post-body">
 
                                 <div class="post-short-info" >
@@ -37,7 +37,7 @@ width: 100%;")
                                         @include('components._posticon')
                                     </a>
                                     <span class="info-time">
-                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                        <i class="main_load_more_back fa fa-clock-o fa-lg"></i>
                                         {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                     </span>
 
@@ -47,7 +47,7 @@ width: 100%;")
                                 <div class="main-text">
                                     {!! $post->body !!}
                                 </div>
-                                <div class="pm_post_meta_standard">
+                                <div class="main_data_meta_standard">
                                     <span><i id="tag-zyma" class="icon fa fa-tags fa-lg" style="margin-left: 6px;"></i></span>
                                     @foreach($post->tags as $tag)
                                         {{ $loop->first ? '' : '&nbsp;' }}
@@ -143,7 +143,7 @@ width: 100%;")
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
             {{ $post->title }}
     </div>
 @endsection

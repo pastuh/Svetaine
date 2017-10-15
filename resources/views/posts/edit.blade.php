@@ -9,7 +9,7 @@
 
 @endsection
 
-@section('body_class', 'pm_dark_type')
+@section('body_class', '')
 
 @section('body_style', 'background: url("/img/posts/' . htmlspecialchars($post->image_blured) . '") no-repeat center center fixed;
 -webkit-background-size: cover;
@@ -18,10 +18,10 @@
 background-size: cover;')
 
 @section('content')
-    <div class="pm_wrapper pm_container">
+    <div class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="pm_content_standard">
+                <div class="main_content_standard">
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                             <div class="panel-body">
@@ -161,8 +161,8 @@ background-size: cover;')
                     </div>
                 </div>
             </div>
-            </div><!-- pm_row -->
-        </div><!-- pm_wrapper -->
+            </div><!-- main_row -->
+        </div><!-- main_wrapper -->
     </div>
 @endsection
 
@@ -175,14 +175,14 @@ background-size: cover;')
         </li>
         <li>
             <a href="{{ route('posts.show', $post->id) }}" aria-label="Atšaukti redagavimą">
-                <i class="pm_likes_icon fa fa-reply"></i>
+                <i class="main_likes_icon fa fa-reply"></i>
             </a>
         </li>
     </ul>
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
         Įrašo redagavimas
     </div>
 @endsection

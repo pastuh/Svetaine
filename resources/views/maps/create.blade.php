@@ -9,13 +9,13 @@
 
 @endsection
 
-@section('body_class', 'pm_dark_type background-info2')
+@section('body_class', ' background-info2')
 
 @section('content')
-    <div class="pm_wrapper pm_container">
+    <div class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-12">
-                <div id="app" class="pm_content_standard">
+                <div id="app" class="main_content_standard">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
                             <div class="panel-body">
@@ -195,14 +195,14 @@
         </li>
         <li>
             <a href="{{ route('maps.index') }}" aria-label="Atšaukti vietovės kūrimą">
-                <i class="pm_likes_icon fa fa-reply"></i>
+                <i class="main_likes_icon fa fa-reply"></i>
             </a>
         </li>
     </ul>
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
         Vietovės kūrimas
     </div>
 @endsection

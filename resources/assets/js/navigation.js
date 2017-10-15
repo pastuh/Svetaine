@@ -1,10 +1,10 @@
 /*Loading screen'o veikimas*/
     var site_width = jQuery(window).width(),
         site_height = jQuery(window).height(),
-        header_height = jQuery('.pm_header').height();
+        header_height = jQuery('.main_header').height();
     // Activate Preloader
     jQuery(".preloader_active").width(site_width).height(site_height);
-    jQuery(".pm_preloader_load_line").addClass("active");
+    jQuery(".main_preloader_load_line").addClass("active");
 
     // Hide Preloader
     setTimeout("jQuery('.preloader_active').fadeOut();", 500);
@@ -19,12 +19,14 @@ setTimeout("jQuery('html').addClass('show-scrollbar');", 1000);
 $(document).ready(function () {
 
     /* Paspaudus Hamburget uzslepia virsutiniu mini meniu */
-
     $( ".navbar-toggle" ).click(function() {
         $('.short-menu').toggle();
         $('.nav-slit').toggle();
         $('.navbar-fixed-bottom').toggleClass('transp-bg');
         $('.navbar-collapse.collapse').toggleClass('dark-bg');
+
+            $(".title-main").toggle();
+            $(".pagination-main").toggle();
     });
 
     /* Submit forma */

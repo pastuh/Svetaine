@@ -9,9 +9,9 @@
 
 <!-- Loading screen'as
 <div class="preloader_active">
-    <div class="pm_preloader_load_back">
-        <div class="pm_preloader_border"></div>
-        <div class="pm_preloader_load_line"></div>
+    <div class="main_preloader_load_back">
+        <div class="main_preloader_border"></div>
+        <div class="main_preloader_load_line"></div>
     </div>
 </div>
  -->

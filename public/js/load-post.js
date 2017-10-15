@@ -1,1 +1,1 @@
-$(".pm_load_more").click(function(){var e=$(".pm_blog_item.added"),d=$(".pm_blog_item.added:not(.checked):first");return e.addClass("checked"),$("html, body").stop(!0).animate({scrollTop:d.offset().top-200},1e3),!1});
+$(".main_load_more").click(function(){var a=$(".main_data_item.added"),d=$(".main_data_item.added:not(.checked):first");return a.addClass("checked"),$("html, body").stop(!0).animate({scrollTop:d.offset().top-200},1e3),!1});

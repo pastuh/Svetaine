@@ -4,7 +4,7 @@
     @yield('bottom-footer-left-menu')
     <div class="container footer-width">
         <div class="navbar-header">
-            <div class="pm_slides_title_and_likes_container">
+            <div class="main_slides_title_and_likes_container">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>

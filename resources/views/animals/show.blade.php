@@ -46,12 +46,12 @@
         <div class="section" id="section1">
             <div class="fp-bg"
                  style='background-image: url("{{ url('../img/animals/' . $animal->info_image) }}"); background-size: cover; background-position: top center; height: 100%; display: flex; justify-content: center; align-items: center;'>
-                <div {{--id="post-page{{ $post->id }}"--}} class="pm_wrapper pm_container">
+                <div {{--id="post-page{{ $post->id }}"--}} class="main_wrapper main_container">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                                    <div class="pm_content_standard">
+                                    <div class="main_content_standard">
 
                                         {{--Body startas--}}
                                         <div class="block__features-text features-text-fix">

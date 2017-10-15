@@ -31,33 +31,21 @@ class AnimalController extends Controller
     public function index()
     {
 
-        // Skaiciuoju kiek Trofeju
-        $count = Animal::all()->count();
+        // Isvedu pirmus trofejus pagal data
+        $animals = Animal::orderBy('id', 'desc')->paginate(8);
 
         // Kiek puslapyje atvaizduos Trofeju
-        if ($count < 1){
+        if (!$animals){
             // Tikrinu ar useris prisijunges
             if(Auth::check() and Auth::user()->hasPermission('create-animals')){
                 return view('animals.create');
             }
             // Jeigu neturi leidimo kurti Trofejus, tai eiti i profili
             return redirect()->route('profile');
-        } elseif($count <= 4) {
-            $animals_number = $count;
-        }else {
-            $animals_number = 4;
         }
 
-        // Isvedu pirmus trofejus pagal data
-        $animals = Animal::orderBy('id', 'desc')->take($animals_number)->get();
-
-        // Skipinu pirmus trofejus pagal data ir imu likusius
-        $skip = $animals_number;
-        $limit = $count - $skip; // the limit
-        $old_animals = Animal::orderBy('id', 'desc')->skip($skip)->take($limit)->get();
-
         $tags = Tag::all();
-        return view('animals.index', compact('animals', 'old_animals', 'count', 'tags'));
+        return view('animals.index', compact('animals', 'tags'));
     }
 
     /**

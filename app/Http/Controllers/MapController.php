@@ -32,33 +32,21 @@ class MapController extends Controller
     public function index()
     {
 
-        // Skaiciuoju kiek Mapu
-        $count = Map::all()->count();
+        // Isvedu pirmus mapus pagal data
+        $maps = Map::orderBy('id', 'desc')->paginate(8);
 
         // Kiek puslapyje atvaizduos Mapu
-        if ($count < 1){
+        if (!$maps){
             // Tikrinu ar useris prisijunges
             if(Auth::check() and Auth::user()->hasPermission('create-maps')){
                 return redirect()->route('maps.create');
             }
             // Jeigu neturi leidimo kurti Mapus, tai eiti i profili
             return redirect()->route('profile');
-        } elseif($count <= 3) {
-            $maps_number = $count;
-        }else {
-            $maps_number = 3;
         }
 
-        // Isvedu pirmus mapus pagal data
-        $maps = Map::orderBy('id', 'desc')->take($maps_number)->get();
-
-        // Skipinu pirmus mapus pagal data ir imu likusius
-        $skip = $maps_number;
-        $limit = $count - $skip; // the limit
-        $old_maps = Map::orderBy('id', 'desc')->skip($skip)->take($limit)->get();
-
         $tags = Tag::all();
-        return view('maps.index', compact('maps', 'old_maps', 'count', 'tags'));
+        return view('maps.index', compact('maps', 'tags'));
     }
 
     /**

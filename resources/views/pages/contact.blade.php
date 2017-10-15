@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('title', '| Kontaktai')
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_visible background-info2')
+@section('body_class', ' single-post main_overflow_visible background-info2')
 
 @section('content')
-    <div class="pm_wrapper pm_container">
+    <div class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="pm_content_standard">
+                <div class="main_content_standard">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
                             <div class="panel-body">
@@ -86,7 +86,7 @@
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
         Kontaktai
     </div>
 @endsection

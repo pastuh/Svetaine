@@ -1,18 +1,18 @@
 @extends('layouts.main')
 
-@section('body_class', 'pm_dark_type album_fullscreen_page pm_overflow_hidden')
+@section('body_class', ' main_fullscreen_page main_overflow_hidden')
 
 @if(count($posts) >= 2)
 @section('simple-menu')
-        <div class="pm_navigation_container">
-            <div class="pm_prev_slide_button">
-                <div class="pm_prev_thumb_cont"></div>
-                <div class="pm_prev_button_fader"></div>
+        <div class="main_navigation_container">
+            <div class="main_prev_slide_button">
+                <div class="main_prev_thumb_cont"></div>
+                <div class="main_prev_button_fader"></div>
             </div>
-            <div class="pm_pause_button"></div>
-            <div class="pm_next_slide_button">
-                <div class="pm_next_thumb_cont"></div>
-                <div class="pm_next_button_fader"></div>
+            <div class="main_pause_button"></div>
+            <div class="main_next_slide_button">
+                <div class="main_next_thumb_cont"></div>
+                <div class="main_next_button_fader"></div>
             </div>
         </div>
 @endsection
@@ -20,13 +20,13 @@
 
 @section('content')
     <!-- Content -->
-    <div class="pm_album_fullscreen">
-        <div class="pm_gallery_container galleery_fullscreen effect_fade">
-            <ul class="pm_gallery effect_fade">
+    <div class="main_album_fullscreen">
+        <div class="main_gallery_container galleery_fullscreen effect_fade">
+            <ul class="main_gallery effect_fade">
 
                 @foreach ($posts as $key => $post)
                     <li style="background: url( {{ url('../img/posts/' . $post->image) }} );" data-number="{{ $key+1 }}" data-link="blog/{{$post->slug}}"
-                        data-title="{{ $post->title }}" data-thumbnail="{{ asset('img/posts/' . $post->image_thumb) }}">
+                        data-title="{{ $post->title }}">
                     </li>
                 @endforeach
             </ul>
@@ -37,9 +37,9 @@
 @endsection
 
 @section('bottom-footer-info')
-        {{--<div class="pm_fullscreen_toggler"></div>--}}
-        <div class="pm_slides_title_and_likes_container welcome_title">
-            <div class="pm_slide_title_wrapper"></div>
+        {{--<div class="main_fullscreen_toggler"></div>--}}
+        <div class="main_slides_title_and_likes_container welcome_title">
+            <div class="main_slide_title_wrapper"></div>
         </div>
 @endsection
 

@@ -1,29 +1,29 @@
 @extends('layouts.main')
 @section('title', '| Steam įrašai')
 
-@section('body_class', 'pm_dark_type page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
+@section('body_class', ' page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 
 @section('content')
-    <div class="pm_blog_listing_container pm_columns_2 pm_with_margin">
-        <div class="pm_blog_listing blog_isotope">
+    <div class="main_data_listing_container main_columns_2 main_with_margin">
+        <div class="main_data_listing data_isotope">
             @foreach($VisibleNews as $news)
-                <div class="pm_blog_item"><!-- Item 1 -->
-                    <div class="pm_blog_item_wrapper">
-                        <div class="pm_blog_featured_image_wrapper">
+                <div class="main_data_item"><!-- Item 1 -->
+                    <div class="main_data_item_wrapper">
+                        <div class="main_data_featured_image_wrapper">
 
                             <div class="post-short-intro">
                                 <div class="mini-info-block">
                                     <span class="info-time">
-                                            <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                            <i class="main_load_more_back fa fa-clock-o fa-lg"></i>
                                         {{ Date::createFromTimestamp($news->date)->format('Y-m-d H:i') }}
                                     </span>
 
-                                    <div class="pm_blog_item_title">
+                                    <div class="main_data_item_title">
                                         {{ str_limit($news->title, $limit= 80, $end="...") }}
                                     </div>
                                 </div>
-                                <div class="pm_post_likes_wrapper">
-                                    <a class="pm_portfolio_read_more" href="{{ $news->url }}" target='_blank'></a>
+                                <div class="main_post_likes_wrapper">
+                                    <a class="main_data_read_more" href="{{ $news->url }}" target='_blank'></a>
                                 </div>
 
                             </div>
@@ -32,7 +32,7 @@
                                 $has_image = preg_match('/(http:\/\/cdn.*?(jpg|png))/', $news->contents, $images);
                             @endphp
 
-                            <div class="pm_blog_item_desc steam_desc">
+                            <div class="main_data_item_desc steam_desc">
                             @if(!empty($images[0]))
                                 <img src="{{ $images[0] }}" alt="" class="feed-item-image img-responsive steam-image" style="float:left; max-height: 200px; width: auto">
                             @else
@@ -71,7 +71,7 @@
         {{--Rodomas mygtukas LOAD MORE jeigu yra virs 4 postu--}}
         @if(count($HiddenNews) >= 1)
             <li>
-                <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
+                <a class="main_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
                     <i class="fa fa-history fa-lg"></i>
                 </a>
             </li>
@@ -80,7 +80,7 @@
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
         STEAM įrašai: {{ count($VisibleNews) + count($HiddenNews) }}
     </div>
 @endsection

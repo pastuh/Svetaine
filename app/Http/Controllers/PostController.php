@@ -23,6 +23,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:read-posts', ['only' => ['index']]);
         $this->middleware('permission:create-posts', ['only' => ['create', 'store']]);
         $this->middleware('permission:delete-posts', ['only' => ['destroy']]);
     }
@@ -37,23 +38,11 @@ class PostController extends Controller
 
         // Atvaizduoju postus jeigu USER turi nors viena.
         $user_posts = Auth::user()->posts->count();
-        if (Auth::user()->hasPermission('read-posts') and $user_posts > 0) {
-            // Skaiciuoju kiek irasu.
-            if ($user_posts <= 4) {
-                $posts_number = $user_posts;
-            } else {
-                $posts_number = 4;
-            }
 
+        if ($user_posts > 0) {
             // Isvedu pirmus postus pagal data
-            $posts = Post::where('user_id', '=', Auth::user()->id)->orderBy('id', 'desc')->take($posts_number)->get();
-
-            // Skipinu pirmus postus pagal data ir imu likusius
-            $skip = $posts_number;
-            $limit = $user_posts - $skip; // the limit
-            $old_posts = Post::where('user_id', '=', Auth::user()->id)->orderBy('id', 'desc')->skip($skip)->take($limit)->get();
-
-            return view('posts.index', compact('posts', 'old_posts', 'user_posts'));
+            $posts = Post::orderBy('id', 'desc')->where('user_id', '=', Auth::user()->id)->paginate(8);
+            return view('posts.index', compact('posts'));
         }
 
         if (Auth::user()->hasPermission('create-posts')) {

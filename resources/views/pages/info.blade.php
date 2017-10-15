@@ -6,32 +6,32 @@
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_visible background-info')
+@section('body_class', ' single-post main_overflow_visible background-info')
 
 @section('content')
     <br>
     <!-- Content -->
-    <div class="pm_wrapper pm_container">
+    <div class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1">
-                <div class="pm_standard_output_cont">
-                    <div class="pm_media_output_cont">
+                <div class="main_standard_output_cont">
+                    <div class="main_media_output_cont">
                         <div class="some_info-nav">
-                            <div class="pm_slides_title_and_likes_container pm_slides_title_and_likes_container2">
-                                <div class="pm_slide_likes_wrapper">
-                                    <div class="pm_add_like_button like-post button-bg">
-                                        <i class="pm_likes_icon fa fa-heart-o"></i>
-                                        <span class="pm_likes_counter">0</span>
+                            <div class="main_slides_title_and_likes_container main_slides_title_and_likes_container2">
+                                <div class="main_slide_likes_wrapper">
+                                    <div class="main_add_like_button like-post button-bg">
+                                        <i class="main_likes_icon fa fa-heart-o"></i>
+                                        <span class="main_likes_counter">0</span>
                                     </div>
                                 </div>
-                                <div class="pm_slide_likes_wrapper">
-                                    <div class="pm_add_like_button comment-post button-bg">
-                                        <i class="pm_likes_icon fa fa-comments"></i>
-                                        <span class="pm_likes_counter">0</span>
+                                <div class="main_slide_likes_wrapper">
+                                    <div class="main_add_like_button comment-post button-bg">
+                                        <i class="main_likes_icon fa fa-comments"></i>
+                                        <span class="main_likes_counter">0</span>
                                     </div>
                                 </div>
-                                <div class="pm_slide_likes_wrapper">
-                                    <div class="pm_slide_title_wrapper">Winter is Coming</div>
+                                <div class="main_slide_likes_wrapper">
+                                    <div class="main_slide_title_wrapper">Winter is Coming</div>
                                 </div>
                             </div>
                             <br style="clear: both;"/>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 main-frame">
-                    <div class="pm_content_standard">
+                    <div class="main_content_standard">
                         <div class="row">
                             <div class="col-lg-8">
                                 <img class="info-image" src="{{ url('img\clipart\blog\blog-standard.jpg') }}" alt="">
@@ -189,22 +189,22 @@
                     </div>
                     <hr>
 
-                    <div class="pm_post_comments_standard pm_simple_layout">
+                    <div class="main_post_comments_standard main_simple_layout">
                         <div id="comments">
-                            <div class="pm_comments_wrapper">
-                                <ul class="pm_comments_list">
+                            <div class="main_comments_wrapper">
+                                <ul class="main_comments_list">
 
                                     <li class="comment">
-                                        <div class="pm_comment_container">
-                                            <div class="pm_comment_wrapper">
-                                                <div class="pm_comment_avatar">
+                                        <div class="main_comment_container">
+                                            <div class="main_comment_wrapper">
+                                                <div class="main_comment_avatar">
                                                     <img class="avatar" src="img\clipart\avatar-1.jpg" alt="">
                                                 </div>
-                                                <div class="pm_comment_info">
-                                                    <span class="pm_comment_author">Amy K.</span>
-                                                    <span class="pm_comment_date">January 18, 2016</span>
+                                                <div class="main_comment_info">
+                                                    <span class="main_comment_author">Amy K.</span>
+                                                    <span class="main_comment_date">January 18, 2016</span>
                                                 </div>
-                                                <div class="pm_comment_text">
+                                                <div class="main_comment_text">
                                                     <p>Wow! So creative and unique theme!</p>
                                                 </div>
                                             </div>
@@ -213,16 +213,16 @@
                                     </li>
 
                                     <li class="comment">
-                                        <div class="pm_comment_container">
-                                            <div class="pm_comment_wrapper">
-                                                <div class="pm_comment_avatar">
+                                        <div class="main_comment_container">
+                                            <div class="main_comment_wrapper">
+                                                <div class="main_comment_avatar">
                                                     <img class="avatar" src="img\clipart\avatar-2.jpg" alt="">
                                                 </div>
-                                                <div class="pm_comment_info">
-                                                    <span class="pm_comment_author">Steve</span>
-                                                    <span class="pm_comment_date">January 18, 2016</span>
+                                                <div class="main_comment_info">
+                                                    <span class="main_comment_author">Steve</span>
+                                                    <span class="main_comment_date">January 18, 2016</span>
                                                 </div>
-                                                <div class="pm_comment_text">
+                                                <div class="main_comment_text">
                                                     <p>Really amazing theme BY photographers FOR photographers!</p>
                                                 </div>
                                             </div>
@@ -231,38 +231,38 @@
                                     </li>
 
                                 </ul>
-                            </div><!-- pm_comments_wrapper -->
+                            </div><!-- main_comments_wrapper -->
 
                             <div class="comment-respond">
                                 <form id="forma" data-parsley-validate class="comment-form">
-                                    <div class="pm_comment_input_wrapper">
-                                        <textarea class="pm_comment_respond_field" name="comment"
+                                    <div class="main_comment_input_wrapper">
+                                        <textarea class="main_comment_respond_field" name="comment"
                                                   placeholder="Parašyti komentarą: ..." rows="1" cols="45" required
                                                   minlength="5"></textarea>
                                     </div>
                                 </form>
                             </div>
                         </div><!-- comments -->
-                    </div><!-- pm_post_comments_standard -->
+                    </div><!-- main_post_comments_standard -->
                 </div>
                 <div class="btn-toolbar">
                     <div class="col-lg-2">
                         <button id="submit-button" type="submit"
-                                class="pm_send_comment_button pm_load_more stilius_mygtukas">
-                            <i class="pm_likes_icon fa fa-floppy-o fa-lg"></i>
-                            <span class="pm_likes_counter"> Išsaugoti</span>
+                                class="main_send_comment_button main_load_more stilius_mygtukas">
+                            <i class="main_likes_icon fa fa-floppy-o fa-lg"></i>
+                            <span class="main_likes_counter"> Išsaugoti</span>
                         </button>
                     </div>
                     <div class="col-lg-1 offset-lg-9">
                         <button id="go-to-top" type="button"
-                                class="pm_send_comment_button pm_load_more stilius_mygtukas">
-                            <i class="pm_likes_icon fa fa-arrow-up fa-lg"></i>
+                                class="main_send_comment_button main_load_more stilius_mygtukas">
+                            <i class="main_likes_icon fa fa-arrow-up fa-lg"></i>
                         </button>
                     </div>
                 </div>
             </div>
-        </div><!-- pm_row -->
-    </div><!-- pm_wrapper -->
+        </div><!-- main_row -->
+    </div><!-- main_wrapper -->
 @endsection
 
 @section('script')

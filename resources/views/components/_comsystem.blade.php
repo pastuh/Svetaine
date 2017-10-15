@@ -3,18 +3,18 @@
     $(document).ready(function () {
 
         @if(session()->has('success'))
-        $(".pm_post_comments_standard").removeClass("hidden");
+        $(".main_post_comments_standard").removeClass("hidden");
         $(".comment-post").addClass("hidden");
         $('html, body').animate({
-            scrollTop: $(".pm_post_comments_standard").offset().top
+            scrollTop: $(".main_post_comments_standard").offset().top
         }, 500);
         @endif
 
         @if(count($errors) > 0)
-        $(".pm_post_comments_standard").removeClass("hidden");
+        $(".main_post_comments_standard").removeClass("hidden");
         $(".comment-post").addClass("hidden");
         $('html, body').animate({
-            scrollTop: $(".pm_post_comments_standard").offset().top
+            scrollTop: $(".main_post_comments_standard").offset().top
         }, 500);
         @endif
 
@@ -68,13 +68,13 @@
     /* Jeigu laikas yra 0 */
     $('.comment-post').click(function () {
         $('#submit-button').removeClass('hidden');
-        $('.pm_simple_title').css('cursor', 'pointer');
+        $('.main_simple_title').css('cursor', 'pointer');
     });
     @endif
 
-$('.pm_simple_title').click(function () {
+$('.main_simple_title').click(function () {
         $(this).css('cursor', '');
-        $(".pm_post_comments_standard,#submit-button").addClass("hidden");
+        $(".main_post_comments_standard,#submit-button").addClass("hidden");
         $('.comment-post').removeClass('hidden');
         $('html,body').animate({scrollTop: 0}, 'fast');
         return false;
@@ -84,9 +84,9 @@ $('.pm_simple_title').click(function () {
     // Paslepia Rodyti komentarus ir scroolina i komentaru forma
     $(".comment-post").click(function () {
         $(".comment-post").addClass("hidden");
-        $(".pm_post_comments_standard").removeClass("hidden");
+        $(".main_post_comments_standard").removeClass("hidden");
         $('html, body').animate({
-            scrollTop: $(".pm_comments_list").offset().top
+            scrollTop: $(".main_comments_list").offset().top
         }, 300);
     });
 

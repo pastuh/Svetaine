@@ -11,33 +11,21 @@ class TrophyController extends Controller
 {
     public function getIndex () {
 
-        // Skaiciuoju kiek PUBLISHED Trofeju
-        $count = Animal::where('published', '1')->count();
+        // Isvedu pirmus trofejus pagal data
+        $animals = Animal::orderBy('id', 'desc')->where('published', '1')->paginate(8);
 
         // Kiek puslapyje atvaizduos Trofeju
-        if ($count < 1){
+        if (!$animals){
             // Tikrinu ar useris prisijunges
             if(Auth::check() and Auth::user()->hasPermission('create-animals')){
                 return view('animals.create');
             }
             // Jeigu neturi jokiu irasu ir leidimo kurti Trofejus, tai eiti i profili
             return redirect()->route('profile');
-        } elseif($count <= 4) {
-            $animals_number = $count;
-        }else {
-            $animals_number = 4;
         }
 
-        // Isvedu pirmus trofejus pagal data
-        $animals = Animal::orderBy('id', 'desc')->where('published', '1')->take($animals_number)->get();
-
-        // Skipinu pirmus trofejus pagal data ir imu likusius
-        $skip = $animals_number;
-        $limit = $count - $skip; // the limit
-        $old_animals = Animal::orderBy('id', 'desc')->skip($skip)->take($limit)->where('published', '1')->get();
-
         $tags = Tag::all();
-        return view('trophies.index', compact('animals', 'old_animals', 'count', 'tags'));
+        return view('trophies.index', compact('animals', 'tags'));
     }
 
     /* Trofejaus puslapis pagal slug */

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', '| Twitch video')
 
-@section('body_class', 'pm_dark_type page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
+@section('body_class', ' page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 
 @section('content')
 
@@ -27,26 +27,26 @@
         </div>
     </div>
 
-    <div class="pm_blog_listing_container pm_columns_4 pm_with_margin">
-        <div class="pm_blog_listing blog_isotope">
+    <div class="main_data_listing_container main_columns_4 main_with_margin">
+        <div class="main_data_listing data_isotope">
             @if(!$EmptyVideo)
-                @foreach($VisibleVideos as $TwitchVideo)
-                    <div class="pm_blog_item"><!-- Item 1 -->
-                        <div class="pm_blog_item_wrapper">
-                            <div class="pm_blog_featured_image_wrapper">
+                @foreach($entries as $TwitchVideo)
+                    <div class="main_data_item"><!-- Item 1 -->
+                        <div class="main_data_item_wrapper">
+                            <div class="main_data_featured_image_wrapper">
 
                                 <div class="post-short-intro {{ $TwitchVideo['channel']['display_name'] == 'expansiveworlds' ? 'featured-video' : '' }}" >
                                     <div class="mini-info-block">
                                         <span class="info-time">
-                                            <i class="pm_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
+                                            <i class="main_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
                                         </span>
 
-                                        <div class="pm_blog_item_title">
+                                        <div class="main_data_item_title">
                                             {{ $TwitchVideo['channel']['display_name'] }}
                                         </div>
                                     </div>
-                                    <div class="pm_post_likes_wrapper">
-                                        <a id="twitch-new" class="pm_potrfolio_watch" style="cursor:pointer;"
+                                    <div class="main_post_likes_wrapper">
+                                        <a id="twitch-new" class="main_portfolio_watch" style="cursor:pointer;"
                                            data-toggle="modal" data-target="#myModal"
                                            data-video="http://player.twitch.tv/?autoplay=false&channel={{ $TwitchVideo['channel']['display_name'] }}">
                                         </a>
@@ -56,7 +56,7 @@
                                 </div>
                                 <img src="{{ $TwitchVideo['preview']['large'] }}" alt="" style="float:left;">
                                 <div class="clearfix"></div>
-                                <div class="pm_blog_item_desc">{{ str_limit($TwitchVideo['channel']['status'], $limit= 37, $end="...") }}</div>
+                                <div class="main_data_item_desc">{{ str_limit($TwitchVideo['channel']['status'], $limit= 37, $end="...") }}</div>
                             </div>
 
                         </div>
@@ -69,46 +69,21 @@
     <div style="padding-top: 80px;"></div>
 @endsection
 
-@if($EmptyVideo)
-    @section('bottom-footer-info')
-        <div class="pm_slide_title_wrapper pm_simple_title">
-            Šiuo metu niekas nestreamina
+@section('bottom-footer-info')
+    <div class="main_slide_title_wrapper main_simple_title title-main">
+        <div class="simple-title">
+            Twitch video: {{ $count_total }}
         </div>
-    @endsection
-@else
-    @section('bottom-footer-info')
-        <div class="pm_slide_title_wrapper pm_simple_title">
-            Twitch transliacijos: {{ count($VisibleVideos) + count($HiddenVideos) }}
-        </div>
-    @endsection
-@endif
+    </div>
 
-@section('bottom-footer-left-menu')
-    <ul class="nav navbar-nav short-menu">
-        @if(!$EmptyVideo)
-            @if(count($HiddenVideos) >= 1)
-                <li>
-                    <a class="pm_load_more" href="javascript:void(0)" aria-label="Daugiau įrašų">
-                        <i class="pm_load_more_back fa fa-history fa-lg"></i>
-                    </a>
-                </li>
-            @endif
-        @endif
-    </ul>
+    <div class="main_slide_title_wrapper main_simple_title pagination-main">
+        <div class="simple-pagination">
+            {{ $entries->links() }}
+        </div>
+    </div>
 @endsection
 
 @section('script')
-
-    {{--Kad pridetu history list--}}
-    @include('components._video-list')
-
-    {{--Kad veiktu MAIN list--}}
-    <script type="text/javascript" src="{{  url('js\template.js') }}"></script>
-
-    <script type="text/javascript" src="{{  url('js\load-post.js') }}"></script>
-
-    {{--Laiko konvertavimas--}}
-    @include('components._time')
 
     <script type="text/javascript">
         $(document).on('click', '#twitch-new', function () {
@@ -117,7 +92,7 @@
             video = '<iframe class="embed-responsive-item main-video" src="' + linkas + '" height="auto" width="100%" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>';
 
             setTimeout( function(){
-            $('.main-video').replaceWith(video);
+                $('.main-video').replaceWith(video);
             }, 500);
         });
         $(document).on('click', '#close-module', function () {
@@ -126,4 +101,7 @@
         });
 
     </script>
+
+    {{--Scroll title/pagination--}}
+    @include('components._title_pagination')
 @endsection

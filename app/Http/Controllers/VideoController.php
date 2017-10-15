@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classes\TwitchVideo;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class VideoController extends Controller
 {
@@ -15,21 +17,23 @@ class VideoController extends Controller
     public function index()
     {
         $TwitchVideos = new TwitchVideo();
-        $TwitchVideos = $TwitchVideos->getTwitchVideos();
-        $EmptyVideo = true;
+        $Data = $TwitchVideos->getTwitchVideos();
 
+        $Streams = $Data['streams'];
+        $count_total = count($Streams);
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $col = new Collection($Streams);
+        $perPage = 8;
+        $currentPageSearchResults = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $entries = new LengthAwarePaginator($currentPageSearchResults, count($col), $perPage, '', ['path'=>url('video/')]);
+
+        $EmptyVideo = true;
         if(!empty($TwitchVideos)) {
-            $VisibleVideos = array_slice($TwitchVideos['streams'],0, 4);
-            $HiddenVideos = array_slice($TwitchVideos['streams'],4);
             $EmptyVideo = false;
         }
-//        dd($HiddenVideos);
-        /* Perskiriu per puse */
-        //$halved = array_chunk($TwitchVideos['streams'], ceil(count($TwitchVideos['streams'])/2));
-        //$VisibleVideos = $halved[0];
-        //$HiddenVideos = $halved[1];
 
-        return view('video.index', compact('VisibleVideos', 'HiddenVideos', 'EmptyVideo'));
+        return view('video.index', compact('entries', 'EmptyVideo', 'count_total'));
     }
 
     /**

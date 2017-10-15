@@ -5,13 +5,13 @@
     <link href="{{  url('js\table\bootstrap-table.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
-@section('body_class', 'pm_dark_type single-post background-info2')
+@section('body_class', ' single-post background-info2')
 
 @section('content')
-    <div class="pm_wrapper pm_container">
+    <div class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-12">
-                <div id="app" class="pm_content_standard">
+                <div id="app" class="main_content_standard">
                     <div class="row">
                         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
                             <div class="panel-body">
@@ -173,14 +173,14 @@
         @endif
         <li>
             <a href="{{ route('permissions.index') }}" aria-label="Atšaukti leidimo kūrimą">
-                <i class="pm_likes_icon fa fa-reply"></i>
+                <i class="main_likes_icon fa fa-reply"></i>
             </a>
         </li>
     </ul>
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
         Naujo leidimo kūrimas
     </div>
 @endsection

@@ -31,22 +31,12 @@ class BlogController extends Controller
             }
             // Jeigu neturi jokiu irasu ir leidimo kurti postus, tai eiti i profili
             return redirect()->route('profile');
-
-        } elseif($count <= 2) {
-            $posts_number = $count;
-        }else {
-            $posts_number = 2;
         }
 
         // Isvedu pirmus postus pagal data
-        $posts = Post::orderBy('id', 'desc')->where('published', '1')->take($posts_number)->get();
+        $posts = Post::orderBy('id', 'desc')->where('published', '1')->paginate(2);
 
-        // Skipinu pirmus postus pagal data ir imu likusius
-        $skip = $posts_number;
-        $limit = $count - $skip; // the limit
-        $old_posts = Post::orderBy('id', 'desc')->skip($skip)->take($limit)->where('published', '1')->get();
-
-        return view('blog.index', compact('posts', 'old_posts', 'count'));
+        return view('blog.index', compact('posts', 'count'));
     }
 
     public function getSingle ($slug) {

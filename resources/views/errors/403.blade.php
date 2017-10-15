@@ -1,13 +1,13 @@
 @extends('layouts.main')
 @section('title', '| Puslapis nerastas')
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_visible background-info2')
+@section('body_class', ' single-post main_overflow_visible background-info2')
 
 @section('content')
-    <div class="pm_wrapper pm_container" style="padding-top: 200px;">
+    <div class="main_wrapper main_container" style="padding-top: 200px;">
         <div class="row">
             <div class="col-lg-12">
-                <div class="pm_content_standard">
+                <div class="main_content_standard">
                     <div class="row">
                         <div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
                             <div class="control-margin">

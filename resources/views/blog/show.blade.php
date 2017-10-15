@@ -5,7 +5,7 @@
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
-@section('body_class', 'pm_dark_type single-post pm_overflow_hidden')
+@section('body_class', ' single-post main_overflow_hidden')
 
 @section('body_style', 'background: url("../img/posts/' . htmlspecialchars($post->image_blured) . '") no-repeat center center fixed;
 -webkit-background-size: cover;
@@ -27,12 +27,12 @@ width: 100%;')
         </svg>
     </div>
 
-    <div {{--id="post-page{{ $post->id }}"--}} class="pm_wrapper pm_container">
+    <div {{--id="post-page{{ $post->id }}"--}} class="main_wrapper main_container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <div class="pm_content_standard">
+                        <div class="main_content_standard">
                             <div class="post-body">
 
                                 <div class="post-short-info">
@@ -41,7 +41,7 @@ width: 100%;')
                                         @include('components._posticon')
                                     </a>
                                     <span class="info-time">
-                                        <i class="pm_load_more_back fa fa-clock-o fa-lg"></i>
+                                        <i class="main_load_more_back fa fa-clock-o fa-lg"></i>
                                         {{ date('Y-m-d H:i', strtotime($post->created_at)) }}
                                     </span>
 
@@ -51,7 +51,7 @@ width: 100%;')
                                 <div class="main-text">
                                     {!! $post->body !!}
                                 </div>
-                                <div class="pm_post_meta_standard">
+                                <div class="main_data_meta_standard">
                                     <span><i id="tag-zyma" class="icon fa fa-tags fa-lg" style="margin-left: 6px;"></i></span>
                                     @foreach($post->tags as $tag)
                                         {{ $loop->first ? '' : '&nbsp;' }}
@@ -68,21 +68,21 @@ width: 100%;')
 
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                        <div class="pm_post_comments_standard pm_simple_layout hidden">
-                            <div class="pm_comments_wrapper">
+                        <div class="main_post_comments_standard main_simple_layout hidden">
+                            <div class="main_comments_wrapper">
                                 <div id="results-wrapper">
                                     <div id="pagination-wrapper">
                                         {{ $links }}
                                     </div>
                                     <div class="clearfix"></div>
-                                    <ul class="pm_comments_list">
+                                    <ul class="main_comments_list">
                                         @foreach($comments as $comment)
                                             {{-- Tikrinu ar useris egzistuoja --}}
                                             @if($comment->user !== NULL and $comment->user->status == 1 )
                                                 <li class="comment">
-                                                    <div class="pm_comment_container">
-                                                        <div class="pm_comment_wrapper">
-                                                            <div class="pm_comment_avatar">
+                                                    <div class="main_comment_container">
+                                                        <div class="main_comment_wrapper">
+                                                            <div class="main_comment_avatar">
                                                                 <img class="avatar"
                                                                      src=
                                                                      "
@@ -95,15 +95,15 @@ width: 100%;')
                                                                      alt="">
                                                             </div>
 
-                                                            <div class="pm_comment_info">
-                                                        <span class="pm_comment_author">
+                                                            <div class="main_comment_info">
+                                                        <span class="main_comment_author">
                                                                 @if($comment->user->hasRole('superadministrator'))
                                                                 <span style="color: #84a970;">{{ $comment->user->name }}</span>
                                                             @else
                                                                 {{ $comment->user->name }}
                                                             @endif
                                                         </span>
-                                                                <span class="pm_comment_date">{{ date('Y-m-d H:i', strtotime($comment->updated_at)) }}</span>
+                                                                <span class="main_comment_date">{{ date('Y-m-d H:i', strtotime($comment->updated_at)) }}</span>
 
                                                                 {{-- LEISTI REDAGUOTI KOMENTARA, JEIGU: --}}
                                                                 {{--Useriui priklauso komentaras ir nepraejo 5 min--}}
@@ -139,7 +139,7 @@ width: 100%;')
                                                         </span>
                                                                 @endif
                                                             </div>
-                                                            <div class="pm_comment_text">
+                                                            <div class="main_comment_text">
                                                                 <p>{{ $comment->comment }}</p>
                                                             </div>
                                                         </div>
@@ -155,15 +155,15 @@ width: 100%;')
                                     <div class="clearfix"></div>
                                 </div>
 
-                            </div><!-- pm_comments_wrapper -->
+                            </div><!-- main_comments_wrapper -->
 
                             @if(Auth::check() and Auth::user()->hasPermission('create-comments'))
                                 <div class="comment-respond">
                                     <form id="main-form" data-parsley-validate
                                           action="{{ route('comments.store', $post->id) }}" method="POST"
                                           class="comment-form">
-                                        <div class="pm_comment_input_wrapper">
-                                        <textarea class="pm_comment_respond_field form-control" name="comment"
+                                        <div class="main_comment_input_wrapper">
+                                        <textarea class="main_comment_respond_field form-control" name="comment"
                                                   rows="1" cols="45" required
                                                   minlength="5" maxlength="2000">{{ old('comment') }}</textarea>
                                         </div>
@@ -171,7 +171,7 @@ width: 100%;')
                                     </form>
                                 </div>
                             @endif
-                            @if(Auth::check() and Auth::user()->hasRole('lurker'))
+                            @if(!Auth::check() or Auth::user()->hasRole('lurker'))
                                 <div class="info-perziura" style="text-align: center;">
                                     <a href="{{ route('profile') }}">Norėdami komentuoti privalote prisijungti prie STEAM (Profilio puslapyje)</a>
                                 </div>
@@ -249,7 +249,7 @@ width: 100%;')
 @endsection
 
 @section('bottom-footer-info')
-    <div class="pm_slide_title_wrapper pm_simple_title">
+    <div class="main_slide_title_wrapper main_simple_title">
         {{ $post->title }}
     </div>
 @endsection
@@ -276,7 +276,7 @@ width: 100%;')
     {{--Mobilaus uzslepimas nereikalingu mygtuku--}}
     <script>
         $(".slide-info-block").click(function () {
-            $(".pm_simple_title").slideToggle("slow", function () {
+            $(".main_simple_title").slideToggle("slow", function () {
                 $(".nav-slit a, .show-image, .comment-post").slideToggle("slow", function () {
 
                 });
