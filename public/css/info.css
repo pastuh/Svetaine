@@ -110,7 +110,7 @@
 }
 
 .block__features-text {
-    background: rgba(0, 0, 0, 0.4);
+    background: hsla(0,0%,9%,.75);
     padding: 10px;
     border-radius: 4px;
     color: #e7e0dd;

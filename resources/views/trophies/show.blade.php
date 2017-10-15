@@ -59,6 +59,9 @@
                                             {!! $animal->body !!}
                                         </div>
 
+                                    </div>
+
+                                    <div class="main_content_standard">
 
                                         <div class="row">
                                             {!! $animal->body_2 !!}
