@@ -72,6 +72,7 @@ class AnimalController extends Controller
             'lt_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
             'body_2' => 'required|min:10',
+            'bg_position' => 'required|numeric|digits_between:0,100',
             'main_image' => 'required|image',
             'info_image' => 'required|image',
             'status_check' => 'sometimes'
@@ -85,6 +86,7 @@ class AnimalController extends Controller
         $animal->slug = str_slug($request->title, "-");
         $animal->body = Purifier::clean($request->body);
         $animal->body_2 = Purifier::clean($request->body_2);
+        $animal->bg_position = $request->bg_position;
 
         //save main_image
         if ($request->hasFile('main_image')) {
@@ -182,6 +184,7 @@ class AnimalController extends Controller
                 'lt_title' => 'required|min:2|max:90',
                 'body' => 'required|min:10',
                 'body_2' => 'required|min:10',
+                'bg_position' => 'required|numeric|digits_between:0,100',
                 'main_image' => 'sometimes|image',
                 'info_image' => 'sometimes|image',
                 'status_check' => 'sometimes',
@@ -193,6 +196,7 @@ class AnimalController extends Controller
             $animal->slug = str_slug($request->title, "-");
             $animal->body = Purifier::clean($request->body);
             $animal->body_2 = Purifier::clean($request->body_2);
+            $animal->bg_position = $request->bg_position;
 
             //save main_image
             if ($request->hasFile('main_image')) {

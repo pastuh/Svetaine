@@ -8,7 +8,7 @@ class Map extends Model
 {
 
     protected $fillable = [
-        'title', 'slug', 'sub_title', 'body', 'body_2', 'published', 'main_image', 'info_image', 'status'
+        'title', 'slug', 'sub_title', 'body', 'body_2', 'published', 'bg_position', 'main_image', 'info_image', 'status'
     ];
 
     public function animals() {

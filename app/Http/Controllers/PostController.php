@@ -79,6 +79,7 @@ class PostController extends Controller
             'title' => 'required|min:16|max:90',
             'slug' => 'required|alpha_dash|min:12|max:90|unique:posts,slug',
             'body' => 'required|min:50',
+            'bg_position' => 'required|numeric|digits_between:0,100',
             'category_id' => 'required|integer|not_in:0',
             'tags' => 'required|array',
             'featured_image' => 'required|image',
@@ -91,6 +92,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->body = Purifier::clean($request->body, 'youtube');
+        $post->bg_position = $request->bg_position;
         $post->category_id = $request->category_id;
         $post->user_id = Auth::user()->id;
 
@@ -209,6 +211,7 @@ class PostController extends Controller
                 'title' => 'required|min:16|max:90',
                 'slug' => 'required|alpha_dash|min:12|max:90|unique:posts,slug,' . $id,
                 'body' => 'required|min:50',
+                'bg_position' => 'required|numeric|digits_between:0,100',
                 'category_id' => 'required|integer|not_in:0',
                 'tags' => 'required|array',
                 'featured_image' => 'sometimes|image',
@@ -219,6 +222,7 @@ class PostController extends Controller
             $post->title = $request->input('title');
             $post->slug = $request->input('slug');
             $post->body = Purifier::clean($request->body, 'youtube');
+            $post->bg_position = $request->bg_position;
             $post->category_id = $request->input('category_id');
 
             if ($request->hasFile('featured_image')) {

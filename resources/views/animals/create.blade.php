@@ -95,7 +95,7 @@
 
                                     <div class="row" v-model="visible" v-show="visible == 'info'">
 
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-4">
                                             <div class="{{ $errors->has('main_image') ? ' has-error' : '' }}">
                                                 <input type="file" class="filestyle" name="main_image" id="image_src"
                                                        data-badge="false" data-iconName="fa fa-upload"
@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-5 col-lg-offset-2">
+                                        <div class="col-lg-4 col-lg-offset-1">
                                             <div class="{{ $errors->has('info_image') ? ' has-error' : '' }}">
                                                 <input type="file" class="filestyle" name="info_image" id="image_src2"
                                                        data-badge="false" data-iconName="fa fa-upload"
@@ -121,6 +121,26 @@
                                                     </span>
                                                 @endif
                                             </div>
+                                        </div>
+
+                                        <div class="col-lg-2 col-lg-offset-1">
+
+                                            <div class="{{ $errors->has('bg_position') ? ' has-error' : '' }}">
+                                                <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="basic-addon1"><span
+                                                            class="fa fa-bold" style="width: 30px;"></span></span>
+                                                    <input type="text" class="form-control" name="bg_position"
+                                                           placeholder="BG pozicija"
+                                                           value="{{ old('bg_position') }}" required
+                                                           minlength="1" maxlength="5">
+                                                </div>
+                                                @if ($errors->has('bg_position'))
+                                                    <span class="help-block">
+                                                {{ $errors->first('bg_position') }}
+                                                </span>
+                                                @endif
+                                            </div>
+
                                         </div>
 
 

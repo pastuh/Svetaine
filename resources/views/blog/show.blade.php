@@ -215,7 +215,7 @@ width: 100%;')
 
     <ul class="nav navbar-nav short-menu">
         <li>
-            <a href="javascript:void(0)" class="slide-info-block">
+            <a href="javascript:void(0)" class="short-info">
                 <i class="fa fa-info-circle fa-lg"></i>
             </a>
         </li>
@@ -273,15 +273,15 @@ width: 100%;')
             $('.fluidbox').fluidbox();
         });
     </script>
-    {{--Mobilaus uzslepimas nereikalingu mygtuku--}}
-    <script>
-        $(".slide-info-block").click(function () {
-            $(".main_simple_title").slideToggle("slow", function () {
-                $(".nav-slit a, .show-image, .comment-post").slideToggle("slow", function () {
 
-                });
+    <script>
+    {{--Mobilaus uzslepimas nereikalingu mygtuku--}}
+    $(".short-info").click(function () {
+        $(".main_simple_title").slideToggle("slow", function () {
+            $(".nav-slit a, .show-image, .comment-post").slideToggle("slow", function () {
+
             });
         });
+    });
     </script>
-
 @endsection

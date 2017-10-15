@@ -400,7 +400,7 @@ textarea.main_comment_respond_field {
   height: 100%;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background-position: center !important;
+  //background-position: center !important;
   list-style: none;
   opacity: 0;
   transition: all .8s;
@@ -414,7 +414,7 @@ textarea.main_comment_respond_field {
   height: 100%;
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background-position: center !important;
+  //background-position: center !important;
   list-style: none;
 }
 
@@ -469,7 +469,7 @@ input[type=file] {
 }
 
 .input-group-lg {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
@@ -1562,28 +1562,16 @@ only screen and (min-resolution: 144dpi) {
   }
 }
 
-/* Trophies BG fix*/
-.trophy-title-block {
+/* Intro title fix*/
+.intro-title-block {
   position: absolute;
   bottom: 100px;
   text-shadow: rgba(0, 0, 0, 0.75) 0px 2px 3px;
 }
 
-@media only screen and (max-width: 768px) {
-  .fallow-deer {
-    background-position: 70% center !important;
-    -webkit-transition: all 0.7s ease;
-    -moz-transition: all 0.7s ease;
-    -o-transition: all 0.7s ease;
-    transition: all 0.7s ease;
-  }
-}
-@media only screen and (min-width: 769px) {
-  .fallow-deer {
-    background-position: top center !important;
-    -webkit-transition: all 0.7s ease;
-    -moz-transition: all 0.7s ease;
-    -o-transition: all 0.7s ease;
-    transition: all 0.7s ease;
-  }
+.fp-bg {
+  -webkit-transition: all 0.7s ease;
+  -moz-transition: all 0.7s ease;
+  -o-transition: all 0.7s ease;
+  transition: all 0.7s ease;
 }

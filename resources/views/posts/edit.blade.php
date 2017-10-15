@@ -106,7 +106,7 @@ background-size: cover;')
                                         </div>
 
                                     <div class="row" style="margin-top: 10px">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-8">
                                             <div class="{{ $errors->has('tags') ? ' has-error' : '' }}">
                                                 <div class="input-group">
                                                     <span class="input-group-addon" id="basic-addon1"><span
@@ -128,6 +128,24 @@ background-size: cover;')
                                                     <span class="help-block">
                                                     {{ $errors->first('tags') }}
                                                     </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3 col-lg-offset-1">
+                                            <div class="{{ $errors->has('bg_position') ? ' has-error' : '' }}">
+                                                <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="basic-addon1"><span
+                                                            class="fa fa-bold" style="width: 30px;"></span></span>
+                                                    <input type="text" class="form-control" name="bg_position"
+                                                           placeholder="BG pozicija"
+                                                           value="{{ old('bg_position', $post->bg_position) }}" required
+                                                           minlength="1" maxlength="5">
+                                                </div>
+                                                @if ($errors->has('bg_position'))
+                                                    <span class="help-block">
+                                                {{ $errors->first('bg_position') }}
+                                                </span>
                                                 @endif
                                             </div>
                                         </div>

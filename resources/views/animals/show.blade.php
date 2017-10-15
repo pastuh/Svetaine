@@ -23,10 +23,10 @@
 
     <div id="fullpage" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="section " id="section0">
-            <div class="fp-bg"
+            <div class="fp-bg preview-img" data-position="{{ $animal->bg_position }}"
                  style='background-image: url("{{ url('../img/animals/' . $animal->main_image) }}"); background-size: cover; background-position: top center; height: 100%'>
                 <div class="block__inner">
-                    <div class="container trophy-title-block">
+                    <div class="container intro-title-block">
                         <div class="row">
                             <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                                 <div class="block__header">
@@ -58,6 +58,9 @@
                                             {!! $animal->body !!}
                                         </div>
 
+                                    </div>
+
+                                    <div class="main_content_standard">
 
                                         <div class="row">
                                             {!! $animal->body_2 !!}

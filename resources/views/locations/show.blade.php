@@ -24,17 +24,16 @@
 
     <div id="fullpage" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="section " id="section0">
-            <div class="fp-bg"
-                 style='background-image: url("{{ url('../img/maps/' . $map->main_image) }}"); background-size: cover; background-position: top center; height: 100%'>
+            <div class="fp-bg preview-img" data-position="{{ $map->bg_position }}"
+                 style='background-image: url("{{ url('../img/maps/' . $map->main_image) }}"); background-size: cover; background-position: top center; height: 100%;'>
                 <div class="block__inner">
-                    <div class="container trophy-title-block" style="display:none;">
+                    <div class="container intro-title-block" style="display:none;">
                         <div class="row">
                             <div class="fix-padding col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                                 <div class="block__header">
                                     <h2 class="heading heading--medium">
                                         {{ $map->title }}</h2>
                                 </div>
-
                                 <div class="block__location">
                                     <p class="block__location-text">{{ $map->sub_title }}</p>
                                 </div>
@@ -101,7 +100,7 @@
     </nav>
 
     <ul class="nav navbar-nav short-menu">
-        <li class="trophy-info">
+        <li class="short-info">
             <a href="javascript:void(0)" aria-label="Trofėjaus intro">
                 <i class="fa fa-info-circle fa-lg">
                 </i>
@@ -137,14 +136,13 @@
     <script type="text/javascript" src="{{  url('js\post-addon.js') }}"></script>
 
     <script>
+    {{--Mobilaus uzslepimas nereikalingu mygtuku--}}
+    $(".short-info").click(function () {
+        $(".intro-title-block").slideToggle("slow", function () {
+            $(".nav-slit a, .main_simple_title").slideToggle("slow", function () {
 
-        $(".trophy-info").click(function () {
-            $(".trophy-title-block:not(.still)").slideToggle("slow", function () {
-                $(".main_simple_title").slideToggle("slow", function () {
-
-                });
             });
         });
-
+    });
     </script>
 @endsection

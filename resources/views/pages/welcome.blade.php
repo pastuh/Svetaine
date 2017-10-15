@@ -25,8 +25,8 @@
             <ul class="main_gallery effect_fade">
 
                 @foreach ($posts as $key => $post)
-                    <li style="background: url( {{ url('../img/posts/' . $post->image) }} );" data-number="{{ $key+1 }}" data-link="blog/{{$post->slug}}"
-                        data-title="{{ $post->title }}">
+                    <li class="preview-img" style="background: url( {{ url('../img/posts/' . $post->image) }} );" data-number="{{ $key+1 }}" data-link="blog/{{$post->slug}}"
+                        data-title="{{ $post->title }}" data-position="{{ $post->bg_position }}">
                     </li>
                 @endforeach
             </ul>

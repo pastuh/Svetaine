@@ -74,6 +74,7 @@ class MapController extends Controller
             'sub_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
             'body_2' => 'required|min:10',
+            'bg_position' => 'required|numeric|digits_between:0,100',
             'animals' => 'required|array',
             'main_image' => 'required|image',
             'info_image' => 'required|image',
@@ -88,6 +89,7 @@ class MapController extends Controller
         $map->slug = str_slug($request->title, "-");
         $map->body = Purifier::clean($request->body);
         $map->body_2 = Purifier::clean($request->body_2);
+        $map->bg_position = $request->bg_position;
 
         //save main_image
         if ($request->hasFile('main_image')) {
@@ -189,6 +191,7 @@ class MapController extends Controller
             'sub_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
             'body_2' => 'required|min:10',
+            'bg_position' => 'required|numeric|digits_between:0,100',
             'animals' => 'required|array',
             'main_image' => 'sometimes|image',
             'info_image' => 'sometimes|image',
@@ -201,6 +204,7 @@ class MapController extends Controller
         $map->slug = str_slug($request->title, "-");
         $map->body = Purifier::clean($request->body);
         $map->body_2 = Purifier::clean($request->body_2);
+        $map->bg_position = $request->bg_position;
 
         //save main_image
         if ($request->hasFile('main_image')) {

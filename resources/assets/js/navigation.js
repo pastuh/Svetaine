@@ -13,9 +13,26 @@
 /*Scrollbar rodymas po loado, skirta veikimui su Loading screen*/
 setTimeout("jQuery('html').addClass('show-scrollbar');", 1000);
 
+/*Background pozicija jeigu mobile*/
+changebg();
+
+function changebg() {
+
+    $.each($('.preview-img'), function (index, item) {
+        if ($(window).width() < 768) {
+            position = $(item).attr("data-position");
+            $(item).css('background-position-x', position + '%');
+        } else {
+            $(item).css('background-position-x', "50%");
+        }
+    });
+}
+
+$(window).on('resize', function(){
+    changebg();
+});
+
 /*Navigacijos ir mygtuku valdymas*/
-
-
 $(document).ready(function () {
 
     /* Paspaudus Hamburget uzslepia virsutiniu mini meniu */
