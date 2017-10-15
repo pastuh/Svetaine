@@ -215,7 +215,7 @@ width: 100%;')
 
     <ul class="nav navbar-nav short-menu">
         <li>
-            <a href="javascript:void(0)" class="short-info">
+            <a href="javascript:void(0)" class="short-info slide-info-block">
                 <i class="fa fa-info-circle fa-lg"></i>
             </a>
         </li>
