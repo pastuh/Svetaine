@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Animal;
+use App\Map;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,9 @@ class AnimalController extends Controller
         }
 
         $tags = Tag::all();
-        return view('animals.index', compact('animals', 'tags'));
+        $maps = Map::all();
+
+        return view('animals.index', compact('animals', 'tags', 'maps'));
     }
 
     /**

@@ -32,7 +32,19 @@
                             </div>
                             <img src="{{ asset('img/animals/' . $animal->main_image) }}" alt="" style="float:left;">
                             <div class="clearfix"></div>
-                            <div class="main_data_item_desc">&nbsp;</div>
+                            @if(count($animal->map) > 0)
+                                <div class="main_data_item_desc main_data_item_map">
+                                    @foreach($animal->map as $map)
+                                        <span class="data_map_small"><img src="{{ asset('img/maps/' . $map->slug . '.png') }}" /></span>
+                                    @endforeach
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            @else
+                                <div class="main_data_item_desc">
+                                    <span class="main_data_item_map_empty">&nbsp</span>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div><!-- blog_item -->
