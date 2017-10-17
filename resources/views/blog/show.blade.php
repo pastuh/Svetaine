@@ -214,12 +214,12 @@ width: 100%;')
     </nav>
 
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Peržiūra">
             <a href="javascript:void(0)" class="short-info slide-info-block">
                 <i class="fa fa-info-circle fa-lg"></i>
             </a>
         </li>
-        <li>
+        <li rel="tooltip" title="Komentarai">
             <a href="javascript:void(0)" class="comment-post">
                 <i class="fa fa-comments fa-lg">
                     <span class="menu-simple-text">{{ $comments->count() }}</span>
@@ -227,7 +227,7 @@ width: 100%;')
             </a>
         </li>
         @if(Auth::check() and Auth::user()->hasPermission('create-comments'))
-            <li class="hidden" id="submit-button">
+            <li rel="tooltip" title="Rašyti" class="hidden" id="submit-button">
                 <a href="javascript:void(0)">
                     <i class="fa fa-check-circle fa-lg"></i>
                 </a>
@@ -238,7 +238,7 @@ width: 100%;')
                 </a>
             </li>
         @endif
-        <li class="show-image">
+        <li rel="tooltip" title="Paveiksliukas" class="show-image">
             <a class="fluidbox fluid-image-fix" href="{{ asset('/img/posts/' . $post->image) }}">
                 <img src="{{ asset('/img/posts/' . $post->image) }}" class="fluid-image-fix" height="0px" width="1px"
                      style="margin-right: -6px;"/>

@@ -189,12 +189,12 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Išsaugoti">
             <a href="javascript:void(0)" id="submit-button" aria-label="Išsaugoti įrašą">
                 <i class="fa fa-check-circle fa-lg"></i>
             </a>
         </li>
-        <li>
+        <li rel="tooltip" title="Atšaukti">
             <a href="{{ route('animals.index') }}" aria-label="Atšaukti gyvūno redagavimą">
                 <i class="main_likes_icon fa fa-reply"></i>
             </a>

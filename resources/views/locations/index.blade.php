@@ -22,6 +22,9 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                    <div class="main_data_item_title">
+                                        {{ str_limit($map->title, $limit= 42, $end="...") }}
+                                    </div>
                                 </div>
                                 <div class="main_post_likes_wrapper">
                                     <a class="main_data_read_more" href="location/{{ $map->slug }}"></a>
@@ -29,7 +32,7 @@
                             </div>
                             <img src="{{ asset('img/maps/' . $map->main_image) }}" alt="" style="float:left;">
                             <div class="clearfix"></div>
-                            <div class="main_data_item_desc">{{ str_limit($map->title, $limit= 42, $end="...") }}</div>
+                            <div class="main_data_item_desc">&nbsp;</div>
                         </div>
                     </div>
                 </div><!-- blog_item -->
@@ -45,17 +48,10 @@
     <ul class="nav navbar-nav short-menu">
 
         {{--Galimybe perziureti sukurtus Trofejus--}}
-        @if(Auth::check() and Auth::user()->hasPermission('read-maps') and count($maps) > 0)
-            <li>
+        @if(Auth::check() and Auth::user()->hasPermission('read-maps'))
+            <li rel="tooltip" title="Vietovių peržiūra">
                 <a href="{{ route('maps.index') }}" aria-label="Peržiūrėti sukurtas vietoves">
                     <i class="fa fa-folder-open fa-lg"></i>
-                </a>
-            </li>
-        {{--Rodoma sukurti posta, jeigu useris turi teises--}}
-        @elseif(Auth::check() and Auth::user()->hasPermission('create-maps'))
-            <li>
-                <a href="{{ route('maps.create') }}" aria-label="Aprašyti vietovę">
-                    <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>
         @endif

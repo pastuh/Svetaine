@@ -72,12 +72,12 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Siūsti">
             <a href="javascript:void(0)" id="submit-button" aria-label="Siūsti pranešimą">
                 <i class="fa fa-check-circle fa-lg"></i>
             </a>
         </li>
-        <li>
+        <li rel="tooltip" title="Atšaukti">
             <a href="{{ route('profile') }}" aria-label="Atšaukti">
                 <i class="fa fa-reply fa-lg"></i>
             </a>

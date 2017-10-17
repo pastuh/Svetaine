@@ -57,7 +57,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check() and Auth::user()->hasPermission('update-acl'))
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Redaguoti">
                 <a href="{{ route('permissions.edit', $permission->id ) }}" aria-label="Redaguoti leidimą">
                     <i class="fa fa-pencil-square fa-lg">
                     </i>

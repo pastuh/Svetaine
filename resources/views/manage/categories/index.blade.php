@@ -93,7 +93,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check() and Auth::user()->hasPermission('create-categories'))
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Išsaugoti">
                 <a href="javascript:void(0)" id="submit-button" aria-label="Išsaugoti kategoriją">
                     <i class="fa fa-check-circle fa-lg"></i>
                 </a>

@@ -48,24 +48,17 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         {{--Rodomas mygtukas i STEAM postus--}}
-        <li>
+        <li rel="tooltip" title="Naujienos">
             <a href="{{ route('news.index') }}" aria-label="Steam naujienos">
                 <i class="fa fa-steam-square fa-lg"></i>
             </a>
         </li>
 
         {{--Rodomas mygtukas POSTS jeigu turi Savo postu ir gali perziureti postus--}}
-        @if(Auth::check() and Auth::user()->posts->count() > 0 and Auth::user()->hasPermission('read-posts'))
-            <li>
+        @if(Auth::check() and Auth::user()->hasPermission('read-posts'))
+            <li rel="tooltip" title="Įrašų peržiūra">
                 <a href="{{ route('posts.index') }}" aria-label="Peržiūrėti sukurtus įrašus">
                     <i class="fa fa-folder-open fa-lg"></i>
-                </a>
-            </li>
-            {{--Rodoma sukurti posta, jeigu useris turi teises, bet neturi postu--}}
-        @elseif(Auth::check() and Auth::user()->hasRole('author|editor|administrator|superadministrator'))
-            <li>
-                <a href="{{ route('posts.create') }}" aria-label="Sukurti įrašą">
-                    <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>
         @endif

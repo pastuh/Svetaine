@@ -62,7 +62,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check() and Auth::user()->hasPermission('update-categories'))
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Redaguoti">
                 <a href="{{ route('categories.edit', $category->slug ) }}" aria-label="Redaguoti kategoriją">
                     <i class="fa fa-pencil-square fa-lg">
                     </i>

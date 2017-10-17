@@ -217,12 +217,12 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
-            <a href="javascript:void(0)" id="submit-button" aria-label="Išsaugoti įrašą">
+        <li rel="tooltip" title="Išsaugoti">
+            <a href="javascript:void(0)" id="submit-button" aria-label="Išsaugoti vietovę">
                 <i class="fa fa-check-circle fa-lg"></i>
             </a>
         </li>
-        <li>
+        <li rel="tooltip" title="Atšaukti">
             <a href="{{ route('maps.index') }}" aria-label="Atšaukti vietovės redagavimą">
                 <i class="main_likes_icon fa fa-reply"></i>
             </a>

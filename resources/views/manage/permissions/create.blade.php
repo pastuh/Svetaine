@@ -165,13 +165,13 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         @if(Auth::check() and Auth::user()->hasPermission('create-acl'))
-            <li>
+            <li rel="tooltip" title="Išsaugoti">
                 <a href="javascript:void(0)" id="submit-button" aria-label="Išsaugoti įrašą">
                     <i class="fa fa-check-circle fa-lg"></i>
                 </a>
             </li>
         @endif
-        <li>
+        <li rel="tooltip" title="Atšaukti">
             <a href="{{ route('permissions.index') }}" aria-label="Atšaukti leidimo kūrimą">
                 <i class="main_likes_icon fa fa-reply"></i>
             </a>

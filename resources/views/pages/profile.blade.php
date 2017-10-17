@@ -109,12 +109,12 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Valdymas">
             <a href="{{ route('manage.dashboard') }}">
                 <i class="fa fa-tachometer fa-lg"></i>
             </a>
         </li>
-        <li>
+        <li rel="tooltip" title="Kontaktai">
             <a href="{{ route('contact.index') }}" style="color:#4f4f4f;">
                 <i class="fa fa-envelope fa-lg"></i>
             </a>

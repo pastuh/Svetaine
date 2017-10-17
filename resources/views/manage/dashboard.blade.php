@@ -26,7 +26,7 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Atsijungti">
             <a href="{{ route('logout') }}"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                aria-label="Atsijungti">
@@ -36,10 +36,10 @@
                 <i class="fa fa-power-off fa-lg"></i>
             </a>
         </li>
-        <li>
-            <a href="{{ route('profile') }}" aria-label="Atšaukti redagavimą">
+        <li rel="tooltip" title="Profilis">
+            <a href="{{ route('profile') }}" aria-label="Profilis">
                 <div class="main_add_like_button like-post">
-                    <i class="main_likes_icon fa fa-reply fa-lg"></i>
+                    <i class="main_likes_icon fa fa-user-circle-o fa-lg"></i>
                 </div>
             </a>
         </li>

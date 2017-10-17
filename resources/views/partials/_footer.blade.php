@@ -19,11 +19,11 @@
         <div class="navbar-collapse collapse">
             <!-- Desines mygtukai -->
             <ul class="nav navbar-nav navbar-right wide-nav">
-                <li><a href="/blog"><i class="icon fa fa-list-ul fa-lg"></i></a></li>
-                <li><a href="/video"><i class="icon fa fa-desktop fa-lg"></i></a></li>
-                <li><a href="/trophies"><i class="icon fa fa-paw fa-lg"></i></a></li>
-                <li><a href="/locations"><i class="icon fa fa-tree fa-lg"></i></a></li>
-                <li><a href="{{ Auth::check() ? '/profile' : '/login' }}"><i class="icon fa fa-user-circle-o fa-lg"></i></a></li>
+                <li rel="tooltip" title="Įrašai"><a href="/blog"><i class="icon fa fa-list-ul fa-lg"></i></a></li>
+                <li rel="tooltip" title="Video"><a href="/video"><i class="icon fa fa-desktop fa-lg"></i></a></li>
+                <li rel="tooltip" title="Trofėjai"><a href="/trophies"><i class="icon fa fa-paw fa-lg"></i></a></li>
+                <li rel="tooltip" title="Vietovės"><a href="/locations"><i class="icon fa fa-tree fa-lg"></i></a></li>
+                <li rel="tooltip" title="Profilis"><a href="{{ Auth::check() ? '/profile' : '/login' }}"><i class="icon fa fa-user-circle-o fa-lg"></i></a></li>
             </ul>
         </div><!-- nav-collapse -->
     </div><!-- container -->

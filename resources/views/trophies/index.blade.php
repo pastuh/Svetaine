@@ -21,6 +21,9 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                    <div class="main_data_item_title">
+                                        {{ str_limit($animal->title, $limit= 42, $end="...") }}
+                                    </div>
                                 </div>
                                 <div class="main_post_likes_wrapper">
                                     <a class="main_data_read_more" href="trophy/{{ $animal->slug }}"></a>
@@ -28,7 +31,19 @@
                             </div>
                             <img src="{{ asset('img/animals/' . $animal->main_image) }}" alt="" style="float:left;">
                             <div class="clearfix"></div>
-                            <div class="main_data_item_desc">{{ str_limit($animal->title, $limit= 42, $end="...") }}</div>
+                                @if(count($animal->map) > 0)
+                                <div class="main_data_item_desc main_data_item_map">
+                                    @foreach($animal->map as $map)
+                                        <span class="data_map_small"><img src="{{ asset('img/maps/' . $map->slug . '.png') }}" /></span>
+                                    @endforeach
+                                        <div class="clearfix"></div>
+                                </div>
+
+                                @else
+                                <div class="main_data_item_desc">
+                                    <span class="main_data_item_map_empty">&nbsp</span>
+                                </div>
+                                @endif
                         </div>
                     </div>
                 </div><!-- blog_item -->
@@ -43,17 +58,10 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         {{--Galimybe perziureti sukurtus Trofejus--}}
-        @if(Auth::check() and Auth::user()->hasPermission('read-animals') and count($animals) > 0)
-            <li>
+        @if(Auth::check() and Auth::user()->hasPermission('read-animals'))
+            <li rel="tooltip" title="Trofėjų peržiūra">
                 <a href="{{ route('animals.index') }}" aria-label="Peržiūrėti sukurtus trofėjus">
                     <i class="fa fa-folder-open fa-lg"></i>
-                </a>
-            </li>
-        {{--Rodoma sukurti posta, jeigu useris turi teises--}}
-        @elseif(Auth::check() and Auth::user()->hasPermission('create-animals'))
-            <li>
-                <a href="{{ route('animals.create') }}" aria-label="Aprašyti trofėjų">
-                    <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>
         @endif

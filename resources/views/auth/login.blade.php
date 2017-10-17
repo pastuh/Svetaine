@@ -71,12 +71,12 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Jungtis">
             <a href="javascript:void(0)" id="submit-button" aria-label="Jungtis prie svetainės">
                 <i class="fa fa-check-circle fa-lg"></i>
             </a>
         </li>
-        <li>
+        <li rel="tooltip" title="Registracija">
             <a href="{{ url('register') }}" aria-label="Registruotis">
                 <i class="fa fa-user-plus fa-lg"></i>
             </a>

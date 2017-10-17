@@ -51,7 +51,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check() and Auth::user()->hasPermission('create-users'))
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Sukurti">
                 <a href="{{ route('users.create') }}" aria-label="Sukurti vartotoją">
                     <i class="fa fa-plus-square fa-lg"></i>
                 </a>

@@ -49,7 +49,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check() and Auth::user()->hasPermission('create-acl'))
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Sukurti">
                 <a href="{{ route('roles.create') }}" aria-label="Sukurti rolę">
                     <i class="fa fa-plus-square fa-lg"></i>
                 </a>

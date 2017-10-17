@@ -196,8 +196,13 @@ textarea.main_comment_respond_field {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
 .main_data_item .steam_desc {
   min-height: 240px;
+}
+
+.main_data_item_map {
+  padding: 5px !important;
 }
 
 .mini-info-block {
@@ -364,7 +369,7 @@ textarea.main_comment_respond_field {
   display: inline-block;
   float: left;
   margin-left: 10px;
-  background: rgba(23, 23, 23, 0.75) url(/img/navigation/next_button_back.png) no-repeat center;
+  background: rgba(23, 23, 23, 0.75) url(/img/navigation/read_more.png) no-repeat center;
   transition: all .3s;
   -webkit-transition: all .3s;
 }
@@ -424,6 +429,15 @@ textarea.main_comment_respond_field {
 
 .main_likes_icon {
   color: #fff;
+}
+
+.title_color {
+  color: #fff;
+}
+.data_map_small img {
+  max-width: 55px;
+  padding-right: 5px;
+  display: Inline-block !important;
 }
 
 #slug {
@@ -1322,7 +1336,7 @@ li.comment:nth-child(odd) {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (min-resolution: 144dpi) {
   .page-template-page-blog-ajax .main_data_item .main_post_likes_wrapper .main_data_read_more {
-    background: #191514 url(/img/navigation/retina/next_button_back.png) no-repeat center;
+    background: #191514 url(/img/navigation/retina/read_more_small.png) no-repeat center;
     background-size: 22px 22px;
   }
   .page-template-page-blog-ajax .main_data_item .main_post_likes_wrapper .main_portfolio_watch {

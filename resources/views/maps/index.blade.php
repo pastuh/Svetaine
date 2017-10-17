@@ -22,6 +22,9 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                    <div class="main_data_item_title">
+                                        {{ str_limit($map->title, $limit= 42, $end="...") }}
+                                    </div>
                                 </div>
                                 <div class="main_post_likes_wrapper">
                                     <a class="main_data_read_more" href="maps/{{ $map->id }}"></a>
@@ -29,7 +32,7 @@
                             </div>
                             <img src="{{ asset('img/maps/' . $map->main_image) }}" alt="" style="float:left;">
                             <div class="clearfix"></div>
-                            <div class="main_data_item_desc">{{ str_limit($map->title, $limit= 42, $end="...") }}</div>
+                            <div class="main_data_item_desc">&nbsp;</div>
                         </div>
                     </div>
                 </div><!-- blog_item -->
@@ -46,8 +49,8 @@
 
         {{--Rodoma sukurti posta, jeigu useris turi teises--}}
         @if(Auth::check() and Auth::user()->hasPermission('create-maps'))
-            <li>
-                <a href="{{ route('maps.create') }}" aria-label="Aprašyti vietovę">
+            <li rel="tooltip" title="Sukurti">
+                <a href="{{ route('maps.create') }}" aria-label="Sukurti vietovę">
                     <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>

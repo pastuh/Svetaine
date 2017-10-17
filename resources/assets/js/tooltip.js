@@ -72,5 +72,11 @@ $( function()
 
         target.bind( 'mouseleave', remove_tooltip );
         tooltip.bind( 'click', remove_tooltip );
+
+        target.bind('click', function() {
+            setTimeout( function(){
+                remove_tooltip()
+                }, 1000);
+        });
     });
 });

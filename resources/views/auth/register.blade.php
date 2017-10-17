@@ -85,13 +85,13 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Registruotis">
             <a href="javascript:void(0)" id="submit-button" aria-label="Registruotis prie svetainės">
                 <i class="fa fa-check-circle fa-lg"></i>
             </a>
         </li>
-        <li>
-            <a href="{{ url('login') }}" aria-label="Prisijungti">
+        <li rel="tooltip" title="Prisijungimas">
+            <a href="{{ url('login') }}" aria-label="Prisijungti prie svetainės">
                 <i class="fa fa-sign-in fa-lg"></i>
             </a>
         </li>

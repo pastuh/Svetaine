@@ -111,20 +111,20 @@
     <ul class="nav navbar-nav short-menu">
         {{--Jeigu postas nepatvirtintas, Autorius gali redaguoti posta--}}
         @if($animal->published == 0)
-            <li>
+            <li rel="tooltip" title="Nepaskelbta">
                 <a href="{{ route('animals.show', $animal->id, 'Nepaskelbta') }}" aria-label="Nepaskelbtas įrašas">
                     <i class="fa fa-eye-slash fa-lg">
                     </i>
                 </a>
             </li>
-            <li>
+            <li rel="tooltip" title="Redaguoti">
                 <a href="{{ route('animals.edit', $animal->id, 'Edit') }}" aria-label="Redaguoti įrašą">
                     <i class="fa fa-pencil-square fa-lg">
                     </i>
                 </a>
             </li>
         @else
-            <li>
+            <li rel="tooltip" title="Peržiūra">
                 <a href="{{ route('trophy.slug', $animal->slug, 'Preview') }}" aria-label="Peržiūrėti įrašą">
                     <i class="fa fa-eye fa-lg">
                     </i>
@@ -133,7 +133,7 @@
         @endif
         {{--Jeigu postas patvirtintas, Useris su spec Role gali redaguoti posta--}}
         @if($animal->published == 1 and Auth::check() and Auth::user()->hasRole('editor|administrator|superadministrator'))
-            <li>
+            <li rel="tooltip" title="Redaguoti">
                 <a href="{{ route('animals.edit', $animal->id, 'Edit') }}" aria-label="Redaguoti įrašą">
                     <i class="fa fa-pencil-square fa-lg">
                     </i>
@@ -141,12 +141,12 @@
             </li>
         @endif
         @if(Auth::check() and Auth::user()->hasPermission('delete-animals'))
-            <li class="post-delete-confirm">
+            <li rel="tooltip" title="Naikinti" class="post-delete-confirm">
                 <a href="javascript:void(0)" aria-label="Naikinti įrašą">
                     <i class="fa fa-trash-o fa-lg"></i>
                 </a>
             </li>
-            <li id="submit-button" class="hidden">
+            <li rel="tooltip" title="Patvirinti naikinimą" id="submit-button" class="hidden">
                 <a href="javascript:void(0)" aria-label="Patvirtinu įrašo naikinimą" style="color: #a21515;">
                     <i class="fa fa-trash-o fa-lg"></i>
                 </a>

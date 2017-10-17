@@ -29,22 +29,22 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Gryzti i Dashboard -->
                 @if(Auth::check())
-                    <li><a href="{{ route('manage.dashboard') }}"><i class="icon fa fa-tachometer fa-lg"></i></a></li>
+                    <li rel="tooltip" title="Valdymas"><a href="{{ route('manage.dashboard') }}"><i class="icon fa fa-tachometer fa-lg"></i></a></li>
                 @endif
                 <!-- Useriu kurimas -->
                 @if(Auth::check() and Auth::user()->hasRole('superadministrator|administrator'))
-                    <li><a href="{{ route('users.index') }}"><i class="icon fa fa-users fa-lg"></i></a></li>
+                    <li rel="tooltip" title="Nariai"><a href="{{ route('users.index') }}"><i class="icon fa fa-users fa-lg"></i></a></li>
                 @endif
                 <!-- Teisiu ir leidimu kurimas -->
                 @if(Auth::check() and Auth::user()->hasRole('superadministrator'))
-                    <li><a href="{{ route('permissions.index') }}"><i class="icon fa fa-id-card-o fa-lg"></i></a></li>
+                    <li rel="tooltip" title="Leidimai"><a href="{{ route('permissions.index') }}"><i class="icon fa fa-id-card-o fa-lg"></i></a></li>
                 @endif
                 <!-- Kategoriju ir tagu perziura + kurimas -->
-                <li><a href="{{ route('categories.index') }}"><i class="icon fa fa-sitemap fa-lg"></i></a></li>
-                <li><a href="{{ route('tags.index') }}"><i class="icon fa fa-tags fa-lg"></i></a></li>
+                <li rel="tooltip" title="Kategorijos"><a href="{{ route('categories.index') }}"><i class="icon fa fa-sitemap fa-lg"></i></a></li>
+                <li rel="tooltip" title="Žymos"><a href="{{ route('tags.index') }}"><i class="icon fa fa-tags fa-lg"></i></a></li>
                 <!-- Prisijungti jeigu neprisijunges -->
                 @if(!Auth::check())
-                    <li><a href="{{ route('login') }}"><i class="icon fa fa-user-circle-o fa-lg"></i></a></li>
+                    <li rel="tooltip" title="Prisijungti"><a href="{{ route('login') }}"><i class="icon fa fa-user-circle-o fa-lg"></i></a></li>
                 @endif
 
             </ul>

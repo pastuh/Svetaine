@@ -191,7 +191,7 @@ class MapController extends Controller
             'sub_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
             'body_2' => 'required|min:10',
-            'bg_position' => 'required|numeric|digits_between:0,100',
+            'bg_position' => 'sometimes|numeric|digits_between:0,100',
             'animals' => 'required|array',
             'main_image' => 'sometimes|image',
             'info_image' => 'sometimes|image',

@@ -114,7 +114,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check() and Auth::user()->hasPermission('update-users'))
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Redaguoti">
                 <a href="{{ route('users.edit', $user->id ) }}" aria-label="Redaguoti vartotoją">
                     <i class="fa fa-pencil-square fa-lg">
                     </i>

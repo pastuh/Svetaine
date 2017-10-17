@@ -45,7 +45,7 @@
 
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
-        <li>
+        <li rel="tooltip" title="Sukurti">
             <a href="{{ route('posts.create') }}" aria-label="Sukurti įrašą">
                 <i class="fa fa-plus-square fa-lg"></i>
             </a>

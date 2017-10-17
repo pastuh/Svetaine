@@ -100,7 +100,7 @@
     </nav>
 
     <ul class="nav navbar-nav short-menu">
-        <li class="short-info">
+        <li rel="tooltip" title="Peržiūra" class="short-info">
             <a href="javascript:void(0)" aria-label="Trofėjaus intro">
                 <i class="fa fa-info-circle fa-lg">
                 </i>

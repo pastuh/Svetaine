@@ -70,7 +70,7 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         @if(Auth::check() and Auth::user()->hasPermission('update-tags'))
-            <li>
+            <li rel="tooltip" title="Redaguoti">
                 <a href="{{ route('tags.edit', $tag->slug ) }}" aria-label="Redaguoti žymą">
                     <i class="fa fa-pencil-square fa-lg">
                     </i>
@@ -78,12 +78,12 @@
             </li>
         @endif
         @if(Auth::check() and Auth::user()->hasPermission('delete-tags'))
-            <li class="post-delete-confirm">
+            <li rel="tooltip" title="Naikinti" class="post-delete-confirm">
                 <a href="javascript:void(0)" aria-label="Naikinti žymą">
                     <i class="fa fa-trash-o fa-lg"></i>
                 </a>
             </li>
-            <li id="submit-button" class="hidden">
+            <li rel="tooltip" title="Patvirtinti naikinimą" id="submit-button" class="hidden">
                 <a href="javascript:void(0)" aria-label="Patvirtinu žymos naikinimą" style="color: #a21515;">
                     <i class="fa fa-trash-o fa-lg"></i>
                 </a>

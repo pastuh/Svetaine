@@ -22,6 +22,9 @@
                                         @endif
                                     @endif
                                 @endforeach
+                                    <div class="main_data_item_title">
+                                        {{ str_limit($animal->title, $limit= 42, $end="...") }}
+                                    </div>
                                 </div>
                                 <div class="main_post_likes_wrapper">
                                     <a class="main_data_read_more" href="animals/{{ $animal->id }}"></a>
@@ -29,7 +32,7 @@
                             </div>
                             <img src="{{ asset('img/animals/' . $animal->main_image) }}" alt="" style="float:left;">
                             <div class="clearfix"></div>
-                            <div class="main_data_item_desc">{{ str_limit($animal->title, $limit= 42, $end="...") }}</div>
+                            <div class="main_data_item_desc">&nbsp;</div>
                         </div>
                     </div>
                 </div><!-- blog_item -->
@@ -45,8 +48,8 @@
     <ul class="nav navbar-nav short-menu">
         {{--Rodoma sukurti posta, jeigu useris turi teises--}}
         @if(Auth::check() and Auth::user()->hasPermission('create-animals'))
-            <li>
-                <a href="{{ route('animals.create') }}" aria-label="Aprašyti trofėjų">
+            <li rel="tooltip" title="Sukurti">
+                <a href="{{ route('animals.create') }}" aria-label="Sukurti trofėjų">
                     <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>

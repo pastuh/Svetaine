@@ -25,7 +25,7 @@
 @section('bottom-footer-left-menu')
     @if(Auth::check())
         <ul class="nav navbar-nav short-menu">
-            <li>
+            <li rel="tooltip" title="Kontaktai">
                 <a href="{{ route('contact.index') }}" aria-label="Kontaktai" style="color:#4f4f4f;">
                     <i class="fa fa-envelope fa-lg"></i>
                 </a>

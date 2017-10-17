@@ -49,13 +49,13 @@
 @section('bottom-footer-left-menu')
     <ul class="nav navbar-nav short-menu">
         @if(Auth::check() and Auth::user()->hasPermission('create-acl'))
-            <li>
+            <li rel="tooltip" title="Sukurti">
                 <a href="{{ route('permissions.create') }}" aria-label="Sukurti leidimą">
                     <i class="fa fa-plus-square fa-lg"></i>
                 </a>
             </li>
         @endif
-        <li>
+        <li rel="tooltip" title="Rolės">
             <a href="{{ route('roles.index') }}" aria-label="Rolės">
                 <i class="fa fa-id-badge fa-lg"></i>
             </a>
