@@ -103,6 +103,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-offset-4">
+                                    <div class="input-group input-group-lg">
+                                                <span class="input-group-addon" id="basic-addon1"><span
+                                                            class="fa fa-steam-square"
+                                                            style="width: 30px;"></span></span>
+                                        <input type="text" class="form-control info-perziura"
+                                               value="{{ $user->steamid }}"
+                                               readonly>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div><!-- row -->
                 </div><!-- standard -->
