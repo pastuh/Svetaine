@@ -1,7 +1,7 @@
 @extends('layouts.manage')
 @section('title', "| " . htmlspecialchars($tag->name) . " žymos redagavimas")
 
-@section('body_class', ' single-post background-info2')
+@section('body_class', 'background-info2')
 
 @section('content')
     <div class="main_wrapper main_container">

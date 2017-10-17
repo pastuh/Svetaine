@@ -5,7 +5,7 @@
     <link href="{{  url('js\table\bootstrap-table.css') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
-@section('body_class', ' single-post main_overflow_visible background-info2')
+@section('body_class', 'main_overflow_visible background-info2')
 
 @section('content')
     <div class="main_wrapper main_container">
