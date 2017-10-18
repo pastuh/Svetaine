@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+    @include('partials._analyticstracking')
     @include('partials._head')
 </head>
 
 {{-- Galimybe priskirti stiliu kiekvienam puslapiui atskirai --}}
 <body class="@yield('body_class')" style="@yield('body_style')">
-@include('partials._analyticstracking')
 
 <div class="preloader_active">
     <div class="main_preloader_load_back">
