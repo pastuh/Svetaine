@@ -48,7 +48,7 @@
                                     <div class="main_post_likes_wrapper">
                                         <a id="twitch-new" class="main_portfolio_watch" style="cursor:pointer;"
                                            data-toggle="modal" data-target="#myModal"
-                                           data-video="http://player.twitch.tv/?autoplay=false&channel={{ $TwitchVideo['channel']['display_name'] }}">
+                                           data-video="https://player.twitch.tv/?autoplay=false&channel={{ $TwitchVideo['channel']['display_name'] }}">
                                         </a>
                                         <div class="clear"></div>
                                     </div>
