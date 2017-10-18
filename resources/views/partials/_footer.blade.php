@@ -1,5 +1,6 @@
 <!-- Apatinis puslapio meniu -->
 <div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    @include('cookieConsent::index')
     {{--Kaires mygtukai--}}
     @yield('bottom-footer-left-menu')
     <div class="container footer-width">

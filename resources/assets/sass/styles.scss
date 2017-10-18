@@ -16,6 +16,21 @@ textarea {
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
+.js-cookie-consent.cookie-consent {
+  background: rgba(23, 23, 23, 0.75);
+  padding-left: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin-bottom: 5px;
+  border-left: 5px solid orange;
+}
+button.js-cookie-consent-agree.cookie-consent__agree {
+  background: #fff;
+  border: 0;
+  border-radius: 5px;
+  color: #333;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
