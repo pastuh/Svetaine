@@ -1,6 +1,6 @@
 $( function()
 {
-    var targets = $( '[data-rel~=tooltip]' ),
+    var targets = $( '[rel~=tooltip]' ),
         target  = false,
         tooltip = false,
         title   = false;
@@ -8,13 +8,13 @@ $( function()
     targets.bind( 'mouseenter', function()
     {
         target  = $( this );
-        tip     = target.attr( 'data-title' );
+        tip     = target.attr( 'title' );
         tooltip = $( '<div id="tooltip"></div>' );
 
         if( !tip || tip == '' )
             return false;
 
-        target.removeAttr( 'data-title' );
+        target.removeAttr( 'title' );
         tooltip.css( 'opacity', 0 )
             .html( tip )
             .appendTo( 'body' );
@@ -67,7 +67,7 @@ $( function()
                 $( this ).remove();
             });
 
-            target.attr( 'data-title', tip );
+            target.attr( 'title', tip );
         };
 
         target.bind( 'mouseleave', remove_tooltip );
