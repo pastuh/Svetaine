@@ -31,6 +31,6 @@
     '<span class="form-control info-perziura info-perziura2">---</span>'+
     '</div>'+
 '<div class="input-group input-group-lg">'+
-    '<span class="input-group-addon" data-rel="tooltip" data-title="Medžioklei naudojama"><span class="fa fa-crosshairs" style="width: 30px;">&nbsp;</span></span>'+
+    '<span class="input-group-addon" data-rel="tooltip" data-title="Medžioklei naudojama"><span class="fa fa-binoculars" style="width: 30px;">&nbsp;</span></span>'+
     '<span class="form-control info-perziura info-perziura2">---</span>'+
     '</div>

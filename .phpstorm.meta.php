@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2017-10-20.
+    * Generated on 2017-10-21.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -52,6 +52,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -195,6 +199,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -338,6 +346,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -481,6 +493,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -624,6 +640,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -767,6 +787,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -910,6 +934,10 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
+<<<<<<< HEAD
+=======
+        'purifier' => \Mews\Purifier\Purifier::class,
+>>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
