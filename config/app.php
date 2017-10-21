@@ -173,7 +173,7 @@ return [
         /*
          * Package Service Providers...
          */
-        LukeTowers\Purifier\PurifierServiceProvider::class,
+        Mews\Purifier\PurifierServiceProvider::class,
         Syntax\SteamApi\SteamApiServiceProvider::class,
         /*
          * Application Service Providers...
@@ -236,7 +236,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Laratrust' => Laratrust\LaratrustFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-        'Purifier' => LukeTowers\Purifier\Purifier::class,
+        'Purifier' => Mews\Purifier\Facades\Purifier::class,
 
     ],
 
