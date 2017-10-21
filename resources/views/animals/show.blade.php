@@ -56,7 +56,7 @@
                                         <div class="block__features-text features-text-fix">
                                             {!! $animal->body !!}
                                         </div>
-                                        <div class="block__features-text features-text-fix" style="margin-top: 10px;">
+                                        <div class="features-text-fix" style="margin-top: 10px;">
                                             {!! $animal->body_2 !!}
                                         </div>
 
