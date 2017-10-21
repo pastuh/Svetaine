@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use LukeTowers\Purifier\Facades\Purifier;
+use Mews\Purifier\Facades\Purifier;
 
 class PostController extends Controller
 {

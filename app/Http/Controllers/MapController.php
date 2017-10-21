@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use LukeTowers\Purifier\Facades\Purifier;
+use Mews\Purifier\Facades\Purifier;
 
 class MapController extends Controller
 {
