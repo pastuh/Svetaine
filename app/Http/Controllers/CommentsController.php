@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Mews\Purifier\Facades\Purifier;
+use LukeTowers\Purifier\Facades\Purifier;
 
 class CommentsController extends Controller
 {

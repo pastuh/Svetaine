@@ -1,1 +1,13 @@
-$(".main_load_more").click(function(){var a=$(".main_data_item.added"),d=$(".main_data_item.added:not(.checked):first");return a.addClass("checked"),$("html, body").stop(!0).animate({scrollTop:d.offset().top-200},1e3),!1});
+$(".main_load_more").click(function () {
+
+    var $allElements = $(".main_data_item.added");
+    var $firstElement = $('.main_data_item.added:not(.checked):first');
+
+    $allElements.addClass('checked');
+
+    $('html, body').stop(true).animate({
+        scrollTop: $firstElement.offset().top - 200
+    }, 1000);
+
+    return false;
+});

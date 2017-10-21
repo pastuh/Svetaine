@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Mews\Purifier\Facades\Purifier;
+use LukeTowers\Purifier\Facades\Purifier;
+
 
 class AnimalController extends Controller
 {

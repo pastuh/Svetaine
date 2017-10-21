@@ -50,26 +50,33 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
-                                <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                                <div class="col-lg-6 col-lg-offset-3">
                                     <div class="main_content_standard">
 
-                                        {{--Body startas--}}
                                         <div class="block__features-text features-text-fix">
                                             {!! $animal->body !!}
                                         </div>
-
-                                    </div>
-
-                                    <div class="main_content_standard">
-
-                                        <div class="row">
+                                        <div class="block__features-text features-text-fix" style="margin-top: 10px;">
                                             {!! $animal->body_2 !!}
                                         </div>
 
-                                        <div class="fix-space-bottom"></div>
+                                    </div>
+                                    {{--<div class="fix-space-bottom"></div>--}}
+                                </div> <!-- col -->
+
+                                <div class="col-lg-1 col-lg-offset-1">
+                                    <div class="main_content_standard" style="text-align: center;">
+                                        <div class="block__features-text features-text-fix">
+                                            Medžiojama:
+                                        </div>
+
+                                        @foreach($animal->map as $map)
+                                            <span class="animal-reserve"><img alt="{{ $map->title }}" src="{{ asset('img/maps/' . $map->slug . '.png') }}" /></span>
+                                        @endforeach
 
                                     </div>
                                 </div> <!-- col -->
+
                             </div><!-- info row -->
                         </div><!-- col12 -->
                     </div><!-- row -->

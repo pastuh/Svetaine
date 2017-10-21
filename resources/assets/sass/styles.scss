@@ -757,6 +757,9 @@ nav.nav-slit {
   background: rgba(23, 23, 23, 0.75) !important;
   color: #fff!important;
 }
+.info-perziura2 {
+  padding-top: 15px;
+}
 
 .text-left {
   text-align: left !important;
@@ -1341,6 +1344,10 @@ li.comment:nth-child(odd) {
   color: #e7e0dd;
 }
 
+.animal-reserve {
+  max-width: 120px;
+}
+
 /* Specialus @Media */
 @media all and (-webkit-min-device-pixel-ratio: 0) {
   .main_post_comments_standard .comment-respond textarea {
@@ -1408,6 +1415,9 @@ only screen and (min-resolution: 144dpi) {
 }
 
 @media only screen and (max-width: 769px) {
+  .animal-reserve {
+    max-width: 100px;
+  }
   .steam-image {
     padding-right: 0;
   }

@@ -116,6 +116,13 @@
     color: #e7e0dd;
     margin-top: 2px;
 }
+.block__features-short-text {
+    background: hsla(0,0%,9%,.75);
+    padding: 10px;
+    border-radius: 4px;
+    color: #e7e0dd;
+    margin-top: 2px;
+}
 .block__features {
     width: 100%;
     margin-right: 20px;

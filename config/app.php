@@ -173,8 +173,7 @@ return [
         /*
          * Package Service Providers...
          */
-
-        Mews\Purifier\PurifierServiceProvider::class,
+        LukeTowers\Purifier\PurifierServiceProvider::class,
         Syntax\SteamApi\SteamApiServiceProvider::class,
         /*
          * Application Service Providers...
@@ -234,10 +233,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Date' => Jenssegers\Date\Date::class,
-        'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Laratrust' => Laratrust\LaratrustFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+        'Purifier' => LukeTowers\Purifier\Purifier::class,
 
     ],
 

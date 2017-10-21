@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.4 on 2017-10-18.
+ * Generated for Laravel 5.5.18 on 2017-10-20.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -5226,7 +5226,7 @@ namespace Illuminate\Support\Facades {
          * @param string $key
          * @param array $replace
          * @param string $locale
-         * @return string 
+         * @return string|array|null 
          * @static 
          */ 
         public static function getFromJson($key, $replace = array(), $locale = null)
@@ -6652,6 +6652,43 @@ namespace Illuminate\Support\Facades {
         {
             \Illuminate\Routing\Redirector::setSession($session);
         }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+            \Illuminate\Routing\Redirector::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @return void 
+         * @static 
+         */ 
+        public static function mixin($mixin)
+        {
+            \Illuminate\Routing\Redirector::mixin($mixin);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+            return \Illuminate\Routing\Redirector::hasMacro($name);
+        }
          
     }
 
@@ -6747,7 +6784,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the current encoded path info for the request.
+         * Get the current decoded path info for the request.
          *
          * @return string 
          * @static 
@@ -8907,6 +8944,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Register a new Fallback route with the router.
+         *
+         * @param \Closure|array|string|null $action
+         * @return \Illuminate\Routing\Route 
+         * @static 
+         */ 
+        public static function fallback($action)
+        {
+            return \Illuminate\Routing\Router::fallback($action);
+        }
+        
+        /**
          * Create a redirect from one URI to another.
          *
          * @param string $uri
@@ -9022,6 +9071,18 @@ namespace Illuminate\Support\Facades {
         public static function getLastGroupPrefix()
         {
             return \Illuminate\Routing\Router::getLastGroupPrefix();
+        }
+        
+        /**
+         * Return the response returned by the given route.
+         *
+         * @param string $name
+         * @return mixed 
+         * @static 
+         */ 
+        public static function respondWithRoute($name)
+        {
+            return \Illuminate\Routing\Router::respondWithRoute($name);
         }
         
         /**
@@ -12204,7 +12265,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the current encoded path info for the request.
+         * Get the current decoded path info for the request.
          *
          * @return string 
          * @static 
@@ -14062,38 +14123,6 @@ namespace Jenssegers\Date {
  
 }
 
-namespace Mews\Purifier\Facades { 
-
-    class Purifier {
-        
-        /**
-         * 
-         *
-         * @param $dirty
-         * @param null $config
-         * @return mixed 
-         * @static 
-         */ 
-        public static function clean($dirty, $config = null)
-        {
-            return \Mews\Purifier\Purifier::clean($dirty, $config);
-        }
-        
-        /**
-         * Get HTMLPurifier instance.
-         *
-         * @return \HTMLPurifier 
-         * @static 
-         */ 
-        public static function getInstance()
-        {
-            return \Mews\Purifier\Purifier::getInstance();
-        }
-         
-    }
- 
-}
-
 namespace Intervention\Image\Facades { 
 
     class Image {
@@ -14156,7 +14185,97 @@ namespace Intervention\Image\Facades {
 
 namespace Laratrust { 
 
-    class Laratrust {
+    class LaratrustFacade {
+        
+        /**
+         * Checks if the current user has a role by its name.
+         *
+         * @param string $name Role name.
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasRole($role, $team = null, $requireAll = false)
+        {
+            return \Laratrust\Laratrust::hasRole($role, $team, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a permission by its name.
+         *
+         * @param string $permission Permission string.
+         * @return bool 
+         * @static 
+         */ 
+        public static function can($permission, $team = null, $requireAll = false)
+        {
+            return \Laratrust\Laratrust::can($permission, $team, $requireAll);
+        }
+        
+        /**
+         * Check if the current user has a role or permission by its name.
+         *
+         * @param array|string $roles The role(s) needed.
+         * @param array|string $permissions The permission(s) needed.
+         * @param array $options The Options.
+         * @return bool 
+         * @static 
+         */ 
+        public static function ability($roles, $permissions, $team = null, $options = array())
+        {
+            return \Laratrust\Laratrust::ability($roles, $permissions, $team, $options);
+        }
+        
+        /**
+         * Checks if the user owns the thing.
+         *
+         * @param Object $thing
+         * @param string $foreignKeyName
+         * @return boolean 
+         * @static 
+         */ 
+        public static function owns($thing, $foreignKeyName = null)
+        {
+            return \Laratrust\Laratrust::owns($thing, $foreignKeyName);
+        }
+        
+        /**
+         * Checks if the user has some role and if he owns the thing.
+         *
+         * @param string|array $role
+         * @param Object $thing
+         * @param array $options
+         * @return boolean 
+         * @static 
+         */ 
+        public static function hasRoleAndOwns($role, $thing, $options = array())
+        {
+            return \Laratrust\Laratrust::hasRoleAndOwns($role, $thing, $options);
+        }
+        
+        /**
+         * Checks if the user can do something and if he owns the thing.
+         *
+         * @param string|array $permission
+         * @param Object $thing
+         * @param array $options
+         * @return boolean 
+         * @static 
+         */ 
+        public static function canAndOwns($permission, $thing, $options = array())
+        {
+            return \Laratrust\Laratrust::canAndOwns($permission, $thing, $options);
+        }
+        
+        /**
+         * Get the currently authenticated user or null.
+         *
+         * @return \Illuminate\Auth\UserInterface|null 
+         * @static 
+         */ 
+        public static function user()
+        {
+            return \Laratrust\Laratrust::user();
+        }
          
     }
  
@@ -16386,11 +16505,9 @@ namespace  {
 
     class Date extends \Jenssegers\Date\Date {}
 
-    class Purifier extends \Mews\Purifier\Facades\Purifier {}
-
     class Image extends \Intervention\Image\Facades\Image {}
 
-    class Laratrust extends \Laratrust\Laratrust {}
+    class Laratrust extends \Laratrust\LaratrustFacade {}
 
     class Input extends \Illuminate\Support\Facades\Input {}
 
