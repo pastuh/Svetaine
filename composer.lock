@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "56afaceffc97c28b290af92d7349d743",
+    "content-hash": "dcfd5dde0fef2772306a784104ca3848",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -672,20 +672,23 @@
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.8.0",
+            "version": "v4.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "d0c392f77d2f2a3dcf7fcb79e2a1e2b8804e75b2"
+                "reference": "95e1bae3182efc0f3422896a3236e991049dac69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/d0c392f77d2f2a3dcf7fcb79e2a1e2b8804e75b2",
-                "reference": "d0c392f77d2f2a3dcf7fcb79e2a1e2b8804e75b2",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/95e1bae3182efc0f3422896a3236e991049dac69",
+                "reference": "95e1bae3182efc0f3422896a3236e991049dac69",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
+            },
+            "require-dev": {
+                "simpletest/simpletest": "^1.1"
             },
             "type": "library",
             "autoload": {
@@ -712,7 +715,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2016-07-16T12:58:58+00:00"
+            "time": "2017-06-03T02:28:16+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -1553,24 +1556,24 @@
             "time": "2017-08-06T17:41:04+00:00"
         },
         {
-            "name": "luketowers/purifier",
-            "version": "3.0.3",
+            "name": "mews/purifier",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/LukeTowers/Purifier.git",
-                "reference": "9ba11a9cae3ab4baea2afb8beeb2f94ad8c5c178"
+                "url": "https://github.com/mewebstudio/Purifier.git",
+                "reference": "85af9a2a932583b2c78a0ed762b46cb19399a0a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LukeTowers/Purifier/zipball/9ba11a9cae3ab4baea2afb8beeb2f94ad8c5c178",
-                "reference": "9ba11a9cae3ab4baea2afb8beeb2f94ad8c5c178",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/85af9a2a932583b2c78a0ed762b46cb19399a0a9",
+                "reference": "85af9a2a932583b2c78a0ed762b46cb19399a0a9",
                 "shasum": ""
             },
             "require": {
-                "ezyang/htmlpurifier": "4.8.*",
-                "illuminate/config": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
-                "illuminate/filesystem": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
-                "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*",
+                "ezyang/htmlpurifier": "4.9.*",
+                "illuminate/config": "5.*",
+                "illuminate/filesystem": "5.*",
+                "illuminate/support": "5.*",
                 "php": ">=5.5.9"
             },
             "require-dev": {
@@ -1584,9 +1587,19 @@
                 "laravel/lumen-framework": "To test the Lumen bindings"
             },
             "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mews\\Purifier\\PurifierServiceProvider"
+                    ],
+                    "aliases": {
+                        "Purifier": "Mews\\Purifier\\Facades\\Purifier"
+                    }
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "LukeTowers\\Purifier\\": "src/"
+                    "Mews\\Purifier\\": "src/"
                 },
                 "files": [
                     "src/helpers.php"
@@ -1601,17 +1614,11 @@
                     "name": "Muharrem ERİN",
                     "email": "me@mewebstudio.com",
                     "homepage": "https://github.com/mewebstudio",
-                    "role": "Original Author"
-                },
-                {
-                    "name": "Luke Towers",
-                    "email": "laravel.purifier@luketowers.cs",
-                    "homepage": "https://luketowers.ca/",
-                    "role": "Maintainer"
+                    "role": "Developer"
                 }
             ],
             "description": "Laravel 5 HtmlPurifier Package",
-            "homepage": "https://github.com/LukeTowers/Purifier",
+            "homepage": "https://github.com/mewebstudio/purifier",
             "keywords": [
                 "Purifier",
                 "htmlpurifier",
@@ -1621,7 +1628,7 @@
                 "security",
                 "xss"
             ],
-            "time": "2017-08-05T16:55:53+00:00"
+            "time": "2017-09-11T15:02:51+00:00"
         },
         {
             "name": "monolog/monolog",

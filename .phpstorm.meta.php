@@ -40,8 +40,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -52,10 +52,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -151,6 +147,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -187,8 +184,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -199,10 +196,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -298,6 +291,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -334,8 +328,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -346,10 +340,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -445,6 +435,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -481,8 +472,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -493,10 +484,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -592,6 +579,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -628,8 +616,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -640,10 +628,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -739,6 +723,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -775,8 +760,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -787,10 +772,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -886,6 +867,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
@@ -922,8 +904,8 @@ namespace PHPSTORM_META {
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'captcha' => \Anhskohbo\NoCaptcha\NoCaptcha::class,
-        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'image' => \Intervention\Image\ImageManager::class,
+        'steamauth' => \Invisnik\LaravelSteamAuth\SteamAuth::class,
         'laratrust' => \Laratrust\Laratrust::class,
         'command.laratrust.migration' => \Laratrust\MigrationCommand::class,
         'command.laratrust.role' => \Laratrust\MakeRoleCommand::class,
@@ -934,10 +916,6 @@ namespace PHPSTORM_META {
         'command.laratrust.setup-teams' => \Laratrust\SetupTeamsCommand::class,
         'command.laratrust.seeder' => \Laratrust\MakeSeederCommand::class,
         'command.laratrust.upgrade' => \Laratrust\UpgradeCommand::class,
-<<<<<<< HEAD
-=======
-        'purifier' => \Mews\Purifier\Purifier::class,
->>>>>>> testas
         'steam-api' => \Syntax\SteamApi\Client::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -1033,6 +1011,7 @@ namespace PHPSTORM_META {
         'auth.password' => \Illuminate\Auth\Passwords\PasswordBrokerManager::class,
         'auth.password.broker' => \Illuminate\Auth\Passwords\PasswordBroker::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
+        'purifier' => \Mews\Purifier\Purifier::class,
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
