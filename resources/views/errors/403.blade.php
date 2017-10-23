@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Puslapis nerastas')
+@section('description', '| Norimas puslapis nerastas.')
 
 @section('body_class', ' single-post main_overflow_visible background-info2')
 

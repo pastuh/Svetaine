@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('title', '| '. htmlspecialchars($animal->title))
+@section('keyword'), trofėjus, aprašymas, @foreach($animal->map as $tag){{ $loop->first ? '' : ', ' }}{{ $tag->title }}@endforeach
+@endsection
+@section('description', '| Gyvūnas: '. htmlspecialchars($animal->lt_title) . ' | ' . htmlspecialchars(strip_tags(str_limit($animal->body, $limit= 160))) )
 
 @section('header_class', 'fixed_header')
 

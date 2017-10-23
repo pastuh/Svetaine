@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Profilis')
+@section('description', '| Lietuvos virtualių medžiotojų nario puslapis. Svarbiausia informacija apie medžiotoją.')
 
 @section('stylesheet')
     <link href="{{  url('css\info.css') }}" rel="stylesheet" type="text/css" media="all">

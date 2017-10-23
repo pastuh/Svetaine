@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Visi įrašai')
+@section('description', '| Svarbiausi įrašai apie žaidimą. Naujienos, apžvalgos, patarimai. Puslapis skirtas tikriems žaidimo fanams.')
 
 @section('body_class', ' page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 

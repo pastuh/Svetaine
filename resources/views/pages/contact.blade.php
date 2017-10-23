@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Kontaktai')
+@section('description', '| Susiekite su svetainės administratoriumi. Problemos, patarimai, pastebėjimai visada laukiami.')
 
 @section('body_class', ' single-post main_overflow_visible background-info2')
 

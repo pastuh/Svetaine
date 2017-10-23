@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('title', '| '. htmlspecialchars($map->title))
+@section('keyword'), vietovė, aprašymas, misijos, outpost, @foreach($map->animals as $tag){{ $loop->first ? '' : ', ' }}{{ $tag->title }}@endforeach
+@endsection
+@section('description', '| Ištrauka: '. htmlspecialchars(strip_tags(str_limit($map->body, $limit= 160))) )
 
 @section('header_class', 'fixed_header')
 

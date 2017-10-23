@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Steam įrašai')
+@section('description', '| Svarbiausios STEAM naujienos tiesiogiai iš žaidimo kūrėjų. Skaityk, sužinok ir dalyvauk konkursuose. Įrašai anglų kalba.')
 
 @section('body_class', ' page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 

@@ -1,5 +1,8 @@
 @extends('layouts.main')
 @section('title', '| ' . htmlspecialchars($post->title) )
+@section('keyword'), įrašas, blog, @foreach($post->tags as $tag){{ $loop->first ? '' : ', ' }}{{ $tag->name }}@endforeach
+@endsection
+@section('description', '| Ištrauka: '. htmlspecialchars(strip_tags(str_limit($post->body, $limit= 160))) )
 
 @section('stylesheet')
     <link href="{{  url('css\parsley.css') }}" rel="stylesheet" type="text/css" media="all">

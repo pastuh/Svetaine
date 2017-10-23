@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Visi trofėjai')
+@section('description', '| Visi išsamiai aprašyti gyvūnai esantys žaidime. Svarbiausia informacija ir faktai tikriems žaidimo fanams.')
 
 @section('body_class', ' page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 

@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('description', '| Lietuvos virtualių medžiotojų svetainės puslapis. Svetainė skirta tikriems žaidėjams. Bendrauk, dalyvauk ir laimėk!')
 
 @section('body_class', ' main_fullscreen_page main_overflow_hidden')
 

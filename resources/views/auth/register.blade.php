@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Registracijos puslapis')
+@section('description', '| Įstok į Lietuvos virtualių medžiotojų klubą jau dabar!' )
 
 @section('body_class', ' single-post main_overflow_visible background-info2')
 

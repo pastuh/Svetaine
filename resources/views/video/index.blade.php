@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', '| Twitch video')
+@section('description', '| Tiesioginės Twitch video transliacijos tavo ekrane. Surask norimą streamerį be didelio vargo. ExpansiveWorlds streamas iškart paryškintas.')
 
 @section('body_class', ' page-template-page-blog-ajax blog_grid_title_page news_page background-info2')
 
