@@ -244,7 +244,7 @@ width: 100%;')
         <li rel="tooltip" title="Paveiksliukas" class="show-image">
             <a class="fluidbox fluid-image-fix" href="{{ asset('/img/posts/' . $post->image) }}">
                 <img src="{{ asset('/img/posts/' . $post->image) }}" class="fluid-image-fix" height="0px" width="1px"
-                     style="margin-right: -6px;"/>
+                     style="margin-right: -6px; position: absolute;"/>
                 <i class="fa fa-picture-o fa-lg"></i>
             </a>
         </li>

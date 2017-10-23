@@ -13,7 +13,7 @@ body {
 body,
 input,
 textarea {
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 .js-cookie-consent.cookie-consent {
@@ -292,7 +292,7 @@ textarea.main_comment_respond_field {
   height: 50px;
   border-radius: 4px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 54px;
   float: left;
   position: relative;
@@ -583,6 +583,7 @@ input[type=file] {
 
 .background-info2 {
   background: url(/img/default_bg.jpg) no-repeat center center fixed;
+  height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -717,7 +718,7 @@ input[type="radio"]:checked + label {
 
 .menu-simple-text {
   padding-left: 6px;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
 nav.nav-slit {

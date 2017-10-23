@@ -11,28 +11,30 @@
     myFunction();
 
     function myFunction() {
-        $(window).scroll(function () {
-            if ($(this).width() < 737) {
-                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                    $(".title-main").hide();
-                    $(".pagination-main").show();
-
-                } else {
-                    $(".pagination-main").hide();
-                    $(".title-main").show();
-                }
-            }
-
-            if ($(this).width() > 768) {
+        if ($(this).width() < 737) {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                $(".title-main").hide();
                 $(".pagination-main").show();
+
+            } else {
+                $(".pagination-main").hide();
                 $(".title-main").show();
             }
-        });
+        }
+
+        if ($(this).width() > 768) {
+            $(".pagination-main").show();
+            $(".title-main").show();
+        }
 
     }
 
     $(window).resize(function () {
         myFunction();
+    });
+    $(window).scroll(function () {
+        myFunction();
+        setTimeout("jQuery('.data_isotope').isotope();", 500);
     });
 
 </script>
