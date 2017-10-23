@@ -34,7 +34,6 @@
     });
     $(window).scroll(function () {
         myFunction();
-        setTimeout("jQuery('.data_isotope').isotope();", 500);
     });
 
 </script>
