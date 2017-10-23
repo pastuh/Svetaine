@@ -67,7 +67,7 @@
         </div><!-- blog_listing -->
         <div class="clear"></div>
     </div><!-- blog_listing_container -->
-    <div style="padding-top: 80px;"></div>
+    {{--<div style="padding-top: 80px;"></div>--}}
 @endsection
 
 @section('bottom-footer-info')
