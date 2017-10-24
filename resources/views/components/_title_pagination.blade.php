@@ -12,7 +12,7 @@
 
     function myFunction() {
         if ($(this).width() < 737) {
-            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
                 $(".title-main").hide();
                 $(".pagination-main").show();
 
