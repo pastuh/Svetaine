@@ -72,7 +72,7 @@
 @section('bottom-footer-info')
     <div class="main_slide_title_wrapper main_simple_title title-main">
         <div class="simple-title">
-            Aprašyti trofėjai: {{ count($animals) }}
+            Aprašyti trofėjai: {{ $count }}
         </div>
     </div>
 

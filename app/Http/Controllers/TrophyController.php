@@ -14,6 +14,7 @@ class TrophyController extends Controller
 
         // Isvedu pirmus trofejus pagal data
         $animals = Animal::orderBy('id', 'desc')->where('published', '1')->paginate(8);
+        $count = Animal::where('published', '1')->count();
 
         // Kiek puslapyje atvaizduos Trofeju
         if (!$animals){
@@ -28,7 +29,7 @@ class TrophyController extends Controller
         $tags = Tag::all();
         $maps = Map::all();
 
-        return view('trophies.index', compact('animals', 'tags', 'maps'));
+        return view('trophies.index', compact('animals', 'count', 'tags', 'maps'));
     }
 
     /* Trofejaus puslapis pagal slug */

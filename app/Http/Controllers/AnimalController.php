@@ -35,6 +35,7 @@ class AnimalController extends Controller
 
         // Isvedu pirmus trofejus pagal data
         $animals = Animal::orderBy('id', 'desc')->paginate(8);
+        $count = Animal::count();
 
         // Kiek puslapyje atvaizduos Trofeju
         if (!$animals){
@@ -49,7 +50,7 @@ class AnimalController extends Controller
         $tags = Tag::all();
         $maps = Map::all();
 
-        return view('animals.index', compact('animals', 'tags', 'maps'));
+        return view('animals.index', compact('animals', 'count', 'tags', 'maps'));
     }
 
     /**
