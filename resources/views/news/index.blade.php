@@ -45,7 +45,7 @@
                                 @endif
 
                                 @php
-                                    $search = "/(\[img.*img\]|\[list\]|\[\*\])/";
+                                    $search = "/(\[img.*img\]|\[list\]|\[\/list\]|\[\*\])/";
                                     $replace = "";
                                     $description = preg_replace($search,$replace,$item->contents);
                                     $search = "/(\[b\]|\[\/b\])/";
@@ -54,7 +54,10 @@
                                     /* URL i paprasta href */
                                     $find = "/\[url=(.*)\](.*)\[\/url\]/";
                                     $description = preg_replace($find,"<span style='color:#ffc500;'>$2</span>", $description);
-                                    /*$description = preg_replace($find,"<span style='color:#ffc500;'>$2</span>", $description);*/
+
+                                    /* DefaultURL i paprasta href */
+                                    $find = "/https?:\/\/store\.steampowered.com\/app\/518790\/theHunter_Call_of_the_Wild\/?/";
+                                    $description = preg_replace($find,"<span style='color:#ffc500;'>Steam store</span>", $description);
 
                                     /* H1 */
                                     $find = "/\[h1\](.*)\[\/h1\]/";
