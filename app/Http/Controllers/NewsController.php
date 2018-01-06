@@ -20,9 +20,16 @@ class NewsController extends Controller
     {
         /* Zaidimo ID Steame */
         $appID = 518790;
-        $news = Steam::news()->GetNewsForApp($appID, 16)->newsitems;
-        $news_total = count($news);
+        $news = Steam::news()->GetNewsForApp($appID, 39)->newsitems;
 
+        // Pasalinu naujienas kurios nera konkrecios
+        foreach($news as $key=>$new){
+            if($new->feed_type == 0){
+                unset($news[$key]);
+            }
+        }
+
+        $news_total = count($news);
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $col = new Collection($news);
         $perPage = 4;
