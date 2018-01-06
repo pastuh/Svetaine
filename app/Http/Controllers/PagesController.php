@@ -55,7 +55,7 @@ class PagesController extends Controller
         Mail::send('emails.contact', $data, function ($message) use($data) {
             $message->from($data['email']);
             $message->to('info@thehunter.lt');
-            $message->subject($data['subject']);
+            $message->subject('theHunter.LT laiškas');
         });
 
         Session::flash('success', 'Žinutė sėkmingai išsiūsta!');

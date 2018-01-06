@@ -116,7 +116,7 @@
             </a>
         </li>
         <li rel="tooltip" title="Kontaktai">
-            <a href="{{ route('contact.index') }}" style="color:#4f4f4f;">
+            <a href="{{ route('contact.index') }}">
                 <i class="fa fa-envelope fa-lg"></i>
             </a>
         </li>

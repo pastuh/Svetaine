@@ -1,6 +1,7 @@
-<h3>Naujas informacinis pranešimas</h3>
+<h3>Informacinis pranešimas užpildytas theHunter.lt svetainėje</h3>
 
 <div>
+    Laiško turinys:<br>
     <hr>
     {{ $bodyMessage }} <br>
     <hr>
