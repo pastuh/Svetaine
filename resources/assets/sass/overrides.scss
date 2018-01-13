@@ -3,6 +3,7 @@ html {
   margin:0;
   padding:0;
   min-height:100%;
+  font-size: unset;
 
 }
 body {
@@ -10,6 +11,7 @@ body {
   min-height: 100%;
   margin:0;
   padding:0;
+  font-size: unset;
 }
 img {
   image-rendering: optimizeSpeed;
@@ -495,4 +497,7 @@ button#close-module {
 .is-active {
   background: #ffc500;
   color: #333;
+}
+.main_content_standard {
+  font-size: 14px;
 }

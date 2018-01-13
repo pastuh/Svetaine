@@ -158,8 +158,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#fullpage').fullpage({
+                anchors: ['intro', 'info'],
+                menu: '#menu',
                 verticalCentered: true,
-                navigation: true,
+                navigation: false,
                 navigationPosition: 'right',
                 scrollingSpeed: 1000,
                 scrollOverflow: true,

@@ -115,8 +115,8 @@
     </nav>
 
     <ul class="nav navbar-nav short-menu">
-        <li rel="tooltip" title="Peržiūra" class="short-info">
-            <a href="javascript:void(0)" aria-label="Trofėjaus intro">
+        <li rel="tooltip" title="Peržiūra">
+            <a class="short-info" href="javascript:void(0)" aria-label="Trofėjaus intro">
                 <i class="fa fa-info-circle fa-lg">
                 </i>
             </a>
@@ -136,8 +136,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#fullpage').fullpage({
+                anchors: ['intro', 'info'],
+                menu: '#menu',
                 verticalCentered: true,
-                navigation: true,
+                navigation: false,
                 navigationPosition: 'right',
                 scrollingSpeed: 1000,
                 scrollOverflow: true,
@@ -158,6 +160,7 @@
 
             });
         });
+        this.blur();
     });
     </script>
 @endsection

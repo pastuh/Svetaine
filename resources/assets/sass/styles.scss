@@ -5,7 +5,7 @@ body {
   position: relative;
   overflow-x: hidden;
   letter-spacing: 0.04em;
-  font-size: 14px;
+  //font-size: 14px;
   line-height: 20px;
   font-weight: normal;
 }
@@ -125,6 +125,12 @@ textarea.main_comment_respond_field {
 .navbar-default .navbar-nav > li > a:hover {
   background: #ffc500;
 }
+
+/*a.short-info:focus
+{
+  background: transparent !important;
+  color: #fff !important;
+}*/
 
 .navbar-brand {
   padding: 0;
@@ -289,7 +295,7 @@ textarea.main_comment_respond_field {
 }
 
 .main_slides_title_and_likes_container .main_slide_title_wrapper {
-  height: 50px;
+  height: 52px;
   border-radius: 4px;
   font-weight: bold;
   font-size: 15px;
