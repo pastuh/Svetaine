@@ -70,7 +70,7 @@ class MapController extends Controller
     {
         // Validate the data
         $this->validate($request, array(
-            'title' => 'required|min:2|max:90',
+            'title' => 'required|min:2|max:90|unique:maps,title',
             'sub_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
             'body_2' => 'required|min:10',
@@ -78,6 +78,7 @@ class MapController extends Controller
             'animals' => 'required|array',
             'main_image' => 'required|image',
             'info_image' => 'required|image',
+            'small_image' => 'required|image',
             'status_check' => 'sometimes'
         ));
 
@@ -96,7 +97,7 @@ class MapController extends Controller
             $image = $request->file('main_image');
             $filename = uniqid() . time() . '.' . $image->getClientOriginalExtension();
 
-            // Trofejaus #1 IMG
+            // Map #1 IMG
             $location = public_path('img/maps/') . $filename;
             Image::make($image)->save($location);
             $map->main_image = $filename;
@@ -107,10 +108,21 @@ class MapController extends Controller
             $image2 = $request->file('info_image');
             $filename2 = uniqid() . time() . '.' . $image2->getClientOriginalExtension();
 
-            // Trofejaus #2 IMG
+            // Map #2 IMG
             $location2 = public_path('img/maps/') . $filename2;
             Image::make($image2)->save($location2);
             $map->info_image = $filename2;
+        }
+
+        //save small_image
+        if ($request->hasFile('small_image')) {
+            $image3 = $request->file('small_image');
+            $filename3 = str_slug($request->title, "-") . '.' . $image3->getClientOriginalExtension();
+
+            // Map #3 IMG
+            $location3 = public_path('img/maps/') . $filename3;
+            Image::make($image3)->save($location3);
+            $map->small_image = $filename3;
         }
 
         //save publish status (Jeigu pazymeta, tai grazinti kad true)
@@ -187,7 +199,7 @@ class MapController extends Controller
 
         // Validate the data
         $this->validate($request, array(
-            'title' => 'required|min:2|max:90',
+            'title' => 'required|min:2|max:90|unique:maps,title,' . $id,
             'sub_title' => 'required|min:2|max:90',
             'body' => 'required|min:10',
             'body_2' => 'required|min:10',
@@ -195,6 +207,7 @@ class MapController extends Controller
             'animals' => 'required|array',
             'main_image' => 'sometimes|image',
             'info_image' => 'sometimes|image',
+            'small_image' => 'sometimes|image',
             'status_check' => 'sometimes',
             'published_check' => 'sometimes'
         ));
@@ -211,7 +224,7 @@ class MapController extends Controller
             $image = $request->file('main_image');
             $filename = uniqid() . time() . '.' . $image->getClientOriginalExtension();
 
-            // Trofejaus #1 IMG
+            // Map #1 IMG
             $location = public_path('img/maps/') . $filename;
             Image::make($image)->save($location);
 
@@ -228,7 +241,7 @@ class MapController extends Controller
             $image2 = $request->file('info_image');
             $filename2 = uniqid() . time() . '.' . $image2->getClientOriginalExtension();
 
-            // Trofejaus #1 IMG
+            // Map #2 IMG
             $location2 = public_path('img/maps/') . $filename2;
             Image::make($image2)->save($location2);
 
@@ -238,6 +251,24 @@ class MapController extends Controller
 
             // Trinu sena foto jeigu ikelta nauja
             Storage::disk('images')->delete(['maps/' . $old_info_image]);
+        }
+
+        //save small_image
+        if ($request->hasFile('small_image')) {
+            $image3 = $request->file('small_image');
+            $filename3 = str_slug($request->title, "-") . '.' . $image3->getClientOriginalExtension();
+
+            // Map #3 IMG
+            $location3 = public_path('img/maps/') . $filename3;
+
+            $old_small_image = $map->small_image;
+            // Trinu sena foto jeigu ikelta nauja
+            Storage::disk('images')->delete(['maps/' . $old_small_image]);
+
+            Image::make($image3)->save($location3);
+
+            $map->small_image = $filename3;
+
         }
 
         if ($request->status_check == 'true') {
@@ -278,6 +309,7 @@ class MapController extends Controller
             $map->animals()->detach();
             $filename_old = $map->main_image;
             $filename_old2 = $map->info_image;
+            $filename_old3 = $map->small_image;
 
             if($filename_old){
                 Storage::disk('images')->delete(['maps/' . $filename_old]);
@@ -285,6 +317,10 @@ class MapController extends Controller
 
             if($filename_old2) {
                 Storage::disk('images')->delete(['maps/' . $filename_old2]);
+            }
+
+            if($filename_old3) {
+                Storage::disk('images')->delete(['maps/' . $filename_old3]);
             }
 
             $map->delete();

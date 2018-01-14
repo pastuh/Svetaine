@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="row" v-model="visible" v-show="visible == 'info'">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="{{ $errors->has('main_image') ? ' has-error' : '' }}">
                                                 <input type="file" class="filestyle" name="main_image" id="image_src"
                                                        data-badge="false" data-iconName="fa fa-upload"
@@ -136,21 +136,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4 col-lg-offset-1">
-                                            <div class="{{ $errors->has('info_image') ? ' has-error' : '' }}">
-                                                <input type="file" class="filestyle" name="info_image" id="image_src2"
-                                                       data-badge="false" data-iconName="fa fa-upload"
-                                                       data-buttonBefore="true" data-placeholder="..."
-                                                       data-buttonText="#2 Paveiksliukas"/>
-                                                @if ($errors->has('info_image'))
-                                                    <span class="help-block">
-                                                    {{ $errors->first('info_image') }}
-                                                    </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-2 col-lg-offset-1">
+                                        <div class="col-lg-5 col-lg-offset-1">
 
                                             <div class="{{ $errors->has('bg_position') ? ' has-error' : '' }}">
                                                 <div class="input-group input-group-lg">
@@ -168,6 +154,34 @@
                                                 @endif
                                             </div>
 
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="{{ $errors->has('info_image') ? ' has-error' : '' }}">
+                                                <input type="file" class="filestyle" name="info_image" id="image_src2"
+                                                       data-badge="false" data-iconName="fa fa-upload"
+                                                       data-buttonBefore="true" data-placeholder="..."
+                                                       data-buttonText="#2 Paveiksliukas"/>
+                                                @if ($errors->has('info_image'))
+                                                    <span class="help-block">
+                                                    {{ $errors->first('info_image') }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5 col-lg-offset-1">
+                                            <div class="{{ $errors->has('small_image') ? ' has-error' : '' }}">
+                                                <input type="file" class="filestyle" name="small_image" id="image_src3"
+                                                       data-badge="false" data-iconName="fa fa-upload"
+                                                       data-buttonBefore="true" data-placeholder="..."
+                                                       data-buttonText="Žemėlapio icon"/>
+                                                @if ($errors->has('small_image'))
+                                                    <span class="help-block">
+                                                    {{ $errors->first('small_image') }}
+                                                    </span>
+                                                @endif
+                                            </div>
                                         </div>
 
 
