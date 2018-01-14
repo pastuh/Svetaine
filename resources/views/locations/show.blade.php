@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
-                                <div>
+                                <div class="col-lg-6 col-lg-offset-3">
                                     <div class="main_content_standard">
 
                                         {{--Body startas--}}
