@@ -1,5 +1,8 @@
 @extends('layouts.manage')
 @section('title', "| Žyma: " . htmlspecialchars($tag->name))
+@section('keyword'), žyma, informacija, list, aprašymas, gyvūnai, žemėlapiai, ginklai, patarimai, tips-tricks, {{$tag->name}}
+@endsection
+@section('description', '| theHunter.lt | Įrašai susiję su '. htmlspecialchars($tag->name))
 
 @section('stylesheet')
     <link href="{{  url('js\table\bootstrap-table.css') }}" rel="stylesheet" type="text/css" media="all">
