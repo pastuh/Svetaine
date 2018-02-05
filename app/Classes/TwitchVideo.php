@@ -7,7 +7,7 @@ class TwitchVideo {
     public function getTwitchVideos() {
 
         /* Nustatau MAX video puslapyje: 40*/
-        $channelsApi = 'https://api.twitch.tv/kraken/streams/?game=The%20Hunter:%20Call%20of%20the%20Wild&limit=40';
+        $channelsApi = 'https://api.twitch.tv/kraken/streams/?game=theHunter:%20Call%20of%20the%20Wild&limit=40';
         $clientId = config('app.twitch_key');
         $ch = curl_init();
 
@@ -27,7 +27,7 @@ class TwitchVideo {
        /* Konvertuoju JSON i ARRAY */
         $twitch = json_decode($response, true);
 
-        return $twitch;
+        dd( $twitch);
 
     }
 }
