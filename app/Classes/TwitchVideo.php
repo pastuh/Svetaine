@@ -27,7 +27,7 @@ class TwitchVideo {
        /* Konvertuoju JSON i ARRAY */
         $twitch = json_decode($response, true);
 
-        dd( $twitch);
+        return $twitch;
 
     }
 }
