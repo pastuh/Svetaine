@@ -35,9 +35,10 @@
                     <div class="main_data_item"><!-- Item 1 -->
                         <div class="main_data_item_wrapper">
                             <div class="main_data_featured_image_wrapper">
-                                <div class="post-short-intro {{ ($TwitchVideo['channel']['display_name'] == 'expansiveworlds' OR
-                                preg_match('/\[LT\]/', $TwitchVideo['channel']['status'])) ? 'featured-video' : '' }}" >
+                                <div class="post-short-intro" >
                                     <div class="mini-info-block">
+                                        <div class="{{ ($TwitchVideo['channel']['display_name'] == 'expansiveworlds' OR
+                                preg_match('/\[LT\]/', $TwitchVideo['channel']['status'])) ? 'post_published' : '' }}"></div>
                                         <span class="info-time">
                                             <i class="main_load_more_back fa fa-twitch fa-lg"></i> {{ $TwitchVideo['viewers'] }}
                                         </span>

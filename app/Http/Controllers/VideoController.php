@@ -20,6 +20,15 @@ class VideoController extends Controller
         $Data = $TwitchVideos->getTwitchVideos();
 
         $Streams = $Data['streams'];
+
+        // Streamas iskeliamas jeigu randama tam tikra informacija
+        foreach ($Streams as $key => $val) {
+            if($val['channel']['display_name'] == 'expansiveworlds' OR preg_match('/\[LT\]/', $val['channel']['status'])) {
+                unset($Streams[$key]);
+                array_unshift($Streams, $val);
+            }
+        }
+
         $count_total = count($Streams);
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
